@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="loading"><head>
+<meta charset="utf-8">
+<title data-l10n="liturgia-horarum">Stundenbuch</title>
+<meta name="viewport" content="width=device-width">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+<link rel="manifest" href="icons/site.webmanifest">
+<link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<script>
+if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installPackage)) {
+	navigator.serviceWorker.register('sw.js');
+}
+</script>
+
+<link rel="stylesheet" href="style.css">
+<script src="js/debug.js" defer></script>
+<script src="js/screenlock.js" defer></script>
+<script src="js/lib/pako.min.js" defer></script>
+<script src="js/lib/xtea-asm.js" defer></script>
+<script src="js/password.js" defer></script>
+<script src="js/util.js" defer></script>
+<script src="js/file.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/l10n.js" defer></script>
+<script src="js/day.js" defer></script>
+<script src="js/commune.js" defer></script>
+<script src="js/calendar.js" defer></script>
+<script src="js/format.js" defer></script>
+<script src="js/hora.js" defer></script>
+<script src="js/form-additional.js" defer></script>
+<script src="js/audio.js" defer></script>
+<script src="js/audio-manager.js" defer></script>
+<script src="js/app.js" defer></script>
+</head><body>
+<article id="main"><img src="img/icon-512.png" alt=""></article>
+<article id="settings" hidden>
+<h2 data-l10n="modi">[modi]</h2>
+<fieldset>
+<legend data-l10n="titulus-generalia">[titulus-generalia]</legend>
+<p><label><span data-l10n="titulus-dies-initio">[titulus-dies-initio]</span> <input type="time" data-key="dayStart"></label></p>
+<p><label><input id="input-screenlock" data-key="screenLock" data-screenlock="true" type="checkbox"> <span data-l10n="titulus-screenlock">[titulus-screenlock]</span></label></p>
+<p><label><span data-l10n="titulus-lingua-2">[titulus-lingua-2]</span><select id="secondary-language-select" data-key="lang2">
+<option value="" data-l10n="titulus-lingua-2-nulla">[titulus-lingua-2-nulla]</option>
+</select></label></p>
+</fieldset>
+<fieldset>
+<legend data-l10n="titulus-aspectus">[titulus-aspectus]</legend>
+<p><label><span data-l10n="titulus-responsorium">[titulus-responsorium]</span><select data-key="rvMode">
+<option value="original" data-l10n="titulus-responsorium-originalis">[titulus-responsorium-originalis]</option>
+<option value="single" data-l10n="titulus-responsorium-singulus">[titulus-responsorium-singulus]</option>
+<option value="expand" data-l10n="titulus-responsorium-expandere">[titulus-responsorium-expandere]</option>
+</select></label></p>
+<p><label><span data-l10n="titulus-flexa-asteriscus">[titulus-flexa-asteriscus]</span><select data-key="flexaAsteriscus">
+<option value="+|*|&lt;br&gt;">+*</option>
+<option value="†|*|&lt;br&gt;">†*</option>
+<option value="/|*| ">/*</option>
+</select></label></p>
+<p><label><input data-key="verse" type="checkbox"> <span data-l10n="titulus-versi">[titulus-versi]</span></label></p>
+<p><label><input data-key="psOratio" type="checkbox"> <span data-l10n="titulus-ps-oratio">[titulus-ps-oratio]</span></label></p>
+<p><label><input data-key="strophae" type="checkbox"> <span data-l10n="titulus-strophae">[titulus-strophae]</span></label></p>
+<p><label><input data-key="solidus" type="checkbox"> <span data-l10n="titulus-solidus">[titulus-solidus]</span></label></p>
+<p><label><input data-key="removeDuplicateAntiphon" type="checkbox"> <span data-l10n="titulus-duplex-antiphona">[titulus-duplex-antiphona]</span></label></p>
+</fieldset>
+<fieldset>
+<legend data-l10n="titulus-horae">[titulus-horae]</legend>
+<p><label><input data-key="noCommons" type="checkbox"> <span data-l10n="titulus-feria-communia">[titulus-feria-communia]</span></label></p>
+<p><label><input data-key="memoriaTSN" type="checkbox"> <span data-l10n="titulus-memoria-tsn">[titulus-memoria-tsn]</span></label></p>
+<p><label><span data-l10n="titulus-invitatorium-locus">[titulus-invitatorium-locus]</span><select data-key="invitatoriumLocus">
+<option value="" data-l10n="titulus-invitatorium-locus-singule">[titulus-invitatorium-locus-singule]</option>
+<option value="lectionis" data-l10n="titulus-invitatorium-locus-lectionis">[titulus-invitatorium-locus-lectionis]</option>
+<option value="laudes" data-l10n="titulus-invitatorium-locus-laudes">[titulus-invitatorium-locus-laudes]</option>
+</select></label></p>
+<p><label><span data-l10n="titulus-invitatorium-psalmus">[titulus-invitatorium-psalmus]</span><select data-key="psalmusInvitatorium">
+<option value="ps-95" data-l10n="titulus-invitatorium-psalmus-95">[titulus-invitatorium-psalmus-95]</option>
+<option value="ps-100" data-l10n="titulus-invitatorium-psalmus-100">[titulus-invitatorium-psalmus-100]</option>
+<option value="ps-67" data-l10n="titulus-invitatorium-psalmus-67">[titulus-invitatorium-psalmus-67]</option>
+<option value="ps-24" data-l10n="titulus-invitatorium-psalmus-24">[titulus-invitatorium-psalmus-24]</option>
+</select></label></p>
+<p><label><input data-key="lectionisNight" type="checkbox"> <span data-l10n="titulus-lectionis-nox">[titulus-lectionis-nox]</span></label></p>
+<p><label><input data-key="moreHymns" type="checkbox"> <span data-l10n="titulus-plures-hymni">[titulus-plures-hymni]</span></label></p>
+<p><label><input data-key="varyCanticaLaudes" type="checkbox"> <span data-l10n="titulus-cantica-laudes">[titulus-cantica-laudes]</span></label></p>
+<p><label><input data-key="replaceDuplicatePsalms" type="checkbox"> <span data-l10n="titulus-duplex-psalmus">[titulus-duplex-psalmus]</span></label></p>
+<p><label><input data-key="varyTSNAntiphon" type="checkbox"> <span data-l10n="titulus-distribuere-tsn">[titulus-distribuere-tsn]</span></label></p>
+<p><label><span data-l10n="titulus-pater-noster-intro">[titulus-pater-noster-intro]</span><select data-key="paterNosterIntro">
+<option value="0" data-l10n="titulus-pater-noster-intro-0">[titulus-pater-noster-intro-0]</option>
+<option value="1" data-l10n="titulus-pater-noster-intro-1">[titulus-pater-noster-intro-1]</option>
+<option value="2" data-l10n="titulus-pater-noster-intro-2">[titulus-pater-noster-intro-2]</option>
+</select></label></p>
+<p><label><input data-key="priest" type="checkbox"> <span data-l10n="titulus-sacerdos">[titulus-sacerdos]</span></label></p>
+<p><label><span data-l10n="titulus-maria-antiphona">[titulus-maria-antiphona]</span><select data-key="marianAntiphon">
+<option value="" data-l10n="titulus-maria-nulla">[titulus-maria-nulla]</option>
+<option value="vespera" data-l10n="titulus-maria-vespera">[titulus-maria-vespera]</option>
+<option value="completorium" data-l10n="titulus-maria-completorium">[titulus-maria-completorium]</option>
+</select></label></p>
+<p><label><span data-l10n="titulus-maria-antiphona-modus">[titulus-maria-antiphona-modus]</span><select data-key="modusMaria">
+<option value="0" data-l10n="titulus-maria-modus-0">[titulus-maria-modus-0]</option>
+<option value="1" data-l10n="titulus-maria-modus-1">[titulus-maria-modus-1]</option>
+<option value="2" data-l10n="titulus-maria-modus-2">[titulus-maria-modus-2]</option>
+<option value="3" data-l10n="titulus-maria-modus-3">[titulus-maria-modus-3]</option>
+</select></label></p>
+</fieldset>
+<fieldset>
+<legend data-l10n="titulus-calendarium">[titulus-calendarium]</legend>
+<p><label><span data-l10n="titulus-calendarium-selectare">[titulus-calendarium-selectare]</span><select id="calendar-select" data-key="calendar" data-calendar="2"></select></label></p>
+<p id="calendar-extra-label" data-l10n="titulus-calendarium-extra">[titulus-calendarium-extra]</p>
+<div id="calendar-extra-list"></div>
+<p><label><span data-l10n="titulus-calendarium-addendum">[titulus-calendarium-addendum]</span><textarea rows="7" id="form-additional-input" data-key="notes" data-calendar="2"></textarea></label></p>
+<p><button id="form-additional-show" data-l10n="titulus-calendarium-addendum-creare" class="inline">[titulus-calendarium-addendum-creare]</button></p>
+<fieldset id="form-additional-all">
+<legend data-l10n="titulus-calendarium-addendum-creare">[titulus-calendarium-addendum-creare]</legend>
+<p><label class="inline"><span data-l10n="titulus-calendarium-addendum-dies">[titulus-calendarium-addendum-dies]</span> <input type="number" id="form-additional-day"></label>
+<label class="inline"><span data-l10n="titulus-calendarium-addendum-mensis">[titulus-calendarium-addendum-mensis]</span> <select id="form-additional-month">
+<option value="1" data-l10n="titulus-calendarium-addendum-ianuarius">[titulus-calendarium-addendum-ianuarius]</option>
+<option value="2" data-l10n="titulus-calendarium-addendum-februarius">[titulus-calendarium-addendum-februarius]</option>
+<option value="3" data-l10n="titulus-calendarium-addendum-martius">[titulus-calendarium-addendum-martius]</option>
+<option value="4" data-l10n="titulus-calendarium-addendum-aprilis">[titulus-calendarium-addendum-aprilis]</option>
+<option value="5" data-l10n="titulus-calendarium-addendum-maius">[titulus-calendarium-addendum-maius]</option>
+<option value="6" data-l10n="titulus-calendarium-addendum-iunius">[titulus-calendarium-addendum-iunius]</option>
+<option value="7" data-l10n="titulus-calendarium-addendum-iulius">[titulus-calendarium-addendum-iulius]</option>
+<option value="8" data-l10n="titulus-calendarium-addendum-augustus">[titulus-calendarium-addendum-augustus]</option>
+<option value="9" data-l10n="titulus-calendarium-addendum-september">[titulus-calendarium-addendum-september]</option>
+<option value="10" data-l10n="titulus-calendarium-addendum-october">[titulus-calendarium-addendum-october]</option>
+<option value="11" data-l10n="titulus-calendarium-addendum-november">[titulus-calendarium-addendum-november]</option>
+<option value="12" data-l10n="titulus-calendarium-addendum-december">[titulus-calendarium-addendum-december]</option>
+<option value="e" data-l10n="titulus-calendarium-addendum-relativus-pascha">[titulus-calendarium-addendum-relativus-pascha]</option>
+<option value="s" data-l10n="titulus-calendarium-addendum-dominica">[titulus-calendarium-addendum-dominica]</option>
+</select></label></p>
+<p><label><span data-l10n="titulus-calendarium-addendum-genus">[titulus-calendarium-addendum-genus]</span><select id="form-additional-action">
+<option value="remove" data-l10n="titulus-calendarium-addendum-removere">[titulus-calendarium-addendum-removere]</option>
+<option value="note" data-l10n="titulus-calendarium-addendum-notam-addere">[titulus-calendarium-addendum-notam-addere]</option>
+<option value="add" data-l10n="titulus-calendarium-addendum-addere">[titulus-calendarium-addendum-addere]</option>
+</select></label></p>
+<p id="form-additional-note-area">
+<label><span data-l10n="titulus-calendarium-addendum-nota">[titulus-calendarium-addendum-nota]</span><input id="form-additional-note"></label>
+</p>
+<div id="form-additional-add-area">
+<p id="form-additional-suggestions"></p>
+<p><label><span data-l10n="titulus-calendarium-addendum-nomen">[titulus-calendarium-addendum-nomen]</span><input id="form-additional-name"></label></p>
+<p><label><span data-l10n="titulus-calendarium-addendum-gradus">[titulus-calendarium-addendum-gradus]</span><select id="form-additional-rank">
+<option value="0" data-l10n="titulus-calendarium-addendum-sollemnitas">[titulus-calendarium-addendum-sollemnitas]</option>
+<option value="1" data-l10n="titulus-calendarium-addendum-festum">[titulus-calendarium-addendum-festum]</option>
+<option value="2" data-l10n="titulus-calendarium-addendum-memoria">[titulus-calendarium-addendum-memoria]</option>
+<option value="3" data-l10n="titulus-calendarium-addendum-memoria-1">[titulus-calendarium-addendum-memoria-1]</option>
+</select></label></p>
+<p><label><span data-l10n="titulus-calendarium-addendum-commune">[titulus-calendarium-addendum-commune]</span><select id="form-additional-main-type">
+<optgroup label="[titulus-calendarium-addendum-defunctus]" data-l10n="titulus-calendarium-addendum-defunctus" data-l10n-attr="label">
+<option value="defunctus" data-l10n="titulus-calendarium-addendum-defunctus">[titulus-calendarium-addendum-defunctus]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-ecclesia]" data-l10n="titulus-calendarium-addendum-ecclesia" data-l10n-attr="label">
+<option value="ecclesia" data-l10n="titulus-calendarium-addendum-ecclesia">[titulus-calendarium-addendum-ecclesia]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-maria]" data-l10n="titulus-calendarium-addendum-maria" data-l10n-attr="label">
+<option value="maria" data-l10n="titulus-calendarium-addendum-maria">[titulus-calendarium-addendum-maria]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-apostolus]" data-l10n="titulus-calendarium-addendum-apostolus" data-l10n-attr="label">
+<option value="apostolus" data-l10n="titulus-calendarium-addendum-apostolus">[titulus-calendarium-addendum-apostolus]</option>
+<option value="apostolus2" data-l10n="titulus-calendarium-addendum-apostolus2">[titulus-calendarium-addendum-apostolus2]</option>
+<option value="evangelista" data-l10n="titulus-calendarium-addendum-evangelista">[titulus-calendarium-addendum-evangelista]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-virgo]" data-l10n="titulus-calendarium-addendum-virgo" data-l10n-attr="label">
+<option value="virgo" data-l10n="titulus-calendarium-addendum-virgo">[titulus-calendarium-addendum-virgo]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-martyr]" data-l10n="titulus-calendarium-addendum-martyr" data-l10n-attr="label">
+<option value="martyr" data-l10n="titulus-calendarium-addendum-martyr">[titulus-calendarium-addendum-martyr]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-pastor]" data-l10n="titulus-calendarium-addendum-pastor" data-l10n-attr="label">
+<option value="pastor" data-l10n="titulus-calendarium-addendum-pastor">[titulus-calendarium-addendum-pastor]</option>
+<option value="doctor" data-l10n="titulus-calendarium-addendum-doctor">[titulus-calendarium-addendum-doctor]</option>
+<option value="papa" data-l10n="titulus-calendarium-addendum-papa">[titulus-calendarium-addendum-papa]</option>
+<option value="episcopus" data-l10n="titulus-calendarium-addendum-episcopus">[titulus-calendarium-addendum-episcopus]</option>
+<option value="fundator" data-l10n="titulus-calendarium-addendum-fundator">[titulus-calendarium-addendum-fundator]</option>
+<option value="missionarius" data-l10n="titulus-calendarium-addendum-missionarius">[titulus-calendarium-addendum-missionarius]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-religiosus]" data-l10n="titulus-calendarium-addendum-religiosus" data-l10n-attr="label">
+<option value="religiosus" data-l10n="titulus-calendarium-addendum-religiosus">[titulus-calendarium-addendum-religiosus]</option>
+<option value="abbas" data-l10n="titulus-calendarium-addendum-abbas">[titulus-calendarium-addendum-abbas]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-vir]" data-l10n="titulus-calendarium-addendum-vir" data-l10n-attr="label">
+<option value="vir" data-l10n="titulus-calendarium-addendum-vir">[titulus-calendarium-addendum-vir]</option>
+</optgroup>
+<optgroup label="[titulus-calendarium-addendum-mulier]" data-l10n="titulus-calendarium-addendum-mulier" data-l10n-attr="label">
+<option value="mulier" data-l10n="titulus-calendarium-addendum-mulier">[titulus-calendarium-addendum-mulier]</option>
+</optgroup>
+</select></label></p>
+<p><label><span data-l10n="titulus-calendarium-addendum-commune-1">[titulus-calendarium-addendum-commune-1]</span><select multiple id="form-additional-other-types">
+</select></label></p>
+</div>
+<p><button id="form-additional-insert" data-l10n="titulus-calendarium-addendum-inserere" class="inline">[titulus-calendarium-addendum-inserere]</button>
+<button id="form-additional-cancel" data-l10n="titulus-calendarium-addendum-dimittere" class="inline">[titulus-calendarium-addendum-dimittere]</button></p>
+</fieldset>
+<p><label><span data-l10n="titulus-memoria-libidum">[titulus-memoria-libidum]</span><select multiple size="7" id="additional-days" data-key="additionalDays" data-calendar="1"></select></label>
+<span data-l10n="titulus-selegere">[titulus-selegere]</span>
+<button id="select-all" data-l10n="titulus-selegere-omnia" class="inline">[titulus-selegere-omnia]</button>
+<button id="select-none" data-l10n="titulus-selegere-nullum" class="inline">[titulus-selegere-nullum]</button>
+<button id="select-group-0" class="inline">0</button>
+<button id="select-group-1" class="inline">1</button>
+<button id="select-group-2" class="inline">2</button>
+<button id="select-group-3" class="inline">3</button>
+<button id="select-group-4" class="inline">4</button>
+</p>
+<p><label><input data-key="mariaSabbato" data-calendar="1" type="checkbox"> <span data-l10n="titulus-maria-sabbato">[titulus-maria-sabbato]</span></label>
+<p><label><input data-key="commemoratio" data-calendar="1" type="checkbox"> <span data-l10n="titulus-commemoratio">[titulus-commemoratio]</span></label>
+<p><label><input data-key="epiphaniasSunday" data-calendar="1" type="checkbox"> <span data-l10n="titulus-epiphanias-dominica">[titulus-epiphanias-dominica]</span></label>
+<p><label><input data-key="ascensionSunday" data-calendar="1" type="checkbox"> <span data-l10n="titulus-ascensio-dominica">[titulus-ascensio-dominica]</span></label>
+<p><label><input data-key="corpusSunday" data-calendar="1" type="checkbox"> <span data-l10n="titulus-corpus-domini-dominica">[titulus-corpus-domini-dominica]</span></label>
+</fieldset>
+<fieldset>
+<legend data-l10n="sonus">[sonus]</legend>
+<p><label><input data-key="sonus" type="checkbox"> <span data-l10n="titulus-sonus">[titulus-sonus]</span></label></p>
+<p><label><span data-l10n="titulus-sonus-forma">[titulus-sonus-forma]</span><select data-key="notesStyle" data-audio="true">
+<option value="modern" data-l10n="titulus-sonus-forma-hodierna">[titulus-sonus-forma-hodierna]</option>
+<option value="gregorian" data-l10n="titulus-sonus-forma-gregoriana">[titulus-sonus-forma-gregoriana]</option>
+</select></label></p>
+<p><label><span data-l10n="titulus-sonus-celeriats">[titulus-sonus-celeriats]</span>
+<input data-key="audioSpeed" data-audio="true" type="range" min="0.5" step="0.1" max="1.5"></label></p>
+</fieldset>
+<fieldset>
+<legend data-l10n="titulus-varia">[titulus-varia]</legend>
+<p><label><span data-l10n="titulus-papa">[titulus-papa]</span> <input data-key="papa"></label></p>
+<p><label><span data-l10n="titulus-episcopus">[titulus-episcopus]</span> <input data-key="episcopus"></label></p>
+<p><label><span data-l10n="titulus-debug">[titulus-debug]</span><select data-key="debug" data-debug="true">
+<option value="0" data-l10n="titulus-debug-0">[titulus-debug-0]</option>
+<option value="1" data-l10n="titulus-debug-1">[titulus-debug-1]</option>
+<option value="2" data-l10n="titulus-debug-2">[titulus-debug-2]</option>
+</select></label></p>
+<p><label><span data-l10n="titulus-textus-proprii">[titulus-textus-proprii]</span> <textarea id="input-override" data-key="override" data-override="true" rows="7"></textarea></label></p>
+</fieldset>
+<fieldset>
+<legend data-l10n="titulus-exportare-importare">[titulus-exportare-importare]</legend>
+<p><span data-l10n="titulus-servare" id="export-config" class="link-like" tabindex="0">[titulus-servare]</span></p>
+<p><span data-l10n="titulus-restituere" id="import-config" class="link-like" tabindex="0">[titulus-restituere]</span></p>
+<p><span data-l10n="titulus-servare-icalendar" id="export-icalendar" class="link-like" tabindex="0">[titulus-servare-icalendar]</span></p>
+<p><span data-l10n="titulus-servare-icalendar-1" id="export-icalendar-1" class="link-like" tabindex="0">[titulus-servare-icalendar-1]</span></p>
+<p><span data-l10n="titulus-restituere-icalendar" id="import-icalendar" class="link-like" tabindex="0">[titulus-restituere-icalendar]</span></p>
+<p><span data-l10n="titulus-servare-textus" id="export-override" class="link-like" tabindex="0">[titulus-servare-textus]</span></p>
+<p><span data-l10n="titulus-restituere-textus" id="import-override" class="link-like" tabindex="0">[titulus-restituere-textus]</span></p>
+<p><span data-l10n="titulus-restituere-praedertiminati" id="reset" class="reset" tabindex="0">[titulus-restituere-praedertiminati]</span></p>
+</fieldset>
+<p><a data-l10n="retrorsum" data-action="?back" href="">[retrorsum]</a></p>
+<p><a data-l10n="catalogus" href="?catalogus">[catalogus]</a></p>
+</article>
+<footer>
+<div id="popup-settings" class="popup">
+<h2 data-l10n="modi">[modi]</h2>
+<p><label><span data-l10n="titulus-forma">[titulus-forma]</span>
+<select data-key="skin">
+<option value="light" data-l10n="titulus-forma-clara">[titulus-forma-clara]</option>
+<option value="dark" data-l10n="titulus-forma-obscura">[titulus-forma-obscura]</option>
+<option value="sepia" data-l10n="titulus-forma-sepia">[titulus-forma-sepia]</option>
+</select></label></p>
+<p><label><span data-l10n="titulus-magnitudo-litterae">[titulus-magnitudo-litterae]</span>
+<input data-key="font" type="range" min="10" step="1" max="18"></label></p>
+<p><label><span data-l10n="titulus-lingua">[titulus-lingua]</span>
+<select id="language-select" data-key="lang" data-reload="true">
+</select></label></p>
+<p id="settings-link-container"><a data-l10n="plures-modi" href="?settings">[plures-modi]</a></p>
+<p id="back-link-container" hidden><a data-l10n="retrorsum" data-action="?back" href="">[retrorsum]</a></p>
+</div>
+<div id="popup-navigation" class="popup">
+<h2 data-l10n="navigatio">[navigatio]</h2>
+<h3 data-l10n="hora">[hora]</h3>
+<ul>
+<li><a id="nav-index" data-l10n="index">[index]</a></li>
+<li><a id="nav-invitatorium" data-l10n="invitatorium">[invitatorium]</a></li>
+<li><a id="nav-lectionis" data-l10n="lectionis">[lectionis]</a></li>
+<li><a id="nav-laudes" data-l10n="laudes">[laudes]</a></li>
+<li><a id="nav-tertia" data-l10n="tertia">[tertia]</a> (<a id="nav-tertia-complementaris" data-l10n="complementaris-1">[complementaris-1]</a>)</li>
+<li><a id="nav-sexta" data-l10n="sexta">[sexta]</a> (<a id="nav-sexta-complementaris" data-l10n="complementaris-1">[complementaris-1]</a>)</li>
+<li><a id="nav-nona" data-l10n="nona">[nona]</a> (<a id="nav-nona-complementaris" data-l10n="complementaris-1">[complementaris-1]</a>)</li>
+<li><a id="nav-vespera" data-l10n="vespera">[vespera]</a></li>
+<li><a id="nav-completorium" data-l10n="completorium">[completorium]</a></li>
+</ul>
+<h3 data-l10n="dies">[dies]</h3>
+<ul>
+<li><a id="nav-prev" data-l10n="prior-dies">[prior-dies]</a></li>
+<li><a id="nav-today" data-l10n="hodie">[hodie]</a></li>
+<li><a id="nav-next" data-l10n="proximus-dies">[proximus-dies]</a></li>
+<li><a id="nav-month" data-l10n="mensis">[mensis]</a></li>
+<li><label class="inline link-like"><span data-l10n="selectare-diem">[selectare-diem]</span> <input id="date-input" class="inline" type="date"></label></li>
+</ul>
+</div>
+<div id="popup-audio" class="popup">
+<p><select id="audio-select-0" class="inline"></select>
+<select id="audio-select-1" class="inline"></select></p>
+<p id="audio-output"></p>
+<p><button id="audio-play" class="inline">▶</button> <button id="audio-stop" class="inline">◾</button> <input id="audio-volume" class="inline" data-key="volume" type="range" min="0" step="1" max="10"></p>
+</div>
+<nav><span role="button" id="button-settings" tabindex="0"><img src="img/config.svg" alt=""><span data-l10n="modi">[modi]</span></span><span role="button" id="button-navigation" tabindex="0"><img src="img/nav.svg" alt=""><span data-l10n="navigatio">[navigatio]</span></span><span role="button" id="button-audio" tabindex="0"><img src="img/note.svg" alt=""><span data-l10n="sonus">[sonus]</span></span></nav>
+</footer>
+</body></html>

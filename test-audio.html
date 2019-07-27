@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>Noten</title>
+<script src="js/audio.js" defer></script>
+<script src="test/audio.js" defer></script>
+<style>
+#input {
+	width: 100%;
+}
+
+.notes {
+	flex-wrap: wrap;
+	display: flex;
+}
+
+.notes-part {
+	display: inline-flex;
+	white-space: nowrap;
+}
+
+svg {
+	flex: none;
+}
+
+.background {
+	flex: auto;
+}
+</style>
+</head><body>
+<textarea id="input" rows="7"></textarea>
+<button id="show">Anzeigen</button>
+<select id="style">
+<option>modern</option>
+<option>gregorian</option>
+</select>
+<div id="output"></div>
+<button id="play">Abspielen</button>
+</body></html>

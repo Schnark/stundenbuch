@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<title>Stundenbuch - Format</title>
+<script src="test/format.js" defer></script>
+<style>
+#key-input {
+	border-bottom: 2px solid black;
+	margin: 0 1em;
+	padding: 0.5em 0 1em;
+}
+
+input {
+	width: 3em;
+}
+
+label,
+button {
+	margin-left: 1em;
+}
+
+textarea {
+	display: block;
+	width: calc(100% - 2em);
+	margin: 1em;
+}
+
+pre:not(:empty) {
+	border: 1px dashed gray;
+	margin: 1em;
+	padding: 1em;
+}
+</style>
+</head><body>
+<div id="key-input">
+<label>Zeit: <input id="prefix" value="pa"></label>
+<label>Woche: <input id="week" value="1"></label>
+<label>Wochentag: <select id="day">
+<option value="0">Sonntag</option>
+<option value="1">Montag</option>
+<option value="2">Dienstag</option>
+<option value="3">Mittwoch</option>
+<option value="4">Donnerstag</option>
+<option value="5">Freitag</option>
+<option value="6">Samstag</option>
+</select></label>
+<label>Jahr: <select id="two">
+<option value="">(einjährig)</option>
+<option>i</option>
+<option>ii</option>
+<select></label>
+<button id="go">Erzeugen</button>
+<button id="next">Weiter</button>
+</div>
+<textarea id="text" rows="10"></textarea>
+<pre id="output"></pre>
+</body></html>

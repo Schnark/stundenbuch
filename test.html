@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<title>Stundenbuch - Test</title>
+<link rel="stylesheet" href="style.css">
+<script src="js/util.js" defer></script>
+<script src="js/debug.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/l10n.js" defer></script>
+<script src="js/day.js" defer></script>
+<script src="js/commune.js" defer></script>
+<script src="js/calendar.js" defer></script>
+<script src="js/format.js" defer></script>
+<script src="js/hora.js" defer></script>
+<script src="test/diff.js" defer></script>
+<script src="test/test.js" defer></script>
+<style id="diff-style"></style>
+<style>
+nav,
+form {
+	padding: 0.5em;
+}
+
+label,
+select,
+input:not([type="checkbox"]),
+button {
+	width: auto;
+	display: inline;
+}
+
+button:disabled {
+	display: none;
+}
+
+#reload {
+	float: right;
+}
+</style>
+</head><body class="skin-light font-14">
+<nav><form>
+<select id="lang" name="lang">
+<option value="de">Deutsch</option>
+<option value="de-x-local">Deutsch (lokaler Vergleich)</option>
+<option value="en">Englisch</option>
+<option value="la">Latein</option>
+<option value="mul">Latein (Variante)</option>
+</select>
+<select id="hora" name="hora">
+<option value="index">Übersicht</option>
+<option value="invitatorium">Invitatorium</option>
+<option value="lectionis">Lesehore</option>
+<option value="laudes">Laudes</option>
+<option value="tertia">Terz</option>
+<option value="tertia-complementaris">Terz (Ergänzungspsalmodie)</option>
+<option value="sexta">Sext</option>
+<option value="sexta-complementaris">Sext (Ergänzungspsalmodie)</option>
+<option value="nona">Non</option>
+<option value="nona-complementaris">Non (Ergänzungspsalmodie)</option>
+<option value="vespera">Vesper</option>
+<option value="completorium">Komplet</option>
+</select>
+<button id="prev" type="button">-</button><input type="date" id="date" name="date" placeholder="YYYY-MM-DD"><button id="next" type="button">+</button>
+<input type="hidden" id="extra" name="extra" value="">
+<label><input type="checkbox" id="compare" name="compare" value="1"> Vergleichen</label>
+<input type="submit" value="Anzeigen">
+<button id="extra-button" disabled type="submit">g</button>
+</form><button id="reload">↻</button><p id="links">
+</p></nav>
+<div id="main"></div>
+</body></html>

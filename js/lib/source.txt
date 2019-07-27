@@ -1,0 +1,2 @@
+pako.min.js: https://github.com/nodeca/pako (MIT/ZLIB)
+xtea-asm.js: own creation (mainly here to hide it from linter)

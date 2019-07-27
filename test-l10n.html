@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<title>Stundenbuch - Test</title>
+<!--<script src="js/util.js" defer></script>-->
+<script src="test/diff.js" defer></script>
+<script src="js/l10n.js" defer></script>
+<script src="test/l10n.js" defer></script>
+<style id="diff-style"></style>
+</head><body>
+<div>
+<label>Modus: <select id="mode">
+<option value="compare">Vergleichen</option>
+<option value="diff">Unterschiede</option>
+<option value="duplicate">Duplikate</option>
+<option value="format">Format</option>
+<option value="convert">Konvertieren</option>
+<option value="prefix">Präfixsuche</option>
+</select></label>
+<label class="hide compare diff">Datei 1: <input id="file1" list="files" value="de"></label>
+<label class="hide compare diff">Datei 2: <input id="file2" list="files" value="la"></label>
+<label class="hide duplicate format prefix">Datei: <input id="file" list="files" value="de"></label>
+<label class="hide convert">Daten: <input id="data" value="pa1i-10"></label>
+<label class="hide prefix">Präfix: <input id="prefix" value=""></label>
+<button id="run">Anzeigen</button>
+<datalist id="files">
+<option value="de">
+<option value="la">
+<option value="en">
+<option value="biblia-eu">
+<option value="biblia-vul">
+<option value="biblia-esv">
+<option value="lectionis-de">
+<option value="lectionis-la">
+<option value="lectionis-en">
+</datalist>
+</div>
+<article id="output"></article>
+</body></html>

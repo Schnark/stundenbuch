@@ -1,0 +1,20 @@
+{
+	"version": "1.0",
+	"name": "Stundengebet",
+	"description": "Stundengebet",
+	"launch_path": "/index.html",
+	"icons": {
+		"128": "/img/icon-128.png",
+		"512": "/img/icon-512.png"
+	},
+	"developer": {
+		"name": "Michael Müller",
+		"url": "https://github.com/Schnark"
+	},
+	"locales": {
+		"en": {
+			"name": "Liturgy of the Hours",
+			"description": "Liturgy of the Hours"
+		}
+	}
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<title>Stundenbuch - Test</title>
+<script src="js/util.js" defer></script>
+<script src="js/day.js" defer></script>
+<script src="test/multi.js" defer></script>
+<style>
+button:disabled {
+	display: none;
+}
+table, iframe {
+	width: 100%;
+}
+iframe {
+	height: 20em;
+}
+</style>
+</head><body>
+<form>
+<label><input id="de" type="checkbox" name="lang" value="de"> Deutsch</label>
+<label><input id="de-x-local" type="checkbox" name="lang" value="de-x-local"> Deutsch (lok. Vgl.)</label>
+<label><input id="la" type="checkbox" name="lang" value="la"> Latein</label>
+<label><input id="en" type="checkbox" name="lang" value="en"> Englisch</label>
+<label>Horen: <select id="hora" name="hora">
+<option value="">Alle</option>
+<option value="index">Übersicht</option>
+<option value="invitatorium">Invitatorium</option>
+<option value="lectionis">Lesehore</option>
+<option value="laudes">Laudes</option>
+<option value="tertia">Terz</option>
+<option value="tertia-complementaris">Terz (Ergänzungspsalmodie)</option>
+<option value="sexta">Sext</option>
+<option value="sexta-complementaris">Sext (Ergänzungspsalmodie)</option>
+<option value="nona">Non</option>
+<option value="nona-complementaris">Non (Ergänzungspsalmodie)</option>
+<option value="vespera">Vesper</option>
+<option value="completorium">Komplet</option>
+</select></label>
+<label>Start: <input id="start" type="date" name="start"></label>
+<label>Anzahl: <input id="length" type="number" name="length"></label>
+<input id="extra" type="hidden" name="extra" value="">
+<label><input id="compare" type="checkbox" name="compare" value="1"> Vergleichen</label>
+<input type="hidden" name="doit" value="1">
+<button>Aktualisieren</button>
+<button disabled id="extra-button">g</button>
+</form>
+<table><tbody></tbody></table>
+</body></html>

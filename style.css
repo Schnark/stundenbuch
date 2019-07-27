@@ -1,0 +1,747 @@
+html,
+body {
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-weight: bold;
+	padding: 0;
+}
+
+h1 {
+	font-size: 250%;
+	margin: 0;
+}
+
+h2 {
+	font-size: 150%;
+	margin: 1em 0 0.5em 0.6667em;
+	padding-right: 0.6667em;
+}
+
+h3 {
+	font-size: 112.5%;
+	margin: 1em 0 0.5em 0.8889em;
+	padding-right: 0.88889em;
+}
+
+h4 {
+	font-size: 100%;
+	margin: 1em 0 0.5em 1em;
+	padding-right: 1em;
+}
+
+h5 {
+	font-size: 100%;
+	margin: 1em 0 0.5em 1em;
+	padding-right: 1em;
+	font-weight: normal;
+}
+
+p,
+div.p,
+pre {
+	margin: 0.5em 0 1em 1em;
+	padding: 0;
+	padding-right: 1em;
+	line-height: 1.5;
+	max-width: 50em;
+}
+
+hr {
+	border: none;
+	background: transparent;
+	color: inherit;
+	border-top: solid thin currentColor;
+	margin: -0.5em 5em 0;
+	max-width: 20em;
+}
+
+.strophae-false hr {
+	display: none;
+}
+
+fieldset {
+	border: solid thin;
+	margin: 0.5em 0.5em 1em;
+	padding: 0;
+	max-width: 50em;
+}
+
+fieldset p {
+	margin: 0.5em 0.5em 1em;
+	max-width: none;
+}
+
+legend {
+	margin: 0 0.5em;
+}
+
+.title {
+	padding: 0.5em 1em;
+	border-bottom: thick solid;
+}
+
+.title p {
+	font-size: 150%;
+	margin: 0.5em 0 0 0;
+	padding: 0;
+}
+
+.green {
+	background: #060;
+	color: #fff;
+	border-color: #040;
+}
+
+.red {
+	background: #a00;
+	color: #fff;
+	border-color: #800;
+}
+
+.white {
+	background: #fff;
+	color: #8b7500;
+	border-color: #8b7500;
+}
+
+.blue {
+	background: #fff;
+	color: #00f;
+	border-color: #00f;
+}
+
+.violet {
+	background: #606;
+	color: #fff;
+	border-color: #404;
+}
+
+.pink {
+	background: #e9d;
+	color: #606;
+	border-color: #c7b;
+}
+
+.black {
+	background: #000;
+	color: #fff;
+	border-color: #222;
+}
+
+cite span,
+.flexa,
+.asteriscus,
+.solidus,
+.versus {
+	white-space: nowrap;
+}
+
+.versus {
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.verse-false .versus {
+	display: none;
+}
+
+.solidus-false .solidus {
+	display: none;
+}
+
+.sonus-false #button-audio {
+	display: none;
+}
+
+h2 cite {
+	font-size: 66.6667%;
+	font-style: normal;
+}
+
+p.additamentum,
+div.additamentum,
+span.additamentum {
+	font-style: italic;
+	margin-left: 2em;
+	max-width: 49em;
+}
+
+.antiphona,
+.canticum-responsum {
+	margin-left: 2em;
+}
+
+p > .canticum-responsum {
+	margin-left: 1em;
+}
+
+em {
+	font-style: normal;
+	letter-spacing: 0.15em;
+}
+
+ul {
+	line-height: 2;
+}
+
+a:link,
+a:visited,
+.link-like {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+a:hover,
+a:active,
+.link-like:hover,
+.link-like:active {
+	text-decoration: underline;
+}
+
+a[href="?none"] {
+	cursor: text;
+	text-decoration: none;
+	font-weight: bold;
+	color: inherit !important;
+}
+
+.link a {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	border-width: 3px;
+	border-style: solid;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 10px 0;
+	display: block;
+}
+
+#reset {
+	cursor: pointer;
+}
+#reset:hover {
+	text-decoration: underline;
+}
+
+body.skin-light {
+	color: #222;
+	background-color: #fff;
+}
+
+.skin-light a:link,
+.skin-light a:visited,
+.skin-light .link-like {
+	color: #2b55ab;
+}
+
+.skin-light a.current:not(:active) {
+	color: #fff;
+	background-color: #2b55ab;
+	border-color: #2b55ab;
+}
+
+.skin-light a:active {
+	color: #ac6600;
+}
+
+.skin-light #main h2,
+.skin-light #main h3,
+.skin-light #main h4,
+.skin-light #main h5 {
+	color: #9A373B;
+}
+
+.skin-light .antiphona-1,
+.skin-light .flexa,
+.skin-light .asteriscus,
+.skin-light .solidus,
+.skin-light .versus,
+.skin-light .versiculum,
+.skin-light .responsum,
+.skin-light .alternativus,
+.skin-light .disabled {
+	color: #72777d;
+}
+
+.skin-light .reset {
+	color: #ab2222;
+}
+
+body.skin-dark {
+	color: #c8ccd1;
+	background-color: #222;
+}
+
+.skin-dark a:link,
+.skin-dark a:visited,
+.skin-dark .link-like {
+	color: #91ade4;
+}
+
+.skin-dark a.current:not(:active) {
+	color: #222;
+	background-color: #91ade4;
+	border-color: #91ade4;
+}
+
+.skin-dark a:active {
+	color: #c67500;
+}
+
+.skin-dark #main h2,
+.skin-dark #main h3,
+.skin-dark #main h4,
+.skin-dark #main h5 {
+	color: #db9c9e;
+}
+
+.skin-dark .antiphona-1,
+.skin-dark .flexa,
+.skin-dark .asteriscus,
+.skin-dark .solidus,
+.skin-dark .versus,
+.skin-dark .versiculum,
+.skin-dark .responsum,
+.skin-dark .alternativus,
+.skin-dark .disabled {
+	color: #a2a9b1;
+}
+
+.skin-dark .reset {
+	color: #ea9696;
+}
+
+body.skin-sepia {
+	color: #5b4636;
+	background-color: #f4ecd8;
+}
+
+.skin-sepia a:link,
+.skin-sepia a:visited,
+.skin-sepia .link-like {
+	color: #264b97;
+}
+
+.skin-sepia a.current:not(:active) {
+	color: #f4ecd8;
+	background-color: #264b97;
+	border-color: #264b97;
+}
+
+.skin-sepia a:active {
+	color: #9c5c00;
+}
+
+.skin-sepia #main h2,
+.skin-sepia #main h3,
+.skin-sepia #main h4,
+.skin-sepia #main h5 {
+	color: #883134;
+}
+
+.skin-sepia .antiphona-1,
+.skin-sepia .flexa,
+.skin-sepia .asteriscus,
+.skin-sepia .solidus,
+.skin-sepia .versus,
+.skin-sepia .versiculum,
+.skin-sepia .responsum,
+.skin-sepia .alternativus,
+.skin-sepia .disabled {
+	color: #676c71;
+}
+
+.skin-sepia .reset {
+	color: #971e1e;
+}
+
+body.font-10 {
+	font-size: 10px;
+}
+
+body.font-11 {
+	font-size: 11px;
+}
+
+body.font-12 {
+	font-size: 12px;
+}
+
+body.font-13 {
+	font-size: 13px;
+}
+
+body.font-14 {
+	font-size: 14px;
+}
+
+body.font-15 {
+	font-size: 15px;
+}
+
+body.font-16 {
+	font-size: 16px;
+}
+
+body.font-17 {
+	font-size: 17px;
+}
+
+body.font-18 {
+	font-size: 18px;
+}
+
+article {
+	margin-bottom: 3em;
+}
+
+html.loading {
+	overflow: hidden;
+}
+
+html.loading footer {
+	display: none;
+}
+
+html.loading #main img {
+	width: 50%;
+	margin: 5% auto;
+	display: block;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+footer nav {
+	background: #000;
+	color: #fff;
+	height: 2.5em;
+	line-height: 2.5em;
+}
+
+@supports (display: flex) {
+	footer nav {
+		line-height: normal;
+		display: flex;
+		align-items: center;
+	}
+}
+
+[role="button"] {
+	cursor: pointer;
+	border: 1px solid;
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	margin: 0.35em 0.5em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+[role="button"] img {
+	height: 1em;
+	vertical-align: middle;
+	padding-right: 0.4em;
+}
+
+.popup {
+	border: solid thin;
+	margin: 2px;
+	border-radius: 2px;
+	max-height: calc(100vh - 3em);
+	overflow: auto;
+}
+
+.skin-light .popup {
+	background-color: rgba(255, 255, 255, 0.95);
+}
+
+.skin-dark .popup {
+	background-color: rgba(34, 34, 34, 0.95);
+}
+
+.skin-sepia .popup {
+	background-color: rgba(244, 236, 216, 0.95);
+}
+
+.popup h2 {
+	margin-top: 0.5em;
+	margin-bottom: 0.3em;
+}
+
+.popup h3 {
+	margin-top: 0.3em;
+	margin-bottom: 0.2em;
+}
+
+.popup ul {
+	margin-top: 0.2em;
+}
+
+label,
+select,
+textarea,
+input:not([type="checkbox"]),
+button {
+	font: inherit;
+	width: 100%;
+	display: block;
+	margin: 0;
+}
+
+/*do'n't know why I only need it here, but that's the case*/
+input {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+label.inline,
+select.inline,
+input.inline,
+button.inline,
+label.inline input,
+label.inline select {
+	width: auto;
+	display: inline;
+}
+
+#optional-select {
+	width: auto;
+	max-width: 10em;
+	display: inline;
+	float: right;
+	margin: 0.5em 0;
+}
+
+#main a {
+	clear: right;
+}
+
+#date-input:not(:focus) {
+	display: block;
+	position: absolute;
+	clip: rect(1px, 1px, 1px, 1px);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#form-additional-day {
+	width: 2em;
+	text-align: right;
+}
+
+.mensis {
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.mensis td {
+	padding: 5px;
+}
+
+.mensis td:nth-child(1) {
+	border-left-style: solid;
+	border-left-width: medium;
+	text-align: center;
+	font-weight: bold;
+	width: 1.25em;
+}
+
+.mensis td:nth-child(2) {
+	text-align: right;
+	width: 2em;
+}
+
+.mensis a {
+	display: block;
+}
+
+.mensis td:nth-last-child(1) {
+	border-right: solid thin;
+}
+
+.mensis tr.current {
+	font-weight: bold;
+}
+
+.mensis tr.current td {
+	border-top: dashed thin;
+	border-top-color: inherit;
+	border-bottom: dashed thin;
+	border-bottom-color: inherit;
+}
+
+.mensis tr.current td:nth-last-child(1) {
+	border-right: solid medium;
+}
+
+.mensis tr:nth-child(1) td,
+.mensis tr.sunday td {
+	border-top: solid thin;
+	border-top-color: inherit;
+}
+
+.mensis tr:nth-last-child(1) td {
+	border-bottom: solid thin;
+	border-bottom-color: inherit;
+}
+
+.basic-table {
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.basic-table th,
+.basic-table td {
+	border: solid thin;
+	text-align: center;
+	padding: 5px;
+}
+
+#main ul {
+	margin-left: 0;
+	padding-left: 1em;
+}
+
+#main ul li {
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.twolang {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.twolang,
+.twolang > tbody > tr,
+.twolang > tbody > tr > td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: top;
+}
+
+.twolang td[colspan="2"] p {
+	max-width: 100em;
+}
+
+#audio-select-0,
+#audio-select-1 {
+	width: 47%;
+}
+
+#audio-play,
+#audio-stop,
+#audio-volume {
+	vertical-align: middle;
+}
+
+#audio-play,
+#audio-stop {
+	width: 3.5em;
+	margin-right: 2em;
+}
+
+#audio-volume {
+	width: calc(95% - 6em);
+}
+
+#audio-output {
+	max-height: 40vh;
+	overflow: auto;
+}
+
+.notes {
+	flex-wrap: wrap;
+	display: flex;
+}
+
+.notes-part {
+	display: inline-flex;
+	white-space: nowrap;
+}
+
+.notes svg {
+	flex: none;
+	/*fix scrolling*/
+	pointer-events: none;
+}
+
+.notes .background {
+	flex: auto;
+}
+
+@media print {
+	body {
+		font-family: serif;
+		color: #000 !important;
+		background-color: transparent !important;
+	}
+
+	.green,
+	.red,
+	.white,
+	.blue,
+	.violet,
+	.pink,
+	.black {
+		background: transparent;
+		color: #000;
+		border-color: #000;
+	}
+
+	.link,
+	footer {
+		display: none;
+	}
+
+	a,
+	.link-like {
+		color: #000 !important;
+		background: transparent !important;
+		border: none;
+	}
+
+	h2,
+	h3,
+	h4,
+	h5 {
+		color: #000 !important;
+	}
+
+	.antiphona-1,
+	.flexa,
+	.asteriscus,
+	.versus,
+	.versiculum,
+	.responsum,
+	.alternativus,
+	.disabled {
+		color: #777 !important;
+	}
+}
