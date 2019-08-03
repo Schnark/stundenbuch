@@ -182,7 +182,7 @@ function getFile (name, callback) {
 }
 
 function load (lang, callback) {
-	var langData, i, todo;
+	var langData, i, todo, files;
 
 	function onDone (noStore) {
 		if (!noStore) {
@@ -228,6 +228,29 @@ function load (lang, callback) {
 
 	langData = parseLangCode(lang) || {};
 	langData = getFileInfo(langData);
+	if (password === 'raw') {
+		files = langData.additional;
+		if (langData.main === 'de') {
+			files.unshift('regional-de');
+		}
+		files.unshift(
+			langData.main,
+			'interface-' + langData.main,
+			'biblia-' + langData.main,
+			'lectionis-' + langData.main,
+			'catalogus-' + langData.main,
+			'audio-' + langData.main
+		);
+		todo = files.length;
+		for (i = 0; i < files.length; i++) {
+			getRawFile('l10n-source/' + files[i] + '.txt', 'text', onGotFile);
+		}
+		return;
+	}
+	if (password === 'none') {
+		onDone();
+		return;
+	}
 	getFile(langData.main, function (text) {
 		processFile(text);
 		todo = langData.additional.length;
@@ -327,7 +350,7 @@ function getName (type) {
 function dynamicReplace (name) {
 	var parts;
 	switch (name) {
-	case 'antiphona': return '[antiphona]' + dynamicReplaceData.antiphona;
+	case 'antiphona': return '{antiphona}' + dynamicReplaceData.antiphona;
 	case 'commemoratio-lectio': return removeHead(dynamicReplaceData.commemoratioLectio);
 	case 'commemoratio-antiphona': return get(dynamicReplaceData.commemoratioAntiphona);
 	case 'commemoratio-oratio1':
@@ -385,7 +408,7 @@ function getRaw (name, fallback) {
 			return fallback;
 		}
 		//throw new Error('Missing text: ' + name);
-		return 'TODO: [' + name + ']';
+		return '[' + name + ']';
 	}
 	return textStore[name];
 }
@@ -572,7 +595,7 @@ return {
 		{code: 'de-AT', autonym: 'Deutsch (Österreich)'},
 		{code: 'de-CH', autonym: 'Deutsch (Schweiz)'},
 		{code: 'en', autonym: 'English', prompt: 'Please enter password:'},
-		{code: 'la', autonym: 'Latina', prompt: 'Do tessera, quæso:'},
+		{code: 'la', autonym: 'Latina', prompt: 'Da tesseram, quæsumus:'},
 		{code: 'la-x-noaccent', autonym: 'Latina (sine accentibus)'}
 	]
 };

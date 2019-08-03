@@ -47,7 +47,8 @@ h5 {
 
 p,
 div.p,
-pre {
+pre,
+dl {
 	margin: 0.5em 0 1em 1em;
 	padding: 0;
 	padding-right: 1em;
@@ -229,11 +230,12 @@ a[href="?none"] {
 	display: block;
 }
 
-#reset {
-	cursor: pointer;
+dt {
+	font-weight: bold;
 }
-#reset:hover {
-	text-decoration: underline;
+
+dt::after {
+	content: ":";
 }
 
 body.skin-light {

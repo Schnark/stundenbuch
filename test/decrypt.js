@@ -47,7 +47,7 @@ function run (pw) {
 	decrypt('de.xtea', pw, [
 		{name: 'de.txt', start: ''},
 		{name: 'interface-de.txt', start: '[titulus]'},
-		{name: 'biblia-eu.txt', start: '#Einheitsübersetzung'},
+		{name: 'biblia-de.txt', start: '#Einheitsübersetzung'},
 		{name: 'lectionis-de.txt', start: '[modus-lectionis]'},
 		{name: 'regional-de.txt', start: '#Freiburg'},
 		{name: 'catalogus-de.txt', start: '[catalogus-index]'},
@@ -56,7 +56,7 @@ function run (pw) {
 	decrypt('en.xtea', pw, [
 		{name: 'en.txt', start: ''},
 		{name: 'interface-en.txt', start: '[titulus]'},
-		{name: 'biblia-esv.txt', start: '#New American Bible'},
+		{name: 'biblia-en.txt', start: '#New American Bible'},
 		{name: 'lectionis-en.txt', start: '[modus-lectionis]'},
 		{name: 'catalogus-en.txt', start: '[catalogus-index]'},
 		{name: 'audio-en.txt', start: '#TODO\n[audio-data]'}
@@ -64,7 +64,7 @@ function run (pw) {
 	decrypt('la.xtea', pw, [
 		{name: 'la.txt', start: ''},
 		{name: 'interface-la.txt', start: '[titulus]'},
-		{name: 'biblia-vul.txt', start: '[gn-28-12-13]'},
+		{name: 'biblia-la.txt', start: '#Nova Vulgata'},
 		{name: 'lectionis-la.txt', start: '[modus-lectionis]'},
 		{name: 'catalogus-la.txt', start: '[catalogus-index]'},
 		{name: 'audio-la.txt', start: '#TODO\n[audio-data]'}

@@ -161,8 +161,8 @@ Day.lectio = {
 	'lectio-laudes-martyr': '2-cor-1-3-5',
 	'lectio-laudes-martyr-varianta-paschale': '1-io-5-3-5',
 	'lectio-tertia-martyr': '1-pt-5-10-11',
-	'lectio-sexta-martyr-plures': 'iac-1-12',
-	'lectio-sexta-martyr': 'hbr-11-33',
+	'lectio-sexta-martyr-plures': 'hbr-11-33',
+	'lectio-sexta-martyr': 'iac-1-12',
 	'lectio-nona-martyr': 'sap-3-1-3',
 	'lectio-vespera-martyr': '1-pt-4-13-14',
 	'lectio-vespera-martyr-varianta-paschale': 'apc-7-14-17',
@@ -493,8 +493,8 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		return;
 	}
 	if (
-		rank === 0 ||
-		(rank === 1 && types.indexOf('dominus') > -1 && Config.getConfig().get('bugCompat'))
+		rank === 0/* ||
+		(rank === 1 && types.indexOf('dominus') > -1 && Config.getConfig().get('bugCompat')) */
 	) {
 		val.eve = true;
 		val.completorium = true;

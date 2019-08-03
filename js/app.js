@@ -350,7 +350,7 @@ function globalKeydownHandler (e) {
 }
 
 function globalClickHandler (e) {
-	var id, config, i, all, prev;
+	var id, config, i, all, prev, input;
 	if (e.target.tagName === 'A' && !e.target.dataset.nativ) {
 		navigate(e.target.dataset.action || e.target.getAttribute('href'));
 		e.preventDefault();
@@ -370,6 +370,14 @@ function globalClickHandler (e) {
 				updateInterface();
 				navigate('?back');
 			});
+		}
+	}
+	if (id === 'password-reset') {
+		if (window.confirm(l10n.get('titulus-delere-adfirmare'))) {
+			try {
+				localStorage.removeItem('stundenbuch-password');
+			} catch (e) {
+			}
 		}
 	}
 
@@ -394,6 +402,7 @@ function globalClickHandler (e) {
 		config.set('additionalDays', []);
 		updateCalendar(true);
 	}
+	//TODO highlight selected group
 	if (id === 'select-group-0') {
 		enableDayGroup([]);
 		updateCalendar(true);
@@ -456,7 +465,9 @@ function globalClickHandler (e) {
 	}
 
 	if (id === 'catalogus-button') {
-		catSearch(document.getElementById('catalogus-input').value);
+		input = document.getElementById('catalogus-input');
+		input.blur();
+		catSearch(input.value);
 	}
 
 	if (id === 'button-settings') {

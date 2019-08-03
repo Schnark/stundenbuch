@@ -26,11 +26,11 @@ l10n-files: l10n-source/combined/de.txt l10n-source/combined/en.txt l10n-source/
 .PHONY: encrypt
 encrypt: l10n/de.xtea l10n/en.xtea l10n/la.xtea
 
-DE_FILES = l10n-source/de.txt l10n-source/interface-de.txt l10n-source/biblia-eu.txt l10n-source/lectionis-de.txt l10n-source/regional-de.txt l10n-source/catalogus-de.txt l10n-source/audio-de.txt
+DE_FILES = l10n-source/de.txt l10n-source/interface-de.txt l10n-source/biblia-de.txt l10n-source/lectionis-de.txt l10n-source/regional-de.txt l10n-source/catalogus-de.txt l10n-source/audio-de.txt
 
-EN_FILES = l10n-source/en.txt l10n-source/interface-en.txt l10n-source/biblia-esv.txt l10n-source/lectionis-en.txt l10n-source/catalogus-en.txt l10n-source/audio-en.txt
+EN_FILES = l10n-source/en.txt l10n-source/interface-en.txt l10n-source/biblia-en.txt l10n-source/lectionis-en.txt l10n-source/catalogus-en.txt l10n-source/audio-en.txt
 
-LA_FILES = l10n-source/la.txt l10n-source/interface-la.txt l10n-source/biblia-vul.txt l10n-source/lectionis-la.txt l10n-source/catalogus-la.txt l10n-source/audio-la.txt
+LA_FILES = l10n-source/la.txt l10n-source/interface-la.txt l10n-source/biblia-la.txt l10n-source/lectionis-la.txt l10n-source/catalogus-la.txt l10n-source/audio-la.txt
 
 l10n-source/combined/de.txt: $(DE_FILES)
 	paste -s -d"\n" $(DE_FILES) > l10n-source/combined/de.txt

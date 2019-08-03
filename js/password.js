@@ -3,11 +3,12 @@ waitForPassword =
 (function () {
 "use strict";
 
-var PW_HASH = 57;
-
-function hasRawAccess () {
-	return location.protocol === 'file:';
-}
+var PW_CHECKSUM = 57,
+	SPECIAL_PW = {
+		'~~local~~': '',
+		'~~none~~': 'none',
+		'~~raw~~': 'raw'
+	};
 
 function loadPassword (key) {
 	try {
@@ -24,15 +25,32 @@ function storePassword (key, pw) {
 	}
 }
 
-function isValidPassword (pw) {
-	return (
-		/^[a-z]{32}$/.test(pw) &&
-		pw.split('').map(function (c, i) {
+function checksum (str) {
+	return str.split('').map(function (c, i) {
 			return (i + 1) * (c.charCodeAt(0) - 97);
 		}).reduce(function (a, b) {
 			return a + b;
-		}, 0) % 101 === PW_HASH
+		}, 0) % 101;
+}
+
+function isValidPassword (pw) {
+	return (
+		pw in SPECIAL_PW || (
+			/^[a-z]{32}$/.test(pw) &&
+			checksum(pw) === PW_CHECKSUM
+		)
 	);
+}
+
+function normalizePassword (pw) {
+	return pw.toLowerCase().replace(/\s+/g, '');
+}
+
+function normalizeSpecialPassword (pw) {
+	if (pw in SPECIAL_PW) {
+		return SPECIAL_PW[pw];
+	}
+	return pw;
 }
 
 function showPasswordPrompt (container, prompt, callback) {
@@ -40,7 +58,7 @@ function showPasswordPrompt (container, prompt, callback) {
 	container.innerHTML = prompt + '<p><textarea id="password-input" rows="3"></textarea></p>';
 	input = document.getElementById('password-input');
 	input.addEventListener('input', function () {
-		var pw = input.value.replace(/\s+/g, '');
+		var pw = normalizePassword(input.value);
 		if (isValidPassword(pw)) {
 			input.blur();
 			container.innerHTML = oldHtml;
@@ -51,14 +69,12 @@ function showPasswordPrompt (container, prompt, callback) {
 
 function waitForPassword (key, container, prompt, callback) {
 	var pw = loadPassword(key);
-	if (hasRawAccess()) {
-		callback('');
-	} else if (isValidPassword(pw)) {
-		callback(pw);
+	if (isValidPassword(pw)) {
+		callback(normalizeSpecialPassword(pw));
 	} else {
 		showPasswordPrompt(container, prompt, function (pw) {
 			storePassword(key, pw);
-			callback(pw);
+			callback(normalizeSpecialPassword(pw));
 		});
 	}
 }

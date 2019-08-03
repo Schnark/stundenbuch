@@ -197,7 +197,7 @@ function checkFormat (file, callback) {
 			[/^oratio-/, /^Oration\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
 			[/-introductio$/, /^(!.*\n\n)*!.*$/, true, 'Einleitung im falschen Format']
 		],
-		'biblia-eu': [
+		'biblia-de': [
 			[/./, /^[a-zA-ZäöüÄÖÜßáëíó0-9() \n<>’\-.:,;?!…–»«_@]+$/, true, 'Illegales Zeichen'],
 			[/./, /^@|^(Psalm \d+( [IVX]+( \([A-Z][a-z]+\))?)?|Canticum|Lesung) <([12] )?[A-Z][a-zäöü]+[^>]+>\n\n/, true, 'Fehlerhafte Überschrift']
 		],
@@ -220,7 +220,7 @@ function checkFormat (file, callback) {
 			[/^oratio-/, /^Oratio\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
 			[/-introductio$/, /^(!.*\n\n)*!.*$/, true, 'Einleitung im falschen Format']
 		],
-		'biblia-vul': [
+		'biblia-la': [
 			[/./, /^[a-zA-ZæÆœŒáéíóúýÁÉÍÓÚǽ0-9() \n<>’\/\-.:,;?!…–»«›‹_@]+$/, true, 'Illegales Zeichen'],
 			[/./, /^@[a-z0-9\-]+$|^(Psalmus \d+( [AB])?( [IVX]+( \([A-Z][a-z]+\))?)?|Canticum|Lectio) <([12] )?[A-Z][a-z]+[^>]+>\n\n/, true, 'Fehlerhafte Überschrift']
 		],
@@ -242,7 +242,7 @@ function checkFormat (file, callback) {
 			[/^oratio-/, /^Concluding Prayer\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
 			[/-introductio$/, /^(!.*\n\n)*!.*$/, true, 'Einleitung im falschen Format']
 		],
-		'biblia-esv': [
+		'biblia-en': [
 			[/./, /^[a-zA-Z0-9() \n<>\/\-.:,;?!…–“”‘’_@]+$/, true, 'Illegales Zeichen'],
 			[/./, /^@[a-z0-9\-]+$|^(Psalm \d+( [AB])?( [IVX]+( \([A-Z][a-z]+\))?)?|Canticle|Reading)(?: <([12] )?[A-Z][a-z]+[^>]+>)?\n\n/, true, 'Fehlerhafte Überschrift']
 		],
@@ -297,7 +297,6 @@ function checkFormat (file, callback) {
 		}
 
 		lang = file.replace(/\.txt$/, '').replace(/^.*-/, '');
-		lang = {eu: 'de', esv: 'en', vul: 'la'}[lang] || lang;
 
 		for (key in data) {
 			if (data.hasOwnProperty(key)) {

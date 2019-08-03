@@ -32,7 +32,7 @@ function updateExtra (extra) {
 }
 
 function show (html) {
-	var re = /TODO: (\[[^\[\]]*\])| (N\.) /g,
+	var re = /(\[[^\[\]]*\])| (N\.) /g,
 		result, todos = [];
 	while ((result = re.exec(html))) {
 		if (todos.indexOf(result[1] || result[2]) === -1) {
@@ -76,7 +76,8 @@ function getConfig (lang, hora, extra, compare) {
 				'50|e'
 			],
 			la: [
-				'23|7|birgitta|1|religiosus,mulier'
+				'23|7|birgitta|1|religiosus,mulier',
+				'9|8|teresia-benedicta|1|martyr,virgo'
 			]
 		};
 	notes['de-x-local'] = notes.de;
@@ -139,7 +140,7 @@ function normalizeLocalHtml (html) {
 		.replace(/<em>([^<]*)<\/em>/g, function (all, em) {
 			return em.split('').join(' ');
 		})
-		.replace(/<h2>Zweite Lesung[\s\S]*?<h2>/, function (lectio) {
+		/*.replace(/<h2>Zweite Lesung[\s\S]*?<h2>/, function (lectio) {
 			var cites = [];
 			lectio = lectio.replace(/([.,] ?)?<cite>(.*?)<\/cite>/g, function (all, punct, cite) {
 				var n = cites.length + 1;
@@ -147,7 +148,7 @@ function normalizeLocalHtml (html) {
 				return ' (' + n + ')' + (punct || '');
 			});
 			return lectio.replace(/<h2>$/, cites.join('') + '<h2>');
-		})
+		})*/
 		.replace(/℟ Halleluja\./g, '( ℟ Halleluja.)')
 		.replace(/Halleluja\.<br>\( ℟ Halleluja\.\)/g, '℟ Halleluja (Halleluja).')
 		.replace('<h2>Versus</h2>', '')

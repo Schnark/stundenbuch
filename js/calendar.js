@@ -738,7 +738,7 @@ Day.calendars = {
 				[31, 7, 'ignatius-loyola', 2, 'pastor'],
 
 				[1, 8, 'alfonsus-liguori', 2, config.get('bugCompat') ? 'pastor' : 'doctor'],
-				[2, 8, 'eusebius', 3, ['episcopus', 'martyr']],
+				[2, 8, 'eusebius', 3, ['episcopus']],
 				[2, 8, 'petrus-iulianus', 3, ['religiosus', 'vir']],
 				[4, 8, 'ioannes-maria-vianney', 2, 'pastor'],
 				[5, 8, 'basilica-maria', 3, 'maria'],
@@ -765,7 +765,7 @@ Day.calendars = {
 				[7, 8, 'xystus', 3, ['martyr', 'vir', 'plures']],
 				[7, 8, 'caietanus', 3, 'pastor'],
 				[8, 8, 'dominicus', 2, 'pastor'],
-				[9, 8, 'teresia-benedicta', 3, ['martyr', 'mulier']],
+				[9, 8, 'teresia-benedicta', 3, ['martyr', 'virgo']],
 				[10, 8, 'laurentius', 1, ['martyr', 'vir']],
 				[11, 8, 'clara-assisi', 2, 'virgo'],
 				[12, 8, 'ioanna-francisca-chantal', 3, ['religiosus', 'mulier']],
@@ -1128,7 +1128,7 @@ Day.calendars = {
 				[20, 7, 'margareta', 3, ['virgo', 'martyr'], 'Margareta'],
 				[23, 7, 'birgitta', 1, ['religiosus', 'mulier']],
 				[24, 7, 'christophorus', 3, ['martyr', 'vir'], 'Christophorus'],
-				[9, 8, 'teresia-benedicta', 1, ['martyr', 'mulier']],
+				[9, 8, 'teresia-benedicta', 1, ['martyr', 'virgo']],
 				[31, 8, 'paulinus-trevirenis', 3, ['episcopus', 'martyr'], 'Paulinus'],
 				[17, 9, 'hildegard-bingen', 3, ['religiosus', 'mulier'], 'Hildegard'],
 				[18, 9, 'lambertus', 3, ['pastor', 'martyr'], 'Lambertus'],
@@ -1184,12 +1184,12 @@ Day.calendars = {
 		],
 		groups: [
 			[
-				'severin-norikum', 'fridolin', 'gertrud', 'konrad-parzham', 'godehard',
+				'severin-norikum', 'agnes', 'fridolin', 'gertrud', 'konrad-parzham', 'godehard',
 				'iosephmaria-escriva', 'kilian', 'lambertus', 'rupert-virgil', 'gallus',
 				'wolfgang', 'konrad-gebhard', 'lucia'
 			],
 			[
-				'valentin-raetien', 'walburga', 'bruno-querfurt', 'liudger', 'marcel-callo',
+				'valentin-raetien', 'agnes', 'walburga', 'bruno-querfurt', 'liudger', 'marcel-callo',
 				'florian', 'vitus', 'ulrich', 'margareta', 'paulinus-trevirenis',
 				'mauritius', 'hubert', 'willibrord', 'leopold', 'barbara',
 				'odilia'
@@ -1197,12 +1197,12 @@ Day.calendars = {
 			[
 				'agnes', 'klemens-maria-hofbauer', 'johannes-nepomuk', 'benno', 'hemma-gurk',
 				'willibald', 'heinrich-kunigunde', 'christophorus', 'niklaus-flue', 'lioba',
-				'wendelin', 'rupert-mayer', 'leonhard', 'adolph-kolping'
+				'wendelin', 'rupert-mayer', 'leonhard', 'adolph-kolping', 'lucia'
 			],
 			[
 				'johannes-nepomuk-neumann', 'meinrad', 'heinrich-seuse', 'rabanus-maurus', 'mathilde',
 				'leo-ix', 'hermann-josef', 'otto-bamberg', 'knud-erich-olaf', 'hildegard-bingen',
-				'ursula', 'pirmin', 'luzius', 'anno'
+				'ursula', 'pirmin', 'luzius', 'anno', 'lucia'
 			]
 		]
 	},
@@ -1302,7 +1302,7 @@ Day.calendars = {
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
-				'oskar-saier', 'johannes-avila', 'ulrich-zell', 'landelin', 'otmar',
+				'oskar-saier', 'johannes-avila', 'ulrich-zell', 'bonaventura', 'monica', 'landelin', 'otmar',
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
@@ -1310,8 +1310,8 @@ Day.calendars = {
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
-				'ulrika-franziska-nisch-hegne', 'heimerad-messkirch', 'arbogast', 'verena-zurzach',
-				'pentecoste-secunda', 'maria-ecclesia'
+				'ulrika-franziska-nisch-hegne', 'heimerad-messkirch', 'bonaventura', 'arbogast', 'monica',
+				'verena-zurzach', 'pentecoste-secunda', 'maria-ecclesia'
 			]
 		]
 	}

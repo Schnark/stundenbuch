@@ -112,9 +112,9 @@ function formatBlock (text, type, easter, debug) {
 		.replace(/ \*/g, getFlexaAsteriscus('asteriscus', ''))
 		.replace(/ \//g, '<span class="solidus"> /</span>')
 		.replace(/<p>([1-9]\S* )/g, '<p><sup class="versus">$1</sup>')
-		.replace(/<br>([1-9]\S* )/g, (text.indexOf('[antiphona]') > -1 ? '<br>' : ' ') + '<sup class="versus">$1</sup>')
-		.replace(/<p>\[antiphona\]<\/p>/g, '')
-		.replace(/<p>\[antiphona\]/g, '<p class="antiphona"><span class="antiphona-1">' + l10n.get('antiphona') + ' </span>')
+		.replace(/<br>([1-9]\S* )/g, (text.indexOf('{antiphona}') > -1 ? '<br>' : ' ') + '<sup class="versus">$1</sup>')
+		.replace(/<p>\{antiphona\}<\/p>/g, '')
+		.replace(/<p>\{antiphona\}/g, '<p class="antiphona"><span class="antiphona-1">' + l10n.get('antiphona') + ' </span>')
 		.replace(/<p>~(\S+) (.*?)<\/p>/g, function (all, msg, label) {
 			return formatLink({href: '?catalogus,' + msg, labelHtml: label});
 		});
@@ -158,10 +158,10 @@ function formatCanticum (canticum, antiphona, removeAnt, easter, debug) {
 
 	canticum = l10n.get(canticum).replace(
 		/\nR: ([^\n]+)/g,
-		Config.getConfig().get('rvMode') === 'single' ? '' : '[$1]'
+		Config.getConfig().get('rvMode') === 'single' ? '' : '{$1}'
 	);
 	if (removeAnt) {
-		pos = canticum[removeAnt < 0 ? 'lastIndexOf' : 'indexOf']('\n[antiphona]');
+		pos = canticum[removeAnt < 0 ? 'lastIndexOf' : 'indexOf']('\n{antiphona}');
 		if (pos > -1) {
 			pos2 = canticum.indexOf('\n', pos + 1);
 			canticum = canticum.slice(0, pos) + (pos2 > -1 ? canticum.slice(pos2 + 1) : '');
@@ -181,17 +181,15 @@ function formatCanticum (canticum, antiphona, removeAnt, easter, debug) {
 			new RegExp('<p>' + rePart + '</p>', 'g'),
 			'<p class="canticum-responsum">$1</p>'
 		)
-		.replace(/TODO: \[/g, 'TODO: {')
 		.replace(
-			/\[(.+?)\](.*?)(<br>|<\/p>)/g,
+			/\{(.+?)\}(.*?)(<br>|<\/p>)/g,
 			function (all, resp, rest, html) {
 				if (html === '<br>') {
 					return rest + '<br><span class="canticum-responsum">' + getRV('R') + resp + '</span><br>';
 				}
 				return rest + '<br>' + getRV('R') + resp + '</p>';
 			}
-		)
-		.replace(/TODO: \{/g, 'TODO: [');
+		);
 
 	if (!Config.getConfig().get('psOratio')) { //last or second-to-last element
 		pos = html.lastIndexOf('<p class="additamentum">');
