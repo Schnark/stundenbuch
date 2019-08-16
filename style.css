@@ -4,7 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	scroll-snap-type: y proximity;
+	scroll-snap-type: block;
 }
 
 h1,
@@ -244,6 +244,10 @@ dt {
 
 dt::after {
 	content: ":";
+}
+
+.day-group.current {
+	font-weight: bold;
 }
 
 body.skin-light {

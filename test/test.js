@@ -140,7 +140,7 @@ function normalizeLocalHtml (html) {
 		.replace(/<em>([^<]*)<\/em>/g, function (all, em) {
 			return em.split('').join(' ');
 		})
-		/**/.replace(/<h2>Zweite Lesung[\s\S]*?<h2>/, function (lectio) {
+		/*/.replace(/<h2>Zweite Lesung[\s\S]*?<h2>/, function (lectio) {
 			var cites = [];
 			lectio = lectio.replace(/([.,] ?)?<cite>(.*?)<\/cite>/g, function (all, punct, cite) {
 				var n = cites.length + 1;

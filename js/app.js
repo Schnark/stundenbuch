@@ -97,6 +97,7 @@ function updateInterface () {
 function updateSettings (config) {
 	var el, i, val, sub, j;
 	updateAdditionalDays();
+	document.getElementById('select-group-' + config.get('autoAddedGroup')).classList.add('current');
 	el = document.querySelectorAll('[data-key]');
 	for (i = 0; i < el.length; i++) {
 		val = config.get(el[i].dataset.key);
@@ -206,7 +207,7 @@ function enableOptionalMemorial (name, date) {
 	navigateToUrl();
 }
 
-function enableDayGroup (days) {
+function enableDayGroup (group) {
 	var config = Config.getConfig(), auto, current;
 	auto = config.get('autoAddedDays');
 	current = config.get('additionalDays');
@@ -214,14 +215,20 @@ function enableDayGroup (days) {
 		return auto.indexOf(d) === -1;
 	});
 	auto = [];
-	days.forEach(function (d) {
-		if (current.indexOf(d) === -1) {
-			auto.push(d);
-			current.push(d);
-		}
-	});
+	if (group > 0) {
+		Day.dayGroups[group - 1].forEach(function (d) {
+			if (current.indexOf(d) === -1) {
+				auto.push(d);
+				current.push(d);
+			}
+		});
+	}
 	config.set('autoAddedDays', auto);
+	config.set('autoAddedGroup', group);
 	config.set('additionalDays', current);
+	updateCalendar(true);
+	document.querySelector('.day-group.current').classList.remove('current');
+	document.getElementById('select-group-' + group).classList.add('current');
 }
 
 function makeLink (date, hora) {
@@ -402,26 +409,20 @@ function globalClickHandler (e) {
 		config.set('additionalDays', []);
 		updateCalendar(true);
 	}
-	//TODO highlight selected group
 	if (id === 'select-group-0') {
-		enableDayGroup([]);
-		updateCalendar(true);
+		enableDayGroup(0);
 	}
 	if (id === 'select-group-1') {
-		enableDayGroup(Day.dayGroups[0]);
-		updateCalendar(true);
+		enableDayGroup(1);
 	}
 	if (id === 'select-group-2') {
-		enableDayGroup(Day.dayGroups[1]);
-		updateCalendar(true);
+		enableDayGroup(2);
 	}
 	if (id === 'select-group-3') {
-		enableDayGroup(Day.dayGroups[2]);
-		updateCalendar(true);
+		enableDayGroup(3);
 	}
 	if (id === 'select-group-4') {
-		enableDayGroup(Day.dayGroups[3]);
-		updateCalendar(true);
+		enableDayGroup(4);
 	}
 
 	if (id === 'export-config') {
@@ -643,6 +644,7 @@ function init () {
 		calendarExtra: [],
 		additionalDays: [],
 		autoAddedDays: [],
+		autoAddedGroup: 0,
 		mariaSabbato: false,
 		commemoratio: false,
 		epiphaniasSunday: false,

@@ -70,7 +70,7 @@ function selectLangCode (list, lang) {
 	return list[0];
 }
 
-function parseFile (text, allowDuplicates) {
+function parseFile (text, allowDuplicates, lang) {
 	var lines = text.split('\n'), i, line, current;
 	for (i = 0; i < lines.length; i++) {
 		line = lines[i];
@@ -79,6 +79,19 @@ function parseFile (text, allowDuplicates) {
 		}
 		if (line.charAt(0) === '[' && line.charAt(line.length - 1) === ']') {
 			current = line.slice(1, -1);
+			if (lang && current.indexOf(':') > -1) {
+				current = current.split(':');
+				if (selectLangCode([current[1]], lang)) {
+					current = current[0];
+					if (!current in textStore) {
+						throw new Error('Override without default: ' + current);
+					}
+					textStore[current] = '';
+				} else {
+					current = '';
+				}
+				continue;
+			}
 			if (!allowDuplicates && current in textStore) {
 				throw new Error('Duplicate: ' + current);
 			}
@@ -89,13 +102,6 @@ function parseFile (text, allowDuplicates) {
 			textStore[current] += line + '\n';
 		}
 	}
-}
-
-function deToAt (text) { //TODO nicht überall
-	return text
-		.replace(/Januar\b/g, 'Jänner')
-		.replace(/Jan\./g, 'Jän.')
-		.replace(/Adventssonntag/g, 'Adventsonntag');
 }
 
 function deToCh (text) {
@@ -134,10 +140,7 @@ function getFileInfo (langData) {
 		lang = availLang[0];
 	}
 	if (lang === 'de') {
-		if (langData.region === 'AT') {
-			transforms.push(deToAt);
-			//additional.push('de-at');
-		} else if (langData.region === 'CH') {
+		if (langData.region === 'CH') {
 			transforms.push(deToCh);
 		}
 	} else if (lang === 'la') {
@@ -194,7 +197,7 @@ function load (lang, callback) {
 
 	function processFile (text, allowDuplicates) {
 		text = applyTransforms(text, langData.transforms);
-		parseFile(text, allowDuplicates);
+		parseFile(text, allowDuplicates, lang);
 	}
 
 	function onGotFile (text) {
@@ -277,11 +280,11 @@ function parseOverride (text) {
 	Object.keys(override.vals).forEach(function (name) {
 		var pos = name.indexOf(':'), lang, key;
 		if (pos === -1) {
-			lang = '';
 			key = name;
+			lang = '';
 		} else {
-			lang = name.slice(0, pos);
-			key = name.slice(pos + 1);
+			key = name.slice(0, pos);
+			lang = name.slice(pos + 1);
 		}
 		if (!override.keys[key]) {
 			override.keys[key] = [];
@@ -407,7 +410,6 @@ function getRaw (name, fallback) {
 		if (fallback !== undefined) {
 			return fallback;
 		}
-		//throw new Error('Missing text: ' + name);
 		return '[' + name + ']';
 	}
 	return textStore[name];
