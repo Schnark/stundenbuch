@@ -2,7 +2,8 @@
 (function () {
 "use strict";
 
-var dateInput;
+var dateInput,
+	proxy = 'https://lit-beach-8985.herokuapp.com/?url=';
 
 function escapeRe (str) {
 	return str.replace(/([\\{}()|.?*+\-\^$\[\]])/g, '\\$1');
@@ -149,8 +150,8 @@ function normalizeLocalHtml (html) {
 			});
 			return lectio.replace(/<h2>$/, cites.join('') + '<h2>');
 		})/**/
-		.replace(/℟ Halleluja\./g, '( ℟ Halleluja.)')
-		.replace(/Halleluja\.<br>\( ℟ Halleluja\.\)/g, '℟ Halleluja (Halleluja).')
+		.replace(/℟ Halleluja\./g, '(℟ Halleluja.)')
+		.replace(/Halleluja\.<br>\(℟ Halleluja\.\)/g, '℟ Halleluja (Halleluja).')
 		.replace('<h2>Versus</h2>', '')
 		.replace('<h2>Versikel</h2>', '')
 		.replace('<h2>Abschluss</h2>', '')
@@ -179,6 +180,10 @@ function normalizeWebHtml (html, lang, easter) {
 
 function fixDe (text) {
 	var fixes = [
+		['Amen ', 'Amen.'],
+		['Ewigkeit. ℣ Singet Lob', 'Ewigkeit. ℟ Amen. ℣ Singet Lob'],
+		['Herrn. ℣ Singet Lob', 'Herrn. ℟ Amen. ℣ Singet Lob'],
+		['(vgl. ', '(Vgl. '],
 		['Mein Gott, eile mir zu Hilfe!', 'Mein Gott, eil mir zu Hilfe!'], //Psalm 71
 		['und hatten doch mein Tun gesehen.«', 'und hatten doch mein Tun gesehen.'], //Psalm 95
 		['Vierzig Jahre war mir dies Geschlecht zuwider †', 'Vierzig Jahre war mir dies Geschlecht zuwider, †'], //Psalm 95
@@ -187,6 +192,10 @@ function fixDe (text) {
 		['Dies ist der Stein, der von euch Bauleuten verworfen wurde', 'Er ist der Stein, der von euch Bauleuten verworfen wurde'], //Einleitung Ps 118 (TSN)
 		['himmlichen', 'himmlischen'], //Einleitung Ps 122
 		['unermeßbarer', 'unermessbarer'], //Te Deum
+		['führt dem Vater seinen verlorenen Sohn', 'führt dem Vater seinen verlornen Sohn'], //Hymnus Lesehore So
+		['Siegesfreude füllt unsere Seele ganz', 'Siegesfreude füllt unsre Seele ganz'], //Hymnus Lesehore So
+		['Danket dem Herrn; denn seine Huld währt ewig!', 'Danket dem Herrn, denn seine Huld währt ewig!'], //Invitatorium-Antiphon Freitag 3. Woche
+		['Sie verteilen unter sich meine Kleider und werfen', 'Sie verteilten unter sich meine Kleider und warfen'], //Antiphon zu Psalm 22, Freitag 3. Woche TSN
 		['Herr, lenke unsere Schritte auf den Weg des Friedens.', 'Herr, lenke unsre Schritte auf den Weg des Friedens.'], //Benedictus-Antiphon Samstag 2. Woche
 		['Verwirf mich nicht vor deinem Angesicht', 'Verwirf mich nicht von deinem Angesicht'], //Versikel Terz Montag 2. Woche
 		['℣ Und sie hielten fest', '℣ Sie hielten fest'], //Versikel Sext Apostel
@@ -343,6 +352,7 @@ function normalizeDeLocalWebHtml (html, easter) {
 		.replace(/«(\S.*?\S)»/g, '»$1«')
 		.replace(/²/g, '\u2123')
 		.replace(/³/g, '\u211f')
+		.replace(/\( ℟/g, '(℟')
 		.replace(/\(O(?:sterzeit)?: Halleluja\.?\)/g, easter ? 'Halleluja.' : '')
 		.replace(/\s+/g, ' ')
 		.replace('℣ Singet Lob und Preis.', html.indexOf('ZWEITE LESUNG') > -1 ? '℟ Amen. \u2123 Singet Lob und Preis.' : '℣ Singet Lob und Preis.')
@@ -357,14 +367,20 @@ function normalizeLaWebHtml (html, easter) {
 	html = html
 		.replace(/[\s\S]*ze serveru http:\/\/breviar.op.cz<\/p>/, '')
 		.replace(/<p class=pouzetisk style='margin:40 0 -20 10 px; text-align:center; font-size:12px; '>BREVIARIUM ROMANUM<\/p>[\s\S]*/, '')
+		.replace(/'#FF0000'/g, '"#FF0000"')
+		.replace(/<font color="#FF0000">†<\/font>/g, '')
+		.replace(/<p>\s*<\/p>\s*/g, '')
+		.replace(/<\/b>\s*<\/b>/g, '</b>')
 		.replace(/<!--[\s\S]*?-->/g, '')
 		.replace(/ –</g, '<')
+		.replace(/.(<\/i> \([^()]+\))/g, '$1 .')
 		.replace(/<p><font color="#FF0000"><font size=-1>&nbsp;&nbsp;&nbsp; Invitatorium locum suum habet[\s\S]*?eius loco dicitur psalmus 94 \(95\)<\/a>. <\/font><\/font>/, '')
 		.replace(/<font color="#FF0000"><font size=-1>Quando sequens psalmus adhibitus est ad Invitatorium, loco eius dicitur <a href="\/obsah\/z95.htm" class="red">psalmus 94 ?\(95\)<\/a>.<\/font><\/font>/, '')
 		.replace(/<p><font size=-1><font color="#FF0000">Sequens canticum dicitur cum <\/font><font color="#000000">Allelúia<\/font><font color="#FF0000">\s+prouti hic notatur, quando cum cantu profertur; in recitatione vero sufficit ut Allelúia dicatur in initio et fine uniuscuiusque strophæ.<\/font><\/font>/, '')
 		.replace('<p><span class="red">(In fine huius cantici non dicitur </span> «Glória Patri»<span class="red">.)</span>', '')
-		.replace(/<font color="#FF0000">A[^<>]*nt\.[^<>]*<\/font>(?:<\/b> <b>)?([^<>]+(?:<font color="#FF0000">\(T\.P\. <\/font>Allelúia\.<font color="#FF0000">\)<\/font>)?)(<\/b>\s*(?:<\/?p>\s*)*<center>[\s\S]*?)(<font color="#FF0000">(?:<sup>|R\.))/g, '$2 Ant.: $1 $3')
-		.replace(/<\/b>(&nbsp;|\s|<p>)*<sup>\d+<\/sup>(?:&nbsp;|\s|<p>)*\[[\s\S]*?\]/g, '$1')
+		.replace('<p><b>&nbsp;&nbsp;&nbsp;Allelúia.</b>\n<br><font color="#FF0000"><sup>1</sup></font>', '<p><font color="#FF0000"><sup>1</sup></font><b>&nbsp;&nbsp;&nbsp;Allelúia.</b>\n<br>')
+		.replace(/<font color="#FF0000">A[^<>]*nt\.[^<>]*<\/font>(?:<\/b> *<b>)?([^<>]+(?:<font color="#FF0000">\(T\.P\. <\/font>Allelúia\.<font color="#FF0000">\)<\/font>)?)(<\/b>\s*(?:<\/?p>\s*)*<center>[\s\S]*?)(<font color="#FF0000">(?:<sup>|R\.))/g, '$2 Ant.: $1 $3')
+		.replace(/<\/b>(&nbsp;|\s|<p>|<br>)*<sup>\d+<\/sup>(?:&nbsp;|\s|<p>)*\[[\s\S]*?\]/g, '$1')
 		.replace(/<sup.*?<\/sup>/g, '')
 		.replace(/<font color="#FF0000">Ant\.\s*[123]?\s*<\/font>/g, 'Ant.: ')
 		.replace(/(<font color="#FF0000">\*<\/font> )([a-z])/g, function (all, ast, letter) {
@@ -390,34 +406,46 @@ function normalizeLaWebHtml (html, easter) {
 		.replace('PRECES', 'Preces')
 		.replace(/<br><b><font color="#ff0000">—<\/font>/gi, '<br><b>')
 		.replace('<p class=pouzetisk><b>Pater noster.....</b></p>', '')
+		.replace('Sanctus,* Sanctus,* Sanctus*', 'Sanctus, * Sanctus, * Sanctus *')
 		.replace('<font color="#FF0000">* Hæc ultima pars hymni ad libitum omitti potest.</font>', '')
 		.replace('<font color="#FF0000">*</font> Salvum fac ', 'Hæc ultima pars hymni ad libitum omitti potest. Salvum fac ')
 		.replace('ORATIO', 'Oratio')
 		.replace(/<p><font color="#FF0000"><font size=-1>&nbsp;&nbsp;&nbsp; Deinde, si præest [\s\S]*Absente sacerdote vel diacono, et in recitatione a solo, sic concluditur:<\/font><\/font>/, 'Benedictio')
 		.replace(/<hr class="red">\s*<p align="center" class="redsmall">\s*<font color="#FF0000">\s*Vel:\s*<br>\(Psalmus sequens in psalterio currente adhibitur feria VI hebd\. I atque feria VI hebd\. III\)<\/font>[\s\S]*/, '')
-		.replace('Deinde, saltem in celebratione communi, additur acclamatio:', 'Conclusio');
+		.replace('Deinde, saltem in celebratione communi, additur acclamatio:', 'Conclusio')
+		.replace(/<br>/g, ' ');
 	div = document.createElement('div');
 	div.innerHTML = html;
 	return div.textContent
 		.replace(/\s+/g, ' ')
 		.replace(/\d+ \[[^\[\]]+\] */g, '')
+		.replace(/\(R\. Allelúia\.\)/g, '℟ Allelúia.')
+		.replace(/℟ Allelúia \(allelúia\)\./g, 'Allelúia. ℟ Allelúia.')
 		.replace(/Allelúia\. Allelúia\. Allelúia\./g, 'Allelúia, allelúia, allelúia.')
 		.replace(/Aleluja, aleluja, aleluja\./g, 'Allelúia, allelúia, allelúia.')
 		.replace(/\(T\.P\. Allelúia\.?\)/g, easter ? 'Allelúia.' : '')
 		.replace(/Glória Patri,? et Fílio,? (\* )?[eE]t Spirítui Sancto[.,] [sS]icut erat in princípio,? et nunc et semper,? (\* )?[eE]t in sǽcula sæculórum\./g, 'Glória Patri, et Fílio, $1et Spirítui Sancto. Sicut erat in princípio, et nunc et semper, $2et in sǽcula sæculórum.')
 		.replace(/℣ Glória Patri et Fílio \* [eE]t Spirítui Sancto\./g, '℣ Glória Patri, et Fílio, et Spirítui Sancto.')
+		.replace('℟ Allelúia. Glória Patri, et Fílio, * et Spirítui Sancto. Sicut erat in princípio, et nunc et semper, * et in sǽcula sæculórum. Amen.', '℟ Allelúia. Allelúia. Glória Patri, et Fílio, et Spirítui Sancto. * ℟ Allelúia. Sicut erat in princípio, et nunc et semper, et in sǽcula sæculórum. Amen. Allelúia. ℟ Allelúia.')
 		.replace('Postea laudabiliter fit conscientiæ discussio, quæ in celebratione communi inseri potest in actum pænitentialem, iuxta formulas in Missa adhibitas', 'Confiteor (Breva pausa silentii ad conscientiæ discussionem) Confíteor Deo omnipoténti et vobis, fratres, quia peccávi nimis cogitatióne, verbo, ópere et omissióne: mea culpa, mea culpa, mea máxima culpa. Ídeo precor beátam Maríam semper Vírginem, omnes Ángelos et Sanctos, et vos, fratres, oráre pro me ad Dóminum Deum nostrum. Misereátur nostri omnípotens Deus et, dimíssis peccátis nostris, perdúcat nos ad vitam ætérnam. Amen')
 		.replace(/Si Officium lectionis dicitur immediate ante aliam Horam,\s+tunc initio prædicti Officii præponi potest hymnus huic Horæ congruus;.*/, '')
 		.replace('Deinde dicitur una ex sequentibus antiphonis finalibus ad B. Mariam Virginem. vel Antiphonæ dominicanæ traditionales.', '')
 		.replace('Pater noster', 'Pater Noster Pater noster')
 		.replace('Oratio Orémus:', 'Oratio')
+		.replace('CONCLUSIVA Orémus:', '')
+		.replace('Amen. Noctem quiétam', '℟ Amen. Benedictio Noctem quiétam')
+		.replace('sæculórum. Benedictio', 'sæculórum. ℟ Amen. Benedictio')
+		.replace('Conclusio Benedicámus Dómino. ℟ Deo grátias. ', '℟ Amen. Conclusio ℣ Benedicámus Dómino. ℟ Deo grátias. ')
 		.replace(/Psalmus (\d+)/g, 'Psalmus $1 Ps $1')
-		.replace(/(\d)-(\d)/g, '$1–$2')
+		.replace(/(\d[bc]?)-(\d)/g, '$1–$2')
+		.replace(/(\d[a-d]?\.)\s+(\d)/g, '$1$2')
 		.replace(/\s*—\s*/g, '–')
+		.replace(/“(\S[^“”„"]*?\S)”/g, '‹$1›')
 		.replace(/„/g, '«')
 		.replace(/“/g, '»')
 		.replace(/"(\S.*?\S)"/g, '«$1»')
-		.replace(/ ?\.\.\./g, ' …');
+		.replace(/ ?\.\.\./g, ' …')
+		.replace(/\s+/g, ' ');
 	//jscs:enable maximumLineLength
 }
 
@@ -508,7 +536,7 @@ function getWebHtml (lang, hora, date, callback) {
 	xhr.onerror = function () {
 		callback('');
 	};
-	xhr.open('GET', 'https://lit-beach-8985.herokuapp.com/?url=' + encodeURIComponent(getUrl(lang, hora, date)));
+	xhr.open('GET', proxy + encodeURIComponent(getUrl(lang, hora, date)));
 	xhr.send();
 }
 

@@ -798,7 +798,7 @@ Day.calendars = {
 				[25, 8, 'ludovicus', 3, 'vir'],
 				[25, 8, 'ioseph-calasanz', 3, 'pastor'],
 				[27, 8, 'monica', 2, 'mulier'],
-				[28, 8, 'augustinus', 2, 'doctor'],
+				[28, 8, 'augustinus', 2, config.get('bugCompat') ? 'pastor' : 'doctor'],
 				[29, 8, 'passio-ioannes', 2, ['martyr', 'vir'], {
 					texts: {
 						cantica: {

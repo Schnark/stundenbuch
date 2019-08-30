@@ -3,7 +3,7 @@ audioManager =
 (function () {
 "use strict";
 
-var dom = {}, audio, currentData;
+var dom = {}, audio, currentData, currentMap;
 
 function setReady () {
 	dom.play.style.display = '';
@@ -55,12 +55,33 @@ function onConfigChange (key, val) {
 	}
 }
 
+function mapKey (key, extra) {
+	var map = currentMap.filter(function (mapEntry) {
+		return mapEntry.re.test(key + ',' + extra);
+	});
+	if (map.length === 0) {
+		return false;
+	}
+	map.sort(function (a, b) {
+		return b.weight - a.weight;
+	});
+	return map[0].index;
+}
+
+function selectIndex (index) {
+	dom.select0.value = index[0];
+	onCategoryChange();
+	dom.select1.value = index[1];
+	onDataChange();
+}
+
 function addData (data) {
 	if (!data) {
 		return;
 	}
-	currentData = data;
-	dom.select0.innerHTML = data.map(function (entry, i) {
+	currentData = data.data;
+	currentMap = data.map;
+	dom.select0.innerHTML = currentData.map(function (entry, i) {
 		return '<option value="' + i + '">' + util.htmlEscape(entry.title) + '</option>';
 	}).join('');
 	onCategoryChange();
@@ -90,7 +111,19 @@ function init (config) {
 }
 
 function parse (data) {
-	var ret = [], title, i, line;
+	var ret = [], map = [], title, i, line;
+
+	function addMapEntry (pattern) {
+		var r = ret.length - 1;
+		if (pattern.indexOf(',') === -1) {
+			pattern += ',*';
+		}
+		map.push({
+			re: new RegExp('^' + pattern.replace('|', '\\|').replace(/\*/g, '.*') + '$'),
+			weight: pattern.length,
+			index: [r, ret[r].data[ret[r].data.length - 1].data]
+		});
+	}
 
 	function append (line) {
 		var r = ret.length - 1,
@@ -117,6 +150,8 @@ function parse (data) {
 			if (title) {
 				ret[ret.length - 1].data.push({title: line, data: ''});
 				title = false;
+			} else if (line.charAt(0) === '!') {
+				addMapEntry(line.slice(1));
 			} else {
 				append(line);
 			}
@@ -124,7 +159,10 @@ function parse (data) {
 			title = true;
 		}
 	}
-	return ret;
+	return {
+		data: ret,
+		map: map
+	};
 }
 
 return {
@@ -132,7 +170,11 @@ return {
 	onConfigChange: onConfigChange,
 	addData: addData,
 	setLang: setLang,
-	parse: parse
+	parse: parse,
+	mapKey: mapKey,
+	selectIndex: selectIndex
 };
+
+//TODO audioManager.selectIndex(audioManager.mapKey('magnificat|ant', 'quadragesimae'))
 
 })();
