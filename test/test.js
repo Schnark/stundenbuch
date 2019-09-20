@@ -272,6 +272,7 @@ function normalizeDeWebHtml (html, easter) {
 		.replace('Geist, * ihn loben und rühmen in Ewigkeit! Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', 'Geist, * ihn loben und rühmen in Ewigkeit!')
 		.replace('Ehre sei dem Vater. Wie im Anfang.', 'Ehre sei dem Vater und dem Sohn und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit. Amen.')
 		.replace(/R Halleluja/g, '\u211f Halleluja')
+		.replace('℟ Halleluja (Halleluja). Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', '℟ Halleluja (Halleluja). Halleluja. Ehre sei dem Vater und dem Sohn und dem Heiligen Geist. * (℟ Halleluja.) Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit. Amen. ℟ Halleluja (Halleluja).')
 		.replace(/\b[RV] /g, ''));
 	//jscs:enable maximumLineLength
 }
@@ -368,7 +369,7 @@ function normalizeLaWebHtml (html, easter) {
 		.replace(/[\s\S]*ze serveru http:\/\/breviar.op.cz<\/p>/, '')
 		.replace(/<p class=pouzetisk style='margin:40 0 -20 10 px; text-align:center; font-size:12px; '>BREVIARIUM ROMANUM<\/p>[\s\S]*/, '')
 		.replace(/'#FF0000'/g, '"#FF0000"')
-		.replace(/<font color="#FF0000">†<\/font>/g, '')
+		.replace(/<font color="#FF0000">\s*†?<\/font>/g, '')
 		.replace(/<p>\s*<\/p>\s*/g, '')
 		.replace(/<\/b>\s*<\/b>/g, '</b>')
 		.replace(/<!--[\s\S]*?-->/g, '')
@@ -426,7 +427,7 @@ function normalizeLaWebHtml (html, easter) {
 		.replace(/\(T\.P\. Allelúia\.?\)/g, easter ? 'Allelúia.' : '')
 		.replace(/Glória Patri,? et Fílio,? (\* )?[eE]t Spirítui Sancto[.,] [sS]icut erat in princípio,? et nunc et semper,? (\* )?[eE]t in sǽcula sæculórum\./g, 'Glória Patri, et Fílio, $1et Spirítui Sancto. Sicut erat in princípio, et nunc et semper, $2et in sǽcula sæculórum.')
 		.replace(/℣ Glória Patri et Fílio \* [eE]t Spirítui Sancto\./g, '℣ Glória Patri, et Fílio, et Spirítui Sancto.')
-		.replace('℟ Allelúia. Glória Patri, et Fílio, * et Spirítui Sancto. Sicut erat in princípio, et nunc et semper, * et in sǽcula sæculórum. Amen.', '℟ Allelúia. Allelúia. Glória Patri, et Fílio, et Spirítui Sancto. * ℟ Allelúia. Sicut erat in princípio, et nunc et semper, et in sǽcula sæculórum. Amen. Allelúia. ℟ Allelúia.')
+		.replace('℟ Allelúia. Glória Patri, et Fílio, * et Spirítui Sancto. Sicut erat in princípio, et nunc et semper, * et in sǽcula sæculórum. Amen.', '℟ Allelúia. Allelúia. Glória Patri, et Fílio, * ℟ Allelúia. et Spirítui Sancto. Allelúia. ℟ Allelúia. Allelúia. Sicut erat in princípio, et nunc et semper, * ℟ Allelúia. et in sǽcula sæculórum. Amen. Allelúia. ℟ Allelúia.')
 		.replace('Postea laudabiliter fit conscientiæ discussio, quæ in celebratione communi inseri potest in actum pænitentialem, iuxta formulas in Missa adhibitas', 'Confiteor (Breva pausa silentii ad conscientiæ discussionem) Confíteor Deo omnipoténti et vobis, fratres, quia peccávi nimis cogitatióne, verbo, ópere et omissióne: mea culpa, mea culpa, mea máxima culpa. Ídeo precor beátam Maríam semper Vírginem, omnes Ángelos et Sanctos, et vos, fratres, oráre pro me ad Dóminum Deum nostrum. Misereátur nostri omnípotens Deus et, dimíssis peccátis nostris, perdúcat nos ad vitam ætérnam. Amen')
 		.replace(/Si Officium lectionis dicitur immediate ante aliam Horam,\s+tunc initio prædicti Officii præponi potest hymnus huic Horæ congruus;.*/, '')
 		.replace('Deinde dicitur una ex sequentibus antiphonis finalibus ad B. Mariam Virginem. vel Antiphonæ dominicanæ traditionales.', '')

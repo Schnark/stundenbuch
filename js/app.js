@@ -367,6 +367,14 @@ function globalClickHandler (e) {
 		id = e.target.parentElement.id;
 	}
 
+	if (e.target.className === 'audio') {
+		audioManager.selectIndex(JSON.parse(e.target.dataset.audio));
+		if (!popupVisible.audio) {
+			togglePopup('audio');
+		}
+		return;
+	}
+
 	if (id === 'reset') {
 		if (window.confirm(l10n.get('titulus-restituere-adfirmare'))) {
 			config = Config.getConfig();
@@ -660,7 +668,7 @@ function init () {
 		solidus: false,
 		verse: false,
 		screenLock: false,
-		sonus: true,
+		sonus: false,
 		notesStyle: 'modern',
 		volume: 5,
 		audioSpeed: 1,

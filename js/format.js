@@ -75,7 +75,7 @@ function formatNotes (data) {
 	return '<p class="additamentum">' + data.notes.join('\n').replace(/</g, '&lt;').replace(/\n/g, '<br>') + '</p>';
 }
 
-function formatBlock (text, type, easter, debug) {
+function formatBlock (text, audio, type, easter, debug) {
 	var lines, i;
 
 	function addCite (all, cite) {
@@ -131,13 +131,16 @@ function formatBlock (text, type, easter, debug) {
 	default:
 		text = formatRV(text);
 	}
+	if (audio) {
+		text = text.replace('</h2>', ' <span class="audio" data-audio="' + util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>');
+	}
 	if (debug) {
 		text = '<pre>' + debug + '</pre>' + text;
 	}
 	return text;
 }
 
-function formatCanticum (canticum, antiphona, removeAnt, easter, debug) {
+function formatCanticum (canticum, antiphona, audio, removeAnt, easter, debug) {
 	var alleluia = l10n.get('alleluia'),
 		flexa = getFlexaAsteriscus('flexa'),
 		asteriscus = getFlexaAsteriscus('asteriscus'),
@@ -168,7 +171,7 @@ function formatCanticum (canticum, antiphona, removeAnt, easter, debug) {
 		}
 	}
 
-	html = formatBlock(canticum)
+	html = formatBlock(canticum, audio)
 		.replace(
 			new RegExp('<p>' + rePart + '<br>' + rePart + '<br>' + rePart + '</p>', 'g'),
 			'<p>$1' + flexa + '$2' + asteriscus + '$3</p>'
@@ -314,6 +317,10 @@ function formatRV (text) {
 	});
 }
 
+function getAudio (key, extra) {
+	return Config.getConfig().get('sonus') && audioManager.mapKey(key, extra || '');
+}
+
 function formatSequence (seq, easter, secondary) {
 	var debug = Number(Config.getConfig().get('debug')) === 2;
 	return seq.map(function (part) {
@@ -351,6 +358,7 @@ function formatSequence (seq, easter, secondary) {
 			return formatCanticum(
 				part[0],
 				antiphona,
+				!secondary && getAudio(part[0] + '|' + antiphona), //TODO
 				removeAnt,
 				easter,
 				debug && ('[' + part[0] + '] + [' + antiphona + ']')
@@ -382,6 +390,7 @@ function formatSequence (seq, easter, secondary) {
 		}
 		return formatBlock(
 			l10n.get(part),
+			!secondary && getAudio(part), //TODO
 			(part.slice(0, 'responsorium-lectionis-'.length) === 'responsorium-lectionis-' && 'responsorium-lectionis') ||
 			(part.slice(0, 'responsorium-'.length) === 'responsorium-' && 'responsorium') ||
 			(part.slice(0, 'versus-'.length) === 'versus-' && 'versus'),

@@ -175,6 +175,4 @@ return {
 	selectIndex: selectIndex
 };
 
-//TODO audioManager.selectIndex(audioManager.mapKey('magnificat|ant', 'quadragesimae'))
-
 })();

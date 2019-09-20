@@ -49,7 +49,7 @@ Day.useHymnusLectionis = {
 	'cathedra-petri': 'laudes',
 	'ioseph': 'laudes',
 	'annuntiatio': 'laudes',
-	'exaltatio-crucis': 'vespera',
+	//'exaltatio-crucis': 'vespera',
 	'maria-immaculata': 'laudes',
 
 	'doctor': 'laudes'
@@ -64,7 +64,9 @@ Day.communeFallback = {
 	missionarius: 'pastor',
 	doctor: 'pastor',
 	abbas: 'religiosus',
-	religiosus: ''
+	religiosus: '',
+	educator: '',
+	misericordia: ''
 };
 
 Day.cantica = {
@@ -493,8 +495,8 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		return;
 	}
 	if (
-		rank === 0/* ||
-		(rank === 1 && types.indexOf('dominus') > -1 && Config.getConfig().get('bugCompat')) */
+		rank === 0 ||
+		(rank === 1 && types.indexOf('dominus') > -1 && Config.getConfig().get('bugCompat'))
 	) {
 		val.eve = true;
 		val.completorium = true;

@@ -812,7 +812,7 @@ Day.calendars = {
 					}
 				}],
 
-				[3, 9, 'gregorius-magnus', 2, 'pastor'],
+				[3, 9, 'gregorius-magnus', 2, config.get('bugCompat') ? 'pastor' : 'doctor'],
 				[8, 9, 'nativitatis-maria', 1, 'maria', {
 					texts: {
 						cantica: {
@@ -831,7 +831,7 @@ Day.calendars = {
 				}],
 				[9, 9, 'petrus-claver', 3, ['pastor', 'misericordia']],
 				[12, 9, 'nomen-maria', 3, 'maria'],
-				[13, 9, 'ioannes-chrysostomus', 2, 'doctor'],
+				[13, 9, 'ioannes-chrysostomus', 2, config.get('bugCompat') ? 'pastor' : 'doctor'],
 				[14, 9, 'exaltatio-crucis', 1, 'dominus', {
 					color: 'red',
 					texts: {

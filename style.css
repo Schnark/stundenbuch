@@ -178,6 +178,15 @@ h2 cite {
 	font-style: normal;
 }
 
+h2 .audio {
+	font-size: 66.6667%;
+	cursor: pointer;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
 p.additamentum,
 div.additamentum,
 span.additamentum {
