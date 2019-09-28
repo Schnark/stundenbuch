@@ -132,7 +132,7 @@ function formatBlock (text, audio, type, easter, debug) {
 		text = formatRV(text);
 	}
 	if (audio) {
-		text = text.replace('</h2>', ' <span class="audio" data-audio="' + util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>');
+		text = text.replace('</h2>', '&nbsp;<span class="audio" data-audio="' + util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>');
 	}
 	if (debug) {
 		text = '<pre>' + debug + '</pre>' + text;
@@ -321,7 +321,7 @@ function getAudio (key, extra) {
 	return Config.getConfig().get('sonus') && audioManager.mapKey(key, extra || '');
 }
 
-function formatSequence (seq, easter, secondary) {
+function formatSequence (seq, time, secondary) {
 	var debug = Number(Config.getConfig().get('debug')) === 2;
 	return seq.map(function (part) {
 		var antiphona, removeAnt = 0, inv;
@@ -358,9 +358,9 @@ function formatSequence (seq, easter, secondary) {
 			return formatCanticum(
 				part[0],
 				antiphona,
-				!secondary && getAudio(part[0] + '|' + antiphona), //TODO
+				!secondary && getAudio(part[0] + '|' + antiphona, time),
 				removeAnt,
-				easter,
+				time === 'p',
 				debug && ('[' + part[0] + '] + [' + antiphona + ']')
 			);
 		}
@@ -386,15 +386,15 @@ function formatSequence (seq, easter, secondary) {
 			return formatNotes(part);
 		}
 		if (part.indexOf('-defunctus') > -1) {
-			easter = false;
+			time = '';
 		}
 		return formatBlock(
 			l10n.get(part),
-			!secondary && getAudio(part), //TODO
+			!secondary && getAudio(part, time),
 			(part.slice(0, 'responsorium-lectionis-'.length) === 'responsorium-lectionis-' && 'responsorium-lectionis') ||
 			(part.slice(0, 'responsorium-'.length) === 'responsorium-' && 'responsorium') ||
 			(part.slice(0, 'versus-'.length) === 'versus-' && 'versus'),
-			easter,
+			time === 'p',
 			debug && ('[' + part + ']')
 		);
 	});

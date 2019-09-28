@@ -1919,23 +1919,23 @@ function mergeSequences (seq1, seq2, lang1) {
 }
 
 function getHora (date, hora, callback) {
-	var easter = date.getPart() === 3, seqPrimary, seqSecondary, config, lang1, lang2;
+	var part = date.getPartLetter(), seqPrimary, seqSecondary, config, lang1, lang2;
 	config = Config.getConfig(); //TODO übergeben lassen
 	if (
-		easter && (
+		part === 'p' && (
 			(hora === 'lectionis' && date.getDayInSequence(-1) === 0) ||
 			hora.indexOf('catalogus') === 0
 		)
 	) {
-		easter = false;
+		part = 'q';
 	}
-	seqPrimary = formatSequence(getHoraSequence(date, hora, config), easter);
+	seqPrimary = formatSequence(getHoraSequence(date, hora, config), part);
 	if (callback) {
 		lang1 = config.get('lang');
 		lang2 = config.get('lang2');
 		if (lang2 && lang1 !== lang2) {
 			l10n.load(lang2, function () {
-				seqSecondary = formatSequence(getHoraSequence(date, hora, config), easter, true);
+				seqSecondary = formatSequence(getHoraSequence(date, hora, config), part, true);
 				l10n.load(lang1, function () {
 					callback(mergeSequences(seqSecondary, seqPrimary, lang2));
 				});

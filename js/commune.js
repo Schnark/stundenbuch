@@ -516,7 +516,7 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		val.completorium = true;
 		val.type = '';
 	}
-	val.commune = types.shift();
+	val.commune = types.shift() || '';
 	val.modifier = types;
 	val.texts = {};
 	util.merge(val, data || {});

@@ -114,13 +114,13 @@ function parse (data) {
 	var ret = [], map = [], title, i, line;
 
 	function addMapEntry (pattern) {
-		var r = ret.length - 1;
+		var r = ret.length - 1, l = pattern.length;
 		if (pattern.indexOf(',') === -1) {
 			pattern += ',*';
 		}
 		map.push({
 			re: new RegExp('^' + pattern.replace('|', '\\|').replace(/\*/g, '.*') + '$'),
-			weight: pattern.length,
+			weight: l,
 			index: [r, ret[r].data[ret[r].data.length - 1].data]
 		});
 	}

@@ -463,6 +463,18 @@ Day.prototype.getPart = function () {
 	return this.part;
 };
 
+//mainly for audio: d - sunday in ordinary time, a - advent, n - christmas, q - lent, p - easter
+Day.prototype.getPartLetter = function () {
+	var part = this.getPart();
+	if (part === 0) {
+		return this.getDay() === 0 ? 'd' : '';
+	}
+	if (part === 1) {
+		return this.getSubPart() <= 2 ? 'a' : 'n';
+	}
+	return ['', '', 'q', 'p'][part];
+};
+
 Day.prototype.getSubPart = function () {
 	var d;
 	switch (this.getPart()) {
