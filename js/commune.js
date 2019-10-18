@@ -364,7 +364,10 @@ Day.getText = function (data, element, hora, part) {
 	case 'c':
 		if (data.rank === 2 && data.commune !== 'defunctus' && (
 			(element === 'lectio' && hora === 'lectionis') ||
-			(element !== 'oratio' && Config.getConfig().get('noCommons'))
+			(
+				element !== 'oratio' && Config.getConfig().get('noCommons') &&
+				!(data.texts && data.texts.cantica) //special memorial, keep common texts
+			)
 		)) {
 			break;
 		}

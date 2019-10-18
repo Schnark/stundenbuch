@@ -277,7 +277,7 @@ function normalizeDeWebHtml (html, easter) {
 	//jscs:enable maximumLineLength
 }
 
-function normalizeDeLocalWebHtml (html, easter) {
+function normalizeDeLocalWebHtml (html, easter) { //FIXME
 	//jscs:disable maximumLineLength
 	var div;
 	html = html
@@ -479,7 +479,7 @@ function getUrl (lang, hora, date) {
 	case 'de-x-unspecific':
 		return 'http://vulgata.info/index.php?title=Kategorie:Stundenbuch';
 	case 'de-x-unspecific-2':
-		return 'https://www.stundengebet.de/kalender.html';
+		return 'https://www.stundengebet.de/jetzt-beten/';
 	case 'en-x-unspecific':
 		return 'http://www.ibreviary.org/en/tools/ibreviary-web.html';
 	case 'la':
@@ -522,7 +522,7 @@ function getLocalHtml (lang, hora, date, callback) {
 
 function getWebHtml (lang, hora, date, callback) {
 	if (lang === 'de-x-local') {
-		getFileHtml('stundenbuch.json', hora, date, callback);
+		getFileHtml('stb.html', hora, date, callback); //was: 'stundenbuch.json'
 		return;
 	}
 	var xhr = new XMLHttpRequest();
@@ -542,7 +542,8 @@ function getWebHtml (lang, hora, date, callback) {
 }
 
 //download stundenbuch.json from https://www.stundengebet.de/kalender.html (see console, convert file to proper JSON formatting)
-function getFileHtml (file, hora, date, callback) {
+//old one, delete if it doesn't come back
+/*function getFileHtml (file, hora, date, callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.onload = function () {
 		var days, i, text;
@@ -572,6 +573,49 @@ function getFileHtml (file, hora, date, callback) {
 	};
 	xhr.open('GET', file);
 	xhr.responseType = 'json';
+	xhr.send();
+}*/
+
+function getFileHtml (file, hora, date, callback) {
+	function getStartDay (doc) {
+		var d, date;
+		date = new Date();
+		d = Number((/(\d+)\./.exec(doc.querySelectorAll('.carousel-item .date')[0].textContent))[1]);
+		if (d > date.getDate()) {
+			date.setMonth(date.getMonth() - 1);
+		}
+		return new Day(date.getFullYear(), date.getMonth(), d);
+	}
+	function extractHTML (doc, d, h) {
+		return doc.querySelectorAll('.gebet-entry .carousel-item')[d].querySelectorAll('.item-' + h)[0].innerHTML;
+	}
+
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function () {
+		var doc, start, html;
+		try {
+			doc = (new DOMParser()).parseFromString(xhr.response, 'text/html');
+			start = getStartDay(doc);
+			html = extractHTML(doc, date.diffTo(start), {
+				invitatorium: 'invitatorium',
+				lectionis: 'lesehore',
+				laudes: 'laudes',
+				tertia: 'terz',
+				sexta: 'sext',
+				nona: 'non',
+				vespera: 'vesper',
+				completorium: 'komplet'
+			}[hora]);
+		} catch (e) {
+			console.warn(e);
+		}
+		callback(html || '');
+	};
+	xhr.onerror = function () {
+		callback('');
+	};
+	xhr.open('GET', file);
+	xhr.responseType = 'text'; //don't know why 'document' doesn't work
 	xhr.send();
 }
 

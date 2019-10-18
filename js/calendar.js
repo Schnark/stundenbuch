@@ -1261,7 +1261,7 @@ Day.calendars = {
 				[5, 9, 'teresa-kalkutta', 3, ['misericordia', 'mulier'], 'Teresa'],
 				[22, 9, 'landelin', 3, ['martyr', 'vir'], 'Landelin'],
 				//[26, 9, 'paulus-vi', 3, 'papa'],
-				[9, 10, 'john-henry-newman', 3, ['pastor', 'beatus'], 'John Henry'],
+				[9, 10, 'john-henry-newman', 3, 'pastor', 'John Henry'],
 				[16, 10, 'otmar', 3, ['abbas', 'vir'], 'Otmar'],
 				[26, 11, 'konrad', 1, 'episcopus', 'Konrad']
 			];

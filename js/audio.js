@@ -15,7 +15,7 @@ Trenner: ,;:|*\n
 Notenschlüssel: 0-6, x
 */
 
-function parseNotes (notes, zero) {
+function parseNotes (notes) {
 	var re1 = /((?:[a-n][+?~.]?)+)(['>\/]?)|([,;:|*\nx0-6])/g,
 		re2 = /([a-n])([+?~.]?)/g,
 		match, n, t,
@@ -40,8 +40,12 @@ function parseNotes (notes, zero) {
 			ret.push({notes: [[match[3], '']], accent: ''});
 		}
 	}
-	if (zero && !(/[0-6]/.test(ret[0].notes[0]))) {
-		ret.unshift({notes: ['0'], accent: ''});
+	if (!(/[0-6]/.test(ret[0].notes[0]))) {
+		ret.unshift({notes: [['0', '']], accent: ''});
+	}
+	if (ret.length > 1 && ret[1].notes[0][0] === 'x') {
+		ret[1].notes[0][0] = ret[0].notes[0][0] + 'x';
+		ret.shift();
 	}
 	return ret;
 }
@@ -216,8 +220,124 @@ Renderer.prototype.renderSharp = function (x, line) {
 			'x2="' + (x + 3 * this.lineHeight / 2) + '" y2="' + y + '" />';
 };
 
+Renderer.prototype.renderB = function (x, line) {
+	var y = this.getHeight(line);
+	if (this.style === 'modern') {
+		return '<path d="M' + x + ',' + (y - 3 * this.lineHeight / 2) +
+			' l0,' + (2 * this.lineHeight) +
+			' q' + this.lineHeight + ',-' + (this.lineHeight / 2) + ' 0,-' + this.lineHeight + '" />';
+	}
+	return '<path d="M' + x + ',' + (y - 3 * this.lineHeight / 4) +
+		' l0,' + this.lineHeight +
+		' q' + (this.lineHeight / 2) + ',-' + (this.lineHeight / 4) + ' 0,-' + (this.lineHeight / 2) + '" />';
+};
+
+Renderer.prototype.renderSignModern = function (shift, b) {
+	var w = 5, key = '';
+	if (b) {
+		if (shift !== 3) { //a-moll
+			key += this.renderB(w, 2);
+			w += this.lineHeight;
+			if (shift !== 0) { //d-moll
+				key += this.renderB(w, 3.5);
+				w += this.lineHeight;
+				if (shift !== 4) { //g-moll
+					key += this.renderB(w, 1.5);
+					w += this.lineHeight;
+					if (shift !== 1) { //c-moll
+						key += this.renderB(w, 3);
+						w += this.lineHeight;
+						if (shift !== 5) { //f-moll
+							key += this.renderB(w, 1);
+							w += this.lineHeight;
+							if (shift !== 2) { //b-moll
+								key += this.renderB(w, 2.5);
+								w += this.lineHeight;
+							} //es-moll
+						}
+					}
+				}
+			}
+		}
+	} else {
+		if (shift !== 0) { //C-Dur
+			key += this.renderSharp(w, 4);
+			w += this.lineHeight;
+			if (shift !== 3) { //G-Dur
+				key += this.renderSharp(w, 2.5);
+				w += this.lineHeight;
+				if (shift !== 6) { //D-Dur
+					key += this.renderSharp(w, 4.5);
+					w += this.lineHeight;
+					if (shift !== 2) { //A-Dur
+						key += this.renderSharp(w, 3);
+						w += this.lineHeight;
+						if (shift !== 5) { //E-Dur
+							key += this.renderSharp(w, 1.5);
+							w += this.lineHeight;
+							if (shift !== 1) { //H-Dur
+								key += this.renderSharp(w, 3.5);
+								w += this.lineHeight;
+							} //Fis-Dur
+						}
+					}
+				}
+			}
+		}
+		w += 0.5 * this.lineHeight;
+	}
+	if (key) {
+		key = this.wrapSvg(w, key + this.renderBackground(w));
+	}
+	w = 8 + 1.5 * this.lineHeight;
+	return this.wrapSvg(w,
+		'<path d="M5,' + (this.gutter + 3 * this.lineHeight) +
+			' c0,-' + this.lineHeight + ' ' + (1.5 * this.lineHeight) + ',-' + this.lineHeight +
+				' ' + (1.5 * this.lineHeight) + ',0' +
+			' c0,' + this.lineHeight + ' -' + (1.5 * this.lineHeight + 4) + ',' + this.lineHeight +
+				' -' + (1.5 * this.lineHeight + 4) + ',0' +
+			' c0,-' + (0.5 * this.lineHeight) + ' ' + (-0.25 * this.lineHeight + 4) + ',-' + (0.75 * this.lineHeight) +
+				' ' + (0.75 * this.lineHeight + 4) + ',-' + (2 * this.lineHeight) +
+			' c' + this.lineHeight + ',-' + (0.75 * this.lineHeight) + ' 0,-' + (3 * this.lineHeight) +
+				' 0,-' + this.lineHeight +
+			' l0,' + (5 * this.lineHeight) +
+			' c0,' + (this.lineHeight / 2) + ' -' + this.lineHeight + ',' + (this.lineHeight / 2) +
+				' -' + this.lineHeight + ',0" />' +
+		this.renderBackground(w)) + key;
+};
+
+Renderer.prototype.renderSignGregorian = function (shift, b) {
+	var w, h, x;
+	if (b) {
+		w = this.lineHeight / 2 + 1;
+		b = this.wrapSvg(w,
+			this.renderB(2, this.getLine('i') % 3.5) + this.renderBackground(w)
+		);
+	} else {
+		b = '';
+	}
+	h = this.getLine('j');
+	x = 1;
+	if (h !== Math.floor(h)) {
+		h = this.getLine('m');
+		x = 5;
+	}
+	//TODO bad placement for shift === 1, but is there a better?
+	h = this.getHeight(h);
+	return this.wrapSvg(x + 6,
+		'<line x1="' + x + '" y1="' + (h - 3 * this.lineHeight / 4) + '" ' +
+			'x2="' + x + '" y2="' + (h + 3 * this.lineHeight / 4) + '" stroke-width="2" />' +
+		'<rect x="' + (x + 1) + '" y="' + (h - 3 * this.lineHeight / 4) + '" width="4" height="4" ' +
+			'stroke="none" fill="currentColor" />' +
+		(x === 1 ? '' : '<rect x="' + (x - 5) + '" y="' + (h - 2) + '" width="4" height="4" ' +
+			'stroke="none" fill="currentColor" />') +
+		'<rect x="' + (x + 1) + '" y="' + (h + 3 * this.lineHeight / 4 - 4) + '" width="4" height="4" ' +
+			'stroke="none" fill="currentColor" />' +
+		this.renderBackground(x + 6)
+	) + b;
+};
+
 Renderer.prototype.renderBar = function (bar) {
-	var w, h, x, key;
 	switch (bar) {
 	case '[':
 		return this.wrapSvg(5,
@@ -228,74 +348,6 @@ Renderer.prototype.renderBar = function (bar) {
 		return this.wrapSvg(5,
 			'<line x1="3.5" y1="' + this.gutter + '" x2="3.5" y2="' + (this.height - this.gutter) + '" stroke-width="3" />' +
 			this.renderBackground(5)
-		);
-	case '0':
-	case '1':
-	case '2':
-	case '3':
-	case '4':
-	case '5':
-	case '6':
-		this.bottom = String.fromCharCode(this.bottom.charCodeAt(0) + Number(bar));
-		if (this.style === 'modern') {
-			w = 8 + 1.5 * this.lineHeight;
-			key = '';
-			//TODO? 0=C-Dur, 1=H-Dur, 2=A-Dur, 3=G-Dur, 4=Fis-Dur, 5=E-Dur, 6=D-Dur
-			//TODO? +x 0=d-moll, 1=c-moll, 2=b-moll, 3=a-moll, 4=g-moll, 5=f-moll, 6=es-moll
-			if (bar === '2' || bar === '5') { //TODO 5 +dis?
-				w += 3.5 * this.lineHeight;
-				key =
-					this.renderSharp(w - 3.5 * this.lineHeight, 4) +
-					this.renderSharp(w - 2.5 * this.lineHeight, 2.5) +
-					this.renderSharp(w - 1.5 * this.lineHeight, 4.5);
-			} else if (bar === '3') {
-				w += 1.5 * this.lineHeight;
-				key = this.renderSharp(w - 1.5 * this.lineHeight, 4);
-			}
-			return this.wrapSvg(w,
-				'<path d="M5,' + (this.gutter + 3 * this.lineHeight) +
-					' c0,-' + this.lineHeight + ' ' + (1.5 * this.lineHeight) + ',-' + this.lineHeight +
-						' ' + (1.5 * this.lineHeight) + ',0' +
-					' c0,' + this.lineHeight + ' -' + (1.5 * this.lineHeight + 4) + ',' + this.lineHeight +
-						' -' + (1.5 * this.lineHeight + 4) + ',0' +
-					' c0,-' + (0.5 * this.lineHeight) + ' ' + (-0.25 * this.lineHeight + 4) + ',-' + (0.75 * this.lineHeight) +
-						' ' + (0.75 * this.lineHeight + 4) + ',-' + (2 * this.lineHeight) +
-					' c' + this.lineHeight + ',-' + (0.75 * this.lineHeight) + ' 0,-' + (3 * this.lineHeight) +
-						' 0,-' + this.lineHeight +
-					' l0,' + (5 * this.lineHeight) +
-					' c0,' + (this.lineHeight / 2) + ' -' + this.lineHeight + ',' + (this.lineHeight / 2) +
-						' -' + this.lineHeight + ',0" />' +
-				key +
-				this.renderBackground(w));
-		}
-		h = this.getLine('j');
-		x = 1;
-		if (h !== Math.floor(h)) {
-			h = this.getLine('m');
-			x = 5;
-		}
-		/*TODO
-		if (h < 0 || h > 3 || h !== Math.floor(h)) {
-			h = this.getLine('c');
-		}
-		if (h < 0 || h > 3 || h !== Math.floor(h)) {
-			h = this.getLine('f');
-			x = 5;
-		}
-		if (h < 0 || h > 3 || h !== Math.floor(h)) {
-			h = this.getLine('m');
-		}*/
-		h = this.getHeight(h);
-		return this.wrapSvg(x + 6,
-			'<line x1="' + x + '" y1="' + (h - 3 * this.lineHeight / 4) + '" ' +
-				'x2="' + x + '" y2="' + (h + 3 * this.lineHeight / 4) + '" stroke-width="2" />' +
-			'<rect x="' + (x + 1) + '" y="' + (h - 3 * this.lineHeight / 4) + '" width="4" height="4" ' +
-				'stroke="none" fill="currentColor" />' +
-			(x === 1 ? '' : '<rect x="' + (x - 5) + '" y="' + (h - 2) + '" width="4" height="4" ' +
-				'stroke="none" fill="currentColor" />') +
-			'<rect x="' + (x + 1) + '" y="' + (h + 3 * this.lineHeight / 4 - 4) + '" width="4" height="4" ' +
-				'stroke="none" fill="currentColor" />' +
-			this.renderBackground(x + 6)
 		);
 	case '\n':
 		return '<br>';
@@ -329,20 +381,6 @@ Renderer.prototype.renderBar = function (bar) {
 			'x2="5" y2="' + (this.height / 2 + this.lineHeight) + '" />' +
 			this.renderBackground(10)
 		) + '<wbr>';
-	case 'x':
-		if (this.style === 'modern') {
-			return this.wrapSvg(this.lineHeight + 3,
-				'<path d="M2,' + (this.getHeight(this.getLine('i') % 3.5) - 3 * this.lineHeight / 2) +
-				' l0,' + (2 * this.lineHeight) +
-				' q' + this.lineHeight + ',-' + (this.lineHeight / 2) + ' 0,-' + this.lineHeight + '" />' +
-				this.renderBackground(this.lineHeight + 3));
-		}
-		return this.wrapSvg(this.lineHeight / 2 + 1,
-			'<path d="M2,' + (this.getHeight(this.getLine('i') % 3.5) - 3 * this.lineHeight / 4) +
-			' l0,' + this.lineHeight +
-			' q' + (this.lineHeight / 2) + ',-' + (this.lineHeight / 4) + ' 0,-' + (this.lineHeight / 2) + '" />' +
-			this.renderBackground(this.lineHeight / 2 + 1)
-		);
 	}
 };
 
@@ -385,8 +423,17 @@ Renderer.prototype.renderAccent = function (data, accent, text) {
 	return this.wrapSvg(data.width, image);
 };
 
-Renderer.prototype.renderNote = function (note) {
-	var firstNote = note.notes[0][0];
+Renderer.prototype.renderNote = function (note, index) {
+	var firstNote = note.notes[0][0], shift, b;
+	if (index === 0) {
+		shift = Number(firstNote.charAt(0));
+		b = firstNote.charAt(1) === 'x';
+		this.bottom = String.fromCharCode(this.bottom.charCodeAt(0) + shift);
+		if (this.style === 'modern') {
+			return this.renderSignModern(shift, b);
+		}
+		return this.renderSignGregorian(shift, b);
+	}
 	if (firstNote < 'a' || firstNote > 'n') {
 		return this.renderBar(firstNote);
 	}
@@ -399,12 +446,12 @@ Renderer.prototype.renderNotes = function (notes) {
 	svg = '<span class="notes"><span class="notes-part">' + this.renderBar('[') +
 		(
 			'<!--background-->' +
-			parseNotes(notes, true).map(this.renderNote.bind(this)).join('<!--background-->') +
+			parseNotes(notes).map(this.renderNote.bind(this)).join('<!--background-->') +
 			'<!--background-->'
 		)
 			.replace(/<wbr>/g, '<!--background--><wbr>')
 			.replace(/<wbr><!--background--><br>/g, '<br>')
-			.replace(/<br>/g, '</span></span><br><span class="notes"><span class="notes-part">')
+			.replace(/<br>/g, '</span><br></span><span class="notes"><span class="notes-part">')
 			.replace(/<wbr>/g, '</span><wbr><span class="notes-part">') +
 		this.renderBar(']') + '</span></span>';
 	svg = svg
@@ -522,6 +569,16 @@ Instrument.prototype.setVolume = function (volume) {
 	}
 };
 
+Instrument.prototype.setShift = function (shift, b) {
+	if (b) {
+		this.shiftB = true;
+		this.shiftAll = [0, 2, 4, 5, 7, 9, 11][shift];
+	} else {
+		this.shiftB = false;
+		this.shiftAll = [0, 1, 3, 5, 6, 8, 10][shift];
+	}
+};
+
 Instrument.prototype.playNote = function (note, type) {
 	var pause = {
 			'\n': 0,
@@ -547,14 +604,6 @@ Instrument.prototype.playNote = function (note, type) {
 			m: 8,
 			n: 10
 		}, freq, i;
-	if (note === 'x') {
-		this.shiftB = true;
-		return;
-	}
-	if (note >= '0' && note <= '6') {
-		this.baseFreq = this.baseFreq / Math.pow(2, [0, 1, 3, 5, 6, 8, 10][note] / 12); //TODO ???
-		return;
-	}
 	if (note in pause) {
 		this.pause(pause[note]);
 		return;
@@ -563,7 +612,7 @@ Instrument.prototype.playNote = function (note, type) {
 		notes.b--;
 		notes.i--;
 	}
-	freq = this.baseFreq * Math.pow(2, notes[note] / 12);
+	freq = this.baseFreq * Math.pow(2, (notes[note] - this.shiftAll) / 12);
 	if (type === '+') {
 		for (i = 0; i < this.repeat; i++) {
 			this.play(freq);
@@ -574,9 +623,11 @@ Instrument.prototype.playNote = function (note, type) {
 };
 
 Instrument.prototype.playNotes = function (notes) {
-	this.shiftB = false;
-	this.baseFreq = 440;
-	parseNotes(notes).forEach(function (note) {
+	parseNotes(notes).forEach(function (note, i) {
+		if (i === 0) {
+			this.setShift(Number(note.notes[0][0].charAt(0)), note.notes[0][0].charAt(1) === 'x');
+			return;
+		}
 		note.notes.forEach(function (n) {
 			this.playNote(n[0], n[1]);
 		}.bind(this));
@@ -778,8 +829,10 @@ function Audio (input, output) {
 
 Audio.prototype.init = function (notes) {
 	this.readStart = true;
-	if (notes === 'start') {
+	if (notes === 'tts-start') {
 		this.readStart = false;
+		notes = '';
+	} else if (notes === 'tts-visible') {
 		notes = '';
 	}
 	this.notes = notes;
