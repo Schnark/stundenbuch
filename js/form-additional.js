@@ -15,14 +15,17 @@ var input,
 
 function initKeys () {
 	var cal;
+
+	function addEntry (entry) {
+		availableKeys[entry[2]] = entry[0] + '|' + entry[1]; //TODO entry[2] undefined oder doppelt
+	}
+
 	if (availableKeys) {
 		return;
 	}
 	availableKeys = {};
 	for (cal in Day.calendars) {
-		Day.calendars[cal].getEntries(new Config({})).forEach(function (entry) {
-			availableKeys[entry[2]] = entry[0] + '|' + entry[1]; //TODO entry[2] undefined oder doppelt
-		});
+		Day.calendars[cal].getEntries(new Config({})).forEach(addEntry);
 	}
 }
 

@@ -83,7 +83,7 @@ function parseFile (text, allowDuplicates, lang) {
 				current = current.split(':');
 				if (selectLangCode([current[1]], lang)) {
 					current = current[0];
-					if (!current in textStore) {
+					if (!(current in textStore)) {
 						throw new Error('Override without default: ' + current);
 					}
 					textStore[current] = '';
@@ -367,7 +367,7 @@ function dynamicReplace (name) {
 			return '';
 		}
 		if (dynamicReplaceData.horaTSN) {
-			return Config.getConfig().get('bugCompat') ? get(name).replace('R Amen.', '') : get(name + '-brevis');
+			return Config.getConfig().get('bugCompat') ? get(name) : get(name + '-brevis');
 		}
 	}
 	parts = /^(papa|episcopus|nomen)(?:-(voc|gen|dat|acc|abl))?$/.exec(name);

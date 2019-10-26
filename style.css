@@ -14,6 +14,13 @@ h4,
 h5 {
 	font-weight: bold;
 	padding: 0;
+}
+
+#main h1,
+#main h2,
+#main h3,
+#main h4,
+#main h5 {
 	scroll-snap-align: start;
 }
 

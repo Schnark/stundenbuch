@@ -1,4 +1,5 @@
 /*global Day, Config, l10n, getHora, schnarkDiff*/
+/*global console*/
 (function () {
 "use strict";
 
@@ -103,10 +104,11 @@ function getConfig (lang, hora, extra, compare) {
 		config.memoriaTSN = true;
 		config.bugCompat = true;
 	} else if (lang === 'de-x-local' && compare) {
-		config.rvMode = hora === 'lectionis' ? 'original' : 'expand';
+		config.rvMode = 'original'; //hora === 'lectionis' ? 'original' : 'expand';
 		config.moreHymns = true;
 		config.flexaAsteriscus = '†|*|<br>';
 		config.varyCanticaLaudes = true;
+		config.paterNosterIntro = 1;
 		config.memoriaTSN = true;
 		config.bugCompat = true;
 		config.marianAntiphon = 'completorium';
@@ -179,11 +181,14 @@ function normalizeWebHtml (html, lang, easter) {
 }
 
 function fixDe (text) {
+	//jscs:disable maximumLineLength
 	var fixes = [
 		['Amen ', 'Amen.'],
 		['Ewigkeit. ℣ Singet Lob', 'Ewigkeit. ℟ Amen. ℣ Singet Lob'],
 		['Herrn. ℣ Singet Lob', 'Herrn. ℟ Amen. ℣ Singet Lob'],
 		['(vgl. ', '(Vgl. '],
+		['(Halleluja). Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', '(Halleluja). Halleluja. Ehre sei dem Vater und dem Sohn und dem Heiligen Geist. * (℟ Halleluja.) Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit. Amen. ℟ Halleluja (Halleluja).'],
+		['ihn loben und rühmen in Ewigkeit! Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', 'ihn loben und rühmen in Ewigkeit!'],
 		['Mein Gott, eile mir zu Hilfe!', 'Mein Gott, eil mir zu Hilfe!'], //Psalm 71
 		['und hatten doch mein Tun gesehen.«', 'und hatten doch mein Tun gesehen.'], //Psalm 95
 		['Vierzig Jahre war mir dies Geschlecht zuwider †', 'Vierzig Jahre war mir dies Geschlecht zuwider, †'], //Psalm 95
@@ -210,6 +215,7 @@ function fixDe (text) {
 		['verbannte Kinder Evas,', 'verbannte Kinder Evas;'], //Salve Regina
 		['. O gütige, o milde, o süße Jungfrau Maria.', '! O gütige, o milde, o süße Jungfrau Maria!'] //Salve Regina
 	], i;
+	//jscs:enable maximumLineLength
 	for (i = 0; i < fixes.length; i++) {
 		text = text.replace(new RegExp(escapeRe(fixes[i][0]), 'g'), fixes[i][1]);
 	}
@@ -277,27 +283,24 @@ function normalizeDeWebHtml (html, easter) {
 	//jscs:enable maximumLineLength
 }
 
-function normalizeDeLocalWebHtml (html, easter) { //FIXME
+function normalizeDeLocalWebHtml (html, easter) {
 	//jscs:disable maximumLineLength
 	var div;
 	html = html
-		.replace(/[\s\S]*<body[^<>]+>/, '')
-		.replace(/<\/body>[\s\S]*/, '')
-		.replace('<h2>Psalm</h2>', '')
-		.replace(/<span class="rub2"(?: id="ant")?>(?:\d\. Ant\.|Antiphon)<\/span> <span id="HL\d+">([^<]+)<\/span>(\s*<\/p>\s*<p class="rub2 center[\s\S]*?)(<span id="HL|<span >\()/g, '$2 Ant. $1 $3')
-		.replace(/(\d\. )?Ant\./g, 'Ant.:')
+		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]+)<\/span><\/p> <p class="format_center"><span class="hl">---<\/span><\/p>/g, 'Ant.: $1')
+		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]*)<\/span><\/p>( (?:<p class="format_subh">|<h2 class="format_h2">P)[\s\S]*?)(<p class="format_none">)/g, '$2 Ant.: $1$3')
+		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]+)<\/span><\/p>/g, 'Ant.: $1')
 		.replace(/(?:FÜRBITTEN|BITTEN)[\s\S]*Vater unser/, function (preces) {
 			return preces.replace(/³/, '')
-				.replace(/³<\/span> <span id="HL\d+">[^<]*</g, '<')
+				//.replace(/³<\/span> <span id="HL\d+">[^<]*</g, '<')
 				.replace(/\(R [^<]*</g, '<');
 		})
-		.replace(/<br\/> +–/g, '')
-		.replace(/<div id="lat"[\s\S]*?<\/div>/, '')
+		.replace(/<br><span class="hl">- /g, '')
+		.replace('<p class="format_preOra">', 'Oration<p>')
 		.replace(/</g, ' <');
 	div = document.createElement('div');
 	div.innerHTML = html;
 	return fixDe(div.textContent
-		.replace(/Antiphon:?/g, 'Ant.:')
 		.replace(/(\d\)?,)(\d)/g, '$1 $2')
 		.replace(/(\d[a-g]?)-(\d?[a-g]?)/g, '$1–$2')
 		.replace('SCHULDBEKENNTNIS', 'Schuldbekenntnis (Stille zur Gewissenserforschung)')
@@ -323,9 +326,6 @@ function normalizeDeLocalWebHtml (html, easter) { //FIXME
 		.replace('KURZLESUNG', 'Lesung')
 		.replace('ERSTE LESUNG', 'Erste Lesung')
 		.replace('ZWEITE LESUNG', 'Zweite Lesung')
-		.replace(/(RESPONSORIUM[\s\S]*?)\*\s*([^*]*?)(Ehre sei dem Vater und dem Sohn)/, function (all, $1, $2, $3) {
-			return $1 + '³ ' + $2.slice(0, 1).toUpperCase() + $2.slice(1) + '² ' + $3;
-		})
 		.replace(/RESPONSORIUM/g, 'Responsorium')
 		.replace('BENEDICTUS', 'Benedictus Lk 1, 68–79 Der Messias und sein Vorläufer')
 		.replace('MAGNIFICAT', 'Magnificat Lk 1, 46–55 Mein Geist jubelt über Gott')
@@ -337,14 +337,14 @@ function normalizeDeLocalWebHtml (html, easter) { //FIXME
 		.replace('BITTEN', 'Bitten')
 		.replace('(Fürbitten in besonderen Anliegen)', 'Hier können Fürbitten in besonderen Anliegen eingefügt werden.')
 		.replace('(Bitten in besonderen Anliegen)', 'Hier können Bitten in besonderen Anliegen eingefügt werden.')
-		.replace(/\(Kyrie, eleison.\s+Christe, eleison.\s+Kyrie, eleison.\)/, '')
+		.replace(/Vater unser\.\s+\(Kyrie, eleison.\s+Christe, eleison.\s+Kyrie, eleison.\)/, '')
 		.replace('Vater unser im Himmel', 'Vaterunser Vater unser im Himmel')
 		.replace(/Wie im Anfang so auch jetzt und alle Zeit/g, 'Wie im Anfang, so auch jetzt und alle Zeit')
-		.replace('(mit den Laudes oder der Lesehore fortfahren, die Erföffnung entfällt dort, es geht direkt mit dem Hymnus weiter)', '')
 		.replace('MARIANISCHE ANTIPHON', '')
 		.replace(/[«»]/g, function (c) {
 			return c === '»' ? '«' : '»';
 		})
+		.replace(/R Halleluja/g, '³ Halleluja')
 		.replace(/\s-\s/g, ' – ')
 		.replace(/\s-,/g, ' –,')
 		.replace(/\.\.\./g, ' …')
@@ -356,6 +356,9 @@ function normalizeDeLocalWebHtml (html, easter) { //FIXME
 		.replace(/\( ℟/g, '(℟')
 		.replace(/\(O(?:sterzeit)?: Halleluja\.?\)/g, easter ? 'Halleluja.' : '')
 		.replace(/\s+/g, ' ')
+		.replace('Damit mein Mund dein Lob verkünde. Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit. Amen. Halleluja. Psalm', 'Damit mein Mund dein Lob verkünde.')
+		.replace('(mit der Laudes oder der Lesehore fortfahren, die Eröffnung entfällt dort, es geht direkt mit dem Hymnus weiter) ', '')
+		.replace('Te Deum (Der Hymnus Te Deum trifft nur an den Sonntagen ausserhalb der Fastenzeit, an den Tagen der Oster- und Weihnachtsoktav und an Hochfesten und Festen … nicht aber an Gedenktagen und Wochentagen. vgl. AES 68) ', '')
 		.replace('℣ Singet Lob und Preis.', html.indexOf('ZWEITE LESUNG') > -1 ? '℟ Amen. \u2123 Singet Lob und Preis.' : '℣ Singet Lob und Preis.')
 		.replace('Eine ruhige Nacht und ein gutes Ende', '℟ Amen. Segen Eine ruhige Nacht und ein gutes Ende')
 		.replace('℣ Der Herr segne uns. Er bewahre uns vor Unheil und führe uns zum ewigen Leben.', '℟ Amen. Segen Der Herr segne uns, er bewahre uns vor Unheil und führe uns zum ewigen Leben.'));
@@ -522,7 +525,7 @@ function getLocalHtml (lang, hora, date, callback) {
 
 function getWebHtml (lang, hora, date, callback) {
 	if (lang === 'de-x-local') {
-		getFileHtml('stb.html', hora, date, callback); //was: 'stundenbuch.json'
+		getFileHtml('stb.html', hora, date, callback);
 		return;
 	}
 	var xhr = new XMLHttpRequest();
@@ -541,41 +544,8 @@ function getWebHtml (lang, hora, date, callback) {
 	xhr.send();
 }
 
-//download stundenbuch.json from https://www.stundengebet.de/kalender.html (see console, convert file to proper JSON formatting)
-//old one, delete if it doesn't come back
-/*function getFileHtml (file, hora, date, callback) {
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function () {
-		var days, i, text;
-		try {
-			days = xhr.response[-1].BREVIER[0].TAG;
-			for (i = 0; i < days.length; i++) {
-				if (days[i].DATUM.value === date.format()) {
-					break;
-				}
-			}
-			text = days[i][{
-				invitatorium: 'INVITATORIUM',
-				lectionis: 'LESEHORE',
-				laudes: 'LAUDES',
-				tertia: 'TERZ',
-				sexta: 'SEXT',
-				nona: 'NON',
-				vespera: 'VESPER',
-				completorium: 'KOMPLET'
-			}[hora]].value;
-		} catch (e) {
-		}
-		callback(text || '');
-	};
-	xhr.onerror = function () {
-		callback('');
-	};
-	xhr.open('GET', file);
-	xhr.responseType = 'json';
-	xhr.send();
-}*/
-
+//download main HTML as stb.html from https://www.stundengebet.de/jetzt-beten/
+//remove duplicate days (until this is fixed, after that consider using online one directly)
 function getFileHtml (file, hora, date, callback) {
 	function getStartDay (doc) {
 		var d, date;

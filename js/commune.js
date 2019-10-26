@@ -519,6 +519,9 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		val.completorium = true;
 		val.type = '';
 	}
+	if (types[0] === 'ecclesia' && Config.getConfig().get('dedicationExtern') && types.indexOf('extra') === -1) {
+		types.push('extra');
+	}
 	val.commune = types.shift() || '';
 	val.modifier = types;
 	val.texts = {};

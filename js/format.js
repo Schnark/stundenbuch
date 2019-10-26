@@ -1,4 +1,4 @@
-/*global formatSequence: true, l10n, Config*/
+/*global formatSequence: true, audioManager, util, l10n, Config*/
 formatSequence =
 (function () {
 "use strict";
@@ -110,6 +110,7 @@ function formatBlock (text, audio, type, easter, debug) {
 		.replace(/<p>=(.*?)<\/p>/g, '<h3>$1</h3>')
 		.replace(/__(.*?)__/g, '<em>$1</em>')
 		.replace(/ \*/g, getFlexaAsteriscus('asteriscus', ''))
+		.replace(/ \/\/ ?/g, ' <span class="solidus"><br></span>')
 		.replace(/ \//g, '<span class="solidus"> /</span>')
 		.replace(/<p>([1-9]\S* )/g, '<p><sup class="versus">$1</sup>')
 		.replace(/<br>([1-9]\S* )/g, (text.indexOf('{antiphona}') > -1 ? '<br>' : ' ') + '<sup class="versus">$1</sup>')
@@ -132,7 +133,8 @@ function formatBlock (text, audio, type, easter, debug) {
 		text = formatRV(text);
 	}
 	if (audio) {
-		text = text.replace('</h2>', '&nbsp;<span class="audio" data-audio="' + util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>');
+		text = text.replace('</h2>',
+			'&nbsp;<span class="audio" data-audio="' + util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>');
 	}
 	if (debug) {
 		text = '<pre>' + debug + '</pre>' + text;

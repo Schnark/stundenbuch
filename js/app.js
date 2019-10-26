@@ -658,6 +658,7 @@ function init () {
 		epiphaniasSunday: false,
 		ascensionSunday: false,
 		corpusSunday: false,
+		dedicationExtern: true,
 		notes: '',
 		override: '',
 		lang: 'de',
