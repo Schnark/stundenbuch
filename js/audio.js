@@ -7,8 +7,9 @@ Audio =
 (function () {
 "use strict";
 
+//TODO Noten mit Notenschlüssel verschieben, Noten nicht bis u
 /*
-Noten: a-n
+Noten: a-u
 Typen: +?~. (~ nicht implementiert)
 Akzente: '>/
 Trenner: ,;:|*\n
@@ -16,8 +17,8 @@ Notenschlüssel: 0-6, x
 */
 
 function parseNotes (notes) {
-	var re1 = /((?:[a-n][+?~.]?)+)(['>\/]?)|([,;:|*\nx0-6])/g,
-		re2 = /([a-n])([+?~.]?)/g,
+	var re1 = /((?:[a-u][+?~.]?)+)(['>\/]?)|([,;:|*\nx0-6])/g,
+		re2 = /([a-u])([+?~.]?)/g,
 		match, n, t,
 		text = [],
 		ret = [];
@@ -434,7 +435,7 @@ Renderer.prototype.renderNote = function (note, index) {
 		}
 		return this.renderSignGregorian(shift, b);
 	}
-	if (firstNote < 'a' || firstNote > 'n') {
+	if (firstNote < 'a' || firstNote > 'u') {
 		return this.renderBar(firstNote);
 	}
 	return this.renderAccent(this.renderCluster(note.notes), note.accent, note.text);
@@ -596,13 +597,22 @@ Instrument.prototype.playNote = function (note, type) {
 			e: -5,
 			f: -4,
 			g: -2,
+
 			h: 0,
 			i: 2,
 			j: 3,
 			k: 5,
 			l: 7,
 			m: 8,
-			n: 10
+			n: 10,
+
+			o: 12,
+			p: 14,
+			q: 15,
+			r: 17,
+			s: 19,
+			t: 20,
+			u: 22
 		}, freq, i;
 	if (note in pause) {
 		this.pause(pause[note]);
@@ -611,6 +621,7 @@ Instrument.prototype.playNote = function (note, type) {
 	if (this.shiftB) {
 		notes.b--;
 		notes.i--;
+		notes.p--;
 	}
 	freq = this.baseFreq * Math.pow(2, (notes[note] - this.shiftAll) / 12);
 	if (type === '+') {

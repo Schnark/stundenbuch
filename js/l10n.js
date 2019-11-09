@@ -537,13 +537,17 @@ function asyncLoop (array, work, end) {
 	doPart();
 }
 
+function getKeys () {
+	return Object.keys(textStore);
+}
+
 function search (callback, str, max, missing, more) {
 	var normalize, ret = [];
 	if (max && more) {
 		max++;
 	}
 	normalize = getNormalisationFunction(str);
-	asyncLoop(Object.keys(textStore), function (key) {
+	asyncLoop(getKeys(), function (key) {
 		if (normalize(textStore[key]).indexOf(str) > -1) {
 			ret.push(key);
 			return max && ret.length === max;
@@ -592,6 +596,7 @@ return {
 	setPassword: setPassword,
 	clearStorage: clearStorage,
 	test: test,
+	getKeys: getKeys,
 	availableLanguages: [
 		{code: 'de', autonym: 'Deutsch', prompt: 'Bitte Passwort eingeben:'},
 		{code: 'de-AT', autonym: 'Deutsch (Österreich)'},

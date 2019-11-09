@@ -52,6 +52,7 @@ Day.useHymnusLectionis = {
 	//'exaltatio-crucis': 'vespera',
 	'maria-immaculata': 'laudes',
 
+	'ecclesia': 'vespera0',
 	'doctor': 'laudes'
 };
 
@@ -105,7 +106,10 @@ Day.cantica = {
 	'cantica-laudes-martyr': ['ps-63', 'dn-3-iii', 'ps-149'],
 	'cantica-vespera-martyr': ['ps-116-i', 'ps-116-ii', 'apc-4-5'],
 
+	'cantica-vespera-pastor-v': ['ps-113', 'ps-146', 'eph-1'],
 	'cantica-lectionis-pastor': ['ps-21', 'ps-92-i', 'ps-92-ii'],
+	'cantica-laudes-pastor': ['ps-118', 'dn-3-ii', 'ps-150'],
+	'cantica-vespera-pastor': ['ps-15', 'ps-112', 'apc-15'],
 
 	'cantica-vespera-mulier-v': ['ps-113', 'ps-147-ii', 'eph-1'],
 	'cantica-lectionis-mulier': ['ps-19-i', 'ps-45-i', 'ps-45-ii'],
@@ -287,6 +291,7 @@ Day.getCantica = function (keys, hora, cantica) {
 		}
 	}
 	if (!cantica) {
+		debug.log('Use none from [' + keys.join(', ') + '].');
 		return;
 	}
 

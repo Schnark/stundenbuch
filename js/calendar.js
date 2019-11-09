@@ -1014,6 +1014,7 @@ Day.calendars = {
 					}
 				}],
 				[9, 12, 'ioannes-didacus', 3, 'vir'],
+				[10, 12, 'maria-loreto', 3, 'maria'],
 				[11, 12, 'damasus-i', 3, 'pastor'],
 				[12, 12, 'maria-guadalupe', 3, 'maria'],
 				[13, 12, 'lucia', 2, ['martyr', 'mulier']],
@@ -1040,7 +1041,7 @@ Day.calendars = {
 					'maria-de-monte-carmelo',
 				'sarbelius-makhluf', 'petrus-iulianus', 'teresia-benedicta', 'rosa-lima', 'petrus-claver',
 				'robertus-bellarmino', 'venceslaus', 'ioannes-leonardus', 'ioannes-brebeuf-isaac-jogues', 'ioannes-paulus-ii',
-				'catharina-alexandrina', 'nicolaus', 'ioannes-kety'
+				'catharina-alexandrina', 'nicolaus', 'maria-loreto', 'ioannes-kety'
 			],
 			[
 				'raimundus-penyafort', 'angela-merici', 'septem-fundatores', 'ioannes-deo', 'turibius',

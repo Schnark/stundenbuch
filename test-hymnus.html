@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<title>Stundenbuch - Test</title>
+<script src="js/debug.js" defer></script>
+<script src="js/l10n.js" defer></script>
+<script src="test/hymnus.js" defer></script>
+<style>
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+td {
+	border: solid thin;
+}
+
+.missing {
+	background-color: #faa;
+}
+.equal {
+	background-color: #afa;
+}
+</style>
+</head><body>
+<div>
+<label>Sprache: <select id="lang">
+<option value="de">Deutsch</option>
+<option value="en">Englisch</option>
+<option value="la">Latein</option>
+</select></label>
+<button id="run">Anzeigen</button>
+</div>
+<article id="output"></article>
+</body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<title>Stundenbuch - Test</title>
+<script>Day = {};</script>
+<script src="js/util.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/calendar.js" defer></script>
+<script src="test/optional.js" defer></script>
+<style>
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+td {
+	border: solid thin;
+}
+
+.hl0 .g0,
+.hl1 .g1,
+.hl2 .g2,
+.hl3 .g3 {
+	background-color: #ffa;
+}
+</style>
+</head><body>
+<div>
+<nav><select id="highlight">
+<option value="">keine</option>
+<option value="hl0">Gruppe 1</option>
+<option value="hl1">Gruppe 2</option>
+<option value="hl2">Gruppe 3</option>
+<option value="hl3">Gruppe 4</option>
+</select></nav>
+<article id="input"></article>
+<article id="output"></article>
+</body></html>

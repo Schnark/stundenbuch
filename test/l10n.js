@@ -149,7 +149,8 @@ function checkFormat (file, callback) {
 	//jscs:disable maximumLineLength
 	var re = {
 		'': [
-			[/[^a-z0-9\-]/, /./, false, 'Schlüssel mit Sonderzeichen'],
+			[/[^a-z0-9\-:]/, /./, false, 'Schlüssel mit Sonderzeichen'],
+			[/^:|:$|:.*:/, /./, false, 'Schlüssel mit falschen Doppelpunkten'],
 			[/./, /./, true, 'Leerer Eintrag'],
 			[/./, / {2}| \n|\n |\n\n\n|^\s|\s$/, false, 'Mehrfacher Leerraum'],
 			[/./, /^[^_]*(__[^_\n]+__[^_]*)*$/, true, 'Unterstreichungen'],
@@ -186,15 +187,17 @@ function checkFormat (file, callback) {
 		'de': [
 			[/./, /^[a-zA-ZäöüÄÖÜßÁáàçéèîłñú0-9() \n<>’\/\-.:,;?!…–»«_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],
 			[/(?!-introductio).{12}$|^.{1,11}$/, /[áçèîłú]/, false, 'Illegales Zeichen (2)'],
-			[/^(?!date-format|dominica|hebdomada|modus-)/, /[%*+{}|]/, false, 'Illegales Zeichen (3)'],
+			[/^(?!date-format|dominica|hebdomada|modus-)/, /[%*+{}]/, false, 'Illegales Zeichen (3)'],
+			[/^(?!date-format|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
 			[/^antiphona-/, /\n/, false, 'Zeilenumbruch in Antiphon'],
+			[/^antiphona-/, /\|./, false, 'Pipe mitten in Antiphon'],
 			[/^hymnus-/, /^Hymnus\n\n|^@hymnus-[a-z0-9\-]+$/, true, 'Hymnus ohne Titel'],
 			[/^responsorium-(?!substitutum-)/, /^Responsorium\n\nR .+\n.(.+) - R\n\nV .+\n.\1$|^@responsorium-[a-z0-9\-]+$/, true, 'Responsorium im falschen Format'],
 			[/^versus-(?!lectionis-)/, /^Responsorium\n\n.+\n.+$/, true, 'Versikel im falschen Format'],
 			[/^versus-lectionis-/, /^Versikel\n\n.+\n.+$|^@versus-[a-z0-9\-]+$/, true, 'Versikel im falschen Format'],
 			[/^preces-laudes-/, /^Bitten\n\n|^@preces-laudes-[a-z0-9\-]+$/, true, 'Preces im falschen Format'],
 			[/^preces-vespera-/, /^Fürbitten\n\n|^@preces-vespera-[a-z0-9\-]+$/, true, 'Preces im falschen Format'],
-			[/^oratio-/, /^Oration\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
+			[/^(?!oratio-commemoratio$)oratio-/, /^Oration\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
 			[/-introductio$/, /^(!.*\n\n)*!.*$/, true, 'Einleitung im falschen Format']
 		],
 		'biblia-de': [
@@ -210,14 +213,16 @@ function checkFormat (file, callback) {
 		'la': [
 			[/./, /^[a-zA-ZæÆœŒáéíóúýÁÉÍÓÚǽçèöõü0-9() \n<>’\/\-.:,;?!…–»«_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],
 			[/(?!-introductio).{12}$|^.{1,11}$/, /[çèö]/, false, 'Illegales Zeichen (2)'],
-			[/^(?!date-format|dominica|hebdomada|modus-|te-deum$)/, /[%*+{}|]/, false, 'Illegales Zeichen (3)'],
+			[/^(?!date-format|dominica|hebdomada|modus-|te-deum$)/, /[%*+{}]/, false, 'Illegales Zeichen (3)'],
+			[/^(?!date-format|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
 			[/^antiphona-/, /\n/, false, 'Zeilenumbruch in Antiphon'],
+			[/^antiphona-/, /\|./, false, 'Pipe mitten in Antiphon'],
 			[/^hymnus-/, /^Hymnus\n\n|^@hymnus-[a-z0-9\-]+$/, true, 'Hymnus ohne Titel'],
 			[/^responsorium-(?!substitutum-)/, /^Responsorium\n\nR .+\n.(.+) - R\n\nV .+\n.\1$|^@responsorium-[a-z0-9\-]+$/, true, 'Responsorium im falschen Format'],
 			[/^versus-(?!lectionis-)/, /^Responsorium\n\n.+\n.+$|^@versus-[a-z0-9\-]+$/, true, 'Versikel im falschen Format'],
 			[/^versus-lectionis-/, /^Versus\n\n.+\n.+$|^@versus-[a-z0-9\-]+$/, true, 'Versikel im falschen Format'],
 			[/^preces-/, /^Preces\n\n|^@preces-[a-z0-9\-]+$/, true, 'Preces im falschen Format'],
-			[/^oratio-/, /^Oratio\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
+			[/^(?!oratio-commemoratio$)oratio-/, /^Oratio\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
 			[/-introductio$/, /^(!.*\n\n)*!.*$/, true, 'Einleitung im falschen Format']
 		],
 		'biblia-la': [
@@ -232,14 +237,16 @@ function checkFormat (file, callback) {
 		],
 		'en': [
 			[/./, /^[a-zA-Z0-9() \n<>’\/\-.:,;?!…–“”_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],
-			[/^(?!date-format|dominica|hebdomada|modus-|te-deum$)/, /[%*+{}|]/, false, 'Illegales Zeichen (2)'],
+			[/^(?!date-format|dominica|hebdomada|modus-|te-deum$)/, /[%*+{}]/, false, 'Illegales Zeichen (2)'],
+			[/^(?!date-format|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
 			[/^antiphona-/, /\n/, false, 'Zeilenumbruch in Antiphon'],
+			[/^antiphona-/, /\|./, false, 'Pipe mitten in Antiphon'],
 			[/^hymnus-/, /^Hymn\n\n|^@hymnus-[a-z0-9\-]+$/, true, 'Hymnus ohne Titel'],
 			[/^responsorium-(?!substitutum-)/, /^Responsory\n\nR .+\n.+ - R\n\nV .+\n.+$|^@responsorium-[a-z0-9\-]+$/, true, 'Responsorium im falschen Format'],
 			[/^versus-(?!lectionis-)/, /^Responsory\n\n.+\n.+$|^@versus-[a-z0-9\-]+$/, true, 'Versikel im falschen Format'],
 			[/^versus-lectionis-/, /^Verse\n\n.+\n.+$|^@versus-[a-z0-9\-]+$/, true, 'Versikel im falschen Format'],
 			[/^preces-/, /^Intercessions\n\n|^@preces-[a-z0-9\-]+$/, true, 'Preces im falschen Format'],
-			[/^oratio-/, /^Concluding Prayer\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
+			[/^(?!oratio-commemoratio$)oratio-/, /^Concluding Prayer\n\n.+ @[a-z0-9\-]+$|^@oratio-[a-z0-9\-]+$/, true, 'Oration im falschen Format'],
 			[/-introductio$/, /^(!.*\n\n)*!.*$/, true, 'Einleitung im falschen Format']
 		],
 		'biblia-en': [
@@ -247,7 +254,7 @@ function checkFormat (file, callback) {
 			[/./, /^@[a-z0-9\-]+$|^(Psalm \d+( [AB])?( [IVX]+( \([A-Z][a-z]+\))?)?|Canticle|Reading)(?: <([12] )?[A-Z][a-z]+[^>]+>)?\n\n/, true, 'Fehlerhafte Überschrift']
 		],
 		'lectionis-en': [
-			[/./, /^[a-zA-Z0-9() \n<>\/\-.:,;?!…–“”‘’_@]+$/, true, 'Illegales Zeichen'],
+			[/./, /^[a-zA-Z0-9() \n<>\/\-.:,;?!…–“”‘’_@~=]+$/, true, 'Illegales Zeichen'],
 			[/^responsorium-/, /^Responsory(?: <[^<>]+>)?\n\nR .+\n.(.+)\n\nV .+\n.\1$|^@responsorium-[a-z0-9\-]+$/, true, 'Responsorium im falschen Format'],
 			[/^lectio-lectionis-.*-a$/, /^First Reading\n\n!|^@lectio-lectionis-[a-z0-9\-]+-a$/, true, 'Lesung im falschen Format (1)'],
 			[/^lectio-lectionis-.*-b$/, /^Second Reading\n\n!|^@lectio-lectionis-[a-z0-9\-]+-b$/, true, 'Lesung im falschen Format (2)']
