@@ -4,14 +4,35 @@
 
 var comments = {
 	agnes: 'g zugunsten von meinrad',
+	'cyrillus-methodius': 'g zugunsten von valentin-terni',
+	polycarpus: 'g zugunsten von willigis',
+	'aloisius-gonzaga': 'g zugunsten von alban',
 	'heinrich-kunigunde': 'statt henricus',
 	bonaventura: 'g zugunsten von bernhard-baden, in Baden 17. 7.',
+	'alfonsus-liguori': 'g zugunsten von petrus-faber',
 	monica: 'g zugunsten von gebhard',
 	'margarita-scotia': 'aus technischen Gründen doppelt',
 	gertrudis: 'abweichendes Datum',
+	konrad: 'statt konrad-gebhard',
 	lucia: 'g zugunsten von odilia',
 	'petrus-canisius': 'abweichendes Datum'
 }, memorials;
+
+/*
+Entfallende g:
+de-mainz
+--------
+petrus-canisius
+elisabeth-lusitania
+ulrich
+robertus-bellarmino
+
+de-rottenburg-stuttgart
+-----------------------
+ioannes-brebeuf-isaac-jogues
+paulus-cruce
+
+*/
 
 function findGroups (needle, groups) {
 	return groups.map(function (group, index) {

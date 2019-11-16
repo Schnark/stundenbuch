@@ -17,7 +17,9 @@ function initKeys () {
 	var cal;
 
 	function addEntry (entry) {
-		availableKeys[entry[2]] = entry[0] + '|' + entry[1]; //TODO entry[2] undefined oder doppelt
+		if (entry[2]) {
+			availableKeys[entry[2]] = entry[0] + '|' + entry[1]; //TODO entry[2] doppelt
+		}
 	}
 
 	if (availableKeys) {
@@ -109,7 +111,7 @@ function onNameChange () {
 
 function onSuggestionClick (e) {
 	if (e.target.dataset.suggestion) {
-		nameInput.value = e.target.dataset.suggestion;
+		nameInput.value = e.target.dataset.suggestion; //TODO auch andere Werte?
 		areaSuggestions.innerHTML = '';
 	}
 }
@@ -184,6 +186,8 @@ function init () {
 	insertButton.addEventListener('click', onInsertClick, false);
 	actionInput.addEventListener('change', onActionChange, false);
 	areaSuggestions.addEventListener('click', onSuggestionClick, false);
+	dayInput.addEventListener('change', onNameChange, false); //name suggestions depend on date
+	monthInput.addEventListener('change', onNameChange, false);
 	nameInput.addEventListener('input', onNameChange, false);
 	mainTypeInput.addEventListener('change', onMainTypeChange, false);
 }

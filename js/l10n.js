@@ -358,7 +358,7 @@ function dynamicReplace (name) {
 	case 'commemoratio-antiphona': return get(dynamicReplaceData.commemoratioAntiphona);
 	case 'commemoratio-oratio1':
 		setDynamicData('commemoratioOratio', true);
-		return removeHead(dynamicReplaceData.commemoratioOratio1).replace(/, $/, '.');
+		return removeHead(dynamicReplaceData.commemoratioOratio1).replace(/,$/, '.');
 	case 'commemoratio-oratio2': return removeHead(dynamicReplaceData.commemoratioOratio2);
 	}
 	if (['per-christum', 'per-christum-1', 'qui-vivit', 'qui-vivis', 'qui-vivis-1'].indexOf(name) > -1) {

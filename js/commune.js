@@ -367,11 +367,12 @@ Day.getText = function (data, element, hora, part) {
 		keys = getKeys(element, hora, data.name);
 		/*falls through*/
 	case 'c':
-		if (data.rank === 2 && data.commune !== 'defunctus' && (
+		if (data.rank >= 2 && data.commune !== 'defunctus' && (
 			(element === 'lectio' && hora === 'lectionis') ||
 			(
 				element !== 'oratio' && Config.getConfig().get('noCommons') &&
-				!(data.texts && data.texts.cantica) //special memorial, keep common texts
+				!(data.texts && data.texts.cantica) && //special memorial, keep common texts
+				data.rank !== 3 //commemoration
 			)
 		)) {
 			break;

@@ -111,7 +111,7 @@ function getConfig (lang, hora, extra, compare) {
 		config.paterNosterIntro = 1;
 		config.memoriaTSN = true;
 		config.bugCompat = true;
-		config.marianAntiphon = 'completorium';
+		//config.marianAntiphon = 'completorium';
 	} else if (lang === 'la' && compare) {
 		config.rvMode = hora === 'lectionis' ? 'original' : 'expand';
 		config.flexaAsteriscus = '†|*|<br>';
@@ -189,6 +189,8 @@ function fixDe (text) {
 		['(vgl. ', '(Vgl. '],
 		['(Halleluja). Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', '(Halleluja). Halleluja. Ehre sei dem Vater und dem Sohn und dem Heiligen Geist. * (℟ Halleluja.) Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit. Amen. ℟ Halleluja (Halleluja).'],
 		['ihn loben und rühmen in Ewigkeit! Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', 'ihn loben und rühmen in Ewigkeit!'],
+		['Der Herr thront für ewig; *', 'Der Herr aber thront für ewig; *'], //Psalm 9 I
+		['Kein Mensch mehr verbreite Schrecken im Land!', 'Kein Mensch mehr verbreite Schrecken im Land.'], //Psalm 10 II
 		['Mein Gott, eile mir zu Hilfe!', 'Mein Gott, eil mir zu Hilfe!'], //Psalm 71
 		['und hatten doch mein Tun gesehen.«', 'und hatten doch mein Tun gesehen.'], //Psalm 95
 		['Vierzig Jahre war mir dies Geschlecht zuwider †', 'Vierzig Jahre war mir dies Geschlecht zuwider, †'], //Psalm 95
@@ -199,11 +201,15 @@ function fixDe (text) {
 		['unermeßbarer', 'unermessbarer'], //Te Deum
 		['führt dem Vater seinen verlorenen Sohn', 'führt dem Vater seinen verlornen Sohn'], //Hymnus Lesehore So
 		['Siegesfreude füllt unsere Seele ganz', 'Siegesfreude füllt unsre Seele ganz'], //Hymnus Lesehore So
-		['Danket dem Herrn; denn seine Huld währt ewig!', 'Danket dem Herrn, denn seine Huld währt ewig!'], //Invitatorium-Antiphon Freitag 3. Woche
+		['verworrenes Chaos dieser Welt', 'verworrnes Chaos dieser Welt'], //Hymnus Laudes Mi
+		['niederfallen vor Gott, vor dem Herrn, unserm Schöpfer!', 'niederfallen vor Gott, vor dem Herrn, unserem Schöpfer!'], //Invitatorium-Antiphon Mittwoch 1. Woche
+		['Danket dem Herrn; denn seine Huld währt ewig!', 'Danket dem Herrn, denn seine Huld währt ewig!'], //Invitatorium-Antiphon Freitag 1. Woche
 		['Sie verteilen unter sich meine Kleider und werfen', 'Sie verteilten unter sich meine Kleider und warfen'], //Antiphon zu Psalm 22, Freitag 3. Woche TSN
 		['Herr, lenke unsere Schritte auf den Weg des Friedens.', 'Herr, lenke unsre Schritte auf den Weg des Friedens.'], //Benedictus-Antiphon Samstag 2. Woche
 		['Verwirf mich nicht vor deinem Angesicht', 'Verwirf mich nicht von deinem Angesicht'], //Versikel Terz Montag 2. Woche
 		['℣ Und sie hielten fest', '℣ Sie hielten fest'], //Versikel Sext Apostel
+		['Stehe unserem Papst N. und allen Bischöfen bei;', 'Steh unserem Papst N. und allen Bischöfen bei;'], //Fürbitten Sonntag 1. Woche
+		['Stehe den Sterbenden bei und lass sie dein Heil schauen.', 'Steh den Sterbenden bei; und lass sie dein Heil schauen.'], //Fürbitten Montag 1. Woche
 		['unsere Stadt (unsere Gemeinde)', 'unsere Stadt'], //Fürbitten Mittwoch 2. Woche
 		['Klugkeit', 'Klugheit'], //Fürbitten Dienstag 3. Woche
 		['und jeder die Fähigkeit entfaltet', 'und jeder die Fähigkeiten entfaltet'], //Oration Terz Montag 2. Woche
@@ -303,6 +309,7 @@ function normalizeDeLocalWebHtml (html, easter) {
 	return fixDe(div.textContent
 		.replace(/(\d\)?,)(\d)/g, '$1 $2')
 		.replace(/(\d[a-g]?)-(\d?[a-g]?)/g, '$1–$2')
+		.replace(/²\s+Lehre mich Erkenntnis und rechtes Urteil\.\s+³\s+Ich vertraue auf deine Gebote\./, '') //solange es falsch ist, besser ganz weg
 		.replace('SCHULDBEKENNTNIS', 'Schuldbekenntnis (Stille zur Gewissenserforschung)')
 		.replace('An dieser Stelle wird eine Gewissenserforschung empfohlen.', '')
 		.replace(' - [alle schlagen an die Brust]', ',')
@@ -339,8 +346,9 @@ function normalizeDeLocalWebHtml (html, easter) {
 		.replace('(Bitten in besonderen Anliegen)', 'Hier können Bitten in besonderen Anliegen eingefügt werden.')
 		.replace(/Vater unser\.\s+\(Kyrie, eleison.\s+Christe, eleison.\s+Kyrie, eleison.\)/, '')
 		.replace('Vater unser im Himmel', 'Vaterunser Vater unser im Himmel')
+		.replace(/Vater unser\.\s+³\s+Herr, erbarme dich deines Volkes\./, 'Lasst uns beten, wie der Herr uns gelehrt hat: Vaterunser Vater unser im Himmel, geheiligt werde dein Name. Dein Reich komme. Dein Wille geschehe, wie im Himmel so auf Erden. Unser tägliches Brot gib uns heute. Und vergib uns unsere Schuld, wie auch wir vergeben unsern Schuldigern. Und führe uns nicht in Versuchung, sondern erlöse uns von dem Bösen.')
 		.replace(/Wie im Anfang so auch jetzt und alle Zeit/g, 'Wie im Anfang, so auch jetzt und alle Zeit')
-		.replace('MARIANISCHE ANTIPHON', '')
+		.replace(/MARIANISCHE ANTIPHON[\s\S]*/, '') //solange es alle sind, besser ganz weg
 		.replace(/[«»]/g, function (c) {
 			return c === '»' ? '«' : '»';
 		})

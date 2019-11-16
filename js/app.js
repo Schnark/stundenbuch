@@ -217,7 +217,7 @@ function enableDayGroup (group) {
 	auto = [];
 	if (group > 0) {
 		Day.dayGroups[group - 1].forEach(function (d) {
-			if (current.indexOf(d) === -1) {
+			if (current.indexOf(d) === -1) { //TODO auch nicht bei gleichem Datum
 				auto.push(d);
 				current.push(d);
 			}

@@ -1,7 +1,8 @@
 /*global Day*/
 (function () {
 "use strict";
-
+//TODO Kollissionen (auch mit eigenen Tagen) besser behandeln,
+//vor November 2023 und auf jeden Fall vor Juni 2033
 /*
 Typen:
 ordinarium
@@ -51,8 +52,9 @@ Day.calendars = {
 						}
 					}
 				}],
-				[34, 'sunday', 'rex', 0, 'dominus', {
-					type: '',
+				[34, 'sunday', 'rex', 0, 'dominus', { //TODO
+					//when it coincides with another sollemnity,
+					//at least in Freiburg it is moved to [33, 'sunday']
 					texts: {
 						cantica: {
 							vespera0: ['ps-113', 'ps-117', 'apc-4-5'],
@@ -258,6 +260,7 @@ Day.calendars = {
 						}
 					}
 				}],
+				//TODO collision of corpus-domini and cor-iesu with nativitatis-ioannes and petrus-paulus
 				[config.get('corpusSunday') ? 63 : 60, 'easter', 'corpus-domini', 0, 'dominus', {
 					texts: {
 						cantica: {
@@ -985,7 +988,7 @@ Day.calendars = {
 				[17, 11, 'elisabeth-hungaria', 2, ['mulier', 'misericordia']],
 				[18, 11, 'basilica-petrus-paulus', 3, 'apostolus'],
 				[21, 11, 'praesentatio-maria', 2, 'maria'],
-				[22, 11, 'caecilia', 2, ['martyr', 'mulier']],
+				[22, 11, 'caecilia', 2, ['martyr', 'virgo', 'mulier']],
 				[23, 11, 'clemens-i', 3, ['martyr', 'vir']],
 				[23, 11, 'columbanus', 3, 'pastor'],
 				[24, 11, 'andreas-dung-lac', 2, ['martyr', 'vir', 'plures']],
@@ -1166,8 +1169,10 @@ Day.calendars = {
 		notes: [ //TODO mehrsprachig
 			[1, 1, 'Weltfriedenstag'],
 			[18, 1, 'Beginn der Weltgebetswoche für die Einheit der Christen'],
+			[3, 'sunday', 'Sonntag des Wortes Gottes'],
 			[27, 1, 'Gedenktag für die Opfer des Nationalsozialismus'],
 			[2, 2, 'Tag des geweihten Lebens'],
+			[8, 2, 'Internationaler Tag des Gebets und der Reflexion gegen den Menschenhandel'],
 			[11, 2, 'Welttag der Kranken'],
 			[-6, 3, 'Weltgebetstag der Frauen'],
 			[-8, 3, 'Beginn der Woche der Brüderlichkeit'],
@@ -1210,7 +1215,12 @@ Day.calendars = {
 	'de-DE': {
 		base: 'de',
 		getEntries: function () {
-			return [];
+			return [
+				//TODO laut DBK von Vollversammlung angenommen, stehen aber in keinem Direktorium:
+				//22. Jan.: Vinzenz Pallotti
+				//10. Mai: Damian de Veuster
+				//20. Nov.: Korbinian
+			];
 		},
 		notes: [
 			[-8, 9, 'Welttag der sozialen Kommunikationsmittel'], //anderswo an anderem Datum
@@ -1243,7 +1253,7 @@ Day.calendars = {
 				[3, 1, 'oskar-saier', 3, ['defunctus', 'vir'], 'Oskar Saier'],
 				[22, 1, 'vinzenz-pallotti', 3, 'fundator', 'Vinzenz Pallotti'],
 				[27, 2, 'gregor-narek', 3, 'doctor', 'Gregor'],
-				//? [24, 3, 'oscar-romero', 3, ['martyr', 'vir'], 'Oscar Romero'],
+				[24, 3, 'oscar-arnulfo-romero', 3, ['martyr', 'vir'], 'Oscar Arnulfo Romero'],
 				[26, 4, 'trudpert', 3, ['martyr', 'vir'], 'Trudpert'],
 				[8, 5, 'ulrika-franziska-nisch-hegne', 3, ['virgo', 'beatus'], 'Ulrika Franziska Nisch'],
 				[10, 5, 'johannes-avila', 3, 'doctor', 'Johannes'],
@@ -1261,7 +1271,6 @@ Day.calendars = {
 				[1, 9, 'verena-zurzach', 3, 'virgo', 'Verena'],
 				[5, 9, 'teresa-kalkutta', 3, ['misericordia', 'mulier'], 'Teresa'],
 				[22, 9, 'landelin', 3, ['martyr', 'vir'], 'Landelin'],
-				//[26, 9, 'paulus-vi', 3, 'papa'],
 				[9, 10, 'john-henry-newman', 3, 'pastor', 'John Henry'],
 				[16, 11, 'otmar', 3, ['abbas', 'vir'], 'Otmar'],
 				[26, 11, 'konrad', 1, 'episcopus', 'Konrad']
@@ -1314,6 +1323,121 @@ Day.calendars = {
 				'ulrika-franziska-nisch-hegne', 'heimerad-messkirch', 'bonaventura', 'arbogast', 'monica',
 				'verena-zurzach', 'pentecoste-secunda', 'maria-ecclesia'
 			]
+		]
+	},
+	'de-mainz': { //hauptsächlich als POC
+		base: 'de-DE',
+		label: 'Diözese Mainz',
+		episcopus: {
+			'': 'Peter',
+			'la': 'Petrus'
+		},
+		getEntries: function () {
+			return [
+				//5. 1. Johannes Nepomuk Neumann (bereits in de)
+				[13, 1, 'gottfried-kappenberg', 3, ['religiosus', 'vir'], 'Gottfried'],
+				[23, 1, 'marianne-cope', 3, ['religiosus', 'mulier'], 'Marianne Cope'],
+				//4. 2. Rabanus Maurus (bereits in de)
+				[14, 2], //cyrillus-methodius
+				[14, 2, 'cyrillus-methodius', 3, ['pastor', 'plures']],
+				[14, 2, 'valentin-terni', 3, ['episcopus', 'martyr'], 'Valentin'],
+				[23, 2], //polycarpus
+				[23, 2, 'polycarpus', 3, ['martyr', 'vir']],
+				[23, 2, 'willigis', 3, 'episcopus', 'Willigis'],
+				[27, 4, 'petrus-canisius', 1, 'doctor'],
+				[15, 5, 'rupert-bingen', 3, 'vir', 'Rupert'],
+				//2. 6. Marcellinus und Petrus (bereits in '')
+				//5. 6. Bonifatius (bereits in de)
+				[10, 6, 'bardo', 3, 'episcopus', 'Bardo'],
+				[21, 6], //aloisius-gonzaga
+				[21, 6, 'aloisius-gonzaga', 3, ['religiosus', 'vir']],
+				[21, 6, 'alban', 3, ['pastor', 'martyr'], 'Alban'],
+				[27, 6, 'kreszenz-et-al', 3, ['episcopus', 'plures'], 'Kreszenz, Aureus, Theonest, Maximus'],
+				[4, 7, 'dom-mainz', 1, ['ecclesia', 'extra'], 'Dom zu Mainz'],
+				[1, 8], //alfonsus-liguori
+				[1, 8, 'alfonsus-liguori', 3, 'doctor'],
+				[1, 8, 'petrus-faber', 3, 'pastor', 'Petrus Faber'],
+				[16, 8, 'rochus', 3, 'vir', 'Rochus'],
+				[17, 9, 'hildegard-bingen', 2, ['religiosus', 'mulier']],
+				//28. 9. Lioba (bereits in de)
+				[16, 10, 'lullus', 3, 'episcopus', 'Lullus'],
+				[26, 10, 'amandus', 3, 'episcopus', 'Amandus'],
+				[29, 10, 'ferrutius', 3, ['martyr', 'vir'], 'Ferrutius'],
+				[11, 11, 'martinus', 0, 'pastor'],
+				[27, 11, 'bilhildis', 3, ['religiosus', 'mulier'], 'Bilhildis']
+			];
+		},
+		extra: {
+			'Dom zu Mainz': [
+				[4, 7, 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia']
+			],
+			'Kirchweihe (allg. Datum)': [
+				[6, 9, 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia']
+			]
+		},
+		notes: [
+			[18, 4, 'Jahrestag der Ernennung von Bischof Peter Kohlgraf'],
+			[27, 8, 'Jahrtag der Bischofsweihe von Bischof Peter Kohlgraf']
+		],
+		groups: [
+			['valentin-terni', 'willigis', 'aloisius-gonzaga', 'alfonsus-liguori'],
+			['marianne-cope', 'cyrillus-methodius', 'polycarpus', 'rupert-bingen',
+				'alban', 'alfonsus-liguori', 'rochus', 'lullus', 'amandus'],
+			['gottfried-kappenberg', 'cyrillus-methodius', 'polycarpus',
+				'aloisius-gonzaga', 'petrus-faber', 'ferrutius', 'bilhildis'],
+			['cyrillus-methodius', 'polycarpus', 'bardo', 'aloisius-gonzaga',
+				'kreszenz-et-al', 'alfonsus-liguori']
+		]
+	},
+	'de-rottenburg-stuttgart': { //hauptsächlich als POC
+		base: 'de-DE',
+		label: 'Diözese Rottenburg-Stuttgart',
+		episcopus: {
+			'': 'Gebhard'
+		},
+		getEntries: function () {
+			return [
+				//5. 1. Johannes Nepomuk Neumann (bereits in de)
+				//21. 1. Meinrad (bereits in de)
+				//23. 1. Heinrich Seuse (bereits in de)
+				[8, 5, 'ulrika-franziska-nisch-hegne', 3, ['virgo', 'beatus'], 'Ulrika Franziska Nisch'],
+				//4. 7. Ulrich (bereits in de)
+				//8. 7. Kilian (bereits in de)
+				[16, 7, 'irmengard', 3, ['religiosus', 'mulier', 'beatus'], 'Irmengard'],
+				[27, 8], //monica
+				[27, 8, 'monica', 3, 'mulier'],
+				[27, 8, 'gebhard', 3, 'episcopus', 'Gebhard'],
+				[6, 9, 'magnus-fuessen', 3, ['religiosus', 'vir'], 'Magnus'],
+				[11, 10, 'jakob-griesinger', 3, ['religiosus', 'vir', 'beatus'], 'Jakob Griesinger'],
+				//16. 10. Gallus (bereits in de)
+				[19, 10, 'dom-rottenburg', 1, ['ecclesia', 'extra'], 'Dom zu Rottenburg'],
+				//31. 10. Wolfgang (bereits in de)
+				//3. 11. Rupert Mayer (bereits in de)
+				[11, 11, 'martinus', 0, 'pastor'],
+				[25, 11, 'elisabeth-reute', 3, ['religiosus', 'mulier', 'beatus'], 'Elisabeth'],
+				[26, 11], //konrad-gebhard
+				[26, 11, 'konrad', 3, 'episcopus', 'Konrad'],
+				//4. 12. Adolph Kolping (bereits in de)
+				[15, 12, 'carlo-steeb', 3, ['pastor', 'beatus'], 'Carlo Steeb']
+			];
+		},
+		extra: {
+			'Dom zu Rottenburg': [
+				[19, 10, 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia']
+			],
+			'Kirchweihe (allg. Datum)': [
+				[14, 10, 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia']
+			]
+		},
+		notes: [
+			[7, 7, 'Jahrestag der Ernennung von Bischof Gebhard Fürst'],
+			[17, 9, 'Jahrtag der Bischofsweihe von Bischof Gebhard Fürst']
+		],
+		groups: [
+			['gebhard', 'konrad', 'carlo-steeb'],
+			['monica', 'magnus-fuessen', 'jakob-griesinger'],
+			['irmengard', 'monica', 'elisabeth-reute'],
+			['ulrika-franziska-nisch-hegne', 'monica']
 		]
 	}
 };
