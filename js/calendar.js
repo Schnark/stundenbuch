@@ -1,8 +1,7 @@
 /*global Day*/
 (function () {
 "use strict";
-//TODO Kollissionen (auch mit eigenen Tagen) besser behandeln,
-//vor November 2023 und auf jeden Fall vor Juni 2033
+//TODO Kollissionen mit Eigen-Hochfesten behandeln, vor November 2023
 /*
 Typen:
 ordinarium
@@ -26,6 +25,16 @@ mulier
 plures
 beatus
 extra (nur ecclesia)
+*/
+
+/*
+Naming conventions for calendars:
+*: basic calendar that has to exist to prevent missing texts
+(empty string): General Roman Calendar
+Numeric entries: Large regions (e.g. 150 is Europa), see https://unstats.un.org/unsd/methodology/m49/
+Valid language codes, either with or without country: when areas with common language also share the calendar, with additions for single countries
+Country codes: Calendars for a country that don't inherit from a common language calendar
+Yet undecided convention for dioceses
 */
 
 Day.calendars = {
@@ -260,7 +269,6 @@ Day.calendars = {
 						}
 					}
 				}],
-				//TODO collision of corpus-domini and cor-iesu with nativitatis-ioannes and petrus-paulus
 				[config.get('corpusSunday') ? 63 : 60, 'easter', 'corpus-domini', 0, 'dominus', {
 					texts: {
 						cantica: {
@@ -449,8 +457,27 @@ Day.calendars = {
 			'la-x-noaccent': 'Franciscus'
 		},
 		getEntries: function (config) {
+			function moveNIPP (day) {
+				if (day.getMonth() === 5) {
+					if (day.getDate() === 25) {
+						return '6/24';
+					}
+					if (day.getDate() === 30) {
+						return '6/29';
+					}
+				}
+				return false;
+			}
+
 			return [
 				[50, 'easter', 'maria-ecclesia', 2, 'maria'],
+				//move 'nativitatis-ioannes'/'petrus-paulus' by one day when they coincide with 'corpus-domini'/'cor-iesu'
+				[config.get('corpusSunday') ? 64 : 61, 'easter', '', 4, '', {
+					move: moveNIPP
+				}],
+				[69, 'easter', '', 4, '', {
+					move: moveNIPP
+				}],
 				[69, 'easter', 'cor-maria', 2, 'maria'],
 
 				[2, 1, 'basilius-gregorius', 2, [config.get('bugCompat') ? 'pastor' : 'doctor', 'plures']],
@@ -1065,12 +1092,24 @@ Day.calendars = {
 		]
 	},
 
-	de: {
+	150: {
 		base: '',
+		getEntries: function () {
+			return [
+				[14, 2, 'cyrillus-methodius', 1, ['pastor', 'plures']],
+				[29, 4, 'catharina-senensis', 1, 'virgo'],
+				[11, 7, 'benedictus-nursia', 1, ['religiosus', 'vir']],
+				[23, 7, 'birgitta', 1, ['religiosus', 'mulier']],
+				[9, 8, 'teresia-benedicta', 1, ['martyr', 'virgo']]
+			];
+		}
+	},
+
+	de: {
+		base: '150',
 		label: 'Regionalkalender für das deutsche Sprachgebiet',
 		getEntries: function () {
 			return [
-				[5, 1, 'johannes-nepomuk-neumann', 3, 'episcopus', 'Johannes Nepomuk Neumann'],
 				[7, 1, 'valentin-raetien', 3, 'pastor', 'Valentin'],
 				[8, 1, 'severin-norikum', 3, 'pastor', 'Severin'],
 				[21, 1], //agnes
@@ -1085,7 +1124,6 @@ Day.calendars = {
 				[21, 1, 'meinrad', 3, ['martyr', 'vir'], 'Meinrad'],
 				[23, 1, 'heinrich-seuse', 3, ['religiosus', 'vir', 'beatus'], 'Heinrich Seuse'],
 				[4, 2, 'rabanus-maurus', 3, 'pastor', 'Rabanus Maurus'],
-				[14, 2, 'cyrillus-methodius', 1, ['pastor', 'plures']],
 				[24, 2, 'matthias', 1, ['apostolus2', 'martyr']],
 				[25, 2, 'walburga', 3, 'mulier', 'Walburga'],
 				[6, 3, 'fridolin', 3, ['religiosus', 'vir'], 'Fridolin'],
@@ -1095,20 +1133,17 @@ Day.calendars = {
 				[17, 3, 'gertrud', 3, ['religiosus', 'mulier'], 'Gertrud'],
 				[26, 3, 'liudger', 3, 'episcopus', 'Liudger'],
 				[19, 4, 'leo-ix', 3, 'papa', 'Leo'],
-				[19, 4, 'marcel-callo', 3, ['martyr', 'vir', 'beatus'], 'Marcel Callo'],
 				[21, 4, 'konrad-parzham', 3, ['religiosus', 'vir'], 'Konrad'],
 				[27, 4, 'petrus-canisius', 3, 'doctor'],
-				[29, 4, 'catharina-senensis', 1, 'virgo'],
 				[4, 5, 'florian', 3, ['martyr', 'vir', 'plures'], 'Florian'],
 				[5, 5, 'godehard', 3, 'episcopus', 'Godehard'],
 				[14, 5], //matthias
 				[16, 5, 'johannes-nepomuk', 3, ['martyr', 'vir'], 'Johannes Nepomuk'],
 				[21, 5, 'hermann-josef', 3, ['religiosus', 'vir'], 'Hermann Josef'],
 				[31, 5], //visitatio
-				[5, 6, 'bonifatius', 1, ['martyr', 'vir']],
 				[15, 6, 'vitus', 3, ['martyr', 'vir'], 'Vitus'],
 				[16, 6, 'benno', 3, 'pastor', 'Benno'],
-				[26, 6, 'iosephmaria-escriva', 3, 'pastor', 'Josefmaria'],
+				[26, 6, 'iosephmaria-escriva', 3, 'pastor', 'Josefmaria'], //TODO de? DE? DE+CH?
 				[27, 6, 'hemma-gurk', 3, 'mulier', 'Hemma'],
 				[30, 6, 'otto-bamberg', 3, 'pastor', 'Otto'],
 				[2, 7, 'visitatio', 1, 'maria', {
@@ -1126,13 +1161,10 @@ Day.calendars = {
 				[7, 7, 'willibald', 3, 'episcopus', 'Willibald'],
 				[8, 7, 'kilian', 3, ['martyr', 'vir', 'plures'], 'Kilian'],
 				[10, 7, 'knud-erich-olaf', 3, ['martyr', 'vir', 'plures'], 'Knud, Erich, Olaf'],
-				[11, 7, 'benedictus-nursia', 1, ['religiosus', 'vir']],
 				[13, 7], //henricus
 				[13, 7, 'heinrich-kunigunde', 3, ['vir', 'plures'], 'Heinrich, Kunigunde'],
 				[20, 7, 'margareta', 3, ['virgo', 'martyr'], 'Margareta'],
-				[23, 7, 'birgitta', 1, ['religiosus', 'mulier']],
 				[24, 7, 'christophorus', 3, ['martyr', 'vir'], 'Christophorus'],
-				[9, 8, 'teresia-benedicta', 1, ['martyr', 'virgo']],
 				[31, 8, 'paulinus-trevirenis', 3, ['episcopus', 'martyr'], 'Paulinus'],
 				[17, 9, 'hildegard-bingen', 3, ['religiosus', 'mulier'], 'Hildegard'],
 				[18, 9, 'lambertus', 3, ['pastor', 'martyr'], 'Lambertus'],
@@ -1145,7 +1177,6 @@ Day.calendars = {
 				[21, 10, 'ursula', 3, ['martyr', 'mulier', 'plures'], 'Ursula'],
 				[31, 10, 'wolfgang', 3, 'episcopus', 'Wolfgang'],
 				[3, 11, 'hubert', 3, 'episcopus', 'Hubert'],
-				[3, 11, 'rupert-mayer', 3, ['pastor', 'beatus'], 'Rupert Mayer'],
 				[3, 11, 'pirmin', 3, 'episcopus', 'Pirmin'],
 				[6, 11, 'leonhard', 3, ['religiosus', 'vir'], 'Leonhard'],
 				[7, 11, 'willibrord', 3, 'episcopus', 'Willibrord'],
@@ -1158,7 +1189,6 @@ Day.calendars = {
 				[26, 11, 'konrad-gebhard', 3, ['episcopus', 'plures'], 'Konrad, Gebhard'],
 				[2, 12, 'luzius', 3, ['martyr', 'vir'], 'Luzius'],
 				[4, 12, 'barbara', 3, ['martyr', 'mulier'], 'Barbara'],
-				[4, 12, 'adolph-kolping', 3, ['pastor', 'beatus'], 'Adolph Kolping'],
 				[5, 12, 'anno', 3, 'episcopus', 'Anno'],
 				[13, 12], //lucia
 				[13, 12, 'lucia', 3, ['martyr', 'mulier']],
@@ -1195,39 +1225,112 @@ Day.calendars = {
 				'wolfgang', 'konrad-gebhard', 'lucia'
 			],
 			[
-				'valentin-raetien', 'agnes', 'walburga', 'bruno-querfurt', 'liudger', 'marcel-callo',
+				'valentin-raetien', 'agnes', 'walburga', 'bruno-querfurt', 'liudger',
 				'florian', 'vitus', 'ulrich', 'margareta', 'paulinus-trevirenis',
-				'mauritius', 'hubert', 'willibrord', 'leopold', 'barbara',
-				'odilia'
+				'mauritius', 'hubert', 'willibrord', 'leopold', 'barbara', 'odilia'
 			],
 			[
 				'agnes', 'klemens-maria-hofbauer', 'johannes-nepomuk', 'benno', 'hemma-gurk',
 				'willibald', 'heinrich-kunigunde', 'christophorus', 'niklaus-flue', 'lioba',
-				'wendelin', 'rupert-mayer', 'leonhard', 'adolph-kolping', 'lucia'
+				'wendelin', 'leonhard', 'lucia'
 			],
 			[
-				'johannes-nepomuk-neumann', 'meinrad', 'heinrich-seuse', 'rabanus-maurus', 'mathilde',
-				'leo-ix', 'hermann-josef', 'otto-bamberg', 'knud-erich-olaf', 'hildegard-bingen',
-				'ursula', 'pirmin', 'luzius', 'anno', 'lucia'
+				'meinrad', 'heinrich-seuse', 'rabanus-maurus', 'mathilde', 'leo-ix', 'hermann-josef',
+				'otto-bamberg', 'knud-erich-olaf', 'hildegard-bingen', 'ursula', 'pirmin', 'luzius',
+				'anno', 'lucia'
 			]
 		]
 	},
 	'de-DE': {
 		base: 'de',
+		label: 'Deutschland',
 		getEntries: function () {
 			return [
+				[5, 1, 'johannes-nepomuk-neumann', 3, 'episcopus', 'Johannes Nepomuk Neumann'],
+				[19, 4, 'marcel-callo', 3, ['martyr', 'vir', 'beatus'], 'Marcel Callo'],
+				[5, 6, 'bonifatius', 1, ['martyr', 'vir']],
+				[3, 11, 'rupert-mayer', 3, ['pastor', 'beatus'], 'Rupert Mayer'],
+				[4, 12, 'adolph-kolping', 3, ['pastor', 'beatus'], 'Adolph Kolping']
 				//TODO laut DBK von Vollversammlung angenommen, stehen aber in keinem Direktorium:
 				//22. Jan.: Vinzenz Pallotti
 				//10. Mai: Damian de Veuster
 				//20. Nov.: Korbinian
+				//TODO oder de?
 			];
 		},
 		notes: [
 			[-8, 9, 'Welttag der sozialen Kommunikationsmittel'], //anderswo an anderem Datum
 			[3, 10, 'Tag der Deutschen Einheit'],
 			[-22, 10, 'Weltmissionssonntag'] //anderswo an anderem Datum
+		],
+		groups: [
+			[],
+			['marcel-callo'],
+			['rupert-mayer', 'adolph-kolping'],
+			['johannes-nepomuk-neumann']
 		]
 	},
+	/*
+	'de-AT': {
+		base: 'de',
+		label: 'Österreich',
+		getEntries: function () {
+Mutter der Kirche nur g
+10. 5. Hl. Damian de Veuster (g)
+21. 5. Sel. Franz Jägerstätter (g)
+12. 6. Sel. Hildegard Burjan (g)
+26. 6. g
+13. 8. Sel. Jakob Gapp (g)
+12. 9. F
+13. 11. Sel. Carl Lampert (g)
+16. 11. Hl. Albert der Große (g, statt 15. 11.)
+8. 12. H+
+12. 12. Sel. Hartmann (g)
+				[8, 12, 'maria-immaculata', 0, ['maria', 'dominus'], {
+					texts: {
+						lectio: {
+							vespera0: 'rm-8-29-30',
+							laudes: 'is-43-1',
+							tertia: 'eph-1-4',
+							sexta: 'eph-1-11-12',
+							nona: 'eph-5-25-27',
+							vespera: 'rm-5-20-21'
+						}
+					}
+				}],
+				[9, 12, '', 4, '', {
+					move: function () {
+						return false;
+					}
+				}],
+		},
+		notes: [
+			[42, 'e', 'Welttag der sozialen Kommunikationsmittel'],
+			[26, 10, 'Nationalfeiertag']
+			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
+		]
+	},
+	'de-CH': {
+		base: 'de',
+		label: 'Schweiz (deutschsprachige Gebiete)',
+		getEntries: function () {
+			return [
+				[16, 7, 'muttergottes-einsiedeln', 3, 'maria', 'Muttergottes von Einsiedeln'], //TODO nur Ch?
+				[16, 8, 'theodor', 3, 'FIXME', 'Theodor'], //TODO nur Si?
+				[25, 9, 'niklaus-flue', 0, 'vir', 'Niklaus von Flüe'],
+				[30, 9], //hieronymus
+				[30, 9, 'hieronymus', 3, 'doctor'],
+				[30, 9, 'urs-viktor', 3, ['martyr', 'plures'], 'Urs, Viktor'] //TODO
+			];
+		},
+		notes: [
+			[42, 'e', 'Welttag der sozialen Kommunikationsmittel'], //TODO offizielles Datum, aber kein Eintrag im Direktorium
+			[1, 8, 'Schweizer Nationalfeiertag'],
+			[-15, 9, 'Eidgenössischer Dank-, Buss- und Bettag']
+			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
+		]
+	},
+	*/
 	'de-freiburg': {
 		base: 'de-DE',
 		label: 'Erzdiözese Freiburg',
@@ -1347,7 +1450,7 @@ Day.calendars = {
 				[27, 4, 'petrus-canisius', 1, 'doctor'],
 				[15, 5, 'rupert-bingen', 3, 'vir', 'Rupert'],
 				//2. 6. Marcellinus und Petrus (bereits in '')
-				//5. 6. Bonifatius (bereits in de)
+				//5. 6. Bonifatius (bereits in de-DE)
 				[10, 6, 'bardo', 3, 'episcopus', 'Bardo'],
 				[21, 6], //aloisius-gonzaga
 				[21, 6, 'aloisius-gonzaga', 3, ['religiosus', 'vir']],

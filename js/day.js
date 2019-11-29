@@ -100,6 +100,9 @@ Day.addNote = function (d, m, note) {
 
 Day.initCalendar = function (name) {
 	var extra, key, i;
+	if (!Day.calendars[name]) { //shouldn't happen
+		name = '';
+	}
 	if ('base' in Day.calendars[name]) {
 		Day.initCalendar(Day.calendars[name].base);
 	}
@@ -263,6 +266,10 @@ Day.prototype.calculateNumbers = function () {
 	this.yearLetter = ['c', 'a', 'b'][y % 3];
 	this.yearLectio = ['ii', 'i'][y % 2];
 
+	if (config.get('bugCompat')) {
+		this.yearLectio = 'i';
+	}
+
 	start = Day.getStart(y);
 	christmas = Day.getChristmas(y);
 	baptism = Day.getBaptism(y);
@@ -388,12 +395,50 @@ Day.prototype.calculateNumbers = function () {
 	this.special = special;
 };
 
+/*
+Day.prototype.getMoon = function () {
+	var y, m, d, c, g, k, e, l;
+
+	y = this.getYear();
+	m = this.getMonth();
+	d = this.getDate();
+
+	c = Math.floor(y / 100); //century
+	g = y % 19 + 1; //golden number
+	k = 27 - c + Math.floor(c / 4) + Math.floor((8 * c + 13) / 25);
+	k = (k % 30) + 30; //make k > 0
+	e = (g * 11 + k) % 30; //epact
+
+	l = d + [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334][m] + e; //day in year + e
+	if (m === 1 && d === 29) {
+		l--; //leap day
+	}
+	if (e > 25 || (e === 25 && g <= 11)) {
+		l -= 30;
+	}
+	if (l > 0) {
+		l = (l % 59) || 59; //59 = 30 + 29, two months
+	}
+	if (l <= 0) {
+		l += 30; //last month of last year
+	} else if (l > 30) {
+		l -= 30; //> 30 means we are in the second of a pair of months
+	}
+
+	if (g === 1 && m === 0 && l > d) { //last month of last year has only 29 days for g === 1
+		l--;
+	}
+
+	return l;
+};
+*/
+
 //order:
-//0: Advents-, Fastensonntage, Sonntage der Osterzeit, Karwoche, Osteroktav
-//1: Hochfeste
+//0: Advents-, Fastensonntage, Sonntage der Osterzeit, Karwoche, Osteroktav (-1 für besondere Tage)
+//1: Hochfeste (1.5 für Eigen-Hochfeste)
 //2: Herrenfeste
 //3: Sonntage
-//4: Feste
+//4: Feste (4.5 für Eigen-Feste)
 //5: Fastenzeit/Hoher Advent/Weihnachtsoktav
 //6: Gedenktage
 //7: Rest

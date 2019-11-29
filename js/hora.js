@@ -6,7 +6,7 @@ getHora =
 function getHymnusLectionis (date, config) {
 	var hymn = date.getText('hymnus', 'lectionis');
 	if (!hymn) {
-		switch (date.getPart()) {
+		switch (config.get('bugCompat') ? 0 : date.getPart()) {
 		case 0:
 			hymn = 'lectionis-' + date.getDayInSequence(Number(l10n.get('modus-hymnus-lectionis'))) +
 				(config.get('lectionisNight') ? '-nox' : '');
@@ -1807,7 +1807,7 @@ function getMonth (date) {
 		for (name in data) {
 			if (
 				data.hasOwnProperty(name) &&
-				['familia', 'iosephus', 'annuntiatio', 'maria-immaculata'].indexOf(name) === -1
+				['familia', 'iosephus', 'annuntiatio', 'nativitatis-ioannes', 'petrus-paulus', 'maria-immaculata'].indexOf(name) === -1 //FIXME alle Hochfeste
 			) {
 				rank = data[name];
 				l10n.setDynamicName(name);

@@ -482,11 +482,13 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 	if (m === 'easter') {
 		key = 'easter/' + d;
 		val = {
-			order: rank <= 1 ? (local ? 1.5 : 0) : (rank === 2 ? 6 : 4) //FIXME
+			//Triduum has rank === 1, so use order === 0 for them, too
+			order: rank === 0 || (rank === 1 && !local) ? 0 : (rank === 2 ? 6 : 4)
 		};
 	} else if (m === 'sunday') {
 		key = 'sunday/' + d;
 		val = {
+			//all have rank >= 1 anyway (3 for sundays after Christmas)
 			order: rank === 0 ? 1 : (types.indexOf('dominus') > -1 ? 2 : 3),
 			eve: true
 		};
@@ -495,13 +497,16 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		val = {
 			order: rank === 0 ?
 				//to make sure Christmas eve takes precedence over 4th sunday of advent
-				(types.indexOf('dominus') > -1 ? -1 : 1 + (local ? 0.5 : 0)) :
+				(types.indexOf('dominus') > -1 ? -1 : 1) :
 				(types.indexOf('dominus') > -1 ? 2 : rank === 2 ? 6 : 4)
 		};
 	}
 	if (name === undefined) {
 		delete Day.specialDays[key];
 		return;
+	}
+	if (local && (val.order === 1 || val.order === 2)) {
+		val.order += 0.5;
 	}
 	if (
 		rank === 0 ||
@@ -602,6 +607,9 @@ Day.getSpecialData = function (day, order, data) {
 		special = Day.getSpecialDataByMove(Day.specialDays[keys[i]], day);
 		if (!special) {
 			continue;
+		}
+		if (Day.specialDays[keys[i]].name && Day.specialDays[keys[i]].name !== special.name) {
+			result.omittedNames[Day.specialDays[keys[i]].name] = Day.specialDays[keys[i]].type;
 		}
 		if (special.rank === 2 && order === 5) {
 			if (result.alternativeNames.indexOf(special.name) === -1) {

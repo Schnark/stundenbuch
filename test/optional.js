@@ -67,7 +67,7 @@ function getAllOptionalMemorials () {
 					type: type[0] || 'proprium',
 					mf: type.indexOf('mulier') > -1 || type.indexOf('maria') > -1,
 					source: source,
-					groups: findGroups(cal[i][2], groups)
+					groups: groups ? findGroups(cal[i][2], groups) : []
 				});
 			}
 		}

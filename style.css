@@ -16,7 +16,6 @@ h5 {
 	padding: 0;
 }
 
-#main h1,
 #main h2,
 #main h3,
 #main h4,
@@ -446,7 +445,7 @@ html.loading footer {
 	display: none;
 }
 
-html.loading #main img {
+html #main img.loading {
 	width: 50%;
 	margin: 5% auto;
 	display: block;
@@ -494,6 +493,7 @@ footer nav {
 	border: solid thin;
 	margin: 2px;
 	border-radius: 2px;
+	max-height: 40em;
 	max-height: calc(100vh - 3em);
 	overflow: auto;
 }
@@ -745,16 +745,25 @@ label.inline select {
 		border-color: #000;
 	}
 
-	.link,
-	footer {
+	footer,
+	h2 .audio,
+	a[data-action="?back"] {
 		display: none;
+	}
+
+	.link {
+		font-style: italic;
+	}
+
+	.link a::before {
+		content: "→";
 	}
 
 	a,
 	.link-like {
 		color: #000 !important;
 		background: transparent !important;
-		border: none;
+		border: none !important;
 	}
 
 	h2,

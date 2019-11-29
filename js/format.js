@@ -109,6 +109,7 @@ function formatBlock (text, audio, type, easter, debug) {
 		.replace(/<br>!([^<]*)</g, '<br><span class="additamentum">$1</span><')
 		.replace(/<p>=(.*?)<\/p>/g, '<h3>$1</h3>')
 		.replace(/__(.*?)__/g, '<em>$1</em>')
+		.replace(/ –/g, '&nbsp;–')
 		.replace(/ \*/g, getFlexaAsteriscus('asteriscus', ''))
 		.replace(/ \/\/ ?/g, ' <span class="solidus"><br></span>')
 		.replace(/ \//g, '<span class="solidus"> /</span>')

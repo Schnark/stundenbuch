@@ -76,6 +76,7 @@ function getConfig (lang, hora, extra, compare) {
 		notes = {
 			de: [
 				'50|e'
+				//'3|12|franciscus-xavier|1|pastor'
 			],
 			la: [
 				'23|7|birgitta|1|religiosus,mulier',
@@ -129,6 +130,7 @@ function getConfig (lang, hora, extra, compare) {
 
 function normalizeLocalHtml (html) {
 	return html
+		.replace(/&nbsp;/g, ' ')
 		.replace(/<sup.*?<\/sup>/g, '')
 		.replace(/<span class="solidus"> \/<\/span>/g, '')
 		.replace(/<\/?span[^>]*>/g, '')
@@ -143,7 +145,7 @@ function normalizeLocalHtml (html) {
 		.replace(/<em>([^<]*)<\/em>/g, function (all, em) {
 			return em.split('').join(' ');
 		})
-		/*/.replace(/<h2>Zweite Lesung[\s\S]*?<h2>/, function (lectio) {
+		/**/.replace(/<h2>Zweite Lesung[\s\S]*?<h2>/, function (lectio) {
 			var cites = [];
 			lectio = lectio.replace(/([.,] ?)?<cite>(.*?)<\/cite>/g, function (all, punct, cite) {
 				var n = cites.length + 1;
@@ -293,9 +295,9 @@ function normalizeDeLocalWebHtml (html, easter) {
 	//jscs:disable maximumLineLength
 	var div;
 	html = html
-		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]+)<\/span><\/p> <p class="format_center"><span class="hl">---<\/span><\/p>/g, 'Ant.: $1')
-		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]*)<\/span><\/p>( (?:<p class="format_subh">|<h2 class="format_h2">P)[\s\S]*?)(<p class="format_none">)/g, '$2 Ant.: $1$3')
-		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]+)<\/span><\/p>/g, 'Ant.: $1')
+		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]+)<\/span><\/p> <p class="format_center"><span class="hl">---<\/span>(?:<br>)?<\/p>/g, 'Ant.: $1')
+		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]*)<\/span>(?:<br>)?<\/p>( (?:<p class="format_subh">|<h2 class="format_h2">P)[\s\S]*?)(<p class="format_none">)/g, '$2 Ant.: $1$3')
+		.replace(/<p class="format_pre\w*Ant(?:iphon)?"><span class="hl">([^<>]+)<\/span>(?:<br>)?<\/p>/g, 'Ant.: $1')
 		.replace(/(?:FÜRBITTEN|BITTEN)[\s\S]*Vater unser/, function (preces) {
 			return preces.replace(/³/, '')
 				//.replace(/³<\/span> <span id="HL\d+">[^<]*</g, '<')
@@ -346,7 +348,9 @@ function normalizeDeLocalWebHtml (html, easter) {
 		.replace('(Bitten in besonderen Anliegen)', 'Hier können Bitten in besonderen Anliegen eingefügt werden.')
 		.replace(/Vater unser\.\s+\(Kyrie, eleison.\s+Christe, eleison.\s+Kyrie, eleison.\)/, '')
 		.replace('Vater unser im Himmel', 'Vaterunser Vater unser im Himmel')
-		.replace(/Vater unser\.\s+³\s+Herr, erbarme dich deines Volkes\./, 'Lasst uns beten, wie der Herr uns gelehrt hat: Vaterunser Vater unser im Himmel, geheiligt werde dein Name. Dein Reich komme. Dein Wille geschehe, wie im Himmel so auf Erden. Unser tägliches Brot gib uns heute. Und vergib uns unsere Schuld, wie auch wir vergeben unsern Schuldigern. Und führe uns nicht in Versuchung, sondern erlöse uns von dem Bösen.')
+		.replace(/Vater unser\.\s+Vaterunser Vater unser/, 'Lasst uns beten, wie der Herr uns gelehrt hat: Vaterunser Vater unser')
+		.replace(/Bösen\.\s+³\s+Herr, erbarme dich deines Volkes\.\s+Oration/, 'Bösen. Oration')
+		//.replace(/Vater unser\.\s+³\s+Herr, erbarme dich deines Volkes\./, 'Lasst uns beten, wie der Herr uns gelehrt hat: Vaterunser Vater unser im Himmel, geheiligt werde dein Name. Dein Reich komme. Dein Wille geschehe, wie im Himmel so auf Erden. Unser tägliches Brot gib uns heute. Und vergib uns unsere Schuld, wie auch wir vergeben unsern Schuldigern. Und führe uns nicht in Versuchung, sondern erlöse uns von dem Bösen.')
 		.replace(/Wie im Anfang so auch jetzt und alle Zeit/g, 'Wie im Anfang, so auch jetzt und alle Zeit')
 		.replace(/MARIANISCHE ANTIPHON[\s\S]*/, '') //solange es alle sind, besser ganz weg
 		.replace(/[«»]/g, function (c) {
@@ -364,9 +368,13 @@ function normalizeDeLocalWebHtml (html, easter) {
 		.replace(/\( ℟/g, '(℟')
 		.replace(/\(O(?:sterzeit)?: Halleluja\.?\)/g, easter ? 'Halleluja.' : '')
 		.replace(/\s+/g, ' ')
+		.replace(/\[/g, '(')
+		.replace(/\]/g, ')')
+		.replace(/\bdaß /g, 'dass ')
+		.replace(/\b([Ll])aß /g, '$1ass ')
 		.replace('Damit mein Mund dein Lob verkünde. Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit. Amen. Halleluja. Psalm', 'Damit mein Mund dein Lob verkünde.')
 		.replace('(mit der Laudes oder der Lesehore fortfahren, die Eröffnung entfällt dort, es geht direkt mit dem Hymnus weiter) ', '')
-		.replace('Te Deum (Der Hymnus Te Deum trifft nur an den Sonntagen ausserhalb der Fastenzeit, an den Tagen der Oster- und Weihnachtsoktav und an Hochfesten und Festen … nicht aber an Gedenktagen und Wochentagen. vgl. AES 68) ', '')
+		.replace('Te Deum (Der Hymnus Te Deum trifft nur an den Sonntagen außerhalb der Fastenzeit, an den Tagen der Oster- und Weihnachtsoktav und an Hochfesten und Festen … nicht aber an Gedenktagen und Wochentagen. vgl. AES 68) ', '')
 		.replace('℣ Singet Lob und Preis.', html.indexOf('ZWEITE LESUNG') > -1 ? '℟ Amen. \u2123 Singet Lob und Preis.' : '℣ Singet Lob und Preis.')
 		.replace('Eine ruhige Nacht und ein gutes Ende', '℟ Amen. Segen Eine ruhige Nacht und ein gutes Ende')
 		.replace('℣ Der Herr segne uns. Er bewahre uns vor Unheil und führe uns zum ewigen Leben.', '℟ Amen. Segen Der Herr segne uns, er bewahre uns vor Unheil und führe uns zum ewigen Leben.'));

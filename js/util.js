@@ -28,6 +28,35 @@ function clone (obj) {
 	return JSON.parse(JSON.stringify(obj));
 }
 
+/*
+function roman (v) {
+	var data = [
+		[1000, 'M'],
+		[900, 'CM'],
+		[500, 'D'],
+		[400, 'CD'],
+		[100, 'C'],
+		[90, 'XC'],
+		[50, 'L'],
+		[40, 'XL'],
+		[10, 'X'],
+		[9, 'IX'],
+		[5, 'V'],
+		[4, 'IV'],
+		[1, 'I']
+	], str = [];
+	while (v > 0) {
+		while (data[0][0] > v) {
+			data.shift();
+		}
+		while (data[0][0] <= v) {
+			v -= data[0][0];
+			str.push(data[0][1]);
+		}
+	}
+	return str.join('');
+}
+*/
 function replaceFormatString (format, replacer) {
 	return format.replace(/\{([^}]+)\}\(%([a-z])\)|%(0?)([a-zA-Z])|(%%)/g, function (all, array, c1, pad, c2, percent) {
 		var c, n;
