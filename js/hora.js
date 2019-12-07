@@ -1540,7 +1540,7 @@ function getInvitatorium (date, config) {
 function getLectionisEaster (date) {
 	return [
 		{type: 'title', title: 'lectionis', date: date},
-		'omitte',
+		'omitte-4',
 		'lectio-lectionis-p0-a',
 		['ex-15-lectionis'],
 		'oratio-lectionis-p0-a',
@@ -1634,12 +1634,18 @@ function getTertiaSextaNona (date, hora, complementaris, config) {
 }
 
 function getVespera (date, config) {
-	var cantica;
+	var cantica, skip;
 	date = date.getEve();
 	cantica = getCanticaVespera(date);
+	if (date.getPart() === 2) {
+		skip = date.getDayInSequence(-1) - 37;
+		if (skip !== 2 && skip !== 3) {
+			skip = false;
+		}
+	}
 	return [
 		{type: 'title', title: 'vespera', date: date, eve: true},
-		(date.getPart() === 2 && [39, 40].indexOf(date.getDayInSequence(-1)) > -1) ? 'omitte' : '',
+		skip ? 'omitte-' + skip : '',
 		'incipit' + (date.getPart() === 2 ? '-quadragesimae' : ''),
 		getHymnusVespera(date, config),
 		cantica[0].split('|'),
@@ -1679,7 +1685,7 @@ function getCompletorium (date, config) {
 	switch (date.getPart()) {
 	case 1:
 		if (date.getDayInChristmasSequence() === -1) {
-			skip = true;
+			skip = 1;
 		}
 		if (date.getSubPart() === 3) {
 			special = true;
@@ -1687,7 +1693,7 @@ function getCompletorium (date, config) {
 		break;
 	case 2:
 		if (date.getDayInSequence(-1) === 41) {
-			skip = true;
+			skip = 4;
 		}
 		if (date.getSubPart() === 3) {
 			resp = 'substitutum-' + (date.getDayInSequence(-1) - 39);
@@ -1711,7 +1717,7 @@ function getCompletorium (date, config) {
 
 	return [
 		{type: 'title', title: 'completorium', date: date, eve: true},
-		skip ? 'omitte' : '',
+		skip ? 'omitte-' + skip : '',
 		'incipit' + (date.getPart() === 2 ? '-quadragesimae' : ''),
 		'confiteor',
 		getHymnusCompletorium(date, day),
@@ -1795,8 +1801,7 @@ function getMonth (date) {
 		return date.getAlternatives().filter(function (name) {
 			return name !== '';
 		}).map(function (name) {
-			l10n.setDynamicName(name);
-			return l10n.get(name, l10n.get('titulus'));
+			return l10n.getTitle(name);
 		}).map(function (title) {
 			return '<span class="alternativus">' + title + '</span>';
 		}).join('<br>');
@@ -1810,9 +1815,8 @@ function getMonth (date) {
 				['familia', 'iosephus', 'annuntiatio', 'nativitatis-ioannes', 'petrus-paulus', 'maria-immaculata'].indexOf(name) === -1 //FIXME alle Hochfeste
 			) {
 				rank = data[name];
-				l10n.setDynamicName(name);
 				omitted.push(
-					l10n.get(name, l10n.get('titulus')) + ' ' +
+					l10n.getTitle(name) + ' ' +
 					date.format(l10n.get(rank ? 'date-format-short-type' : 'date-format-short'))
 						.replace('%t',  l10n.get(rank + '-littera'))
 				);
@@ -1840,8 +1844,7 @@ function getMonth (date) {
 		}
 		title = date.getName();
 		if (title) {
-			l10n.setDynamicName(title);
-			title = l10n.get(title, l10n.get('titulus'));
+			title = l10n.getTitle(title);
 		} else if (date.isSunday()) {
 			title = l10n.formatSunday(date.getSunday());
 		}
@@ -1919,14 +1922,14 @@ function mergeSequences (seq1, seq2, lang1) {
 }
 
 function getHora (date, hora, callback) {
-	var part = date.getPartLetter(), seqPrimary, seqSecondary, config, lang1, lang2;
+	var part, seqPrimary, seqSecondary, config, lang1, lang2;
 	config = Config.getConfig(); //TODO übergeben lassen
-	if (
-		part === 'p' && (
-			(hora === 'lectionis' && date.getDayInSequence(-1) === 0) ||
-			hora.indexOf('catalogus') === 0
-		)
-	) {
+	if (hora.indexOf('catalogus') === 0) {
+		part = '';
+	} else {
+		part = (['vespera', 'completorium'].indexOf(hora) > -1 ? date.getEve() : date).getPartLetter();
+	}
+	if (part === 'p' && hora === 'lectionis' && date.getDayInSequence(-1) === 0) {
 		part = 'q';
 	}
 	seqPrimary = formatSequence(getHoraSequence(date, hora, config), part);

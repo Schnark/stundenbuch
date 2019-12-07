@@ -172,9 +172,9 @@ Renderer.prototype.renderSingleNoteModern = function (x, note, type) {
 	};
 };
 
-Renderer.prototype.renderSingleNoteGregorian = function (x, note, type/*, prev*/) {
+Renderer.prototype.renderSingleNoteGregorian = function (x, note, type, prev) {
 	var y = this.getHeight(this.getLine(note)),
-		h = 2 * this.lineHeight / 3, w = h, //h = this.lineHeight / 2 - 1 ?
+		h = 2 * this.lineHeight / 3, w = h,
 		image;
 	/*if (prev && prev < note) { //TODO
 		x -= w;
@@ -193,6 +193,10 @@ Renderer.prototype.renderSingleNoteGregorian = function (x, note, type/*, prev*/
 	case '.':
 		image += this.renderDot(x + w + 3, note);
 		w += 7;
+	}
+	if (prev && prev !== note) {
+		image += '<line x1="' + x + '" y1="' + this.getHeight(this.getLine(prev)) + '" ' +
+			'x2="' + x + '" y2="' + y + '" />';
 	}
 	return {
 		image: image,

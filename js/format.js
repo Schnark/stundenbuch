@@ -31,9 +31,8 @@ function formatTitle (data) {
 	l10n.setDynamicData('horaTSN', ['tertia', 'sexta', 'nona'].indexOf(data.title) > -1);
 	l10n.setDynamicData('nomen', '');
 	if (name) {
-		l10n.setDynamicName(name);
 		additional.push(
-			l10n.get(name, l10n.get('titulus')) +
+			l10n.getTitle(name) + //also sets name for preces etc.
 			(data.date.isEve() ? ' (' + l10n.get('vespera-pridiana') + ')' : '')
 		);
 	} else if (data.date.isSunday()) {

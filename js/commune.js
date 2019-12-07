@@ -448,20 +448,36 @@ Day.additionalDays = [];
 Day.nameFallback = {};
 
 Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
-	var key, val, typeOfDay = ['sollemnitas', 'festum', 'memoria', 'memoria-1'][rank] || '';
+	var key, val, type, typeOfDay = ['sollemnitas', 'festum', 'memoria', 'memoria-1'][rank] || '';
 	if (rank < 3 || name === undefined) {
 		Day.additionalDays = Day.additionalDays.filter(function (entry) {
 			return !(entry.d === d && entry.m === m);
 		});
 	}
+	if (!Array.isArray(types)) {
+		types = types ? [types] : [];
+	}
 	if (name) {
+		type = '';
+		if (types.indexOf('beatus') > -1) {
+			type += '-beatus';
+		}
+		if (types.indexOf('plures') > -1) {
+			type += '-plures';
+		}
+		if (types.indexOf('ecclesia') > -1) {
+			type = '-ecclesia';
+		}
+		if (types.indexOf('maria') > -1 || types.indexOf('dominus') > -1) {
+			type = '-alt';
+		}
 		if (typeof data === 'string') {
 			if (!Day.nameFallback[name]) {
-				Day.nameFallback[name] = data.replace(/[<>"&]/g, ' '); //could be provided by the user
+				Day.nameFallback[name] = [data.replace(/[<>"&]/g, ' '), type]; //could be provided by the user
 			}
 			data = {};
 		} else if (data && data.nameFallback) {
-			Day.nameFallback[name] = data.nameFallback;
+			Day.nameFallback[name] = [data.nameFallback, type];
 		}
 	}
 	if (rank === 3) {
@@ -475,9 +491,6 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		} else {
 			return;
 		}
-	}
-	if (!Array.isArray(types)) {
-		types = types ? [types] : [];
 	}
 	if (m === 'easter') {
 		key = 'easter/' + d;

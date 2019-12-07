@@ -135,12 +135,11 @@ function updateAdditionalDays () {
 
 	for (i = 0; i < Day.additionalDays.length; i++) {
 		d = Day.additionalDays[i];
-		l10n.setDynamicName(d.name);
 		html.push(
 			'<option ' +
 			(days.indexOf(d.name) > -1 ? 'selected ' : '') +
 			'value="' + d.name + '">' +
-			l10n.get(d.name, l10n.get('titulus')) +
+			l10n.getTitle(d.name) +
 			(isNaN(d.m) ? '' : ' ' + util.replaceFormatString(l10n.get('date-format-short'), getFormat)) +
 			'</option>'
 		);
@@ -162,11 +161,8 @@ function makeSelect (date) {
 	}
 	alternatives.unshift(date.getName() || '');
 	html = '<p><select id="optional-select" data-date="' + date.format() + '">' + alternatives.map(function (name) {
-		if (name) {
-			l10n.setDynamicName(name);
-		}
 		return '<option value="' + name + '">' +
-			(name ? l10n.get(name, l10n.get('titulus')) : l10n.get('nulla-memoria')) + '</option>';
+			(name ? l10n.getTitle(name) : l10n.get('nulla-memoria')) + '</option>';
 	}).join('') + '</select></p>';
 	return {type: 'raw', html: html};
 }
@@ -596,13 +592,28 @@ function getLanguageSelect () {
 }
 
 function getCalendarSelect () {
-	var cal, ret = [];
+	var cal, calendar, ret = [], groupOpen = false;
 	for (cal in Day.calendars) {
-		if (Day.calendars[cal].labelMsg) {
-			ret.push('<option value="' + cal + '" data-l10n="' + Day.calendars[cal].labelMsg + '"></option>');
-		} else if (Day.calendars[cal].label) {
-			ret.push('<option value="' + cal + '">' + Day.calendars[cal].label + '</option>');
+		calendar = Day.calendars[cal];
+		if (calendar.groupLabelMsg || calendar.groupLabel) {
+			if (groupOpen) {
+				ret.push('</optgroup>');
+			}
+			if (calendar.groupLabelMsg) {
+				ret.push('<optgroup data-l10n="' + calendar.groupLabelMsg + '" data-l10n-attr="label">');
+			} else if (calendar.groupLabel) {
+				ret.push('<optgroup label="' + calendar.groupLabel + '">');
+			}
+			groupOpen = true;
 		}
+		if (calendar.labelMsg) {
+			ret.push('<option value="' + cal + '" data-l10n="' + calendar.labelMsg + '"></option>');
+		} else if (calendar.label) {
+			ret.push('<option value="' + cal + '">' + calendar.label + '</option>');
+		}
+	}
+	if (groupOpen) {
+		ret.push('</optgroup>');
 	}
 	return ret.join('');
 }

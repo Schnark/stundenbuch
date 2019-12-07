@@ -651,6 +651,13 @@ label.inline select {
 	padding: 5px;
 }
 
+@media (max-width: 480px) {
+	.narrow th,
+	.narrow td {
+		padding: 2px;
+	}
+}
+
 #main ul {
 	margin-left: 0;
 	padding-left: 1em;

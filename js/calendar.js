@@ -1,6 +1,8 @@
 /*global Day*/
 (function () {
 "use strict";
+//For historic development of the calendars see NOTES.txt
+
 //TODO Kollissionen mit Eigen-Hochfesten behandeln, vor November 2023
 /*
 Typen:
@@ -1047,7 +1049,7 @@ Day.calendars = {
 				[10, 12, 'maria-loreto', 3, 'maria'],
 				[11, 12, 'damasus-i', 3, 'pastor'],
 				[12, 12, 'maria-guadalupe', 3, 'maria'],
-				[13, 12, 'lucia', 2, ['martyr', 'mulier']],
+				[13, 12, 'lucia', 2, ['martyr', 'virgo']],
 				[14, 12, 'ioannes-cruce', 2, 'doctor'],
 				[21, 12, 'petrus-canisius', 3, 'doctor'],
 				[23, 12, 'ioannes-kety', 3, ['misericordia', 'pastor']],
@@ -1127,15 +1129,15 @@ Day.calendars = {
 				[24, 2, 'matthias', 1, ['apostolus2', 'martyr']],
 				[25, 2, 'walburga', 3, 'mulier', 'Walburga'],
 				[6, 3, 'fridolin', 3, ['religiosus', 'vir'], 'Fridolin'],
-				[9, 3, 'bruno-querfurt', 3, ['martyr', 'vir'], 'Bruno'],
+				[9, 3, 'bruno-querfurt', 3, ['martyr', 'vir'], 'Bruno von Querfurt'],
 				[14, 3, 'mathilde', 3, 'mulier', 'Mathilde'],
 				[15, 3, 'klemens-maria-hofbauer', 3, 'pastor', 'Klemens Maria Hofbauer'],
 				[17, 3, 'gertrud', 3, ['religiosus', 'mulier'], 'Gertrud'],
 				[26, 3, 'liudger', 3, 'episcopus', 'Liudger'],
-				[19, 4, 'leo-ix', 3, 'papa', 'Leo'],
-				[21, 4, 'konrad-parzham', 3, ['religiosus', 'vir'], 'Konrad'],
+				[19, 4, 'leo-ix', 3, 'papa', 'Leo IX.'],
+				[21, 4, 'konrad-parzham', 3, ['religiosus', 'vir'], 'Konrad von Parzham'],
 				[27, 4, 'petrus-canisius', 3, 'doctor'],
-				[4, 5, 'florian', 3, ['martyr', 'vir', 'plures'], 'Florian'],
+				[4, 5, 'florian', 3, ['martyr', 'vir', 'plures'], 'Florian +'],
 				[5, 5, 'godehard', 3, 'episcopus', 'Godehard'],
 				[14, 5], //matthias
 				[16, 5, 'johannes-nepomuk', 3, ['martyr', 'vir'], 'Johannes Nepomuk'],
@@ -1143,8 +1145,10 @@ Day.calendars = {
 				[31, 5], //visitatio
 				[15, 6, 'vitus', 3, ['martyr', 'vir'], 'Vitus'],
 				[16, 6, 'benno', 3, 'pastor', 'Benno'],
-				[26, 6, 'iosephmaria-escriva', 3, 'pastor', 'Josefmaria'], //TODO de? DE? DE+CH?
-				[27, 6, 'hemma-gurk', 3, 'mulier', 'Hemma'],
+				//iosephmaria-escriva eigentlich nur DE+CH+FL, aber wohl auch alle Diözesen in AT und Bozen-Brixen
+				//daher hier wohl am besten aufgehoben
+				[26, 6, 'iosephmaria-escriva', 3, 'pastor', 'Josefmaria Escrivá de Balaguer'],
+				[27, 6, 'hemma-gurk', 3, 'mulier', 'Hemma von Gurk'],
 				[30, 6, 'otto-bamberg', 3, 'pastor', 'Otto'],
 				[2, 7, 'visitatio', 1, 'maria', {
 					texts: {
@@ -1159,22 +1163,22 @@ Day.calendars = {
 				}],
 				[4, 7, 'ulrich', 3, 'episcopus', 'Ulrich'],
 				[7, 7, 'willibald', 3, 'episcopus', 'Willibald'],
-				[8, 7, 'kilian', 3, ['martyr', 'vir', 'plures'], 'Kilian'],
+				[8, 7, 'kilian', 3, ['martyr', 'vir', 'plures'], 'Kilian +'],
 				[10, 7, 'knud-erich-olaf', 3, ['martyr', 'vir', 'plures'], 'Knud, Erich, Olaf'],
 				[13, 7], //henricus
-				[13, 7, 'heinrich-kunigunde', 3, ['vir', 'plures'], 'Heinrich, Kunigunde'],
+				[13, 7, 'heinrich-kunigunde', 3, ['vir', 'plures'], 'Heinrich II., Kunigunde'],
 				[20, 7, 'margareta', 3, ['virgo', 'martyr'], 'Margareta'],
 				[24, 7, 'christophorus', 3, ['martyr', 'vir'], 'Christophorus'],
 				[31, 8, 'paulinus-trevirenis', 3, ['episcopus', 'martyr'], 'Paulinus'],
-				[17, 9, 'hildegard-bingen', 3, ['religiosus', 'mulier'], 'Hildegard'],
+				[17, 9, 'hildegard-bingen', 3, ['religiosus', 'mulier'], 'Hildegard von Bingen'],
 				[18, 9, 'lambertus', 3, ['pastor', 'martyr'], 'Lambertus'],
-				[22, 9, 'mauritius', 3, ['martyr', 'vir', 'plures'], 'Mauritius'],
+				[22, 9, 'mauritius', 3, ['martyr', 'vir', 'plures'], 'Mauritius +'],
 				[24, 9, 'rupert-virgil', 3, ['pastor', 'plures'], 'Rupert, Virgil'],
 				[25, 9, 'niklaus-flue', 3, 'vir', 'Niklaus von der Flüe'],
 				[28, 9, 'lioba', 3, ['religiosus', 'mulier'], 'Lioba'],
 				[16, 10, 'gallus', 3, ['religiosus', 'vir'], 'Gallus'],
 				[20, 10, 'wendelin', 3, 'vir', 'Wendelin'],
-				[21, 10, 'ursula', 3, ['martyr', 'mulier', 'plures'], 'Ursula'],
+				[21, 10, 'ursula', 3, ['martyr', 'mulier', 'plures'], 'Ursula +'],
 				[31, 10, 'wolfgang', 3, 'episcopus', 'Wolfgang'],
 				[3, 11, 'hubert', 3, 'episcopus', 'Hubert'],
 				[3, 11, 'pirmin', 3, 'episcopus', 'Pirmin'],
@@ -1191,7 +1195,7 @@ Day.calendars = {
 				[4, 12, 'barbara', 3, ['martyr', 'mulier'], 'Barbara'],
 				[5, 12, 'anno', 3, 'episcopus', 'Anno'],
 				[13, 12], //lucia
-				[13, 12, 'lucia', 3, ['martyr', 'mulier']],
+				[13, 12, 'lucia', 3, ['martyr', 'virgo']],
 				[13, 12, 'odilia', 3, ['religiosus', 'mulier'], 'Odilia'],
 				[21, 12] //petrus-canisius
 			];
@@ -1270,23 +1274,20 @@ Day.calendars = {
 			['johannes-nepomuk-neumann']
 		]
 	},
-	/*
 	'de-AT': {
 		base: 'de',
 		label: 'Österreich',
 		getEntries: function () {
-Mutter der Kirche nur g
-10. 5. Hl. Damian de Veuster (g)
-21. 5. Sel. Franz Jägerstätter (g)
-12. 6. Sel. Hildegard Burjan (g)
-26. 6. g
-13. 8. Sel. Jakob Gapp (g)
-12. 9. F
-13. 11. Sel. Carl Lampert (g)
-16. 11. Hl. Albert der Große (g, statt 15. 11.)
-8. 12. H+
-12. 12. Sel. Hartmann (g)
-				[8, 12, 'maria-immaculata', 0, ['maria', 'dominus'], {
+			return [
+				[50, 'easter'], //maria-ecclesia
+				[50, 'easter', 'maria-ecclesia', 3, 'maria'],
+
+				[10, 5, 'damian-veuster', 3, 'pastor', 'Damian de Veuster'],
+				[12, 9, 'nomen-maria', 1, 'maria'],
+				[15, 11], //albertus-magnus, leopold
+				[15, 11, 'leopold', 3, 'vir'],
+				[16, 11, 'albertus-magnus', 3, 'doctor'],
+				[8, 12, 'maria-immaculata', 0, ['maria', 'dominus'], { //+dominus um über 2. Adventsonntag zu stehen
 					texts: {
 						lectio: {
 							vespera0: 'rm-8-29-30',
@@ -1298,11 +1299,16 @@ Mutter der Kirche nur g
 						}
 					}
 				}],
-				[9, 12, '', 4, '', {
-					move: function () {
-						return false;
-					}
-				}],
+				[9, 12], //maria-immaculata move, ioannes-didacus
+				[9, 12, 'ioannes-didacus', 3, 'vir']
+				//TODO evt. ganz AT
+				//21. 5.: Sel. Franz Jägerstätter (g)
+				//30. 5.: Sel. Otto Neururer (g)
+				//12. 6.: Sel. Hildegard Burjan (g)
+				//13. 8.: Sel. Jakob Gapp (g)
+				//13. 11.: Sel. Carl Lampert (g)
+				//12. 12.: Sel. Hartmann (g)
+			];
 		},
 		notes: [
 			[42, 'e', 'Welttag der sozialen Kommunikationsmittel'],
@@ -1315,24 +1321,26 @@ Mutter der Kirche nur g
 		label: 'Schweiz (deutschsprachige Gebiete)',
 		getEntries: function () {
 			return [
-				[16, 7, 'muttergottes-einsiedeln', 3, 'maria', 'Muttergottes von Einsiedeln'], //TODO nur Ch?
-				[16, 8, 'theodor', 3, 'FIXME', 'Theodor'], //TODO nur Si?
-				[25, 9, 'niklaus-flue', 0, 'vir', 'Niklaus von Flüe'],
+				[25, 9, 'niklaus-flue', 0, 'vir'],
 				[30, 9], //hieronymus
 				[30, 9, 'hieronymus', 3, 'doctor'],
-				[30, 9, 'urs-viktor', 3, ['martyr', 'plures'], 'Urs, Viktor'] //TODO
+				[30, 9, 'urs-viktor', 3, ['martyr', 'plures'], 'Urs, Viktor']
+				//TODO evt. ganz CH
+				//[16, 7, 'muttergottes-einsiedeln', 3, 'maria', 'Muttergottes von Einsiedeln']
+				//[16, 8, 'theodor', 3, '?', 'Theodor']
 			];
 		},
 		notes: [
-			[42, 'e', 'Welttag der sozialen Kommunikationsmittel'], //TODO offizielles Datum, aber kein Eintrag im Direktorium
+			[42, 'e', 'Welttag der sozialen Kommunikationsmittel'],
 			[1, 8, 'Schweizer Nationalfeiertag'],
 			[-15, 9, 'Eidgenössischer Dank-, Buss- und Bettag']
 			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
 		]
 	},
-	*/
+
 	'de-freiburg': {
 		base: 'de-DE',
+		groupLabel: 'Diözesen Deutschland',
 		label: 'Erzdiözese Freiburg',
 		episcopus: {
 			'': 'Stephan',
@@ -1349,40 +1357,65 @@ Mutter der Kirche nur g
 							laudes: 'act-5-30-32',
 							vespera: 'eph-4-3-6'
 						}
-					}
+					},
+					nameFallback: 'Pfingstmontag'
 				}],
 				[55, 'easter', 'maria-ecclesia', 3, 'maria'],
 
 				[3, 1, 'oskar-saier', 3, ['defunctus', 'vir'], 'Oskar Saier'],
+				//5. 1. Johannes Nepomuk Neumann (bereits in de-DE)
+				//21. 1. Meinrad (bereits in de)
 				[22, 1, 'vinzenz-pallotti', 3, 'fundator', 'Vinzenz Pallotti'],
-				[27, 2, 'gregor-narek', 3, 'doctor', 'Gregor'],
+				//23. 1. Heinrich Seuse (bereits in de)
+				[27, 2, 'gregor-narek', 3, 'doctor', 'Gregor von Narek'],
+				//6. 3. Fridolin von Säckingen (bereits in de)
+				//15. 3. Klemens Maria Hofbauer (bereits in de)
 				[24, 3, 'oscar-arnulfo-romero', 3, ['martyr', 'vir'], 'Oscar Arnulfo Romero'],
+				//19. 4. Leo IX. (bereits in de)
+				//24. 4. Fidelis von Sigmaringen (bereits in '')
 				[26, 4, 'trudpert', 3, ['martyr', 'vir'], 'Trudpert'],
-				[8, 5, 'ulrika-franziska-nisch-hegne', 3, ['virgo', 'beatus'], 'Ulrika Franziska Nisch'],
-				[10, 5, 'johannes-avila', 3, 'doctor', 'Johannes'],
-				[27, 6, 'heimerad-messkirch', 3, 'pastor', 'Heimerad'],
-				[14, 7, 'ulrich-zell', 3, ['religiosus', 'vir'], 'Ulrich'],
+				//27. 4. Petrus Kanisius (bereits in de)
+				[8, 5, 'ulrika-franziska-nisch-hegne', 3, ['virgo', 'beatus'], 'Ulrika Franziska Nisch von Hegne'],
+				[10, 5, 'johannes-avila', 3, 'doctor', 'Johannes von Avila'],
+				[27, 6, 'heimerad-messkirch', 3, 'pastor', 'Heimerad aus Meßkirch'],
+				//4. 7. Ulrich (bereits in de)
+				//8. 7. Kilian (bereits in de)
+				[14, 7, 'ulrich-zell', 3, ['religiosus', 'vir'], 'Ulrich von Zell'],
 				[15, 7], //bonaventura
 				[15, 7, 'bonaventura', 3, 'doctor'],
-				[15, 7, 'bernhard-baden', 3, ['vir', 'beatus'], 'Bernhard'],
+				[15, 7, 'bernhard-baden', 3, ['vir', 'beatus'], 'Bernhard von Baden'],
 				[21, 7, 'arbogast', 3, 'episcopus', 'Arbogast'],
-				[12, 8, 'karl-leisner', 3, ['martyr', 'vir', 'beatus'], 'Karl'],
+				//9. 8. Theresia Benedicta vom Kreuz (bereits in 150)
+				[12, 8, 'karl-leisner', 3, ['martyr', 'vir', 'beatus'], 'Karl Leisner'],
+				//15. 8. Mariä Aufnahme in den Himmel (bereits in '')
+				//20. 8. Bernhard von Clairvaux (bereits in '')
 				[27, 8], //monica
 				[27, 8, 'monica', 3, 'mulier'],
 				[27, 8, 'gebhard', 3, 'episcopus', 'Gebhard'],
 				[1, 9, 'pelagius', 3, ['martyr', 'vir'], 'Pelagius'],
 				[1, 9, 'verena-zurzach', 3, 'virgo', 'Verena'],
-				[5, 9, 'teresa-kalkutta', 3, ['misericordia', 'mulier'], 'Teresa'],
+				[5, 9, 'teresa-kalkutta', 3, ['misericordia', 'mulier'], 'Teresa von Kalkutta'],
+				//18. 9. Lambert (bereits in de)
 				[22, 9, 'landelin', 3, ['martyr', 'vir'], 'Landelin'],
-				[9, 10, 'john-henry-newman', 3, 'pastor', 'John Henry'],
+				//25. 9. Niklaus von der Flüe (bereits in de)
+				//28. 9. Lioba (bereits in de)
+				[9, 10, 'john-henry-newman', 3, 'pastor', 'John Henry Newman'],
+				//16. 10. Gallus (bereits in de)
+				//31. 10. Wolfgang (bereits in de)
+				//3. 11. Pirmin (bereits in de)
+				//3. 11. Rupert Mayer (bereits in de-DE)
+				//15. 11. Albert der Große (bereits in '')
 				[16, 11, 'otmar', 3, ['abbas', 'vir'], 'Otmar'],
+				//23. 11. Kolumban (bereits in '')
 				[26, 11, 'konrad', 1, 'episcopus', 'Konrad']
+				//13. 12. Odilia (bereits in de)
 			];
 		},
 		notes: [
 			[30, 5, 'Jahrestag der Ernennung von Erzbischof Stephan Burger'],
 			[29, 6, 'Jahrtag der Bischofsweihe und Amtseinführung von Erzbischof Stephan Burger'],
 			[9, 8, 'Geburtstag von Erzbischof em. Robert Zollitsch'],
+			[15, 8, 'Hochfest der Schutzpatronin der Erzdiözese Freiburg'],
 			[26, 12, 'Namenstag von Erzbischof Stephan Burger']
 		],
 		extra: {
@@ -1437,8 +1470,8 @@ Mutter der Kirche nur g
 		},
 		getEntries: function () {
 			return [
-				//5. 1. Johannes Nepomuk Neumann (bereits in de)
-				[13, 1, 'gottfried-kappenberg', 3, ['religiosus', 'vir'], 'Gottfried'],
+				//5. 1. Johannes Nepomuk Neumann (bereits in de-DE)
+				[13, 1, 'gottfried-kappenberg', 3, ['religiosus', 'vir'], 'Gottfried von Kappenberg'],
 				[23, 1, 'marianne-cope', 3, ['religiosus', 'mulier'], 'Marianne Cope'],
 				//4. 2. Rabanus Maurus (bereits in de)
 				[14, 2], //cyrillus-methodius
@@ -1448,7 +1481,7 @@ Mutter der Kirche nur g
 				[23, 2, 'polycarpus', 3, ['martyr', 'vir']],
 				[23, 2, 'willigis', 3, 'episcopus', 'Willigis'],
 				[27, 4, 'petrus-canisius', 1, 'doctor'],
-				[15, 5, 'rupert-bingen', 3, 'vir', 'Rupert'],
+				[15, 5, 'rupert-bingen', 3, 'vir', 'Rupert von Bingen'],
 				//2. 6. Marcellinus und Petrus (bereits in '')
 				//5. 6. Bonifatius (bereits in de-DE)
 				[10, 6, 'bardo', 3, 'episcopus', 'Bardo'],
@@ -1460,7 +1493,7 @@ Mutter der Kirche nur g
 				[1, 8], //alfonsus-liguori
 				[1, 8, 'alfonsus-liguori', 3, 'doctor'],
 				[1, 8, 'petrus-faber', 3, 'pastor', 'Petrus Faber'],
-				[16, 8, 'rochus', 3, 'vir', 'Rochus'],
+				[16, 8, 'rochus', 3, 'vir', 'Rochus von Montpellier'],
 				[17, 9, 'hildegard-bingen', 2, ['religiosus', 'mulier']],
 				//28. 9. Lioba (bereits in de)
 				[16, 10, 'lullus', 3, 'episcopus', 'Lullus'],
@@ -1500,27 +1533,27 @@ Mutter der Kirche nur g
 		},
 		getEntries: function () {
 			return [
-				//5. 1. Johannes Nepomuk Neumann (bereits in de)
+				//5. 1. Johannes Nepomuk Neumann (bereits in de-DE)
 				//21. 1. Meinrad (bereits in de)
 				//23. 1. Heinrich Seuse (bereits in de)
-				[8, 5, 'ulrika-franziska-nisch-hegne', 3, ['virgo', 'beatus'], 'Ulrika Franziska Nisch'],
+				[8, 5, 'ulrika-franziska-nisch-hegne', 3, ['virgo', 'beatus'], 'Ulrika Franziska Nisch von Hegne'],
 				//4. 7. Ulrich (bereits in de)
 				//8. 7. Kilian (bereits in de)
 				[16, 7, 'irmengard', 3, ['religiosus', 'mulier', 'beatus'], 'Irmengard'],
 				[27, 8], //monica
 				[27, 8, 'monica', 3, 'mulier'],
 				[27, 8, 'gebhard', 3, 'episcopus', 'Gebhard'],
-				[6, 9, 'magnus-fuessen', 3, ['religiosus', 'vir'], 'Magnus'],
+				[6, 9, 'magnus-fuessen', 3, ['religiosus', 'vir'], 'Magnus von Füssen'],
 				[11, 10, 'jakob-griesinger', 3, ['religiosus', 'vir', 'beatus'], 'Jakob Griesinger'],
 				//16. 10. Gallus (bereits in de)
 				[19, 10, 'dom-rottenburg', 1, ['ecclesia', 'extra'], 'Dom zu Rottenburg'],
 				//31. 10. Wolfgang (bereits in de)
-				//3. 11. Rupert Mayer (bereits in de)
+				//3. 11. Rupert Mayer (bereits in de-DE)
 				[11, 11, 'martinus', 0, 'pastor'],
-				[25, 11, 'elisabeth-reute', 3, ['religiosus', 'mulier', 'beatus'], 'Elisabeth'],
+				[25, 11, 'elisabeth-reute', 3, ['religiosus', 'mulier', 'beatus'], 'Elisabeth von Reute'],
 				[26, 11], //konrad-gebhard
 				[26, 11, 'konrad', 3, 'episcopus', 'Konrad'],
-				//4. 12. Adolph Kolping (bereits in de)
+				//4. 12. Adolph Kolping (bereits in de-DE)
 				[15, 12, 'carlo-steeb', 3, ['pastor', 'beatus'], 'Carlo Steeb']
 			];
 		},

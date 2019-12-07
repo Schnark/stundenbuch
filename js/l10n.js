@@ -305,6 +305,7 @@ function applyGrammerDe (name, form) {
 	return name;
 }
 
+//TODO nicht auf deutsche Namen(-sbestandteile): von, Callo, Romero
 function applyGrammerLa (name, form) {
 	switch (form) {
 	case 'voc':
@@ -384,15 +385,20 @@ function setDynamicData (key, val) {
 	dynamicReplaceData[key] = val;
 }
 
-function setDynamicName (name) {
-	setDynamicData('nomen', get(name + '-nomen', Day.nameFallback[name] || ''));
-}
-
 function formatSunday (sunday) {
 	var result = /^[a-c](\d+)(-[aqp])?$/.exec(sunday);
 	return util.replaceFormatString(get('dominica' + (result[2] || '')), function (c) {
 		return c === 'n' && Number(result[1]);
 	});
+}
+
+function getTitle (name) {
+	var fallback = Day.nameFallback[name] || [],
+		fallbackName = fallback[0] || '',
+		fallbackType = fallback[1] || '';
+	fallbackName = fallbackName.replace(/\+$/, get('titulus-et-socii'));
+	setDynamicData('nomen', get(name + '-nomen', fallbackName));
+	return get(name, get('titulus' + fallbackType));
 }
 
 function getRaw (name, fallback) {
@@ -589,8 +595,8 @@ return {
 	get: get,
 	has: has,
 	setDynamicData: setDynamicData,
-	setDynamicName: setDynamicName,
 	formatSunday: formatSunday,
+	getTitle: getTitle,
 	setNames: setNames,
 	search: search,
 	setPassword: setPassword,

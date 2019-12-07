@@ -266,9 +266,9 @@ Day.prototype.calculateNumbers = function () {
 	this.yearLetter = ['c', 'a', 'b'][y % 3];
 	this.yearLectio = ['ii', 'i'][y % 2];
 
-	if (config.get('bugCompat')) {
+	/*if (config.get('bugCompat')) {
 		this.yearLectio = 'i';
-	}
+	}*/
 
 	start = Day.getStart(y);
 	christmas = Day.getChristmas(y);
@@ -697,6 +697,10 @@ DayEve.prototype.getDayInSequence = function (mod) {
 
 DayEve.prototype.getPart = function () {
 	return this.next.getPart();
+};
+
+DayEve.prototype.getPartLetter = function () {
+	return this.next.getPartLetter();
 };
 
 DayEve.prototype.getSubPart = function () {
