@@ -34,7 +34,8 @@ Naming conventions for calendars:
 *: basic calendar that has to exist to prevent missing texts
 (empty string): General Roman Calendar
 Numeric entries: Large regions (e.g. 150 is Europa), see https://unstats.un.org/unsd/methodology/m49/
-Valid language codes, either with or without country: when areas with common language also share the calendar, with additions for single countries
+Valid language codes, either with or without country: when areas with common language also share the calendar,
+	with additions for single countries
 Country codes: Calendars for a country that don't inherit from a common language calendar
 Yet undecided convention for dioceses
 */
@@ -92,8 +93,8 @@ Day.calendars = {
 						lectio: {
 							vespera0: '2-cor-8-9',
 							laudes: 'dt-5-16',
-							tertia: 'col-3-12-13',
-							sexta: 'col-3-14-15',
+							tertia: 'col-3-12-13-var',
+							sexta: 'col-3-14-15-var',
 							nona: 'col-3-17',
 							vespera: 'phil-2-6-7'
 						}

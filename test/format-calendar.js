@@ -25,10 +25,24 @@ OMIT = [
 
 TEXTS = {
 	'E': ['*-introductio'],
-	'H': ['hymnus-vespera-*-v', 'hymnus-*', 'hymnus-lectionis-*', 'hymnus-laudes-*', 'hymnus-tertia-*', 'hymnus-sexta-*', 'hymnus-nona-*', 'hymnus-vespera-*'],
-	'A': ['antiphona-invitatorium-*', 'antiphona-vespera-*-1-v', 'antiphona-vespera-*-2-v', 'antiphona-vespera-*-3-v', 'antiphona-magnificat-*-v', 'antiphona-lectionis-*-1', 'antiphona-lectionis-*-2', 'antiphona-lectionis-*-3', 'antiphona-laudes-*-1', 'antiphona-laudes-*-2', 'antiphona-laudes-*-3', 'antiphona-benedictus-*', 'antiphona-tertia-*', 'antiphona-sexta-*', 'antiphona-nona-*', 'antiphona-vespera-*-1', 'antiphona-vespera-*-2', 'antiphona-vespera-*-3', 'antiphona-magnificat-*'],
+	'H': [
+		'hymnus-vespera-*-v', 'hymnus-*', 'hymnus-lectionis-*', 'hymnus-laudes-*',
+		'hymnus-tertia-*', 'hymnus-sexta-*', 'hymnus-nona-*', 'hymnus-vespera-*'
+	],
+	'A': [
+		'antiphona-invitatorium-*',
+		'antiphona-vespera-*-1-v', 'antiphona-vespera-*-2-v', 'antiphona-vespera-*-3-v', 'antiphona-magnificat-*-v',
+		'antiphona-lectionis-*-1', 'antiphona-lectionis-*-2', 'antiphona-lectionis-*-3',
+		'antiphona-laudes-*-1', 'antiphona-laudes-*-2', 'antiphona-laudes-*-3', 'antiphona-benedictus-*',
+		'antiphona-tertia-*', 'antiphona-sexta-*', 'antiphona-nona-*',
+		'antiphona-vespera-*-1', 'antiphona-vespera-*-2', 'antiphona-vespera-*-3', 'antiphona-magnificat-*'
+	],
 	'P': ['preces-vespera-*-v', 'preces-laudes-*', 'preces-vespera-*'],
-	'L': ['lectio-lectionis-*-a', 'responsorium-lectionis-*-a', 'lectio-lectionis-*-b', 'responsorium-lectionis-*-b', 'lectio-lectionis-*-b-alt', 'responsorium-lectionis-*-b-alt'],
+	'L': [
+			'lectio-lectionis-*-a', 'responsorium-lectionis-*-a',
+			'lectio-lectionis-*-b', 'responsorium-lectionis-*-b',
+			'lectio-lectionis-*-b-alt', 'responsorium-lectionis-*-b-alt'
+	],
 	'O': ['oratio-vespera-*-v', 'oratio-*']
 };
 

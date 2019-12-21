@@ -4,7 +4,61 @@
 "use strict";
 
 var dateInput,
-	proxy = 'https://lit-beach-8985.herokuapp.com/?url=';
+	proxy = 'https://lit-beach-8985.herokuapp.com/?url=',
+	local = location.href.slice(0, 13) === 'file:///home/' ? {
+		'https://www.stundengebet.de/jetzt-beten/': 'l10n-source/cache/stb.html'
+	} : {};
+
+function addToCache (url, html) {
+	var cache;
+	try {
+		cache = JSON.parse(sessionStorage.getItem('stb-cache') || '{}');
+		cache[url] = html;
+		sessionStorage.setItem('stb-cache', JSON.stringify(cache));
+	} catch (e) {
+	}
+}
+
+function getFromCache (url) {
+	try {
+		return JSON.parse(sessionStorage.getItem('stb-cache') || '{}')[url];
+	} catch (e) {
+	}
+}
+
+function getXHR (url, useProxy, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function () {
+		var text = xhr.responseText;
+		if (useProxy) {
+			try {
+				text = JSON.parse(text).error;
+			} catch (e) {
+			}
+		}
+		callback(text || '');
+	};
+	xhr.onerror = function () {
+		callback('');
+	};
+	xhr.open('GET', useProxy ? proxy + encodeURIComponent(url) : url);
+	if (!useProxy) {
+		xhr.responseType = 'text';
+	}
+	xhr.send();
+}
+
+function getWithCache (url, callback) {
+	var html = getFromCache(url);
+	if (html) {
+		callback(html);
+		return;
+	}
+	getXHR(local[url] || url, !local[url], function (html) {
+		addToCache(url, html);
+		callback(html);
+	});
+}
 
 function escapeRe (str) {
 	return str.replace(/([\\{}()|.?*+\-\^$\[\]])/g, '\\$1');
@@ -541,28 +595,13 @@ function getLocalHtml (lang, hora, date, callback) {
 
 function getWebHtml (lang, hora, date, callback) {
 	if (lang === 'de-x-local') {
-		getFileHtml('stb.html', hora, date, callback);
+		getFileHtml(hora, date, callback);
 		return;
 	}
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function () {
-		var text = xhr.responseText;
-		try {
-			text = JSON.parse(text).error;
-		} catch (e) {
-		}
-		callback(text || '');
-	};
-	xhr.onerror = function () {
-		callback('');
-	};
-	xhr.open('GET', proxy + encodeURIComponent(getUrl(lang, hora, date)));
-	xhr.send();
+	getWithCache(getUrl(lang, hora, date), callback);
 }
 
-//download main HTML as stb.html from https://www.stundengebet.de/jetzt-beten/
-//remove duplicate days (until this is fixed, after that consider using online one directly)
-function getFileHtml (file, hora, date, callback) {
+function getFileHtml (hora, date, callback) {
 	function getStartDay (doc) {
 		var d, date;
 		date = new Date();
@@ -576,11 +615,10 @@ function getFileHtml (file, hora, date, callback) {
 		return doc.querySelectorAll('.gebet-entry .carousel-item')[d].querySelectorAll('.item-' + h)[0].innerHTML;
 	}
 
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function () {
-		var doc, start, html;
+	getWithCache('https://www.stundengebet.de/jetzt-beten/', function (html) {
+		var doc, start;
 		try {
-			doc = (new DOMParser()).parseFromString(xhr.response, 'text/html');
+			doc = (new DOMParser()).parseFromString(html, 'text/html'); //don't know why responseType = 'document' doesn't work
 			start = getStartDay(doc);
 			html = extractHTML(doc, date.diffTo(start), {
 				invitatorium: 'invitatorium',
@@ -596,13 +634,7 @@ function getFileHtml (file, hora, date, callback) {
 			console.warn(e);
 		}
 		callback(html || '');
-	};
-	xhr.onerror = function () {
-		callback('');
-	};
-	xhr.open('GET', file);
-	xhr.responseType = 'text'; //don't know why 'document' doesn't work
-	xhr.send();
+	});
 }
 
 function getDiffHtml (lang, hora, date, callback) {

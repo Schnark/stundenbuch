@@ -17,7 +17,9 @@ function getAudio (key) {
 }
 
 function countSyllables (line) {
-	return line.replace(/[Qq]u/g, 'q').replace(/ae|ao|ea|eo|ia|io|iu|oa|ua/g, 'a-a').split(/[aeiouyäöüæœáéíóúýǽ]{1,2}/gi).length - 1;
+	return line.replace(/[Qq]u/g, 'q')
+		.replace(/ae|ao|ea|eo|ia|io|iu|oa|ua/g, 'a-a')
+		.split(/[aeiouyäöüæœáéíóúýǽ]{1,2}/gi).length - 1;
 }
 
 function getMeter (lines) {
@@ -66,7 +68,8 @@ function display (hymns) {
 		return '<tr><td><code>' + data.key + '</code></td>' +
 			'<td title="' + data.text + '">' + data.incipit + '</td>' +
 			'<td' + (cls ? ' class="' + cls + '"' : '') + '>' + (data.audio || '') + '</td>' +
-			'<td title="' + data.meter.replace(/\/\//g, '\n') + '">' + data.meter.replace(/\/\/.*/, '') + (varies(data.meter) ? ' *' : '') + '</td></tr>';
+			'<td title="' + data.meter.replace(/\/\//g, '\n') + '">' +
+			data.meter.replace(/\/\/.*/, '') + (varies(data.meter) ? ' *' : '') + '</td></tr>';
 	});
 	document.getElementById('output').innerHTML = '<table>' +
 			'<tr><th>Schlüssel</th><th>Incipt</th><th>Melodie</th><th>Metrum</th></tr>' +

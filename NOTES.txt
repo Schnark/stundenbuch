@@ -357,6 +357,7 @@ http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1976/123.html: Lectiones biblicae Liturgiae Horarum
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1983/206.html: Änderungen IGLH wegen neuem CIC
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1986/235.html: Liturgia Horarum editio typica altera (I)
+http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1987/248.html: Liturgia Horarum editio typica altera (II)
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1988/260.html: Liturgia Horarum editio typica altera (III)
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1988/262.html: Liturgia Horarum editio typica altera (IV)
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1989/275.html: Liturgia Horarum: Supplementum
@@ -533,7 +534,7 @@ Vermutlich nicht (zumindest nicht für Freiburg) approbierte Texte, trotzdem vor
 - Hl. Vinzenz Pallotti (Direktorium 2018, Schweiz, http://liturgie.ch/images/liturgie/praxis/direktorium/pdf/lesehore-vinzenz-pallotti.pdf)
 - Hl. Oskar Romero (https://www.steyler.eu/svd/seelsorge/anregung/artikel/2018/Heilige/oscar-romero-Hl-liturgie.php)
 - Hl. Teresa von Kalkutta (Direktorium 2018, App)
-- Hl. Johannes Heinrich Newman (Direktorium 2018, App)
+- Hl. Johannes Heinrich Newman (Direktorium 2018, App, https://www.oratoriosanfilippo.org/Newman-germanice.pdf)
 
 * Lesung der Lesehore für:
 - Hl. Vinzenz Pallotti (Direktorium 2018, Schweiz, http://liturgie.ch/images/liturgie/praxis/direktorium/pdf/lesehore-vinzenz-pallotti.pdf)

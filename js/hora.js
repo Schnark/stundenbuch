@@ -6,7 +6,7 @@ getHora =
 function getHymnusLectionis (date, config) {
 	var hymn = date.getText('hymnus', 'lectionis');
 	if (!hymn) {
-		switch (config.get('bugCompat') ? 0 : date.getPart()) {
+		switch (date.getPart()) {
 		case 0:
 			hymn = 'lectionis-' + date.getDayInSequence(Number(l10n.get('modus-hymnus-lectionis'))) +
 				(config.get('lectionisNight') ? '-nox' : '');
@@ -14,7 +14,7 @@ function getHymnusLectionis (date, config) {
 		case 1:
 			switch (date.getSubPart()) {
 			case 0:
-				hymn = 'lectionis-adventus';
+				hymn = config.get('bugCompat') ? 'lectionis-' + date.getDayInSequence(14) : 'lectionis-adventus';
 				break;
 			case 1:
 			case 2:
@@ -1812,7 +1812,10 @@ function getMonth (date) {
 		for (name in data) {
 			if (
 				data.hasOwnProperty(name) &&
-				['familia', 'iosephus', 'annuntiatio', 'nativitatis-ioannes', 'petrus-paulus', 'maria-immaculata'].indexOf(name) === -1 //FIXME alle Hochfeste
+				[
+					'familia', 'iosephus', 'annuntiatio', 'nativitatis-ioannes',
+					'petrus-paulus', 'maria-immaculata'
+				].indexOf(name) === -1 //FIXME alle Hochfeste
 			) {
 				rank = data[name];
 				omitted.push(
