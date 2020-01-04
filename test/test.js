@@ -5,8 +5,10 @@
 
 var dateInput,
 	proxy = 'https://lit-beach-8985.herokuapp.com/?url=',
+	localPath = 'l10n-source/cache/', //actually doesn't belong there,
+	//but that way I have to remove just one folder before publishing
 	local = location.href.slice(0, 13) === 'file:///home/' ? {
-		'https://www.stundengebet.de/jetzt-beten/': 'l10n-source/cache/stb.html'
+		'https://www.stundengebet.de/jetzt-beten/': 'stb.html'
 	} : {};
 
 function addToCache (url, html) {
@@ -49,12 +51,17 @@ function getXHR (url, useProxy, callback) {
 }
 
 function getWithCache (url, callback) {
-	var html = getFromCache(url);
+	var html = getFromCache(url), useProxy = true;
 	if (html) {
 		callback(html);
 		return;
 	}
-	getXHR(local[url] || url, !local[url], function (html) {
+
+	if (local[url]) {
+		useProxy = false;
+		url = localPath + local[url];
+	}
+	getXHR(url, useProxy, function (html) {
 		addToCache(url, html);
 		callback(html);
 	});
@@ -159,7 +166,7 @@ function getConfig (lang, hora, extra, compare) {
 		config.memoriaTSN = true;
 		config.bugCompat = true;
 	} else if (lang === 'de-x-local' && compare) {
-		config.rvMode = 'original'; //hora === 'lectionis' ? 'original' : 'expand';
+		config.rvMode = 'original';
 		config.moreHymns = true;
 		config.flexaAsteriscus = '†|*|<br>';
 		config.varyCanticaLaudes = true;
@@ -365,7 +372,7 @@ function normalizeDeLocalWebHtml (html, easter) {
 	return fixDe(div.textContent
 		.replace(/(\d\)?,)(\d)/g, '$1 $2')
 		.replace(/(\d[a-g]?)-(\d?[a-g]?)/g, '$1–$2')
-		.replace(/²\s+Lehre mich Erkenntnis und rechtes Urteil\.\s+³\s+Ich vertraue auf deine Gebote\./, '') //solange es falsch ist, besser ganz weg
+		//.replace(/²\s+Lehre mich Erkenntnis und rechtes Urteil\.\s+³\s+Ich vertraue auf deine Gebote\./, '') //solange es falsch ist, besser ganz weg
 		.replace('SCHULDBEKENNTNIS', 'Schuldbekenntnis (Stille zur Gewissenserforschung)')
 		.replace('An dieser Stelle wird eine Gewissenserforschung empfohlen.', '')
 		.replace(' - [alle schlagen an die Brust]', ',')

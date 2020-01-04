@@ -10,15 +10,15 @@ Audio =
 //TODO Noten mit Notenschlüssel verschieben, Noten nicht bis u
 /*
 Noten: a-u
-Typen: +?~. (~ nicht implementiert)
+Typen: +#?~. (~ nicht implementiert)
 Akzente: '>/
 Trenner: ,;:|*\n
 Notenschlüssel: 0-6, x
 */
 
 function parseNotes (notes) {
-	var re1 = /((?:[a-u][+?~.]?)+)(['>\/]?)|([,;:|*\nx0-6])/g,
-		re2 = /([a-u])([+?~.]?)/g,
+	var re1 = /((?:[a-u][+#?~.]?)+)(['>\/]?)|([,;:|*\nx0-6])/g,
+		re2 = /([a-u])([+#?~.]?)/g,
 		match, n, t,
 		text = [],
 		ret = [];
@@ -149,6 +149,7 @@ Renderer.prototype.renderSingleNoteModern = function (x, note, type) {
 	h += 2;
 	switch (type) {
 	case '+':
+	case '#':
 		image +=
 			'<line x1="' + x + '" y1="' + (y - 2 * h / 3) + '" x2="' + x + '" y2="' + (y + 2 * h / 3) + '" />' +
 			'<line x1="' + (x + w) + '" y1="' + (y - 2 * h / 3) + '" x2="' + (x + w) + '" y2="' + (y + 2 * h / 3) + '" />';
@@ -186,6 +187,7 @@ Renderer.prototype.renderSingleNoteGregorian = function (x, note, type, prev) {
 	image += this.renderExtraLines(note, x, w);
 	switch (type) {
 	case '+':
+	case '#':
 		image +=
 			'<line x1="' + x + '" y1="' + (y - h) + '" x2="' + x + '" y2="' + (y + h) + '" />' +
 			'<line x1="' + (x + w) + '" y1="' + (y - h) + '" x2="' + (x + w) + '" y2="' + (y + h) + '" />';
@@ -208,7 +210,7 @@ Renderer.prototype.renderBackground = function (w) {
 	var svg = [], i, y;
 	for (i = 0; i < this.lines; i++) {
 		y = this.getHeight(i);
-		svg.push('<line x1="0" y1="' + y + '" x2="' + w + '" y2="' + y + '" />');
+		svg.push('<line x1="-0.5" y1="' + y + '" x2="' + (w + 0.5) + '" y2="' + y + '" />');
 	}
 	return svg.join('');
 };
@@ -386,6 +388,8 @@ Renderer.prototype.renderBar = function (bar) {
 			'x2="5" y2="' + (this.height / 2 + this.lineHeight) + '" />' +
 			this.renderBackground(10)
 		) + '<wbr>';
+	default:
+		return this.wrapSvg(10, '<rect x="0" y="0" width="10" height="' + this.height + '" fill="currentColor" />');
 	}
 };
 
@@ -662,6 +666,10 @@ function Reader (el) {
 	this.setSpeed(1);
 }
 
+Reader.rates = {
+	'': 60 //TODO sprachabhängig
+};
+
 Reader.isAvailable = function () {
 	return !!window.speechSynthesis;
 };
@@ -672,7 +680,7 @@ Reader.prototype.isEnabled = function () {
 
 Reader.prototype.setLang = function (lang) {
 	this.lang = lang.replace(/^la(-|$)/, 'it$1'); //we (probably) don't have "la", so use "it" instead
-	this.rate = 60; //TODO sprachabhängig
+	this.rate = Reader.rates[lang] || Reader.rates[lang.replace(/-.*/, '')] || Reader.rates[''];
 };
 
 Reader.prototype.setSpeed = function (speed) {

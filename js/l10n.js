@@ -177,7 +177,12 @@ function getRawFile (name, type, callback) {
 function getFile (name, callback) {
 	if (password) {
 		getRawFile('l10n/' + name + '.xtea', 'arraybuffer', function (data) {
-			callback(xtea.decrypt(new Uint8Array(data), password));
+			var text = '';
+			try {
+				text = xtea.decrypt(new Uint8Array(data), password);
+			} catch (e) {
+			}
+			callback(text);
 		});
 	} else {
 		getRawFile('l10n-source/combined/' + name + '.txt', 'text', callback);

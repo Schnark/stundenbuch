@@ -266,6 +266,13 @@ dt::after {
 	font-weight: bold;
 }
 
+/*
+It would be nice to also have a skin-auto together with a @media (light-level: foo) query, where
+washed maps to skin-light, dim to skin-dark and normal to skin-sepia. To not duplicate things further,
+CSS variables should be used for the colors, but as the light-level query has no support on current
+devices (let alone FFOS), with no good polyfill (though that should be possible), that is something
+to explore in the far futur.
+*/
 body.skin-light {
 	color: #222;
 	background-color: #fff;

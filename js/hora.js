@@ -12,9 +12,13 @@ function getHymnusLectionis (date, config) {
 				(config.get('lectionisNight') ? '-nox' : '');
 			break;
 		case 1:
+			if (config.get('bugCompat') && [0, 4, 5].indexOf(date.getSubPart()) > -1) {
+				hymn = 'lectionis-' + date.getDayInSequence(14);
+				break;
+			}
 			switch (date.getSubPart()) {
 			case 0:
-				hymn = config.get('bugCompat') ? 'lectionis-' + date.getDayInSequence(14) : 'lectionis-adventus';
+				hymn = 'lectionis-adventus';
 				break;
 			case 1:
 			case 2:
@@ -34,7 +38,7 @@ function getHymnusLectionis (date, config) {
 				'lectionis-quadragesimae-2' :
 				'lectionis-quadragesimae' + (date.isSunday() ? '-1' : '');
 			break;
-		case 3: hymn = date.getSubPart() > 0 ? 'lectionis-paschale-1' : 'lectionis-paschale';
+		case 3: hymn = date.getSubPart() > 1 ? 'lectionis-paschale-1' : 'lectionis-paschale';
 		}
 	}
 	return 'hymnus-' + hymn;
@@ -57,7 +61,7 @@ function getHymnusLaudes (date, config) {
 		case 2:
 			hymn = date.getSubPart() >= 2 ? 'laudes-quadragesimae-2' : 'laudes-quadragesimae' + (date.isSunday() ? '-1' : '');
 			break;
-		case 3: hymn = date.getSubPart() > 0 ? 'laudes-paschale-1' : 'laudes-paschale';
+		case 3: hymn = date.getSubPart() > 1 ? 'laudes-paschale-1' : 'laudes-paschale';
 		}
 	}
 	return 'hymnus-' + hymn;
@@ -135,7 +139,7 @@ function getHymnusVespera (date, config) {
 			hymn = date.getSubPart() >= 2 ? 'vespera-quadragesimae-2' :
 				'vespera-quadragesimae' + (date.isSunday() ? '-1' : '');
 			break;
-		case 3: hymn = date.getSubPart() > 0 ? 'vespera-paschale-1' : 'vespera-paschale';
+		case 3: hymn = date.getSubPart() > 1 ? 'vespera-paschale-1' : 'vespera-paschale';
 		}
 	}
 	return 'hymnus-' + hymn;
@@ -246,7 +250,7 @@ function getCanticaLectionis (date) {
 			}
 			break;
 		case 3:
-			if (date.getDayInSequence(-1) <= 7) {
+			if (date.getSubPart() === 0) {
 				cantica = canticumP[date.getDayInSequence(-1)];
 			} else if (date.isSunday()) {
 				cantica = cantica.map(function (s) {
@@ -346,7 +350,7 @@ function getCanticaLaudes (date) {
 			}
 			break;
 		case 3:
-			if (date.getDayInSequence(-1) <= 7) {
+			if (date.getSubPart() === 0) {
 				cantica = canticum[0].map(function (s) {
 					return s.replace(/\|.*$/g, '') + '|paschale';
 				});
@@ -465,7 +469,7 @@ function getCanticaTertiaSextaNona (date, hora, complementaris, config) {
 			antiphona = ['tertia', 'sexta', 'nona'][hora] + '-quadragesimae' + (date.getSubPart() >= 2 ? '-1' : '');
 			break;
 		case 3:
-			if (date.getDayInSequence(-1) <= 7) {
+			if (date.getSubPart() === 0) {
 				if (!complementaris) {
 					cantica = canticumP[date.getDayInSequence()];
 				}
@@ -583,7 +587,7 @@ function getCanticaVespera (date) {
 			}
 			break;
 		case 3:
-			if (date.getDayInSequence(-1) <= 7) {
+			if (date.getSubPart() === 0) {
 				cantica = canticum[0].map(function (s) {
 					return s.replace(/\|.*$/g, '') + '|paschale';
 				});
@@ -718,13 +722,13 @@ function getLectioLaudes (date) {
 		'gal-2-19-20',
 		'2-pt-3-13-14'
 	], lectioAdventMap = [
-		['rm-13-11-12', 'rm-13-11-12'],
-		['is-2-3', 'is-2-3'],
-		['gn-49-10', 'gn-49-10'],
-		['is-7-14-15', 'is-7-14-15'],
-		['is-45-8', 'is-45-8'],
-		['ier-30-18-22', 'ier-30-18-22'],
-		['is-11-1-3', 'is-11-1-3']
+		'rm-13-11-12',
+		'is-2-3',
+		'gn-49-10',
+		'is-7-14-15',
+		'is-45-8',
+		'ier-30-18-22',
+		'is-11-1-3'
 	], lectioChristmasMap = [
 		['hbr-1-1-2', 'is-4-2-3'],
 		['act-6-2-5', 'is-49-8-9'],
@@ -761,8 +765,8 @@ function getLectioLaudes (date) {
 				subpart = 0;
 			}
 			switch (subpart) {
-			case 0: lectio = lectioAdventMap[date.getDay()][0]; break;
-			case 1: case 2: lectio = lectioAdventMap[date.getDayInChristmasSequence(7)][1]; break;
+			case 0: lectio = lectioAdventMap[date.getDay()]; break;
+			case 1: case 2: lectio = lectioAdventMap[date.getDayInChristmasSequence(7)]; break;
 			case 3: lectio = lectioChristmasMap[date.getDayInChristmasSequence(7)][0]; break;
 			case 4: case 5: lectio = lectioChristmasMap[date.getDayInChristmasSequence(7)][1];
 			}
@@ -1065,14 +1069,14 @@ function getLectioVespera (date) {
 		'col-1-23',
 		'rm-8-1-2',
 		'rm-11-33-36'
-	], lectioAdventMap = [ //TODO zusammenlegen (auch Laudes)
-		['phil-4-4-5', 'phil-4-4-5'],
-		['phil-3-21', 'phil-3-21'],
-		['1-cor-1-7-9', '1-cor-1-7-9'],
-		['1-cor-4-5', '1-cor-4-5'],
-		['iac-5-7-9', 'iac-5-7-9'],
-		['2-pt-3-8-9', '2-pt-3-8-9'],
-		['1-th-5-23-24', '1-th-5-23-24']
+	], lectioAdventMap = [
+		'phil-4-4-5',
+		'phil-3-21',
+		'1-cor-1-7-9',
+		'1-cor-4-5',
+		'iac-5-7-9',
+		'2-pt-3-8-9',
+		'1-th-5-23-24'
 	], lectioChristmasMap = [
 		['1-io-1-1-3', 'eph-2-3-5'],
 		['1-io-1-5-7', 'col-1-13-15'],
@@ -1108,14 +1112,14 @@ function getLectioVespera (date) {
 				subpart = 0;
 			}
 			switch (subpart) {
-			case 0: lectio = lectioAdventMap[date.getDay()][0]; break;
-			case 1: case 2: lectio = lectioAdventMap[date.getDayInChristmasSequence(7)][1]; break;
+			case 0: lectio = lectioAdventMap[date.getDay()]; break;
+			case 1: case 2: lectio = lectioAdventMap[date.getDayInChristmasSequence(7)]; break;
 			case 3: lectio = lectioChristmasMap[date.getDayInChristmasSequence(7)][0]; break;
 			case 4: case 5: lectio = lectioChristmasMap[date.getDayInChristmasSequence(7)][1];
 			}
 			break;
 		case 2: lectio = lectioLentMap[date.getDay()][date.getSubPart() === 0 ? 0 : 1]; break;
-		case 3: lectio = lectioEasterMap[date.getDay()][date.getSubPart() < 2 ? 0 : 1];
+		case 3: lectio = lectioEasterMap[date.getDay()][date.getSubPart() < 3 ? 0 : 1];
 		}
 	}
 	return lectio;
@@ -1192,7 +1196,7 @@ function getResponsoriumLaudes (date) {
 			}
 			break;
 		case 3:
-			if (date.getDayInSequence(-1) <= 7) {
+			if (date.getSubPart() === 0) {
 				resp = 'substitutum-3';
 			} else {
 				resp = 'laudes-paschale' + (date.isSunday() ? '-0' : '-1');
@@ -1248,9 +1252,9 @@ function getResponsoriumVespera (date) {
 			}
 			break;
 		case 3:
-			if (date.getDayInSequence(-1) <= 7) {
+			if (date.getSubPart() === 0) {
 				resp = 'substitutum-3';
-			} else if (date.getSubPart() === 0) {
+			} else if (date.getSubPart() === 1) {
 				resp = 'vespera-paschale';
 				if (date.getDayInSequence(-1) % 7 === 0) {
 					//deutsches Stundenbuch teilweise abweichend,
@@ -1275,7 +1279,7 @@ function getInvitatoriumAntiphona (date) {
 	case 1: return '!invitatorium-' + ['adventus', 'adventus-1',
 		'adventus-2', 'nativitatis', 'nativitatis', 'nativitatis-1'][date.getSubPart()];
 	case 2: return '!invitatorium-quadragesimae';
-	case 3: return date.getSubPart() === 0 ? '!invitatorium-paschale' : '!invitatorium-paschale-1';
+	case 3: return date.getSubPart() <= 1 ? '!invitatorium-paschale' : '!invitatorium-paschale-1';
 	}
 }
 
@@ -1289,7 +1293,7 @@ function getBenedictusAntiphona (date) {
 	case 1:
 		switch (date.getSubPart()) {
 		case 0: return date.getDayInSequence(-1) + (date.isSunday() ? date.getYearLetter() : '') + '-adventus';
-		case 1: case 2: return (-date.getDayInChristmasSequence()) + '-adventus-1';
+		case 1: case 2: return (-date.getDayInChristmasSequence()) + '-adventus-1'; //TODO falls vorhanden (la) evt. Ant. 4. Adv.
 		case 3: case 4: case 5: return date.getDayInChristmasSequence() + '-nativitatis';
 		}
 		break; //to make jshint happy
@@ -1345,7 +1349,7 @@ function getPrecesLaudes (date) {
 			break;
 		case 2: preces = 'laudes-' + (date.getSubPart() >= 2 ? 12 : date.getDayInSequence(14)) +
 			'-quadragesimae'; break;
-		case 3: preces = 'laudes-' + date.getDayInSequence(14) + '-paschale' + (date.getSubPart() === 0 ? '' : '-1');
+		case 3: preces = 'laudes-' + date.getDayInSequence(14) + '-paschale' + (date.getSubPart() <= 1 ? '' : '-1');
 		}
 	}
 	return 'preces-' + preces;
@@ -1369,7 +1373,7 @@ function getPrecesVespera (date) {
 			break;
 		case 2: preces = 'vespera-' + (date.getSubPart() >= 2 ? 12 : date.getDayInSequence(14)) +
 			'-quadragesimae'; break;
-		case 3: preces = 'vespera-' + date.getDayInSequence(14) + '-paschale' + (date.getSubPart() === 0 ? '' : '-1');
+		case 3: preces = 'vespera-' + date.getDayInSequence(14) + '-paschale' + (date.getSubPart() <= 1 ? '' : '-1');
 		}
 	}
 	return 'preces-' + preces;
@@ -1606,7 +1610,7 @@ function getLaudes (date, config) {
 		config.get('priest') ?
 			('benedictio-sacerdos' +
 				((date.getPart() === 3 &&
-				(date.getDayInSequence(-1) <= 7 || date.getDayInSequence(-1) === 49)) ? '-paschale' : '')) :
+				(date.getSubPart() === 0 || date.getDayInSequence(-1) === 49)) ? '-paschale' : '')) :
 			'benedictio'
 	];
 }
@@ -1661,7 +1665,7 @@ function getVespera (date, config) {
 		config.get('priest') ?
 			('benedictio-sacerdos' +
 				((date.getPart() === 3 &&
-				(date.getDayInSequence(-1) <= 7 || date.getDayInSequence(-1) >= 48)) ? '-paschale' : '')) :
+				(date.getSubPart() === 0 || date.getDayInSequence(-1) >= 48)) ? '-paschale' : '')) :
 			'benedictio',
 		config.get('marianAntiphon') === 'vespera' ? getMaria(date, config) : ''
 	];
@@ -1700,7 +1704,7 @@ function getCompletorium (date, config) {
 		}
 		break;
 	case 3:
-		if (date.getDayInSequence(-1) <= 7) {
+		if (date.getSubPart() === 0) {
 			resp = 'substitutum-3';
 			special = true;
 		}
@@ -1756,6 +1760,11 @@ function getOverview (date, config) {
 		{type: 'link', href: getHora.makeLink(date, 'completorium'),
 			labelHtml: l10n.get('completorium') + eve, cls: current === 'completorium' ? 'current' : ''}
 		//TODO antizipierte Lesehore
+		//TODO Lesejahr {A|B|C}(%a)/{I|II}(%i), %W. Woche im Psalterium, %L. Tag im Mondmonat
+		//TODO {Adventszeit|Hoher Advent|Hoher Advent|Weihnachtsoktav|Weihnachtszeit (vor Epiphanias)|Weihnachtszeit (ab Epiphanias)}(%p)
+		//TODO {Fastenzeit|Fastenzeit|Karwoche|Karwoche}(%p)
+		//TODO {Osteroktav|Osterzeit (vor Himmelfahrt)|Osterzeit (ab Himmelfahrt)|Osterzeit (ab Himmelfahrt)}(%p)
+		//TODO Zeit im Jahreskreis
 	];
 }
 

@@ -1,4 +1,4 @@
-/*global screenlock, Day, Config, l10n, util, debug, file, getHora, audioManager, waitForPassword*/
+/*global screenlock, Day, Config, l10n, util, debug, file, getHora, audioManager, passwordManager*/
 /*global Event*/
 (function () {
 "use strict";
@@ -155,7 +155,7 @@ function updateAdditionalDays () {
 }
 
 function makeSelect (date) {
-	var alternatives = date.getAlternatives(), html;
+	var alternatives = util.clone(date.getAlternatives()), html;
 	if (!alternatives.length) {
 		return;
 	}
@@ -385,10 +385,7 @@ function globalClickHandler (e) {
 	}
 	if (id === 'password-reset') {
 		if (window.confirm(l10n.get('titulus-delere-adfirmare'))) {
-			try {
-				localStorage.removeItem('stundenbuch-password');
-			} catch (e) {
-			}
+			passwordManager.clear();
 		}
 	}
 
@@ -587,7 +584,7 @@ function navigateToUrl () {
 
 function getLanguageSelect () {
 	return l10n.availableLanguages.map(function (entry) {
-		return '<option value="' + entry.code + '">' + entry.autonym + '</option>';
+		return '<option value="' + entry.code + '" lang="' + entry.code + '">' + entry.autonym + '</option>';
 	}).join('');
 }
 
@@ -710,8 +707,7 @@ function init () {
 	Config.setConfig(config);
 	updateCalendar();
 	l10n.parseOverride(config.get('override'));
-	waitForPassword(
-		'stundenbuch-password',
+	passwordManager.wait(
 		document.getElementById('main'),
 		l10n.availableLanguages.filter(function (entry) {
 			return entry.prompt;

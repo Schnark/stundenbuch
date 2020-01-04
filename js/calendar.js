@@ -98,7 +98,8 @@ Day.calendars = {
 							nona: 'col-3-17',
 							vespera: 'phil-2-6-7'
 						}
-					}
+					},
+					abc: true
 				}],
 				[30, 12, '', 4, '', {
 					move: function (day) {
@@ -209,7 +210,7 @@ Day.calendars = {
 					completorium: true
 				}],
 				[0, 'easter', 'pascha', 0, 'ordinarium', {
-					eve: false
+					eve: false //actually neither needed nor used
 				}],
 				/*[7, 'easter', 'pascha-octava', 0, 'ordinarium', {
 					type: ''

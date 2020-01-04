@@ -338,7 +338,7 @@ Day.getLectioLectionis = function (keys, both) {
 	return second + '-b';
 };
 
-Day.getText = function (data, element, hora, part) {
+Day.getText = function (data, element, hora, part, year) {
 	var source, keys = [], key, cantica, commune, i, antiphona;
 
 	function getModifiers () {
@@ -364,7 +364,7 @@ Day.getText = function (data, element, hora, part) {
 	case 'o':
 		return;
 	case 'p':
-		keys = getKeys(element, hora, data.name);
+		keys = getKeys(element, hora, data.name + (element === 'antiphona' && hora !== 'invitatorium' && data.abc ? '-' + year : ''));
 		/*falls through*/
 	case 'c':
 		if (data.rank >= 2 && data.commune !== 'defunctus' && (
@@ -464,6 +464,9 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		}
 		if (types.indexOf('plures') > -1) {
 			type += '-plures';
+		}
+		if (types.indexOf('defunctus') > -1) {
+			type = '-defunctus';
 		}
 		if (types.indexOf('ecclesia') > -1) {
 			type = '-ecclesia';
@@ -608,7 +611,11 @@ Day.getSpecialData = function (day, order, data) {
 			notes: []
 		};
 
-	keys = [data.m + '/' + data.w, data.m + '/' + data.d, 'sunday/' + data.s, 'easter/' + data.e];
+	keys = [data.m + '/' + data.w, data.m + '/' + data.d];
+	if (data.s) {
+		keys.push('sunday/' + data.s);
+	}
+	keys.push('easter/' + data.e);
 
 	Day.additionalDays.filter(function (d) {
 		return keys.indexOf(d.m + '/' + d.d) > -1;

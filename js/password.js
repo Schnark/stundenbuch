@@ -1,5 +1,5 @@
-/*global waitForPassword: true*/
-waitForPassword =
+/*global passwordManager: true*/
+passwordManager =
 (function () {
 "use strict";
 
@@ -8,19 +8,27 @@ var PW_CHECKSUM = 57,
 		'~~local~~': '',
 		'~~none~~': 'none',
 		'~~raw~~': 'raw'
-	};
+	},
+	PW_KEY = 'stundenbuch-password';
 
-function loadPassword (key) {
+function loadPassword () {
 	try {
-		return localStorage.getItem(key);
+		return localStorage.getItem(PW_KEY);
 	} catch (e) {
 	}
 	return '';
 }
 
-function storePassword (key, pw) {
+function storePassword (pw) {
 	try {
-		return localStorage.setItem(key, pw);
+		return localStorage.setItem(PW_KEY, pw);
+	} catch (e) {
+	}
+}
+
+function clearPassword () {
+	try {
+		localStorage.removeItem(PW_KEY);
 	} catch (e) {
 	}
 }
@@ -67,18 +75,21 @@ function showPasswordPrompt (container, prompt, callback) {
 	});
 }
 
-function waitForPassword (key, container, prompt, callback) {
-	var pw = loadPassword(key);
+function waitForPassword (container, prompt, callback) {
+	var pw = loadPassword();
 	if (isValidPassword(pw)) {
 		callback(normalizeSpecialPassword(pw));
 	} else {
 		showPasswordPrompt(container, prompt, function (pw) {
-			storePassword(key, pw);
+			storePassword(pw);
 			callback(normalizeSpecialPassword(pw));
 		});
 	}
 }
 
-return waitForPassword;
+return {
+	clear: clearPassword,
+	wait: waitForPassword
+};
 
 })();

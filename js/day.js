@@ -334,6 +334,7 @@ Day.prototype.calculateNumbers = function () {
 		d = this.diffTo(baptism);
 		if (d % 7 === 0) {
 			this.order = 3;
+			specialData.s = 1 + (d / 7);
 		}
 		this.part = 0;
 		this.color = 'green';
@@ -472,7 +473,7 @@ Day.prototype.hasTeDeum = function () {
 	return (this.special && this.special.tedeum) ||
 		(this.isSunday() && this.getPart() !== 2) ||
 		(this.getPart() === 1 && this.getSubPart() === 3) ||
-		(this.getPart() === 3 && this.getDayInSequence(-1) <= 7);
+		(this.getPart() === 3 && this.getSubPart() === 0);
 };
 
 Day.prototype.hasSpecialCompletorium = function () {
@@ -555,13 +556,16 @@ Day.prototype.getSubPart = function () {
 		return 3; //last days
 	case 3:
 		d = this.getDayInSequence(-1);
+		if (d <= 7) {
+			return 0; //first week
+		}
 		if (d < (Config.getConfig().get('ascensionSunday') ? 42 : 39)) {
-			return 0; //until before ascension
+			return 1; //until before ascension
 		}
 		if (d < 43) {
-			return 1;
+			return 2;
 		}
-		return 2; //last week
+		return 3; //last week
 	default: return 0;
 	}
 };
@@ -627,7 +631,7 @@ Day.prototype.getText = function (type, hora) {
 	case 2: part = 'quadragesimae'; break;
 	case 3: part = 'paschale';
 	}
-	return Day.getText(this.special, type, hora, part);
+	return Day.getText(this.special, type, hora, part, this.getYearLetter());
 };
 
 function DayEve (day) {
