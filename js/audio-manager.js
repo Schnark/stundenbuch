@@ -69,6 +69,9 @@ function mapKey (key, extra) {
 }
 
 function selectIndex (index) {
+	if (dom.select0.disabled) {
+		return;
+	}
 	dom.select0.value = index[0];
 	onCategoryChange();
 	dom.select1.value = index[1];
@@ -89,7 +92,7 @@ function addData (data) {
 
 function init (config) {
 	var vol;
-	audio = new Audio (document.getElementById('main'), document.getElementById('audio-output'));
+	audio = new Audio(document.getElementById('main'), document.getElementById('audio-output'));
 	dom.play = document.getElementById('audio-play');
 	dom.stop = document.getElementById('audio-stop');
 	dom.volume = document.getElementById('audio-volume');

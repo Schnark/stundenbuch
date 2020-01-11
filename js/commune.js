@@ -227,7 +227,7 @@ Day.getSource = function (data, element, hora) {
 		return 'p';
 	}
 	if (element === 'cantica' && ['tertia', 'sexta', 'nona'].indexOf(hora) > -1) {
-		return 'o'; //TODO Herrenfest Sonntag: Psalmen der ersten Woche
+		return 'o';
 	}
 	if (data.rank === 1) {
 		return 'p';
@@ -541,10 +541,12 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 	case 'defunctus': val.color = 'black'; break;
 	default: val.color = types.indexOf('martyr') > -1 ? 'red' : 'white';
 	}
-	if (types[0] === 'defunctus' && rank < 2) {
+	if (types[0] === 'defunctus') {
 		val.tedeum = false;
 		val.completorium = true;
-		val.type = '';
+		if (rank < 2) {
+			val.type = '';
+		}
 	}
 	if (types[0] === 'ecclesia' && Config.getConfig().get('dedicationExtern') && types.indexOf('extra') === -1) {
 		types.push('extra');

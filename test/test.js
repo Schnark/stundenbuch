@@ -163,7 +163,7 @@ function getConfig (lang, hora, extra, compare) {
 		config.moreHymns = true;
 		config.varyCanticaLaudes = true;
 		config.paterNosterIntro = 2;
-		config.memoriaTSN = true;
+		//config.memoriaTSN = true;
 		config.bugCompat = true;
 	} else if (lang === 'de-x-local' && compare) {
 		config.rvMode = 'original';
@@ -171,7 +171,7 @@ function getConfig (lang, hora, extra, compare) {
 		config.flexaAsteriscus = '†|*|<br>';
 		config.varyCanticaLaudes = true;
 		config.paterNosterIntro = 1;
-		config.memoriaTSN = true;
+		//config.memoriaTSN = true;
 		config.bugCompat = true;
 		//config.marianAntiphon = 'completorium';
 	} else if (lang === 'la' && compare) {
@@ -270,6 +270,7 @@ function fixDe (text) {
 		['Sie verteilen unter sich meine Kleider und werfen', 'Sie verteilten unter sich meine Kleider und warfen'], //Antiphon zu Psalm 22, Freitag 3. Woche TSN
 		['Herr, lenke unsere Schritte auf den Weg des Friedens.', 'Herr, lenke unsre Schritte auf den Weg des Friedens.'], //Benedictus-Antiphon Samstag 2. Woche
 		['Verwirf mich nicht vor deinem Angesicht', 'Verwirf mich nicht von deinem Angesicht'], //Versikel Terz Montag 2. Woche
+		['℣ Reinige mich von verborgener Schuld', '℣ Reinige mich vor verborgener Schuld'], //Vesikel Sext Samstag 1. Woche
 		['℣ Und sie hielten fest', '℣ Sie hielten fest'], //Versikel Sext Apostel
 		['Stehe unserem Papst N. und allen Bischöfen bei;', 'Steh unserem Papst N. und allen Bischöfen bei;'], //Fürbitten Sonntag 1. Woche
 		['Stehe den Sterbenden bei und lass sie dein Heil schauen.', 'Steh den Sterbenden bei; und lass sie dein Heil schauen.'], //Fürbitten Montag 1. Woche

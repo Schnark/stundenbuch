@@ -443,7 +443,9 @@ function getCanticaTertiaSextaNona (date, hora, complementaris, config) {
 		}
 	}
 	if (!cantica) {
-		cantica = complementaris ? canticum2[hora] : canticum[date.getDayInSequence()];
+		cantica = complementaris ?
+			canticum2[hora] :
+			canticum[date.getOrder() === 2 && date.isSunday() && !config.get('bugCompat') ? 0 : date.getDayInSequence()];
 		switch (date.getPart()) {
 		case 1:
 			switch (date.getSubPart()) {
@@ -1765,6 +1767,7 @@ function getOverview (date, config) {
 		//TODO {Fastenzeit|Fastenzeit|Karwoche|Karwoche}(%p)
 		//TODO {Osteroktav|Osterzeit (vor Himmelfahrt)|Osterzeit (ab Himmelfahrt)|Osterzeit (ab Himmelfahrt)}(%p)
 		//TODO Zeit im Jahreskreis
+		//TODO U+1F4D7 ff?
 	];
 }
 

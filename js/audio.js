@@ -14,6 +14,7 @@ Typen: +#?~. (~ nicht implementiert)
 Akzente: '>/
 Trenner: ,;:|*\n
 Notenschlüssel: 0-6, x
+Text: In Anführungszeichen
 */
 
 function parseNotes (notes) {

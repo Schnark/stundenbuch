@@ -62,7 +62,8 @@ Day.calendars = {
 							nona: 'is-49-6',
 							vespera: 'act-10-37-38'
 						}
-					}
+					},
+					iii: true
 				}],
 				[34, 'sunday', 'rex', 0, 'dominus', { //TODO
 					//when it coincides with another sollemnity,
