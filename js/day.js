@@ -197,7 +197,6 @@ Day.prototype.format = function (format) {
 		case 'd': return this.getDate();
 		case 'm': return this.getMonth();
 		case 'y': return this.getYear();
-		default: return false;
 		}
 	}.bind(this));
 };
@@ -396,7 +395,6 @@ Day.prototype.calculateNumbers = function () {
 	this.special = special;
 };
 
-/*
 Day.prototype.getMoon = function () {
 	var y, m, d, c, g, k, e, l;
 
@@ -432,7 +430,6 @@ Day.prototype.getMoon = function () {
 
 	return l;
 };
-*/
 
 //order:
 //0: Advents-, Fastensonntage, Sonntage der Osterzeit, Karwoche, Osteroktav (-1 für besondere Tage)
@@ -631,7 +628,7 @@ Day.prototype.getText = function (type, hora) {
 	case 2: part = 'quadragesimae'; break;
 	case 3: part = 'paschale';
 	}
-	return Day.getText(this.special, type, hora, part, this.getYearLetter());
+	return Day.getText(this.special, type, hora, part, this.getYearLetter(), this.getYearLectio());
 };
 
 function DayEve (day) {

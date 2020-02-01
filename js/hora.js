@@ -445,7 +445,7 @@ function getCanticaTertiaSextaNona (date, hora, complementaris, config) {
 	if (!cantica) {
 		cantica = complementaris ?
 			canticum2[hora] :
-			canticum[date.getOrder() === 2 && date.isSunday() && !config.get('bugCompat') ? 0 : date.getDayInSequence()];
+			canticum[date.getOrder() === 2 && date.isSunday() ? 0 : date.getDayInSequence()];
 		switch (date.getPart()) {
 		case 1:
 			switch (date.getSubPart()) {
@@ -1760,14 +1760,27 @@ function getOverview (date, config) {
 		{type: 'link', href: getHora.makeLink(date, 'vespera'),
 			labelHtml: l10n.get('vespera') + eve, cls: current === 'vespera' ? 'current' : ''},
 		{type: 'link', href: getHora.makeLink(date, 'completorium'),
-			labelHtml: l10n.get('completorium') + eve, cls: current === 'completorium' ? 'current' : ''}
+			labelHtml: l10n.get('completorium') + eve, cls: current === 'completorium' ? 'current' : ''},
 		//TODO antizipierte Lesehore
-		//TODO Lesejahr {A|B|C}(%a)/{I|II}(%i), %W. Woche im Psalterium, %L. Tag im Mondmonat
-		//TODO {Adventszeit|Hoher Advent|Hoher Advent|Weihnachtsoktav|Weihnachtszeit (vor Epiphanias)|Weihnachtszeit (ab Epiphanias)}(%p)
-		//TODO {Fastenzeit|Fastenzeit|Karwoche|Karwoche}(%p)
-		//TODO {Osteroktav|Osterzeit (vor Himmelfahrt)|Osterzeit (ab Himmelfahrt)|Osterzeit (ab Himmelfahrt)}(%p)
-		//TODO Zeit im Jahreskreis
-		//TODO U+1F4D7 ff?
+		{type: 'notes', notes: [
+			util.replaceFormatString(l10n.get('dies-info'), function (c) {
+				switch (c) {
+				case 'a': return date.getYearLetter().charCodeAt(0) - 97;
+				case 'i': return date.getYearLectio().length - 1;
+				case 'w': return Math.floor(date.getDayInSequence() / 7);
+				case 'l': return date.getMoon() - 1; //change to 0-based
+				}
+			}),
+			util.replaceFormatString(
+				l10n.get('dies-info-' + ['annum', 'adventus-nativitatis', 'quadragesimae', 'paschale'][date.getPart()]),
+				function (c) {
+					if (c === 'p') {
+						return date.getSubPart();
+					}
+				}
+			)
+			//TODO optionale und ausfallende Tage
+		]}
 	];
 }
 

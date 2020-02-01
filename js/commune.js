@@ -325,7 +325,7 @@ Day.getLectioLectionis = function (keys, both) {
 		return;
 	}
 	noregular = ['natalis', 'stephanus', 'ioannes-apostolus', 'innocentes', 'maria-genetrix',
-		'epiphanias', 'baptismate'].indexOf(keys[0].replace('lectio-lectionis-', '')) > -1;
+		'epiphanias', 'baptismate', 'baptismate-i', 'baptismate-ii'].indexOf(keys[0].replace('lectio-lectionis-', '')) > -1;
 	if (first) {
 		return [
 			first + '-a', second + '-b',
@@ -338,8 +338,8 @@ Day.getLectioLectionis = function (keys, both) {
 	return second + '-b';
 };
 
-Day.getText = function (data, element, hora, part, year) {
-	var source, keys = [], key, cantica, commune, i, antiphona;
+Day.getText = function (data, element, hora, part, yearABC, yearIII) {
+	var source, append = '', keys = [], key, cantica, commune, i, antiphona;
 
 	function getModifiers () {
 		var modifiers = util.clone(data.modifier);
@@ -364,7 +364,12 @@ Day.getText = function (data, element, hora, part, year) {
 	case 'o':
 		return;
 	case 'p':
-		keys = getKeys(element, hora, data.name + (element === 'antiphona' && hora !== 'invitatorium' && data.abc ? '-' + year : ''));
+		if (element === 'antiphona' && hora !== 'invitatorium' && data.abc) {
+			 append = '-' + yearABC;
+		} else if (element === 'lectio' && hora === 'lectionis' && l10n.get('modus-lectionis') === '2' && data.iii) {
+			append = '-' + yearIII
+		}
+		keys = getKeys(element, hora, data.name + append);
 		/*falls through*/
 	case 'c':
 		if (data.rank >= 2 && data.commune !== 'defunctus' && (
@@ -631,9 +636,11 @@ Day.getSpecialData = function (day, order, data) {
 			continue;
 		}
 		if (Day.specialDays[keys[i]].name && Day.specialDays[keys[i]].name !== special.name) {
+			//omitted because of move
 			result.omittedNames[Day.specialDays[keys[i]].name] = Day.specialDays[keys[i]].type;
 		}
 		if (special.rank === 2 && order === 5) {
+			//make memorial optional (if it isn't already) and commemorate it if enabled
 			if (result.alternativeNames.indexOf(special.name) === -1) {
 				result.alternativeNames.push(special.name);
 			}
@@ -646,7 +653,12 @@ Day.getSpecialData = function (day, order, data) {
 				delete special.color;
 			}
 		}
-		if (special.order <= order) {
+		if (
+			special.order < order || (
+				special.order === order && //collision of (probably) a day relative to easter with a fixed date
+				(special.type !== 'memoria-1' || (result.special && result.special.type === 'memoria-1'))
+			)
+		) {
 			if (result.special && result.alternativeNames.indexOf(result.special.name) === -1) {
 				result.omittedNames[result.special.name] = result.special.type;
 			}

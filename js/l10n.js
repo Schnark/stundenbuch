@@ -393,7 +393,9 @@ function setDynamicData (key, val) {
 function formatSunday (sunday) {
 	var result = /^[a-c](\d+)(-[aqp])?$/.exec(sunday);
 	return util.replaceFormatString(get('dominica' + (result[2] || '')), function (c) {
-		return c === 'n' && Number(result[1]);
+		if (c === 'n') {
+			return Number(result[1]);
+		}
 	});
 }
 

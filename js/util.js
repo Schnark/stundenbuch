@@ -28,8 +28,7 @@ function clone (obj) {
 	return JSON.parse(JSON.stringify(obj));
 }
 
-/*
-function roman (v) {
+function formatRoman (v) {
 	var data = [
 		[1000, 'M'],
 		[900, 'CM'],
@@ -56,9 +55,9 @@ function roman (v) {
 	}
 	return str.join('');
 }
-*/
+
 function replaceFormatString (format, replacer) {
-	return format.replace(/\{([^}]+)\}\(%([a-z])\)|%(0?)([a-zA-Z])|(%%)/g, function (all, array, c1, pad, c2, percent) {
+	return format.replace(/\{([^}]+)\}\(%([a-z])\)|%(0?)(4?)([a-zA-Z])|(%%)/g, function (all, array, c1, pad, roman, c2, percent) {
 		var c, n;
 		if (percent) {
 			return '%';
@@ -70,13 +69,19 @@ function replaceFormatString (format, replacer) {
 			c = c2;
 		}
 		n = replacer(c.toLowerCase());
-		if (n === false) {
+		if (n === undefined) {
 			return all;
 		}
 		if (c.toLowerCase() !== c) {
 			n++;
 		}
-		return array ? array[Math.min(n, array.length - 1)] : (n < 10 ? pad : '') + n;
+		if (array) {
+			return array[Math.min(n, array.length - 1)];
+		}
+		if (roman) { //Q: Why 4 for Roman number format? A: Because 4 === R in the Mnemonic major system
+			return formatRoman(n);
+		}
+		return (n < 10 ? pad : '') + n;
 	});
 }
 
