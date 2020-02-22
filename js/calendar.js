@@ -650,7 +650,7 @@ Day.calendars = {
 				[12, 5, 'nereus-achilleus', 3, ['martyr', 'vir', 'plures']],
 				[12, 5, 'pancratius', 3, ['martyr', 'vir']],
 				[13, 5, 'maria-fatima', 3, 'maria'],
-				[14, 5, 'matthias', 1, ['apostolus2', 'martyr']],
+				[14, 5, 'matthias', 1, ['apostolus', 'martyr']], //TODO apostolus2 ?
 				[18, 5, 'ioannis-i', 3, ['papa', 'martyr']],
 				[20, 5, 'bernhardinus-senensis', 3, 'pastor'],
 				[21, 5, 'christophorus-magallanes', 3, ['martyr', 'vir', 'plures']],
@@ -1129,7 +1129,7 @@ Day.calendars = {
 				[21, 1, 'meinrad', 3, ['martyr', 'vir'], 'Meinrad'],
 				[23, 1, 'heinrich-seuse', 3, ['religiosus', 'vir', 'beatus'], 'Heinrich Seuse'],
 				[4, 2, 'rabanus-maurus', 3, 'pastor', 'Rabanus Maurus'],
-				[24, 2, 'matthias', 1, ['apostolus2', 'martyr']],
+				[24, 2, 'matthias', 1, ['apostolus', 'martyr']], //TODO apostolus2 ?
 				[25, 2, 'walburga', 3, 'mulier', 'Walburga'],
 				[6, 3, 'fridolin', 3, ['religiosus', 'vir'], 'Fridolin'],
 				[9, 3, 'bruno-querfurt', 3, ['martyr', 'vir'], 'Bruno von Querfurt'],

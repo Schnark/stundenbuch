@@ -252,6 +252,7 @@ function fixDe (text) {
 		['(vgl. ', '(Vgl. '],
 		['(Halleluja). Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', '(Halleluja). Halleluja. Ehre sei dem Vater und dem Sohn und dem Heiligen Geist. * (℟ Halleluja.) Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit. Amen. ℟ Halleluja (Halleluja).'],
 		['ihn loben und rühmen in Ewigkeit! Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', 'ihn loben und rühmen in Ewigkeit!'],
+		[' not tut', ' Not tut'], //Neue Rechtschreiung (Preces Laudes 3. Woche Dienstag)
 		['Der Herr thront für ewig; *', 'Der Herr aber thront für ewig; *'], //Psalm 9 I
 		['Kein Mensch mehr verbreite Schrecken im Land!', 'Kein Mensch mehr verbreite Schrecken im Land.'], //Psalm 10 II
 		['Mein Gott, eile mir zu Hilfe!', 'Mein Gott, eil mir zu Hilfe!'], //Psalm 71
@@ -367,7 +368,8 @@ function normalizeDeLocalWebHtml (html, easter) {
 		})
 		.replace(/<br><span class="hl">- /g, '')
 		.replace('<p class="format_preOra">', 'Oration<p>')
-		.replace(/</g, ' <');
+		.replace(/</g, ' <')
+		.replace(/\\n/g, ' ');
 	div = document.createElement('div');
 	div.innerHTML = html;
 	return fixDe(div.textContent

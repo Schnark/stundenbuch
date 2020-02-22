@@ -340,7 +340,7 @@ function getCanticaLaudes (date) {
 			}
 			break;
 		case 2:
-			if (date.getDayInSequence(-1) === -4) {
+			if (date.getDayInSequence(-1) === -4 && !Config.getConfig().get('bugCompat')) {
 				cantica = canticum[19];
 			}
 			if (date.isSunday() || date.getSubPart() >= 2) {
@@ -1295,7 +1295,15 @@ function getBenedictusAntiphona (date) {
 	case 1:
 		switch (date.getSubPart()) {
 		case 0: return date.getDayInSequence(-1) + (date.isSunday() ? date.getYearLetter() : '') + '-adventus';
-		case 1: case 2: return (-date.getDayInChristmasSequence()) + '-adventus-1'; //TODO falls vorhanden (la) evt. Ant. 4. Adv.
+		case 1: case 2:
+			if (
+				date.isSunday() &&
+				[-4, -2, -1].indexOf(date.getDayInChristmasSequence() === -1) &&
+				l10n.has('antiphona-benedictus-21a-adventus')
+			) {
+				return '21' + date.getYearLetter() + '-adventus';
+			}
+			return (-date.getDayInChristmasSequence()) + '-adventus-1';
 		case 3: case 4: case 5: return date.getDayInChristmasSequence() + '-nativitatis';
 		}
 		break; //to make jshint happy
@@ -1739,6 +1747,55 @@ function getCompletorium (date, config) {
 }
 
 function getOverview (date, config) {
+
+	function getInfoForDay (date) {
+		var info = [
+			util.replaceFormatString(l10n.get('dies-info'), function (c) {
+				switch (c) {
+				case 'a': return date.getYearLetter().charCodeAt(0) - 97;
+				case 'i': return date.getYearLectio().length - 1;
+				case 'w': return Math.floor(date.getDayInSequence() / 7);
+				case 'l': return date.getMoon() - 1; //change to 0-based
+				}
+			}),
+			util.replaceFormatString(
+				l10n.get('dies-info-' + ['annum', 'adventus-nativitatis', 'quadragesimae', 'paschale'][date.getPart()]),
+				function (c) {
+					if (c === 'p') {
+						return date.getSubPart();
+					}
+				}
+			)
+		], title, other;
+
+		title = date.getName();
+		if (title) {
+			title = l10n.getTitle(title);
+		} else if (date.isSunday()) {
+			title = l10n.formatSunday(date.getSunday());
+		}
+		if (title) {
+			info.push(title);
+		}
+		other = date.getAlternatives().filter(function (name) {
+			return name !== '';
+		}).map(function (name) {
+			return l10n.getTitle(name);
+		});
+		if (other.length) {
+			info.push(l10n.get('dies-info-alternativus') + ' ' + other.join('; '));
+		}
+		other = Object.keys(date.getOmitted()).filter(function (name) {
+			return name !== '';
+		}).map(function (name) {
+			return l10n.getTitle(name);
+		});
+		if (other.length) {
+			info.push(l10n.get('dies-info-omittantes') + ' ' + other.join('; '));
+		}
+		return info;
+	}
+
 	var eve = date.getEve().isEve() ? ' (' + l10n.get('vespera-pridiana') + ')' : '',
 		current = date.getCurrentHora();
 	if (current && config.get('invitatoriumLocus') === current) {
@@ -1759,28 +1816,10 @@ function getOverview (date, config) {
 		{type: 'link', href: getHora.makeLink(date, 'nona'), label: 'nona', cls: current === 'nona' ? 'current' : ''},
 		{type: 'link', href: getHora.makeLink(date, 'vespera'),
 			labelHtml: l10n.get('vespera') + eve, cls: current === 'vespera' ? 'current' : ''},
+		//TODO? antizipierte Lesehore
 		{type: 'link', href: getHora.makeLink(date, 'completorium'),
 			labelHtml: l10n.get('completorium') + eve, cls: current === 'completorium' ? 'current' : ''},
-		//TODO antizipierte Lesehore
-		{type: 'notes', notes: [
-			util.replaceFormatString(l10n.get('dies-info'), function (c) {
-				switch (c) {
-				case 'a': return date.getYearLetter().charCodeAt(0) - 97;
-				case 'i': return date.getYearLectio().length - 1;
-				case 'w': return Math.floor(date.getDayInSequence() / 7);
-				case 'l': return date.getMoon() - 1; //change to 0-based
-				}
-			}),
-			util.replaceFormatString(
-				l10n.get('dies-info-' + ['annum', 'adventus-nativitatis', 'quadragesimae', 'paschale'][date.getPart()]),
-				function (c) {
-					if (c === 'p') {
-						return date.getSubPart();
-					}
-				}
-			)
-			//TODO optionale und ausfallende Tage
-		]}
+		{type: 'notes', notes: getInfoForDay(date)}
 	];
 }
 
@@ -1861,23 +1900,28 @@ function getMonth (date) {
 			colors[color] = 0;
 		}
 		colors[color]++;
+
 		type = date.getType();
 		if (type) {
 			type = l10n.get(type + '-littera');
 		}
+
 		d = date.getDate();
 		href = getHora.makeLink(date, '');
 		if (href) {
 			d = '<a href="' + href + '">' + d + '</a>';
 		}
+
 		title = date.getName();
 		if (title) {
 			title = l10n.getTitle(title);
 		} else if (date.isSunday()) {
 			title = l10n.formatSunday(date.getSunday());
 		}
+
 		alternatives = getAlternatives(date);
 		addOmitted(date);
+
 		cls = [];
 		if (date.isSunday()) {
 			cls.push('sunday');
@@ -1889,6 +1933,7 @@ function getMonth (date) {
 			'<tr' + (cls.length ? ' class="' + cls.join(' ') + '"' : '') + '><td class="' + color + '">' + type + '</td>' +
 			'<td>' + d + '</td><td>' + title + (title && alternatives ? '<br>' : '') + alternatives + '</td></tr>'
 		);
+
 		date = date.next();
 	}
 	next = date;
@@ -1899,16 +1944,13 @@ function getMonth (date) {
 			maxColor = color;
 		}
 	}
+	omitted = omitted.length ?
+		'<div class="p additamentum">' + l10n.get('dies-omittantes') + '<ul><li>' + omitted.join('</li><li>') + '</li></ul></div>' :
+		'';
 	return [
 		{type: 'month', date: date, color: maxColor},
 		{type: 'link', href: getHora.makeLink(prev, 'mensis'), labelHtml: prev.format(l10n.get('date-format-month'))},
-		{
-			type: 'raw',
-			html: '<div class="p"><table class="mensis">' + rows.join('') + '</table></div>' +
-				(omitted.length ?
-					'<div class="p additamentum">' + l10n.get('dies-omittantes') + '<ul><li>' +
-					omitted.join('</li><li>') + '</li></ul></div>' : '')
-		},
+		{type: 'raw', html: '<div class="p"><table class="mensis">' + rows.join('') + '</table></div>' + omitted},
 		{type: 'link', href: getHora.makeLink(next, 'mensis'), labelHtml: next.format(l10n.get('date-format-month'))}
 	];
 }
