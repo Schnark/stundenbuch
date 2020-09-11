@@ -1,8 +1,10 @@
 /*global Config, Day*/
+/*jshint forin: false*/
 (function () {
 "use strict";
 
 var comments = {
+	'maria-ecclesia': 'g/abweichendes Datum zugunsten von pentecoste-secunda',
 	agnes: 'g zugunsten von meinrad',
 	'cyrillus-methodius': 'g zugunsten von valentin-terni',
 	polycarpus: 'g zugunsten von willigis',
@@ -11,10 +13,14 @@ var comments = {
 	bonaventura: 'g zugunsten von bernhard-baden, in Baden 17. 7.',
 	'alfonsus-liguori': 'g zugunsten von petrus-faber',
 	monica: 'g zugunsten von gebhard',
+	hieronymus: 'g zugunsten von urs-viktor',
+	'albertus-magnus': 'abweichendes Datum',
+	leopold: 'aus technischen Gründen doppelt',
 	'margarita-scotia': 'aus technischen Gründen doppelt',
 	gertrudis: 'abweichendes Datum',
 	konrad: 'statt konrad-gebhard',
 	lucia: 'g zugunsten von odilia',
+	'ioannes-didacus': 'aus technischen Gründen doppelt',
 	'petrus-canisius': 'abweichendes Datum'
 }, memorials;
 

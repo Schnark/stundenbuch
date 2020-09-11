@@ -105,6 +105,9 @@ Prot. 29/19 (http://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_
 Unsere Liebe Frau von Loreto (10. Dez., g)
 Prot. 404/19 (http://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20191007_decreto-celebrazione-verginediloreto_en.html)
 
+2020:
+Hl. Faustina Kowalska (5. Okt., g)
+Prot. 229/20 (http://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20200518_decreto-celebrazione-santafaustina_la.html)
 
 Europa
 ------
@@ -142,6 +145,7 @@ Hl. Katharina von Alexandrien (unverändert in Generalkalender aufgenommen)
 Hl. Josefmaria Escriva de Balaguer (26. Jun., g)
 (defakto, nach Aufnahme in Kalender von DE, CH, FL, Diözesen in AT, Bozen-Brixen)
 
+
 Liturgischer Kalender für Deutschland
 -------------------------------------
 
@@ -173,7 +177,6 @@ Prot. 1009/11 (http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae
 2014:
 Hl. Johannes Paul II. (unverändert in Generalkalender aufgenommen)
 
-
 Weitere mögliche Gedenktage:
 
 2006 oder nie:
@@ -204,9 +207,7 @@ Hl. Albert der Große (15. Nov.→16. Nov.)
 Hl. Damian de Veuster (10. Mai, g)
 Hl. Josefmaria Escriva de Balaguer (26. Jun., g)
 
-
 Weitere mögliche Gedenktage:
-
 Sel. Franz Jägerstätter (21. Mai, g)
 Sel. Otto Neururer (30. Mai, g)
 Sel. Hildegard Burjan (12. Jun., g)
@@ -231,15 +232,12 @@ Hl. Hieronymus (G→g)
 Hll. Urs und Viktor (30. Sep., g)
 Hl. Niklaus von der Flüe (g→H)
 
-
 Weitere mögliche Gedenktage:
-
 Muttergottes von Einsiedeln (16. Jul., g)
 Hl. Theodor (16. Aug., g)
 
 Siehe auch:
 http://liturgie.ch/praxis/direktorium/aktuelle-ausgabe
-
 
 
 Diözesankalender der Erzdiözese Freiburg
@@ -303,12 +301,12 @@ Sel. Rupert Mayer (unverändert in Kalender für Deutschland aufgenommen)
 Hl. Johannes Nepomuk Neumann (unverändert in Kalender für Deutschland aufgenommen)
 
 2015:
-Sel. Paul VI. (?, g)
+Sel. Paul VI. (26. Sep., g)
 (Direktorium)
 
 2018:
-Hl. Gregor von Narek (?, g)
-Hl. Johannes von Avila (?, g)
+Hl. Gregor von Narek (27. Feb., g)
+Hl. Johannes von Avila (10. Mai, g)
 (Direktorium)
 
 2019:
@@ -316,13 +314,12 @@ Maria, Mutter der Kirche (Mo nach Pfingsten→Sa nach Pfingsten, G→g)
 (Direktorium)
 
 2019:
-Hl. Oscar Romero (?, g)
+Hl. Oscar Romero (24. Mär., g)
 (Direktorium)
 
 2019:
 Hl. Paul VI. (mit anderem Datum in Generalkalender aufgenommen)
 (https://www.ebfr.de/html/media/dl.html?i=867188)
-
 
 Direktorien:
 2011: http://www.ebfr.de/lib/download.php?key=141b8d4a6092&file=/dynamic/datei/direktorium_2011.pdf&name=direktorium_2011.pdf
@@ -364,7 +361,6 @@ http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1992/306-307.html: Liturgia Horarum: Supplementum
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1993/320.html: Liturgia Horarum: Supplementum
 
-
 Ordo Cantus Officii
 -------------------
 
@@ -383,6 +379,7 @@ http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/
 
 Missale Romanum
 ---------------
+
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1975/111-112.html: MR typica altera
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1986/240-241-242.html: The sources of the Roman Missal, I
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1987/252-253-254.html: The sources of the Roman Missal, II
@@ -395,7 +392,6 @@ http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1973/83.html: Autoren der Hymnen im Stundenbuch
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1977/129.html: Thesaurus Liturgiae Horarum Monasticae
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1979/161.html: Verwendung der Nova Vulgata
-
 
 
 Deutsche Texte
@@ -417,6 +413,7 @@ Approbierte Übersetzungen
 2009: neue Heilige im Messbuch (Prot. 973/07 und weitere, s.a. https://bistum-augsburg.de/content/download/192320/file/D2019%2013.pdf)
 2016: Revidierte Einheitsübersetzung (Prot. 257/13 und weitere)
 2016: Hl. Johannes XXIII. (Prot. 703/15 und weitere; https://dli.institute/wp/wp-content/uploads/2017/06/Stundenbuch_Hl_Johannes_XXIII_11.-Oktober_Broschuere_DACHL2016.pdf)
+
 
 Texte für deutsche Eigenfeiern
 ------------------------------
@@ -440,6 +437,7 @@ Für folgende Texte steht eine deutsche Übersetzung mit anschließender Approba
 - Maria, Mutter der Kirche
 - Hl. Paul VI.
 - Unsere Liebe Frau von Loreto
+- Hl. Faustina Kowalska
 
 * Lesung der Lesehore für (gekennzeichnete Tage haben meist nicht approbierten Text im Freiburger Direktorium 2018, https://www.ebfr.de/html/media/dl.html?i=976961):
 - Hl. Petrus Claver
@@ -459,6 +457,7 @@ Für folgende Texte steht eine deutsche Übersetzung mit anschließender Approba
 - Maria, Mutter der Kirche
 - Hl. Paul VI. (*)
 - Unsere Liebe Frau von Loreto
+- Hl. Faustina Kowalska
 
 * Sonstige Texte
 - Neuerungen der editio typica altera (insb. Antiphonen Sonntage geprägte Zeiten in Lesejahr B, C)

@@ -18,10 +18,13 @@ iframe {
 </style>
 </head><body>
 <form>
-<label><input id="de" type="checkbox" name="lang" value="de"> Deutsch</label>
-<label><input id="de-x-local" type="checkbox" name="lang" value="de-x-local"> Deutsch (lok. Vgl.)</label>
-<label><input id="la" type="checkbox" name="lang" value="la"> Latein</label>
-<label><input id="en" type="checkbox" name="lang" value="en"> Englisch</label>
+<label><input id="de" type="checkbox" name="lang" value="de"> de</label>
+<label><input id="de-x-combined" type="checkbox" name="lang" value="de-x-combined"> de-x-combined</label>
+<label><input id="de-x-app" type="checkbox" name="lang" value="de-x-app"> de-x-app</label>
+<label><input id="la" type="checkbox" name="lang" value="la"> la</label>
+<label><input id="la-x-app" type="checkbox" name="lang" value="la-x-app"> la-x-app</label>
+<label><input id="en" type="checkbox" name="lang" value="en"> en</label>
+<label><input id="mul" type="checkbox" name="lang" value="mul"> mul</label>
 <label>Horen: <select id="hora" name="hora">
 <option value="">Alle</option>
 <option value="index">Übersicht</option>
@@ -37,7 +40,7 @@ iframe {
 <option value="vespera">Vesper</option>
 <option value="completorium">Komplet</option>
 </select></label>
-<label>Start: <input id="start" type="date" name="start"></label>
+<label>Start: <input id="start" type="date" name="start" placeholder="YYYY-MM-DD"></label>
 <label>Anzahl: <input id="length" type="number" name="length"></label>
 <input id="extra" type="hidden" name="extra" value="">
 <label><input id="compare" type="checkbox" name="compare" value="1"> Vergleichen</label>

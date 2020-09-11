@@ -187,8 +187,8 @@ function checkFormat (file, callback) {
 		'de': [
 			[/./, /^[a-zA-ZäöüÄÖÜßÁáàçéèîłñú0-9() \n<>’\/\-.:,;?!…–»«_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],
 			[/(?!-introductio).{12}$|^.{1,11}$/, /[áçèîłú]/, false, 'Illegales Zeichen (2)'],
-			[/^(?!date-format|dominica|hebdomada|modus-)/, /[%*+{}]/, false, 'Illegales Zeichen (3)'],
-			[/^(?!date-format|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
+			[/^(?!date-format|dies-info|dominica|hebdomada|modus-)/, /[%*+{}]/, false, 'Illegales Zeichen (3)'],
+			[/^(?!date-format|dies-info|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
 			[/^antiphona-/, /\n/, false, 'Zeilenumbruch in Antiphon'],
 			[/^antiphona-/, /\|./, false, 'Pipe mitten in Antiphon'],
 			[/^hymnus-/, /^Hymnus\n\n|^@hymnus-[a-z0-9\-]+$/, true, 'Hymnus ohne Titel'],
@@ -213,8 +213,8 @@ function checkFormat (file, callback) {
 		'la': [
 			[/./, /^[a-zA-ZæÆœŒáéíóúýÁÉÍÓÚǽçèöõü0-9() \n<>’\/\-.:,;?!…–»«_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],
 			[/(?!-introductio).{12}$|^.{1,11}$/, /[çèö]/, false, 'Illegales Zeichen (2)'],
-			[/^(?!date-format|dominica|hebdomada|modus-|te-deum$)/, /[%*+{}]/, false, 'Illegales Zeichen (3)'],
-			[/^(?!date-format|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
+			[/^(?!date-format|dies-info|dominica|hebdomada|modus-|te-deum$)/, /[%*+{}]/, false, 'Illegales Zeichen (3)'],
+			[/^(?!date-format|dies-info|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
 			[/^antiphona-/, /\n/, false, 'Zeilenumbruch in Antiphon'],
 			[/^antiphona-/, /\|./, false, 'Pipe mitten in Antiphon'],
 			[/^hymnus-/, /^Hymnus\n\n|^@hymnus-[a-z0-9\-]+$/, true, 'Hymnus ohne Titel'],
@@ -237,8 +237,8 @@ function checkFormat (file, callback) {
 		],
 		'en': [
 			[/./, /^[a-zA-Z0-9() \n<>’\/\-.:,;?!…–“”_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],
-			[/^(?!date-format|dominica|hebdomada|modus-|te-deum$)/, /[%*+{}]/, false, 'Illegales Zeichen (2)'],
-			[/^(?!date-format|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
+			[/^(?!date-format|dies-info|dominica|hebdomada|modus-|te-deum$)/, /[%*+{}]/, false, 'Illegales Zeichen (2)'],
+			[/^(?!date-format|dies-info|dominica|hebdomada|modus-|antiphona-)/, /\|/, false, 'Illegales Zeichen (|)'],
 			[/^antiphona-/, /\n/, false, 'Zeilenumbruch in Antiphon'],
 			[/^antiphona-/, /\|./, false, 'Pipe mitten in Antiphon'],
 			[/^hymnus-/, /^Hymn\n\n|^@hymnus-[a-z0-9\-]+$/, true, 'Hymnus ohne Titel'],

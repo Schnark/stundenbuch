@@ -32,6 +32,9 @@ function getMeter (lines) {
 }
 
 function getHymns () {
+	var titleExceptions = {
+		'Denkmal, das uns mahnet': 'Gottheit tief verborgen'
+	};
 	return l10n.getKeys().filter(function (key) {
 		return key.indexOf('hymnus-') === 0;
 	}).map(function (key) {
@@ -45,7 +48,7 @@ function getHymns () {
 			text: lines.slice(2).join('\n'),
 			audio: audio,
 			meter: meter,
-			equal: audio === incipit || audio === incipit.slice(0, -1)
+			equal: audio === incipit || audio === incipit.slice(0, -1) || titleExceptions[incipit] === audio
 		};
 	});
 }
@@ -63,6 +66,9 @@ function varies (meter) {
 
 function display (hymns) {
 	var html;
+	hymns.sort(function (a, b) {
+		return a.incipit < b.incipit ? -1 : (a.incipit > b.incipit ? 1 : (a.key < b.key ? -1 : 1));
+	});
 	html = hymns.map(function (data) {
 		var cls = data.equal ? 'equal' : (data.audio ? '' : 'missing');
 		return '<tr><td><code>' + data.key + '</code></td>' +

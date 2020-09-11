@@ -1,10 +1,11 @@
-/*global Day, Config, l10n, getHora, schnarkDiff*/
+/*global Day, Config, l10n, getHora, util, schnarkDiff*/
 /*global console*/
 (function () {
 "use strict";
 
 var dateInput,
 	proxy = 'https://lit-beach-8985.herokuapp.com/?url=',
+	appPath = '../../../../stb/stundenbuch.stundenbuch.571/assets/',
 	localPath = 'l10n-source/cache/', //actually doesn't belong there,
 	//but that way I have to remove just one folder before publishing
 	local = location.href.slice(0, 13) === 'file:///home/' ? {
@@ -111,14 +112,15 @@ function show (html) {
 
 function showLinks (hora, date) {
 	document.getElementById('links').innerHTML = [
-		['App', 'index.html?' + date.format() + '|' + hora],
+		['App', 'index.html?d=' + date.format() + '&h=' + hora],
 		['katholisch.de', getUrl('de', hora, date)],
-		['stundengebet.de', getUrl('de-x-unspecific-2')],
+		['stundengebet.de', getUrl('de-x-combined')],
 		['vulgata.org', getUrl('de-x-unspecific')],
 		['ibreviary.org', getUrl('en-x-unspecific')],
 		['breviarium.info', getUrl('la', hora, date)],
 		['almudi.org', getUrl('la-x-unspecific')],
 		['universalis.com', getUrl('mul', hora, date)],
+		['Android-App', getUrl('mul-x-app', hora, date)],
 		['diff', 'test-diff.html']
 	].map(function (entry) {
 		return '<a href="' + entry[1] + '" target="_blank" rel="noopener">' + entry[0] + '</a>';
@@ -129,7 +131,7 @@ function canCompare (lang, hora) {
 	return (
 		(lang === 'de' || lang === 'mul') &&
 		['laudes', 'tertia', 'sexta', 'nona', 'vespera', 'completorium'].indexOf(hora) > -1
-	) || lang === 'de-x-local' || lang === 'la';
+	) || lang === 'de-x-combined' || lang === 'de-x-app' || lang === 'la' || lang === 'la-x-app';
 }
 
 function getConfig (lang, hora, extra, compare) {
@@ -144,12 +146,12 @@ function getConfig (lang, hora, extra, compare) {
 				'9|8|teresia-benedicta|1|martyr,virgo'
 			]
 		};
-	notes['de-x-local'] = notes.de;
+	notes['de-x-combined'] = notes.de;
 	config.rvMode = 'original';
 	config.flexaAsteriscus = '+|*|<br>';
 	config.psalmusInvitatorium = 'ps-95';
 	config.invitatoriumLocus = '';
-	config.calendar = 'de';
+	config.calendar = 'de-DE';
 	config.additionalDays = extra;
 	config.commemoratio = !!extra.length;
 	config.notes = '';
@@ -163,17 +165,25 @@ function getConfig (lang, hora, extra, compare) {
 		config.moreHymns = true;
 		config.varyCanticaLaudes = true;
 		config.paterNosterIntro = 2;
-		//config.memoriaTSN = true;
+		config.memoriaTSN = true;
 		config.bugCompat = true;
-	} else if (lang === 'de-x-local' && compare) {
+	} else if (lang === 'de-x-combined' && compare) {
 		config.rvMode = 'original';
 		config.moreHymns = true;
 		config.flexaAsteriscus = '†|*|<br>';
 		config.varyCanticaLaudes = true;
 		config.paterNosterIntro = 1;
-		//config.memoriaTSN = true;
+		config.memoriaTSN = true;
 		config.bugCompat = true;
 		//config.marianAntiphon = 'completorium';
+	} else if ((lang === 'de-x-app' || lang === 'la-x-app') && compare) {
+		config.papa = 'Franziskus';
+		config.lectionisNight = true;
+		config.rvMode = hora === 'lectionis' ? 'original' : 'single';
+		config.removeDuplicateAntiphon = true;
+		config.flexaAsteriscus = '†|*|<br>';
+		//config.paterNosterIntro = hora === 'laudes' ? 1 : 2;
+		config.marianAntiphon = hora;
 	} else if (lang === 'la' && compare) {
 		config.rvMode = hora === 'lectionis' ? 'original' : 'expand';
 		config.flexaAsteriscus = '†|*|<br>';
@@ -208,9 +218,9 @@ function normalizeLocalHtml (html) {
 		})
 		/**/.replace(/<h2>Zweite Lesung[\s\S]*?<h2>/, function (lectio) {
 			var cites = [];
-			lectio = lectio.replace(/([.,] ?)?<cite>(.*?)<\/cite>/g, function (all, punct, cite) {
+			lectio = lectio.replace(/([.,;] ?)?<cite>(.*?)<\/cite>/g, function (all, punct, cite) {
 				var n = cites.length + 1;
-				cites.push(n + ' ' + cite.replace(/^\(|\)$/g, '') + '. ');
+				cites.push(n + ' ' + cite.replace(/^\(|\.?\)$/g, '') + '. ');
 				return ' (' + n + ')' + (punct || '');
 			});
 			return lectio.replace(/<h2>$/, cites.join('') + '<h2>');
@@ -231,8 +241,11 @@ function normalizeWebHtml (html, lang, easter) {
 	if (lang === 'de') {
 		return normalizeDeWebHtml(html, easter);
 	}
-	if (lang === 'de-x-local') {
-		return normalizeDeLocalWebHtml(html, easter);
+	if (lang === 'de-x-combined') {
+		return normalizeDeCombinedHtml(html, easter);
+	}
+	if (lang === 'de-x-app' || lang === 'la-x-app') {
+		return normalizeAppHtml(html);
 	}
 	if (lang === 'la') {
 		return normalizeLaWebHtml(html);
@@ -247,9 +260,15 @@ function fixDe (text) {
 	//jscs:disable maximumLineLength
 	var fixes = [
 		['Amen ', 'Amen.'],
+		['zu Grunde gehen', 'zugrunde gehen'], //nach neuer RS geht beides
+		['Kassiodor', 'Cassiodor'],
+		['Herr, eile mir zu helfen. Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit.', 'Herr, eile mir zu helfen. Ehre sei dem Vater und dem Sohn und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit.'],
 		['Ewigkeit. ℣ Singet Lob', 'Ewigkeit. ℟ Amen. ℣ Singet Lob'],
 		['Herrn. ℣ Singet Lob', 'Herrn. ℟ Amen. ℣ Singet Lob'],
+		['Psalm Psalm 95 Ps 95', 'Psalm 95 Ps 95 (94)'],
+		['Joh. ', 'Joh '],
 		['(vgl. ', '(Vgl. '],
+		['Vgl ', 'Vgl. '],
 		['(Halleluja). Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', '(Halleluja). Halleluja. Ehre sei dem Vater und dem Sohn und dem Heiligen Geist. * (℟ Halleluja.) Wie im Anfang, so auch jetzt und alle Zeit und in Ewigkeit. Amen. ℟ Halleluja (Halleluja).'],
 		['ihn loben und rühmen in Ewigkeit! Ehre sei dem Vater und dem Sohn * und dem Heiligen Geist. Wie im Anfang, so auch jetzt und alle Zeit * und in Ewigkeit. Amen.', 'ihn loben und rühmen in Ewigkeit!'],
 		[' not tut', ' Not tut'], //Neue Rechtschreiung (Preces Laudes 3. Woche Dienstag)
@@ -258,6 +277,7 @@ function fixDe (text) {
 		['Mein Gott, eile mir zu Hilfe!', 'Mein Gott, eil mir zu Hilfe!'], //Psalm 71
 		['und hatten doch mein Tun gesehen.«', 'und hatten doch mein Tun gesehen.'], //Psalm 95
 		['Vierzig Jahre war mir dies Geschlecht zuwider †', 'Vierzig Jahre war mir dies Geschlecht zuwider, †'], //Psalm 95
+		['Da wurde Jesus von Furcht und Angst ergriffen.', 'Da ergriff Jesus Furcht und Angst.'], //Einleitung Ps 55
 		['Der Messias, König und Priester', 'Einsetzung des priesterlichen Königs'], //Einleitung Ps 110
 		['Dank für Gottes Rettung und Heil', 'Dank für Rettung und Heil'], //Einleitung Ps 118 (TSN)
 		['Dies ist der Stein, der von euch Bauleuten verworfen wurde', 'Er ist der Stein, der von euch Bauleuten verworfen wurde'], //Einleitung Ps 118 (TSN)
@@ -266,6 +286,8 @@ function fixDe (text) {
 		['führt dem Vater seinen verlorenen Sohn', 'führt dem Vater seinen verlornen Sohn'], //Hymnus Lesehore So
 		['Siegesfreude füllt unsere Seele ganz', 'Siegesfreude füllt unsre Seele ganz'], //Hymnus Lesehore So
 		['verworrenes Chaos dieser Welt', 'verworrnes Chaos dieser Welt'], //Hymnus Laudes Mi
+		['du lenkst mit starker Hand,', 'du lenkst mit starker Hand'], //Hymnus Sext (Fastenzeit)
+		['Dir höchster Gott, ', 'Dir, höchster Gott, '], //Hymnus Lesehore Fastenzeit
 		['niederfallen vor Gott, vor dem Herrn, unserm Schöpfer!', 'niederfallen vor Gott, vor dem Herrn, unserem Schöpfer!'], //Invitatorium-Antiphon Mittwoch 1. Woche
 		['Danket dem Herrn; denn seine Huld währt ewig!', 'Danket dem Herrn, denn seine Huld währt ewig!'], //Invitatorium-Antiphon Freitag 1. Woche
 		['Sie verteilen unter sich meine Kleider und werfen', 'Sie verteilten unter sich meine Kleider und warfen'], //Antiphon zu Psalm 22, Freitag 3. Woche TSN
@@ -354,7 +376,7 @@ function normalizeDeWebHtml (html, easter) {
 	//jscs:enable maximumLineLength
 }
 
-function normalizeDeLocalWebHtml (html, easter) {
+function normalizeDeCombinedHtml (html, easter) {
 	//jscs:disable maximumLineLength
 	var div;
 	html = html
@@ -383,11 +405,13 @@ function normalizeDeLocalWebHtml (html, easter) {
 		.replace('HYMNUS', 'Hymnus')
 		.replace('PSALMODIE', '')
 		.replace(/ERSTE LESUNG[\s\S]*ZWEITE LESUNG/, function (lectio) {
-			return lectio.replace(/á/g, 'a')
+			return lectio
+				.replace(/á/g, 'a')
 				.replace(/é/g, 'e')
 				.replace(/í/g, 'i')
 				.replace(/ó/g, 'o')
 				.replace(/ú/g, 'u')
+				.replace(/ý/g, 'y')
 				.replace(/Á/g, 'A')
 				.replace(/É/g, 'E')
 				.replace(/Í/g, 'I');
@@ -442,6 +466,56 @@ function normalizeDeLocalWebHtml (html, easter) {
 		.replace('℣ Singet Lob und Preis.', html.indexOf('ZWEITE LESUNG') > -1 ? '℟ Amen. \u2123 Singet Lob und Preis.' : '℣ Singet Lob und Preis.')
 		.replace('Eine ruhige Nacht und ein gutes Ende', '℟ Amen. Segen Eine ruhige Nacht und ein gutes Ende')
 		.replace('℣ Der Herr segne uns. Er bewahre uns vor Unheil und führe uns zum ewigen Leben.', '℟ Amen. Segen Der Herr segne uns, er bewahre uns vor Unheil und führe uns zum ewigen Leben.'));
+	//jscs:enable maximumLineLength
+}
+
+function normalizeAppHtml (html) {
+	//jscs:disable maximumLineLength
+	var div;
+	html = html
+		.replace(/[\s\S]*<\/style>/, '')
+		.replace(/(<!-- a|<!-- \/content -->)[\s\S]*/, '')
+		.replace(/<p style="line-height: 0.8;" class="NoLineHight"><span style="color:red; font-size:80%; line-height:125%;">[^<]*<\/span><\/p>/g, '')
+		.replace(/<span style="color:red; font-size:80%;">[^<]*<\/span>/g, '')
+		.replace(/<div name="subtitle"[^>]*>(.*?)<\/div>/g, '$1')
+		.replace(/<div [^>]*style="display:none">[\s\S]*?<\/div>/g, '')
+		.replace(/<font style="color:#FF3030">Ant.[^<]*<\/font>([^<]*)<\/i><\/p>((?:<\/div><div id="mag1">)?<h3.*?)<font style="font-family:serif;font-size:180%;color:#3255DD">/g, '</i></p>$2 Ant.: $1 <font>')
+		.replace(/<font style="color:#FF3030">Ant.[^<]*<\/font>/g, 'Ant.: ')
+		.replace(/<font style="font-family:liturgy;color:#FF3030">F<\/font>/g, '')
+		.replace(/<font style="font-family:liturgy;font-size:150%;color:#FF3030">A/g, '<font>\u211f')
+		.replace(/<font style="font-family:liturgy;font-size:150%;color:#FF3030">B/g, '<font>\u2123')
+		.replace(/<p style="line-height: 140%;">– /g, '<p style="line-height: 140%;"> ')
+		.replace(/>(?:Bitten|Fürbitten|Preces).*/, function (preces) {
+			return preces
+				.replace(/<p style="line-height: 140%;"><font>℟&nbsp;<\/font>([^<]*)</, '<p>$1<')
+				.replace(/<p style="line-height: 140%;"><font>℟&nbsp;<\/font>[^<]*</g, '<p><');
+		})
+		.replace(/(<\/?p|<br>)/g, ' $1');
+
+	div = document.createElement('div');
+	div.innerHTML = html;
+	return div.textContent
+		.replace(/\s+/g, ' ')
+		.replace(/\(1\/\d\)/g, '')
+		.replace(/\(I\/(?:III?|I?V|VII?)\)/g, '')
+		.replace(/Aperi, Dómine, \[\+\].*?\[-\]/, '')
+		.replace('ERSTE LESUNG', 'Erste Lesung')
+		.replace('ZWEITE LESUNG', 'Zweite Lesung')
+		.replace('LECTIO PRIOR', 'Lectio prior')
+		.replace('LECTIO ALTERA', 'Lectio altera')
+		.replace('Vater Unser (dt./lat.)', 'Vaterunser')
+		.replace('(Bitten in besonderen Anliegen.)', 'Hier können Bitten in besonderen Anliegen eingefügt werden.')
+		.replace('(Fürbitten in besonderen Anliegen.)', 'Hier können Fürbitten in besonderen Anliegen eingefügt werden.')
+		.replace('Lasset uns beten.', '')
+		.replace('Orémus.', '')
+		.replace('Segen (dt./lat.)', '')
+		.replace('(dt./lat.)', '')
+		.replace('Laudes Vesper', '')
+		.replace('(Preces in singularibus necessitatibus.)', '')
+		.replace('Benedictio ℣', 'Conclusio ℣')
+		.replace(/„/g, '»')
+		.replace(/“/g, '«')
+		.replace(/\s+/g, ' ');
 	//jscs:enable maximumLineLength
 }
 
@@ -561,7 +635,7 @@ function getUrl (lang, hora, date) {
 		return 'http://stundenbuch.katholisch.de/stundenbuch.php?' + hora + date;
 	case 'de-x-unspecific':
 		return 'http://vulgata.info/index.php?title=Kategorie:Stundenbuch';
-	case 'de-x-unspecific-2':
+	case 'de-x-combined':
 		return 'https://www.stundengebet.de/jetzt-beten/';
 	case 'en-x-unspecific':
 		return 'http://www.ibreviary.org/en/tools/ibreviary-web.html';
@@ -594,6 +668,26 @@ function getUrl (lang, hora, date) {
 			completorium: 'compline'
 		}[hora] || 'today';
 		return 'http://www.universalis.com/L/' + date.format('%y%0M%0d') + '/' + hora + '.htm';
+	case 'mul-x-app':
+	case 'de-x-app':
+	case 'la-x-app':
+		lang = lang.slice(0, -6);
+		if (lang !== 'mul') {
+			lang = '&lang=' + lang;
+		} else {
+			lang = '';
+		}
+		hora = {
+			invitatorium: 'invitatorium',
+			lectionis: 'lesehore',
+			laudes: 'laudes',
+			tertia: 'terz',
+			sexta: 'sext',
+			nona: 'non',
+			vespera: 'vesper',
+			completorium: 'komplet'
+		}[hora] || 'index';
+		return appPath + hora + '.html?date=' + date.format() + lang;
 	}
 }
 
@@ -604,14 +698,18 @@ function getLocalHtml (lang, hora, date, callback) {
 }
 
 function getWebHtml (lang, hora, date, callback) {
-	if (lang === 'de-x-local') {
-		getFileHtml(hora, date, callback);
+	if (lang === 'de-x-combined') {
+		getCombinedHtml(hora, date, callback);
+		return;
+	}
+	if (lang.slice(-6) === '-x-app') {
+		getAppHtml(getUrl(lang, hora, date), callback);
 		return;
 	}
 	getWithCache(getUrl(lang, hora, date), callback);
 }
 
-function getFileHtml (hora, date, callback) {
+function getCombinedHtml (hora, date, callback) {
 	function getStartDay (doc) {
 		var d, date;
 		date = new Date();
@@ -645,6 +743,24 @@ function getFileHtml (hora, date, callback) {
 		}
 		callback(html || '');
 	});
+}
+
+function getAppHtml (url, callback) {
+	var iframe = document.createElement('iframe');
+
+	function onMessage (e) {
+		if (e.source === iframe.contentWindow) {
+			window.removeEventListener('message', onMessage);
+			document.body.removeChild(iframe);
+			callback(e.data);
+		}
+	}
+
+	iframe.style.height = '1px';
+	iframe.style.width = '1px';
+	window.addEventListener('message', onMessage);
+	iframe.src = url;
+	document.body.appendChild(iframe);
 }
 
 function getDiffHtml (lang, hora, date, callback) {
@@ -704,7 +820,7 @@ function init (lang, hora, date, extra, compare) {
 }
 
 function run () {
-	var params = {};
+	var params;
 	getHora.makeLink = function (date, hora) {
 		return '?lang=' + params.lang +
 			'&hora=' + hora +
@@ -712,15 +828,8 @@ function run () {
 			'&extra=' + params.extra +
 			'&compare=' + (params.compare || '');
 	};
-	location.search.slice(1)
-		.split('&')
-		.forEach(function (str) {
-			var pos = str.indexOf('=');
-			if (pos !== -1) {
-				params[decodeURIComponent(str.slice(0, pos))] = decodeURIComponent(str.slice(pos + 1));
-			}
-		});
-	if (['de', 'de-x-local', 'en', 'la', 'mul'].indexOf(params.lang) === -1) {
+	params = util.getUrlParams();
+	if (['de', 'de-x-combined', 'de-x-app', 'en', 'la', 'la-x-app', 'mul'].indexOf(params.lang) === -1) {
 		params.lang = 'de';
 	}
 	if (

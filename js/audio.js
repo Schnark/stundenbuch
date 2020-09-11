@@ -10,15 +10,27 @@ Audio =
 //TODO Noten mit Notenschlüssel verschieben, Noten nicht bis u
 /*
 Noten: a-u
-Typen: +#?~. (~ nicht implementiert)
+Typen: +#?~.
+	+ wiederholt
+	# evt. wiederholt
+	? evt. ausgelassen
+	~ Tremolo
+	. verlängert
 Akzente: '>/
-Trenner: ,;:|*\n
+Trenner: ,;:!|*\n
+	, kurze Pause
+	; lange Pause
+	: optionale Abtrennung
+	! optionale Abtrennung mit Pause
+	| Endstrich
+	* Strich mit Asterisk
+	\n Zeilenumbruch
 Notenschlüssel: 0-6, x
 Text: In Anführungszeichen
 */
 
 function parseNotes (notes) {
-	var re1 = /((?:[a-u][+#?~.]?)+)(['>\/]?)|([,;:|*\nx0-6])/g,
+	var re1 = /((?:[a-u][+#?~.]?)+)(['>\/]?)|([,;:!|*\nx0-6])/g,
 		re2 = /([a-u])([+#?~.]?)/g,
 		match, n, t,
 		text = [],
@@ -141,11 +153,16 @@ Renderer.prototype.renderExtraLines = function (note, x, w) {
 Renderer.prototype.renderSingleNoteModern = function (x, note, type) {
 	var y = this.getHeight(this.getLine(note)),
 		h = this.lineHeight - 2, w = h * 1.5,
-		image;
+		image, textShift = 0;
 	if (type === '?') {
 		x += 5;
 	}
-	image = this.renderNoteHead(x, y, w, h, type !== '+');
+	if (type === '~') {
+		image = this.renderNoteHead(x, y, w / 2 + 0.5, h, true) +
+			this.renderNoteHead(x + w / 2 - 0.5, y, w / 2 + 0.5, h, true);
+	} else {
+		image = this.renderNoteHead(x, y, w, h, type !== '+');
+	}
 	image += this.renderExtraLines(note, x, w);
 	h += 2;
 	switch (type) {
@@ -168,23 +185,42 @@ Renderer.prototype.renderSingleNoteModern = function (x, note, type) {
 				' q' + (h / 2) + ',' + (3 * h / 4) + ' 0,' + (3 * h / 2) + '" />';
 		w += 5;
 	}
+	if (y > this.height - 6) {
+		textShift = 12;
+	} else if (y > this.height - 11) {
+		textShift = -1;
+	}
 	return {
 		image: image,
-		w: x + w
+		w: x + w,
+		textShift: textShift
 	};
 };
 
 Renderer.prototype.renderSingleNoteGregorian = function (x, note, type, prev) {
 	var y = this.getHeight(this.getLine(note)),
 		h = 2 * this.lineHeight / 3, w = h,
-		image;
+		image, textShift = 0;
 	/*if (prev && prev < note) { //TODO
 		x -= w;
 	}*/
 	if (type === '+') {
 		w *= 3;
 	}
-	image = this.renderNoteHead(x, y, w, h, type !== '?');
+	if (type === '~') {
+		image = '<polygon points="' + [
+			x, y - h / 2,
+			x + w / 4, y - h / 2 - w / 4,
+			x + 3 * w / 4, y - h / 2 + w / 4,
+			x + w, y - h / 2,
+			x + w, y + h / 2,
+			x + 3 * w / 4, y + h / 2 + w / 4,
+			x + w / 4, y + h / 2 - w / 4,
+			x, y + h / 2
+		].join(' ') + '" stroke="none" fill="currentColor" />';
+	} else {
+		image = this.renderNoteHead(x, y, w, h, type !== '?');
+	}
 	image += this.renderExtraLines(note, x, w);
 	switch (type) {
 	case '+':
@@ -201,9 +237,15 @@ Renderer.prototype.renderSingleNoteGregorian = function (x, note, type, prev) {
 		image += '<line x1="' + x + '" y1="' + this.getHeight(this.getLine(prev)) + '" ' +
 			'x2="' + x + '" y2="' + y + '" />';
 	}
+	if (y > this.height - 6) {
+		textShift = 13;
+	} else if (y > this.height - 11) {
+		textShift = -1;
+	}
 	return {
 		image: image,
-		w: x + w
+		w: x + w,
+		textShift: textShift
 	};
 };
 
@@ -306,7 +348,7 @@ Renderer.prototype.renderSignModern = function (shift, b) {
 				' -' + (1.5 * this.lineHeight + 4) + ',0' +
 			' c0,-' + (0.5 * this.lineHeight) + ' ' + (-0.25 * this.lineHeight + 4) + ',-' + (0.75 * this.lineHeight) +
 				' ' + (0.75 * this.lineHeight + 4) + ',-' + (2 * this.lineHeight) +
-			' c' + this.lineHeight + ',-' + (0.75 * this.lineHeight) + ' 0,-' + (3 * this.lineHeight) +
+			' c' + (1.75 * this.lineHeight) + ',-' + (1.75 * this.lineHeight) + ' 0,-' + (3 * this.lineHeight) +
 				' 0,-' + this.lineHeight +
 			' l0,' + (5 * this.lineHeight) +
 			' c0,' + (this.lineHeight / 2) + ' -' + this.lineHeight + ',' + (this.lineHeight / 2) +
@@ -335,11 +377,11 @@ Renderer.prototype.renderSignGregorian = function (shift, b) {
 	return this.wrapSvg(x + 6,
 		'<line x1="' + x + '" y1="' + (h - 3 * this.lineHeight / 4) + '" ' +
 			'x2="' + x + '" y2="' + (h + 3 * this.lineHeight / 4) + '" stroke-width="2" />' +
-		'<rect x="' + (x + 1) + '" y="' + (h - 3 * this.lineHeight / 4) + '" width="4" height="4" ' +
+		'<rect x="' + (x + 1) + '" y="' + (h - 3 * this.lineHeight / 4) + '" width="4" height="5.5" ' +
 			'stroke="none" fill="currentColor" />' +
-		(x === 1 ? '' : '<rect x="' + (x - 5) + '" y="' + (h - 2) + '" width="4" height="4" ' +
+		(x === 1 ? '' : '<rect x="' + (x - 5) + '" y="' + (h - 2.5) + '" width="4" height="5" ' +
 			'stroke="none" fill="currentColor" />') +
-		'<rect x="' + (x + 1) + '" y="' + (h + 3 * this.lineHeight / 4 - 4) + '" width="4" height="4" ' +
+		'<rect x="' + (x + 1) + '" y="' + (h + 3 * this.lineHeight / 4 - 5.5) + '" width="4" height="5.5" ' +
 			'stroke="none" fill="currentColor" />' +
 		this.renderBackground(x + 6)
 	) + b;
@@ -365,6 +407,7 @@ Renderer.prototype.renderBar = function (bar) {
 			this.renderBackground(10)
 		) + '<wbr>';
 	case ':':
+	case '!':
 		return this.wrapSvg(10,
 			'<line x1="5" y1="' + this.gutter + '" ' +
 			'x2="5" y2="' + (this.height - this.gutter) + '" stroke-dasharray="1,1" />' +
@@ -395,18 +438,27 @@ Renderer.prototype.renderBar = function (bar) {
 };
 
 Renderer.prototype.renderCluster = function (notes) {
-	var image = '', i, w = 5, ret;
+	var image = '', i, w = 5, textShift = 0, ret;
 	for (i = 0; i < notes.length; i++) {
 		ret = this.renderSingleNote(w, notes[i][0], notes[i][1], notes[i - 1] ? notes[i - 1][0] : '');
 		image += ret.image;
 		w = ret.w;
+		if (ret.textShift) {
+			if (ret.textShift < 0 && textShift <= 0) {
+				textShift = Math.min(ret.textShift, textShift);
+			}
+			if (ret.textShift > 0) {
+				textShift = Math.max(ret.textShift, textShift);
+			}
+		}
 	}
 	w += 5;
 	w = Math.round(w);
 	image += this.renderBackground(w);
 	return {
 		image: image,
-		width: w
+		width: w,
+		textShift: textShift
 	};
 };
 
@@ -426,8 +478,8 @@ Renderer.prototype.renderAccent = function (data, accent, text) {
 		case '\'':
 			image += '<line x1="' + (data.width / 2 - 1) + '" y1="7" x2="' + (data.width / 2 + 2) + '" y2="2" />';
 	}
-	if (text) { //TODO 7px?, besser platzieren
-		image += '<text x="' + (data.width / 2) + '" y="' + (this.height - 1) + '" text-anchor="middle" font-size="6px" ' +
+	if (text) { //TODO 7px?
+		image += '<text x="' + (data.width / 2) + '" y="' + (this.height - 1 - data.textShift) + '" text-anchor="middle" font-size="6px" ' +
 			'stroke="none" fill="currentColor">' + text + '</text>';
 	}
 	return this.wrapSvg(data.width, image);
@@ -595,6 +647,7 @@ Instrument.prototype.playNote = function (note, type) {
 			':': 0,
 			',': 0.5,
 			';': 1,
+			'!': 1,
 			'|': 1.5,
 			'*': 2
 		},

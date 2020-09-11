@@ -101,7 +101,7 @@ function parseKey (key) {
 
 function encrypt (text, key) {
 	var data;
-	text = pako.deflateRaw((new TextEncoder()).encode(text));
+	text = pako.deflateRaw((new TextEncoder()).encode(text), {level: 9});
 	data = new Uint8Array(24 + text.length);
 	data.set(parseKey(key));
 	data[16] = Math.random() * 0xFF;

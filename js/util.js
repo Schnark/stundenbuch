@@ -57,38 +57,66 @@ function formatRoman (v) {
 }
 
 function replaceFormatString (format, replacer) {
-	return format.replace(/\{([^}]+)\}\(%([a-z])\)|%(0?)(4?)([a-zA-Z])|(%%)/g, function (all, array, c1, pad, roman, c2, percent) {
-		var c, n;
-		if (percent) {
-			return '%';
+	return format.replace(
+		/\{([^}]+)\}\(%([a-z])\)|%(0?)(4?)([a-zA-Z])|(%%)/g,
+		function (all, array, c1, pad, roman, c2, percent) {
+			var c, n;
+			if (percent) {
+				return '%';
+			}
+			if (array) {
+				array = array.split('|');
+				c = c1;
+			} else {
+				c = c2;
+			}
+			n = replacer(c.toLowerCase());
+			if (n === undefined) {
+				return all;
+			}
+			if (c.toLowerCase() !== c) {
+				n++;
+			}
+			if (array) {
+				return array[Math.min(n, array.length - 1)];
+			}
+			if (roman) { //Q: Why 4 for Roman number format? A: Because 4 === R in the Mnemonic major system
+				return formatRoman(n);
+			}
+			return (n < 10 ? pad : '') + n;
 		}
-		if (array) {
-			array = array.split('|');
-			c = c1;
-		} else {
-			c = c2;
+	);
+}
+
+function getUrlParams (url, multi) {
+	var params = {};
+	if (multi) {
+		multi.forEach(function (key) {
+			params[key] = [];
+		});
+	} else {
+		multi = [];
+	}
+	(url || location.search).slice(1).split('&').forEach(function (str) {
+		var pos = str.indexOf('='), key, val;
+		if (pos !== -1) {
+			key = decodeURIComponent(str.slice(0, pos));
+			val = decodeURIComponent(str.slice(pos + 1));
+			if (multi.indexOf(key) > -1) {
+				params[key].push(val);
+			} else {
+				params[key] = val;
+			}
 		}
-		n = replacer(c.toLowerCase());
-		if (n === undefined) {
-			return all;
-		}
-		if (c.toLowerCase() !== c) {
-			n++;
-		}
-		if (array) {
-			return array[Math.min(n, array.length - 1)];
-		}
-		if (roman) { //Q: Why 4 for Roman number format? A: Because 4 === R in the Mnemonic major system
-			return formatRoman(n);
-		}
-		return (n < 10 ? pad : '') + n;
 	});
+	return params;
 }
 
 return {
 	htmlEscape: htmlEscape,
 	merge: merge,
 	clone: clone,
-	replaceFormatString: replaceFormatString
+	replaceFormatString: replaceFormatString,
+	getUrlParams: getUrlParams
 };
 })();

@@ -57,9 +57,9 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option value="expand" data-l10n="titulus-responsorium-expandere">[titulus-responsorium-expandere]</option>
 </select></label></p>
 <p><label><span data-l10n="titulus-flexa-asteriscus">[titulus-flexa-asteriscus]</span><select data-key="flexaAsteriscus">
-<option value="+|*|&lt;br&gt;">+*</option>
-<option value="†|*|&lt;br&gt;">†*</option>
-<option value="/|*| ">/*</option>
+<option value="+|*|&lt;br&gt;" data-l10n="titulus-flexa-asteriscus-0">[titulus-flexa-asteriscus-0]</option>
+<option value="†|*|&lt;br&gt;" data-l10n="titulus-flexa-asteriscus-1">[titulus-flexa-asteriscus-1]</option>
+<option value="/|*| " data-l10n="titulus-flexa-asteriscus-2">[titulus-flexa-asteriscus-2]</option>
 </select></label></p>
 <p><label><input data-key="verse" type="checkbox"> <span data-l10n="titulus-versi">[titulus-versi]</span></label></p>
 <p><label><input data-key="psOratio" type="checkbox"> <span data-l10n="titulus-ps-oratio">[titulus-ps-oratio]</span></label></p>
@@ -246,14 +246,14 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <li><span data-l10n="titulus-delere-tesseram" id="password-reset" class="reset link-like" tabindex="0">[titulus-delere-tesseram]</span></li>
 </ul>
 </fieldset>
-<p><a data-l10n="retrorsum" data-action="?back" href="">[retrorsum]</a></p>
-<p><a data-l10n="catalogus" href="?catalogus">[catalogus]</a></p>
+<p><span data-l10n="retrorsum" class="link-like" tabindex="0" data-action="?a=back">[retrorsum]</span></p>
 </article>
 <footer>
 <div id="popup-settings" class="popup">
+<span class="focus-trap" data-focus="button-settings" tabindex="0"></span>
 <h2 data-l10n="modi">[modi]</h2>
 <p><label><span data-l10n="titulus-forma">[titulus-forma]</span>
-<select data-key="skin">
+<select id="skin-select" data-key="skin">
 <option value="light" data-l10n="titulus-forma-clara">[titulus-forma-clara]</option>
 <option value="dark" data-l10n="titulus-forma-obscura">[titulus-forma-obscura]</option>
 <option value="sepia" data-l10n="titulus-forma-sepia">[titulus-forma-sepia]</option>
@@ -263,10 +263,12 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <p><label><span data-l10n="titulus-lingua">[titulus-lingua]</span>
 <select id="language-select" data-key="lang" data-reload="true">
 </select></label></p>
-<p id="settings-link-container"><a data-l10n="plures-modi" href="?settings">[plures-modi]</a></p>
-<p id="back-link-container" hidden><a data-l10n="retrorsum" data-action="?back" href="">[retrorsum]</a></p>
+<p id="settings-link-container"><a data-l10n="plures-modi" href="?a=settings">[plures-modi]</a> – <a data-l10n="catalogus" href="?c=catalogus">[catalogus]</a></p>
+<p id="back-link-container" hidden><span data-l10n="retrorsum" class="link-like" tabindex="0" data-action="?a=back">[retrorsum]</span> – <a data-l10n="catalogus" href="?c=catalogus">[catalogus]</a></p>
+<span class="focus-trap" data-focus="button-settings" tabindex="0"></span>
 </div>
 <div id="popup-navigation" class="popup">
+<span class="focus-trap" data-focus="button-navigation" tabindex="0"></span>
 <h2 data-l10n="navigatio">[navigatio]</h2>
 <h3 data-l10n="hora">[hora]</h3>
 <ul>
@@ -288,13 +290,16 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <li><a id="nav-month" data-l10n="mensis">[mensis]</a></li>
 <li><label class="inline link-like"><span data-l10n="selectare-diem">[selectare-diem]</span> <input id="date-input" class="inline" type="date"></label></li>
 </ul>
+<span class="focus-trap" data-focus="button-navigation" tabindex="0"></span>
 </div>
 <div id="popup-audio" class="popup">
+<span class="focus-trap" data-focus="button-audio" tabindex="0"></span>
 <p><select id="audio-select-0" class="inline"></select>
 <select id="audio-select-1" class="inline"></select></p>
 <p id="audio-output"></p>
 <p><button id="audio-play" class="inline">▶</button> <button id="audio-stop" class="inline">◾</button> <input id="audio-volume" class="inline" data-key="volume" type="range" min="0" step="1" max="10"></p>
+<span class="focus-trap" data-focus="button-audio" tabindex="0"></span>
 </div>
-<nav><span role="button" id="button-settings" tabindex="0"><img src="img/config.svg" alt=""><span data-l10n="modi">[modi]</span></span><span role="button" id="button-navigation" tabindex="0"><img src="img/nav.svg" alt=""><span data-l10n="navigatio">[navigatio]</span></span><span role="button" id="button-audio" tabindex="0"><img src="img/note.svg" alt=""><span data-l10n="sonus">[sonus]</span></span></nav>
+<nav><span role="button" id="button-settings" tabindex="0" data-focus="skin-select"><img src="img/config.svg" alt=""><span data-l10n="modi">[modi]</span></span><span role="button" id="button-navigation" tabindex="0" data-focus="nav-index"><img src="img/nav.svg" alt=""><span data-l10n="navigatio">[navigatio]</span></span><span role="button" id="button-audio" tabindex="0" data-focus="audio-select-0"><img src="img/note.svg" alt=""><span data-l10n="sonus">[sonus]</span></span></nav>
 </footer>
 </body></html>

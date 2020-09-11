@@ -13,30 +13,31 @@ var currentData,
 	scrollPos = {};
 
 function navigate (href, noHistory) {
-	var data = href.slice(1).split('|'), lang, scrollElement;
+	var data, lang, scrollElement;
+	if (!href && !noHistory) {
+		return;
+	}
 	scrollElement = document.getElementsByTagName('html')[0];
 	if (!noHistory) {
 		scrollPos[location.search] = scrollElement.scrollTop / scrollElement.scrollHeight;
 	}
-	if (data[0] === 'none') {
-		return;
-	}
-	if (data[0] === 'back') {
+	data = util.getUrlParams(href);
+	if (data.a === 'back') {
 		history.back(); //will trigger popstate and thus call navigate again
 		return;
 	}
 	lang = document.getElementsByTagName('html')[0].lang;
-	if (data[0] === 'settings') {
+	if (data.a === 'settings') {
 		if (currentData) {
 			updateNavigation(currentData.day, currentData.hora, true);
 		}
 		showSettingsPage();
 		lang = ''; //disable TTS
-	} else if (data[0].indexOf('catalogus') === 0) {
+	} else if (data.c) {
 		if (currentData) {
 			updateNavigation(currentData.day, currentData.hora, true);
 		}
-		getHora(new Day(), data[0], function (html) {
+		getHora(new Day(), data.c === 'catalogus' ? data.c : 'catalogus,' + data.c, function (html) {
 			dom.main.innerHTML = html;
 			updateTitle();
 			if (!noHistory) {
@@ -47,8 +48,8 @@ function navigate (href, noHistory) {
 		showMainPage();
 	} else {
 		currentData = {
-			day: new Day(data[0]),
-			hora: data[1] || 'index'
+			day: new Day(data.d || ''),
+			hora: data.h || 'index'
 		};
 		updateNavigation(currentData.day, currentData.hora);
 		getHora(currentData.day, currentData.hora, function (html) {
@@ -228,7 +229,7 @@ function enableDayGroup (group) {
 }
 
 function makeLink (date, hora) {
-	return '?' + date.format() + '|' + hora;
+	return '?d=' + date.format() + '&h=' + hora;
 }
 
 function catSearch (str) {
@@ -236,7 +237,7 @@ function catSearch (str) {
 	document.getElementById('catalogus-button').disabled = true;
 	document.getElementById('catalogus-button').innerHTML = l10n.get('quaerere-progreditur');
 	l10n.search(function (result) {
-		navigate('?catalogus,' + result.join(','));
+		navigate('?c=' + result.join(','));
 	}, str, 10, 'quaerere-nihil', 'quaerere-plurima');
 }
 
@@ -256,16 +257,16 @@ function updateNavigation (day, hora, linkCurrent) {
 		'nona', 'nona-complementaris',
 		'vespera', 'completorium'
 	].forEach(function (h) {
-		document.getElementById('nav-' + h).href = (hora === h && !linkCurrent) ? '?none' : makeLink(day, h);
+		document.getElementById('nav-' + h).href = (hora === h && !linkCurrent) ? '' : makeLink(day, h);
 	});
 	if (isMonth) {
 		hora = 'index';
 	}
 	document.getElementById('nav-prev').href = makeLink(day.prev(), hora);
 	document.getElementById('nav-today').href = (!isMonth && !linkCurrent && today.format() === day.format()) ?
-		'?none' : makeLink(today, hora);
+		'' : makeLink(today, hora);
 	document.getElementById('nav-next').href = makeLink(day.next(), hora);
-	document.getElementById('nav-month').href = (isMonth && !linkCurrent) ? '?none' : makeLink(day, 'mensis');
+	document.getElementById('nav-month').href = (isMonth && !linkCurrent) ? '' : makeLink(day, 'mensis');
 }
 
 function updateCalendar (additional) {
@@ -312,7 +313,7 @@ function showMainPage () {
 }
 
 function ignoreClick (e) {
-	if (e.target.tagName !== 'A') {
+	if (e.target.tagName !== 'A' && !(e.target.className === 'link-like' && e.target.dataset.action)) {
 		e.stopPropagation();
 	}
 }
@@ -339,7 +340,7 @@ function addToAdditionalDays (newData) {
 function globalKeydownHandler (e) {
 	//convert Enter on pseudo-links to click
 	//close popup on Escape
-	//FIXME order of popups
+	//TODO improve TAB order
 	var el = document.activeElement;
 	if ((e.key === 'Enter' || e.which === 13) && el) {
 		if (el.id === 'catalogus-input') {
@@ -349,12 +350,26 @@ function globalKeydownHandler (e) {
 		}
 	} else if (e.key === 'Escape' || e.which === 27) {
 		togglePopup('');
+	} else if ((e.key === 'Tab' || e.which === 9) && e.target.dataset.focus) {
+		if (popupVisible[e.target.id.slice('button-'.length)]) {
+			document.getElementById(e.target.dataset.focus).focus();
+			e.preventDefault();
+		}
+	}
+}
+
+function globalFocusHandler (e) {
+	if (e.target.className === 'focus-trap') {
+		document.getElementById(e.target.dataset.focus).focus();
 	}
 }
 
 function globalClickHandler (e) {
 	var id, config, i, all, prev, input;
-	if (e.target.tagName === 'A' && !e.target.dataset.nativ) {
+	if (
+		(e.target.tagName === 'A' && !e.target.dataset.nativ) ||
+		(e.target.className === 'link-like' && e.target.dataset.action)
+	) {
 		navigate(e.target.dataset.action || e.target.getAttribute('href'));
 		e.preventDefault();
 	}
@@ -367,6 +382,8 @@ function globalClickHandler (e) {
 		audioManager.selectIndex(JSON.parse(e.target.dataset.audio));
 		if (!popupVisible.audio) {
 			togglePopup('audio');
+			document.getElementById('audio-output').scrollTop = 0; //this is usually done automatically
+			//but not when the popup was invisible
 		}
 		return;
 	}
@@ -379,7 +396,7 @@ function globalClickHandler (e) {
 			updateCalendar();
 			l10n.load(config.get('lang'), function () {
 				updateInterface();
-				navigate('?back');
+				navigate('?a=back');
 			});
 		}
 	}
@@ -437,7 +454,7 @@ function globalClickHandler (e) {
 				updateCalendar();
 				l10n.load(config.get('lang'), function () {
 					updateInterface();
-					navigate('?back');
+					navigate('?a=back');
 				});
 			} else {
 				window.alert(l10n.get('titulus-restituere-fefellit'));
@@ -589,6 +606,7 @@ function getLanguageSelect () {
 }
 
 function getCalendarSelect () {
+	/*jshint forin: false*/
 	var cal, calendar, ret = [], groupOpen = false;
 	for (cal in Day.calendars) {
 		calendar = Day.calendars[cal];
@@ -726,6 +744,7 @@ function init () {
 				updateNavigation(currentData.day, currentData.hora);
 
 				document.body.addEventListener('keydown', globalKeydownHandler, false);
+				document.body.addEventListener('focus', globalFocusHandler, true); //focus doesn't bubble, focusin has bad support
 				document.body.addEventListener('click', globalClickHandler, false);
 				document.body.addEventListener('input', globalInputHandler, false);
 				document.body.addEventListener('change', globalInputHandler, false);

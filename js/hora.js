@@ -1,4 +1,4 @@
-/*global getHora: true, formatSequence, l10n, Day, Config*/
+/*global getHora: true, formatSequence, l10n, util, Day, Config*/
 getHora =
 (function () {
 "use strict";
@@ -36,7 +36,7 @@ function getHymnusLectionis (date, config) {
 		case 2:
 			hymn = date.getSubPart() >= 2 ?
 				'lectionis-quadragesimae-2' :
-				'lectionis-quadragesimae' + (date.isSunday() ? '-1' : '');
+				'lectionis-quadragesimae' + (!config.get('bugCompat') && date.isSunday() ? '-1' : '');
 			break;
 		case 3: hymn = date.getSubPart() > 1 ? 'lectionis-paschale-1' : 'lectionis-paschale';
 		}
@@ -1565,7 +1565,8 @@ function getLectionisEaster (date) {
 		['ps-118-lectionis'],
 		'lectio-lectionis-p0-d',
 		'te-deum',
-		'oratio-dominica-0-p'
+		'oratio-dominica-0-p',
+		'conclusio'
 	];
 }
 
@@ -1720,9 +1721,13 @@ function getCompletorium (date, config) {
 		}
 	}
 
-	if (special && !config.get('bugCompat')) {
+	if (special/* && !config.get('bugCompat')*/) {
 		day = date.isEve() ? 6 : 0;
-		oratio = date.isSunday() ? day : 7;
+		if (!config.get('bugCompat')) {
+			oratio = date.isSunday() ? day : 7;
+		} else {
+			oratio = day;
+		}
 	} else {
 		oratio = day;
 	}
@@ -1749,34 +1754,36 @@ function getCompletorium (date, config) {
 function getOverview (date, config) {
 
 	function getInfoForDay (date) {
-		var info = [
-			util.replaceFormatString(l10n.get('dies-info'), function (c) {
-				switch (c) {
-				case 'a': return date.getYearLetter().charCodeAt(0) - 97;
-				case 'i': return date.getYearLectio().length - 1;
-				case 'w': return Math.floor(date.getDayInSequence() / 7);
-				case 'l': return date.getMoon() - 1; //change to 0-based
+		var time, info = [], title, other, omitted;
+
+		time = util.replaceFormatString(
+			l10n.get('dies-info-' + ['annum', 'adventus-nativitatis', 'quadragesimae', 'paschale'][date.getPart()]),
+			function (c) {
+				if (c === 'p') {
+					return date.getSubPart();
 				}
-			}),
-			util.replaceFormatString(
-				l10n.get('dies-info-' + ['annum', 'adventus-nativitatis', 'quadragesimae', 'paschale'][date.getPart()]),
-				function (c) {
-					if (c === 'p') {
-						return date.getSubPart();
-					}
-				}
-			)
-		], title, other;
+			}
+		);
+		info.push(util.replaceFormatString(l10n.get('dies-info'), function (c) {
+			switch (c) {
+			case 'a': return date.getYearLetter().charCodeAt(0) - 97;
+			case 'i': return date.getYearLectio().length - 1;
+			case 'l': return date.getMoon() - 1; //change to 0-based
+			case 't': return time;
+			case 'w': return Math.floor(date.getDayInSequence() / 7);
+			}
+		}));
 
 		title = date.getName();
 		if (title) {
-			title = l10n.getTitle(title);
+			title = l10n.getTitle(title) + ' (' + l10n.get(date.getType() + '-littera') + ')'; //TODO l10n?
 		} else if (date.isSunday()) {
 			title = l10n.formatSunday(date.getSunday());
 		}
 		if (title) {
 			info.push(title);
 		}
+
 		other = date.getAlternatives().filter(function (name) {
 			return name !== '';
 		}).map(function (name) {
@@ -1785,14 +1792,15 @@ function getOverview (date, config) {
 		if (other.length) {
 			info.push(l10n.get('dies-info-alternativus') + ' ' + other.join('; '));
 		}
-		other = Object.keys(date.getOmitted()).filter(function (name) {
-			return name !== '';
-		}).map(function (name) {
-			return l10n.getTitle(name);
+
+		omitted = date.getOmitted();
+		other = Object.keys(omitted).map(function (name) {
+			return l10n.getTitle(name) + ' (' + l10n.get(omitted[name] + '-littera') + ')'; //TODO l10n?
 		});
 		if (other.length) {
 			info.push(l10n.get('dies-info-omittantes') + ' ' + other.join('; '));
 		}
+
 		return info;
 	}
 
@@ -1805,7 +1813,6 @@ function getOverview (date, config) {
 		{type: 'title', title: 'liturgia-horarum', date: date},
 		getHora.makeSelect(date),
 		date.getType(),
-		date.getAbout(),
 		{type: 'notes', notes: date.getNotes()},
 		{type: 'link', href: getHora.makeLink(date, 'invitatorium'), label: 'invitatorium',
 			cls: current === 'invitatorium' ? 'current' : ''},
@@ -1819,7 +1826,8 @@ function getOverview (date, config) {
 		//TODO? antizipierte Lesehore
 		{type: 'link', href: getHora.makeLink(date, 'completorium'),
 			labelHtml: l10n.get('completorium') + eve, cls: current === 'completorium' ? 'current' : ''},
-		{type: 'notes', notes: getInfoForDay(date)}
+		{type: 'notes', notes: getInfoForDay(date)},
+		date.getAbout()
 	];
 }
 
@@ -1843,7 +1851,7 @@ function getCatalogue (data) {
 			return {type: 'raw', html: l10n.get(entry)};
 		}
 		if (entry === '') {
-			return {type: 'raw', html: '<p class="link"><a href="" data-action="?back">' + l10n.get('retrorsum') + '</a></p>'};
+			return {type: 'raw', html: '<p class="link"><span class="link-like" tabindex="0" data-action="?a=back">' + l10n.get('retrorsum') + '</span></p>'};
 		}
 		content = l10n.get(entry, '');
 		if (!content) {
@@ -1945,7 +1953,8 @@ function getMonth (date) {
 		}
 	}
 	omitted = omitted.length ?
-		'<div class="p additamentum">' + l10n.get('dies-omittantes') + '<ul><li>' + omitted.join('</li><li>') + '</li></ul></div>' :
+		'<div class="p additamentum">' + l10n.get('dies-omittantes') +
+			'<ul><li>' + omitted.join('</li><li>') + '</li></ul></div>' :
 		'';
 	return [
 		{type: 'month', date: date, color: maxColor},

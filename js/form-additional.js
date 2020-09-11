@@ -14,6 +14,7 @@ var input,
 	availableKeys;
 
 function initKeys () {
+	/*jshint forin: false*/
 	var cal;
 
 	function addEntry (entry) {
@@ -88,6 +89,7 @@ function onActionChange () {
 }
 
 function onNameChange () {
+	/*jshint forin: false*/
 	var key, date = dayInput.value + '|' + monthInput.value, name = nameInput.value, suggestions0 = [], suggestions1 = [];
 	for (key in availableKeys) {
 		if (!matchesPartialName(name, key)) {
@@ -106,7 +108,6 @@ function onNameChange () {
 	areaSuggestions.innerHTML = suggestions0.map(function (suggestion) {
 		return '<code data-suggestion="' + suggestion + '">' + suggestion + '</code>';
 	}).join(' – ');
-	//TODO
 }
 
 function onSuggestionClick (e) {

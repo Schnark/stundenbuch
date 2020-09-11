@@ -1,4 +1,5 @@
 /*global Config, Day, l10n*/
+/*jshint forin: false*/
 (function () {
 "use strict";
 

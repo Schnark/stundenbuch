@@ -74,7 +74,7 @@ function formatNotes (data) {
 	return '<p class="additamentum">' + data.notes.join('\n').replace(/</g, '&lt;').replace(/\n/g, '<br>') + '</p>';
 }
 
-function formatBlock (text, audio, type, easter, debug) {
+function formatBlock (text, audio, type, easter, debug, raw) {
 	var lines, i;
 
 	function addCite (all, cite) {
@@ -84,6 +84,10 @@ function formatBlock (text, audio, type, easter, debug) {
 			}
 			return '<span>' + cite + '</span>';
 		}).join('; ') + ')</cite>';
+	}
+
+	if (raw) {
+		return '<pre>' + (debug ? debug + '\n\n' : '') + text + '</pre>';
 	}
 
 	lines = text.replace(/<([^<>]*)>/g, addCite).split('\n');
@@ -118,7 +122,7 @@ function formatBlock (text, audio, type, easter, debug) {
 		.replace(/<p>\{antiphona\}<\/p>/g, '')
 		.replace(/<p>\{antiphona\}/g, '<p class="antiphona"><span class="antiphona-1">' + l10n.get('antiphona') + ' </span>')
 		.replace(/<p>~(\S+) (.*?)<\/p>/g, function (all, msg, label) {
-			return formatLink({href: '?catalogus,' + msg, labelHtml: label});
+			return formatLink({href: '?c=' + msg, labelHtml: label});
 		});
 	switch (type) {
 	case 'responsorium-lectionis':
@@ -135,7 +139,7 @@ function formatBlock (text, audio, type, easter, debug) {
 	}
 	if (audio) {
 		text = text.replace('</h2>',
-			'&nbsp;<span class="audio" data-audio="' + util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>');
+			'&nbsp;<span class="audio" tabindex="0" data-audio="' + util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>');
 	}
 	if (debug) {
 		text = '<pre>' + debug + '</pre>' + text;
@@ -398,7 +402,8 @@ function formatSequence (seq, time, secondary) {
 			(part.slice(0, 'responsorium-'.length) === 'responsorium-' && 'responsorium') ||
 			(part.slice(0, 'versus-'.length) === 'versus-' && 'versus'),
 			time === 'p',
-			debug && ('[' + part + ']')
+			debug && ('[' + part + ']'),
+			part.slice(0, 6) === 'audio-'
 		);
 	});
 }

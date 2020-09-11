@@ -1,4 +1,4 @@
-/*global Day, console*/
+/*global Day, util, console*/
 (function () {
 "use strict";
 
@@ -136,9 +136,12 @@ function makeTable (table, langs, hora, days, extra, compare, callback) {
 		th = document.createElement('th');
 		th.textContent = {
 			de: 'Deutsch',
-			'de-x-local': 'Deutsch',
+			'de-x-combined': 'Deutsch (neuere Variante)',
+			'de-x-app': 'Deutsch (App)',
 			la: 'Latein',
-			en: 'Englisch'
+			'la-x-app': 'Latein (App)',
+			en: 'Englisch',
+			mul: 'Latein (Variante)'
 		}[langs[i]] || langs[i];
 		row.appendChild(th);
 	}
@@ -160,9 +163,12 @@ function getDays (start, length) {
 
 function init (langs, hora, start, length, extra, compare, doit) {
 	document.getElementById('de').checked = langs.indexOf('de') > -1;
-	document.getElementById('de-x-local').checked = langs.indexOf('de-x-local') > -1;
+	document.getElementById('de-x-combined').checked = langs.indexOf('de-x-combined') > -1;
+	document.getElementById('de-x-app').checked = langs.indexOf('de-x-app') > -1;
 	document.getElementById('la').checked = langs.indexOf('la') > -1;
+	document.getElementById('la-x-app').checked = langs.indexOf('la-x-app') > -1;
 	document.getElementById('en').checked = langs.indexOf('en') > -1;
+	document.getElementById('mul').checked = langs.indexOf('mul') > -1;
 	document.getElementById('hora').value = hora;
 	document.getElementById('start').value = start.format();
 	document.getElementById('length').value = length;
@@ -184,30 +190,16 @@ function init (langs, hora, start, length, extra, compare, doit) {
 }
 
 function run () {
-	var params = {};
-	location.search.slice(1)
-		.split('&')
-		.forEach(function (str) {
-			var pos = str.indexOf('='), key, val;
-			if (pos !== -1) {
-				key = decodeURIComponent(str.slice(0, pos));
-				val = decodeURIComponent(str.slice(pos + 1));
-				if (key === 'lang') {
-					params.lang = params.lang || [];
-					params.lang.push(val);
-				} else {
-					params[key] = val;
-				}
-			}
-		});
-	if (params.lang) {
-		params.lang = params.lang.filter(function (lang) {
-			return ['de', 'de-x-local', 'la', 'en'].indexOf(lang) !== -1;
-		});
+	var params = util.getUrlParams('', ['lang']);
+	params.lang = params.lang.filter(function (lang) {
+		return ['de', 'de-x-combined', 'de-x-app', 'la', 'la-x-app', 'en', 'mul'].indexOf(lang) !== -1;
+	});
+	if (params.lang.length === 0) {
+		params.lang = ['de', 'la'];
 	}
 	window.addEventListener('message', onMessage, false);
 	init(
-		params.lang || ['de', 'la'],
+		params.lang,
 		params.hora || '',
 		new Day(params.start),
 		params.length || 1,

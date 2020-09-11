@@ -1,5 +1,6 @@
 /*global Day, Config, l10n, util*/
 /*global console*/
+/*jshint forin: false*/
 (function () {
 "use strict";
 
@@ -59,7 +60,7 @@ function getTexts (name, templates) {
 function formatLink (name, key) {
 	var texts = getTexts(name, TEXTS[key]);
 	if (texts.length) {
-		return '<a href="?catalogus,' + texts.join(',') + '">' + key + '</a>';
+		return '<a href="?c=' + texts.join(',') + '">' + key + '</a>';
 	}
 }
 

@@ -99,6 +99,7 @@ Day.addNote = function (d, m, note) {
 };
 
 Day.initCalendar = function (name) {
+	/*jshint forin: false*/
 	var extra, key, i;
 	if (!Day.calendars[name]) { //shouldn't happen
 		name = '';
@@ -393,6 +394,10 @@ Day.prototype.calculateNumbers = function () {
 		this.color = special.color;
 	}
 	this.special = special;
+};
+
+Day.prototype.isRegular28Feb = function () {
+	return this.getMonth() === 1 && this.getDate() === 28 && this.next().getDate() === 1;
 };
 
 Day.prototype.getMoon = function () {

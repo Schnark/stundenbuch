@@ -188,7 +188,7 @@ Day.calendars = {
 				}],
 				[-1, 'easter', 'sabbatum-sanctum', 1, 'dominus', {
 					type: '',
-					color: false,
+					color: false, //TODO 'red'? 'black'?
 					tedeum: false,
 					texts: {
 						hymnus: {
@@ -958,6 +958,7 @@ Day.calendars = {
 					tedeum: true
 				}],
 				[4, 10, 'franciscus', 2, ['religiosus', 'vir']],
+				[5, 10, 'faustina-kowalska', 3, 'virgo'],
 				[6, 10, 'bruno', 3, 'pastor'],
 				[7, 10, 'maria-rosarium', 2, 'maria', {
 					texts: {
@@ -1091,8 +1092,8 @@ Day.calendars = {
 				'vincentius-ferrer', 'georgius', 'petrus-chanel', 'nereus-achilleus', 'beda-venerabilis',
 				'paulus-vi', 'romualdus', 'paulinus-nolanus', 'maria-goretti', 'camillus-lellis',
 				'petrus-chrysologus', 'basilica-maria', 'pontianus-hippolytus', 'ioseph-calasanz', 'cosmas-damianus',
-				'dionysius', 'hedvigis', 'antonius-maria-claret', 'gertrudis', 'columbanus',
-				'ioannes-didacus', 'petrus-canisius', 'thomas-becket'
+				'faustina-kowalska', 'dionysius', 'hedvigis', 'antonius-maria-claret', 'gertrudis',
+				'columbanus', 'ioannes-didacus', 'petrus-canisius', 'thomas-becket'
 			]
 		]
 	},
@@ -1130,7 +1131,7 @@ Day.calendars = {
 				[23, 1, 'heinrich-seuse', 3, ['religiosus', 'vir', 'beatus'], 'Heinrich Seuse'],
 				[4, 2, 'rabanus-maurus', 3, 'pastor', 'Rabanus Maurus'],
 				[24, 2, 'matthias', 1, ['apostolus', 'martyr']], //TODO apostolus2 ?
-				[25, 2, 'walburga', 3, 'mulier', 'Walburga'],
+				[25, 2, 'walburga', 3, ['religiosus', 'mulier'], 'Walburga'],
 				[6, 3, 'fridolin', 3, ['religiosus', 'vir'], 'Fridolin'],
 				[9, 3, 'bruno-querfurt', 3, ['martyr', 'vir'], 'Bruno von Querfurt'],
 				[14, 3, 'mathilde', 3, 'mulier', 'Mathilde'],
@@ -1317,6 +1318,12 @@ Day.calendars = {
 			[42, 'e', 'Welttag der sozialen Kommunikationsmittel'],
 			[26, 10, 'Nationalfeiertag']
 			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
+		],
+		groups: [
+			['maria-ecclesia'],
+			['maria-ecclesia'],
+			['damian-veuster', 'maria-ecclesia'],
+			['maria-ecclesia']
 		]
 	},
 	'de-CH': {
@@ -1338,6 +1345,12 @@ Day.calendars = {
 			[1, 8, 'Schweizer Nationalfeiertag'],
 			[-15, 9, 'Eidgenössischer Dank-, Buss- und Bettag']
 			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
+		],
+		groups: [
+			['hieronymus'],
+			['hieronymus'],
+			['urs-viktor'],
+			['hieronymus']
 		]
 	},
 

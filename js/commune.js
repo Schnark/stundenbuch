@@ -365,9 +365,9 @@ Day.getText = function (data, element, hora, part, yearABC, yearIII) {
 		return;
 	case 'p':
 		if (element === 'antiphona' && hora !== 'invitatorium' && data.abc) {
-			 append = '-' + yearABC;
+			append = '-' + yearABC;
 		} else if (element === 'lectio' && hora === 'lectionis' && l10n.get('modus-lectionis') === '2' && data.iii) {
-			append = '-' + yearIII
+			append = '-' + yearIII;
 		}
 		keys = getKeys(element, hora, data.name + append);
 		/*falls through*/
@@ -530,8 +530,8 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		val.order += 0.5;
 	}
 	if (
-		rank === 0 ||
-		(rank === 1 && types.indexOf('dominus') > -1 && Config.getConfig().get('bugCompat'))
+		rank === 0 /*||
+		(rank === 1 && types.indexOf('dominus') > -1 && Config.getConfig().get('bugCompat'))*/
 	) {
 		val.eve = true;
 		val.completorium = true;
@@ -623,6 +623,9 @@ Day.getSpecialData = function (day, order, data) {
 		keys.push('sunday/' + data.s);
 	}
 	keys.push('easter/' + data.e);
+	if (day.isRegular28Feb()) {
+		keys.push('2/29');
+	}
 
 	Day.additionalDays.filter(function (d) {
 		return keys.indexOf(d.m + '/' + d.d) > -1;

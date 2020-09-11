@@ -234,14 +234,15 @@ a:active,
 	text-decoration: underline;
 }
 
-a[href="?none"] {
+a[href=""] {
 	cursor: text;
 	text-decoration: none;
 	font-weight: bold;
 	color: inherit !important;
 }
 
-.link a {
+.link a,
+.link .link-like {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -298,7 +299,7 @@ body.skin-light {
 .skin-light #main h3,
 .skin-light #main h4,
 .skin-light #main h5 {
-	color: #9A373B;
+	color: #9a373b;
 }
 
 .skin-light .antiphona-1,
