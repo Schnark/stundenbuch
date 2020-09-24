@@ -3,7 +3,6 @@
 "use strict";
 //For historic development of the calendars see NOTES.txt
 
-//TODO Kollissionen mit Eigen-Hochfesten behandeln, vor November 2023
 /*
 Typen:
 ordinarium
@@ -913,11 +912,11 @@ Day.calendars = {
 				[29, 9, 'archangeli', 1, '', {
 					texts: {
 						cantica: {
-							lectionis: ['ps-97', 'ps-103-i', 'ps-103-ii'],
+							lectionis: ['ps-97', 'ps-103-i-archangeli', 'ps-103-ii-archangeli'],
 							tertia: ['', '', ''],
 							sexta: ['', '', ''],
 							nona: ['', '', ''],
-							vespera: ['ps-8', 'ps-138', 'apc-4-5']
+							vespera: ['ps-8', 'ps-138', 'col-1']
 						},
 						lectio: {
 							laudes: 'gn-28-12-13',

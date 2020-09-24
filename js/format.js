@@ -139,7 +139,9 @@ function formatBlock (text, audio, type, easter, debug, raw) {
 	}
 	if (audio) {
 		text = text.replace('</h2>',
-			'&nbsp;<span class="audio" tabindex="0" data-audio="' + util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>');
+			'&nbsp;<span class="audio" tabindex="0" data-audio="' +
+			util.htmlEscape(JSON.stringify(audio)) + '">♪</span></h2>'
+		);
 	}
 	if (debug) {
 		text = '<pre>' + debug + '</pre>' + text;

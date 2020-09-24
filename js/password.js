@@ -21,7 +21,7 @@ function loadPassword () {
 
 function storePassword (pw) {
 	try {
-		return localStorage.setItem(PW_KEY, pw);
+		localStorage.setItem(PW_KEY, pw);
 	} catch (e) {
 	}
 }

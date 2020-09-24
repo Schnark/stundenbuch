@@ -744,7 +744,8 @@ function init () {
 				updateNavigation(currentData.day, currentData.hora);
 
 				document.body.addEventListener('keydown', globalKeydownHandler, false);
-				document.body.addEventListener('focus', globalFocusHandler, true); //focus doesn't bubble, focusin has bad support
+				//focus doesn't bubble, focusin has bad support
+				document.body.addEventListener('focus', globalFocusHandler, true);
 				document.body.addEventListener('click', globalClickHandler, false);
 				document.body.addEventListener('input', globalInputHandler, false);
 				document.body.addEventListener('change', globalInputHandler, false);

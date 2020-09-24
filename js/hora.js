@@ -1851,7 +1851,11 @@ function getCatalogue (data) {
 			return {type: 'raw', html: l10n.get(entry)};
 		}
 		if (entry === '') {
-			return {type: 'raw', html: '<p class="link"><span class="link-like" tabindex="0" data-action="?a=back">' + l10n.get('retrorsum') + '</span></p>'};
+			return {
+				type: 'raw',
+				html: '<p class="link"><span class="link-like" tabindex="0" data-action="?a=back">' +
+					l10n.get('retrorsum') + '</span></p>'
+			};
 		}
 		content = l10n.get(entry, '');
 		if (!content) {
@@ -1882,13 +1886,7 @@ function getMonth (date) {
 	function addOmitted (date) {
 		var data = date.getOmitted(), name, rank;
 		for (name in data) {
-			if (
-				data.hasOwnProperty(name) &&
-				[
-					'familia', 'iosephus', 'annuntiatio', 'nativitatis-ioannes',
-					'petrus-paulus', 'maria-immaculata'
-				].indexOf(name) === -1 //FIXME alle Hochfeste
-			) {
+			if (data.hasOwnProperty(name) && data[name] !== 'sollemnitas') {
 				rank = data[name];
 				omitted.push(
 					l10n.getTitle(name) + ' ' +

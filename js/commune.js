@@ -564,6 +564,26 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		val.move = Day.specialDays[key].move;
 	}
 	Day.specialDays[key] = val;
+	if (local && rank === 0) {
+		if (d > 0 && !isNaN(m)) {
+			//this will break for a sollemnity on Feb 28, if that falls on a sunday in lent in a leap year,
+			//but there is no easy solution, and it's not really needed, either
+			d = new Day(1999, m, d);
+			d = d.next();
+			m = d.getMonth();
+			d = d.getDate();
+		} else {
+			//m should be 'easter' in this case, but if it isn't, nothing will break, either
+			d++;
+		}
+		Day.addSpecialDay(d, m, '', 4, '', {
+			move: function (day) {
+				if (day.prev().getOmitted()[name]) {
+					return key;
+				}
+			}
+		});
+	}
 };
 
 Day.addSpecialDays = function (days, extend) {
@@ -573,7 +593,9 @@ Day.addSpecialDays = function (days, extend) {
 		Day.additionalDays = [];
 	}
 	for (i = 0; i < days.length; i++) {
-		Day.addSpecialDay.apply(this, days[i], extend); //FIXME extend zu grob
+		/*data = util.clone(days[i]);
+		data[6] = extend; //FIXME extend zu grob*/
+		Day.addSpecialDay.apply(this, days[i]);
 	}
 };
 

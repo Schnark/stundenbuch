@@ -479,8 +479,8 @@ Renderer.prototype.renderAccent = function (data, accent, text) {
 			image += '<line x1="' + (data.width / 2 - 1) + '" y1="7" x2="' + (data.width / 2 + 2) + '" y2="2" />';
 	}
 	if (text) { //TODO 7px?
-		image += '<text x="' + (data.width / 2) + '" y="' + (this.height - 1 - data.textShift) + '" text-anchor="middle" font-size="6px" ' +
-			'stroke="none" fill="currentColor">' + text + '</text>';
+		image += '<text x="' + (data.width / 2) + '" y="' + (this.height - 1 - data.textShift) + '" ' +
+			'text-anchor="middle" font-size="6px" stroke="none" fill="currentColor">' + text + '</text>';
 	}
 	return this.wrapSvg(data.width, image);
 };
