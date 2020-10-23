@@ -166,7 +166,7 @@ Day.calendars = {
 				}],
 				[-2, 'easter', 'passionis', 1, 'dominus', {
 					type: '',
-					color: 'red', //TODO ['violet', 'red']?
+					color: 'red',
 					tedeum: false,
 					texts: {
 						hymnus: {
@@ -187,7 +187,7 @@ Day.calendars = {
 				}],
 				[-1, 'easter', 'sabbatum-sanctum', 1, 'dominus', {
 					type: '',
-					color: false, //TODO 'red'? 'black'?
+					color: 'black',
 					tedeum: false,
 					texts: {
 						hymnus: {
@@ -1206,7 +1206,7 @@ Day.calendars = {
 		notes: [ //TODO mehrsprachig
 			[1, 1, 'Weltfriedenstag'],
 			[18, 1, 'Beginn der Weltgebetswoche für die Einheit der Christen'],
-			[3, 'sunday', 'Sonntag des Wortes Gottes'],
+			[3, 'sunday', 'Sonntag des Wortes Gottes'], //in Deutschland eigentlich immer am letzten Sonntag im Januar
 			[27, 1, 'Gedenktag für die Opfer des Nationalsozialismus'],
 			[2, 2, 'Tag des geweihten Lebens'],
 			[8, 2, 'Internationaler Tag des Gebets und der Reflexion gegen den Menschenhandel'],
@@ -1382,16 +1382,13 @@ Day.calendars = {
 				//21. 1. Meinrad (bereits in de)
 				[22, 1, 'vinzenz-pallotti', 3, 'fundator', 'Vinzenz Pallotti'],
 				//23. 1. Heinrich Seuse (bereits in de)
-				[27, 2, 'gregor-narek', 3, 'doctor', 'Gregor von Narek'],
 				//6. 3. Fridolin von Säckingen (bereits in de)
 				//15. 3. Klemens Maria Hofbauer (bereits in de)
-				[24, 3, 'oscar-arnulfo-romero', 3, ['martyr', 'vir'], 'Oscar Arnulfo Romero'],
 				//19. 4. Leo IX. (bereits in de)
 				//24. 4. Fidelis von Sigmaringen (bereits in '')
 				[26, 4, 'trudpert', 3, ['martyr', 'vir'], 'Trudpert'],
 				//27. 4. Petrus Kanisius (bereits in de)
 				[8, 5, 'ulrika-franziska-nisch-hegne', 3, ['virgo', 'beatus'], 'Ulrika Franziska Nisch von Hegne'],
-				[10, 5, 'johannes-avila', 3, 'doctor', 'Johannes von Avila'],
 				[27, 6, 'heimerad-messkirch', 3, 'pastor', 'Heimerad aus Meßkirch'],
 				//4. 7. Ulrich (bereits in de)
 				//8. 7. Kilian (bereits in de)
@@ -1410,6 +1407,7 @@ Day.calendars = {
 				[1, 9, 'pelagius', 3, ['martyr', 'vir'], 'Pelagius'],
 				[1, 9, 'verena-zurzach', 3, 'virgo', 'Verena'],
 				[5, 9, 'teresa-kalkutta', 3, ['misericordia', 'mulier'], 'Teresa von Kalkutta'],
+				[9, 9, 'alfons-maria-eppinger', 3, ['virgo', 'beatus'], 'Alfons Maria'],
 				//18. 9. Lambert (bereits in de)
 				[22, 9, 'landelin', 3, ['martyr', 'vir'], 'Landelin'],
 				//25. 9. Niklaus von der Flüe (bereits in de)
@@ -1463,11 +1461,11 @@ Day.calendars = {
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
-				'oskar-saier', 'johannes-avila', 'ulrich-zell', 'bonaventura', 'monica', 'landelin', 'otmar',
+				'oskar-saier', 'ulrich-zell', 'bonaventura', 'monica', 'landelin', 'otmar',
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
-				'gregor-narek', 'bonaventura', 'monica', 'pelagius', 'john-henry-newman',
+				'bonaventura', 'monica', 'pelagius', 'alfons-maria-eppinger', 'john-henry-newman',
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[

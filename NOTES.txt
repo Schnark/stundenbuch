@@ -300,26 +300,14 @@ Hl. Vinzenz Pallotti (22. Jan., g)
 Sel. Rupert Mayer (unverändert in Kalender für Deutschland aufgenommen)
 Hl. Johannes Nepomuk Neumann (unverändert in Kalender für Deutschland aufgenommen)
 
-2015:
-Sel. Paul VI. (26. Sep., g)
-(Direktorium)
-
-2018:
-Hl. Gregor von Narek (27. Feb., g)
-Hl. Johannes von Avila (10. Mai, g)
-(Direktorium)
-
 2019:
 Maria, Mutter der Kirche (Mo nach Pfingsten→Sa nach Pfingsten, G→g)
 (Direktorium)
 
-2019:
-Hl. Oscar Romero (24. Mär., g)
+2021:
+Sel. Alfons Maria Eppinger (9. Sep., g)
 (Direktorium)
 
-2019:
-Hl. Paul VI. (mit anderem Datum in Generalkalender aufgenommen)
-(https://www.ebfr.de/html/media/dl.html?i=867188)
 
 Direktorien:
 2011: http://www.ebfr.de/lib/download.php?key=141b8d4a6092&file=/dynamic/datei/direktorium_2011.pdf&name=direktorium_2011.pdf
@@ -331,6 +319,14 @@ Direktorien:
 2018: https://www.ebfr.de/html/media/dl.html?i=976961 oder https://www.ebfr.de/html/media/dl.html?i=474949
 2019: https://www.ebfr.de/html/media/dl.html?i=976962 oder http://www.bistum-freiburg.de/html/media/dl.html?i=791421
 2020: https://www.ebfr.de/html/media/dl.html?i=976956
+2021: https://www.ebfr.de/html/media/dl.html?i=1187811 mit Ergänzungen https://www.ebfr.de/html/media/dl.html?i=1184356
+
+Nicht im Kalender, aber im Direktorium verzeichnet:
+
+Sel. Paul VI. (26. Sep., 2015–2019, seither im Generalkalender)
+Hl. Gregor von Narek (27. Feb., seit 2018)
+Hl. Johannes von Avila (10. Mai, seit 2018)
+Hl. Oscar Romero (24. Mär., seit 2019)
 
 
 Lateinische Texte
@@ -366,7 +362,7 @@ Ordo Cantus Officii
 
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1983/202.html: Ordo Cantus Officii
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1983/204-205.html: Ordo Cantus Officii
-http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/2015/587-592.html: Ordo Cantus Officii editio typica alera
+http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/2015/587-592.html: Ordo Cantus Officii editio typica altera
 
 Martyrologium
 -------------
@@ -439,7 +435,7 @@ Für folgende Texte steht eine deutsche Übersetzung mit anschließender Approba
 - Unsere Liebe Frau von Loreto
 - Hl. Faustina Kowalska
 
-* Lesung der Lesehore für (gekennzeichnete Tage haben meist nicht approbierten Text im Freiburger Direktorium 2018, https://www.ebfr.de/html/media/dl.html?i=976961):
+* Lesung der Lesehore für (gekennzeichnete Tage haben meist nicht approbierten Text im Freiburger Direktorium 2018, https://www.ebfr.de/html/media/dl.html?i=976961; oder im Ergänzungsband 2021, https://www.ebfr.de/html/media/dl.html?i=1184356):
 - Hl. Petrus Claver
 - Hl. Pierre-Julien Eymard
 - Hl. Ludwig Maria Grignion de Montfort (*)
@@ -457,7 +453,7 @@ Für folgende Texte steht eine deutsche Übersetzung mit anschließender Approba
 - Maria, Mutter der Kirche
 - Hl. Paul VI. (*)
 - Unsere Liebe Frau von Loreto
-- Hl. Faustina Kowalska
+- Hl. Faustina Kowalska (*)
 
 * Sonstige Texte
 - Neuerungen der editio typica altera (insb. Antiphonen Sonntage geprägte Zeiten in Lesejahr B, C)
@@ -467,18 +463,20 @@ Von diesen Texten habe ich für folgende Übersetzungen aus alternativen Quellen
 
 * Orationen für:
 - Maria, Mutter der Kirche (Votivmesse, http://www.peterskirche.at/messbuch/1080-MBII1141.html; https://dli.institute/wp/news/maria-mutter-der-kirche/)
-- Unsere Liebe Frau von Loreto (Marienmesse, http://pretiosaliturgica.blogspot.com/2019/11/u-l-f-von-loreto.html; https://dli.institute/wp/news/neuer-marien-gedenktag-im-generalkalender/)
+- Hl. Paul VI. (Ergänzungsband Direktorium 2021)
+- Unsere Liebe Frau von Loreto (Ergänzungsband Direktorium 2021)
 
 * Lesung der Lesehore für:
 - Heiligster Name Jesu (Direktorium 2018, Franziskaner)
 - Hl. Josefine Bakhita (App, https://play.google.com/store/apps/details?id=stundenbuch.stundenbuch)
 - Hl. Rita von Cascia (App)
-- Hl. Paul VI. (Quelle nicht mehr auffindbar)
+- Hl. Paul VI. (Ergänzungsband Direktorium 2021)
+- Hl. Faustina Kowalska (Ergänzungsband Direktorium 2021)
 
 Diese Texte müssten eigentlich existieren, sind aber in keiner mir bekannten Quelle verfügbar:
 
 * Lesung der Lesehore für:
-- Sel. Marcel Callo (Alternative evt. http://www.fen-net.de/~ea1599/marcel_callo/web/lesungen.pdf)
+- Sel. Marcel Callo (Alternative evt. http://www.fen-net.de/~ea1599/marcel_callo/web/lesungen.pdf, oder Direktorium 2021)
 
 
 Fehlende Texte (Diözesankalender Freiburg)
@@ -496,7 +494,7 @@ Vermutlich approbierte Texte, vorhanden:
 - Sel. Karl Leisner (Direktorium 2018, approbiert)
 - Hl. Verena von Zurzach (Schweizer Benediktiner, https://www.st-verena.ch/st-verena/gebet-und-texte/gebete-fuer-die-liturgie/)
 - Hl. Otmar (https://www.bistum-stgallen.ch/fileadmin/kundendaten/Bistum/Heilige/Otmar/Hl._Otmar_-_Proprien_zu_Messbuch_und_Lektionar.pdf)
-- Sel. Liborius Wagner (https://pg-stadtlauringen.de/%C3%BCber-uns/pfarreiengemeinschaft-und-pfarreien#gebete-und-lieder)
+- Sel. Liborius Wagner (Ergänzungsband Direktorium 2021; s.a. https://pg-stadtlauringen.de/%C3%BCber-uns/pfarreiengemeinschaft-und-pfarreien#gebete-und-lieder)
 
 * Lesung der Lesehore für:
 - Sel. Ulrika von Hegne (https://www.franziskanische-selige-heilige.de/mai/ulrika-von-hegne/, s.a. Direktorium 2018, approbiert)
@@ -525,29 +523,23 @@ Vermutlich approbierte Texte, nicht vorhanden:
 - Hl. Verena von Zurzach
 - Hl. Landelin
 - Hl. Otmar
-- Sel. Liborius Wagner
+- Sel. Liborius Wagner (mehrere Texte im Ergänzungsband Direktorium 2021)
 
 Vermutlich nicht (zumindest nicht für Freiburg) approbierte Texte, trotzdem vorhanden:
 
 * Orationen für:
 - Hl. Vinzenz Pallotti (Direktorium 2018, Schweiz, http://liturgie.ch/images/liturgie/praxis/direktorium/pdf/lesehore-vinzenz-pallotti.pdf)
-- Hl. Oskar Romero (https://www.steyler.eu/svd/seelsorge/anregung/artikel/2018/Heilige/oscar-romero-Hl-liturgie.php)
 - Hl. Teresa von Kalkutta (Direktorium 2018, App)
 - Hl. Johannes Heinrich Newman (Direktorium 2018, App, https://www.oratoriosanfilippo.org/Newman-germanice.pdf)
+- Sel. Alfons Maria Eppinger (Ergänzungsband Direktorium 2021)
 
 * Lesung der Lesehore für:
 - Hl. Vinzenz Pallotti (Direktorium 2018, Schweiz, http://liturgie.ch/images/liturgie/praxis/direktorium/pdf/lesehore-vinzenz-pallotti.pdf)
 - Hl. Teresa von Kalkutta (App, Direktorium 2018 hat privaten Vorschlag)
 - Hl. Johannes Heinrich Newman (https://www.oratoriosanfilippo.org/Newman-germanice.pdf, App, Direktorium 2018 hat privaten Vorschlag)
+- Sel. Alfons Maria Eppinger (Ergänzungsband Direktorium 2021)
 
 Vermutlich nicht approbierte Texte, nicht vorhanden:
 
-* Orationen für:
-- Hl. Gregor von Narek
-- Hl. Johannes von Avila
-
 * Lesung der Lesehore für:
 - Pfingstmontag
-- Hl. Gregor von Narek
-- Hl. Oskar Romero
-- Hl. Johannes von Avila (Direktorium 2018 hat privaten Vorschlag)
