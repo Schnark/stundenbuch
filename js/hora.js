@@ -1754,7 +1754,7 @@ function getCompletorium (date, config) {
 function getOverview (date, config) {
 
 	function getInfoForDay (date) {
-		var time, info = [], title, other, omitted;
+		var time, info = [], title, type, other, omitted;
 
 		time = util.replaceFormatString(
 			l10n.get('dies-info-' + ['annum', 'adventus-nativitatis', 'quadragesimae', 'paschale'][date.getPart()]),
@@ -1776,7 +1776,11 @@ function getOverview (date, config) {
 
 		title = date.getName();
 		if (title) {
-			title = l10n.getTitle(title) + ' (' + l10n.get(date.getType() + '-littera') + ')'; //TODO l10n?
+			title = l10n.getTitle(title);
+			type = date.getType();
+			if (type) {
+				title += ' (' + l10n.get(type + '-littera') + ')'; //TODO l10n?
+			}
 		} else if (date.isSunday()) {
 			title = l10n.formatSunday(date.getSunday());
 		}

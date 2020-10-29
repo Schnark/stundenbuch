@@ -6,7 +6,7 @@
 
 var SOURCES, OMIT, TEXTS, calendar;
 
-SOURCES = {
+SOURCES = { //{} for 'la', 'en'
 	150: 'EU',
 	'de': 'RK',
 	'de-DE': 'DE',
@@ -25,7 +25,7 @@ OMIT = [
 ];
 
 TEXTS = {
-	'E': ['*-introductio'],
+	'E': ['*-introductio'], //'I' for 'la', 'en'
 	'H': [
 		'hymnus-vespera-*-v', 'hymnus-*', 'hymnus-lectionis-*', 'hymnus-laudes-*',
 		'hymnus-tertia-*', 'hymnus-sexta-*', 'hymnus-nona-*', 'hymnus-vespera-*'
@@ -48,6 +48,12 @@ TEXTS = {
 };
 
 calendar = {};
+
+function normalize (str) {
+	return str.toLowerCase()
+		.replace(/ä/g, 'a').replace(/ö/g, 'o')
+		.replace(/ü/g, 'u').replace(/ß/g, 'ss');
+}
 
 function getTexts (name, templates) {
 	return templates.map(function (str) {
@@ -96,12 +102,24 @@ function formatInfo (source, day, month, rank) {
 	return info.join(', ');
 }
 
+function getAliases (name) {
+	var aliases = name.split(/, | und /g);
+	aliases.shift();
+	if (aliases[aliases.length - 1] === 'Gefährten') {
+		aliases.pop();
+	}
+	return aliases;
+}
+
 function addCalendar (cal) {
 	Day.calendars[cal].getEntries(new Config({})).forEach(function (entry) {
-		var name = entry[2];
+		var name = entry[2], commune = entry[4];
 		if (name && OMIT.indexOf(name) === -1) {
 			if (!calendar[name]) {
-				calendar[name] = {title: l10n.get(name), info: [], texts: formatTexts(name)};
+				if (!Array.isArray(commune)) {
+					commune = [commune];
+				}
+				calendar[name] = {title: l10n.get(name), commune: commune, info: [], texts: formatTexts(name)};
 			}
 			calendar[name].info.push(formatInfo(cal, entry[0], entry[1], entry[3]));
 		}
@@ -121,18 +139,45 @@ function formatEntry (entry) {
 	return '<li>' + entry.title + ' (' + entry.info.join('; ') + ')' + (entry.texts ? ': ' + entry.texts : '') + '</li>';
 }
 
+function getSort (name, commune) {
+	if (commune.indexOf('maria') > -1) {
+		return 'Maria, ' + calendar[name].title;
+	}
+	if (commune.indexOf('ecclesia') > -1) {
+		return 'Kirchweihe, ' + calendar[name].title;
+	}
+	return l10n.get(name + '-nomen', calendar[name].title).replace(/^(?:Bischof|Bruder|Papst) /, '');
+}
+
 function formatCalendar () {
-	var list = [], name;
+	var list = [], name, aliases, i;
 	for (name in calendar) {
-		//TODO maria
-		list.push({html: formatEntry(calendar[name]), sort: l10n.get(name + '-nomen', calendar[name].title)});
+		list.push({
+			html: formatEntry(calendar[name]),
+			sort: normalize(getSort(name, calendar[name].commune))
+		});
+		if (calendar[name].commune.indexOf('plures') > -1) {
+			aliases = getAliases(l10n.get(name + '-nomen'));
+			for (i = 0; i < aliases.length; i++) {
+				list.push({
+					html: '<li>' + aliases[i] + ' → ' + calendar[name].title + '</li>',
+					sort: normalize(aliases[i])
+				});
+			}
+		}
+	}
+	for (i = 1; i <= 26; i++) {
+		list.push({
+			html: '</ul></div>\n\n<h2>' + String.fromCharCode(64 + i) + '</h2>\n<div class="p"><ul>',
+			sort: String.fromCharCode(96 + i)
+		});
 	}
 	list.sort(function (a, b) {
 		return a.sort < b.sort ? -1 : 1;
 	});
-	return list.map(function (entry) {
+	return (list.map(function (entry) {
 		return entry.html;
-	}).join('\n');
+	}).join('\n') + '\n</ul></div>').replace(/^<\/ul><\/div>\n\n/, '').replace(/<h2>.<\/h2>\n<div class="p"><ul>\n<\/ul><\/div>(\n\n)?/g, '');
 }
 
 function run (lang) {
