@@ -681,7 +681,10 @@ function getLectioResponsoriumLectionis (date, config) {
 			'lectio-lectionis-' + special[1],
 			'responsorium-lectionis-' + special[1],
 			'', '',
-			special[2] !== false ? 'lectio-lectionis-' + key + '-a' : ''
+			(
+				special[2] !== false &&
+				['n1', 'n2', 'n3'].indexOf(key.replace(/i+$/, '')) === -1
+			) ? 'lectio-lectionis-' + key + '-a' : ''
 		];
 	}
 	return [
@@ -1995,7 +1998,10 @@ function mergeSequences (seq1, seq2, lang1) {
 		if (!part1 && !part2) {
 			return '';
 		}
-		if (part1 === false || part1 === part2) {
+		if (
+			part1 === false ||
+			(part2 && (part1 === part2.replace(/&nbsp;<span class="audio" [^>]*>♪<\/span><\/h2>/, '</h2>')))
+		) {
 			return '<tr><td colspan="2">' + part2 + '</td></tr><!--2-->';
 		}
 		return '<tr><td lang="' + lang1 + '">' + part1 + '</td><td>' + (part2 || '') + '</td></tr>';

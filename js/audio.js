@@ -94,13 +94,19 @@ Renderer.prototype.getHeight = function (l) {
 	return this.height - this.gutter - l * this.lineHeight;
 };
 
-Renderer.prototype.wrapSvg = function (w, image) {
+Renderer.prototype.wrapSvg = function (w, image, t, b) {
+	var h = (this.height + (t || 0) + (b || 0)) / 14, s = ((b || 0) + (t || 0)) / 28;
+	if (s) {
+		s = ' style="position: relative; top: ' + Math.abs(s) + 'em;"';
+	} else {
+		s = '';
+	}
 	if (w) {
-		return '<svg width="' + (w / 14) + 'em" height="' + (this.height / 14) + 'em"' +
+		return '<svg' + s + ' width="' + (w / 14) + 'em" height="' + h + 'em"' +
 			' viewBox="0 0 ' + w + ' ' + this.height + '"' +
 			' stroke="currentColor" fill="none">' + image + '</svg>';
 	}
-	return '<svg class="background" width="0.07em" height="' + (this.height / 14) + 'em" viewBox="0 0 1 ' + this.height + '"' +
+	return '<svg' + s + ' class="background" width="0.07em" height="' + h + 'em" viewBox="0 0 1 ' + this.height + '"' +
 		' preserveAspectRatio="none" stroke="currentColor" fill="none">' + image + '</svg>';
 };
 
@@ -193,6 +199,8 @@ Renderer.prototype.renderSingleNoteModern = function (x, note, type) {
 	return {
 		image: image,
 		w: x + w,
+		top: Math.max(0, h - y),
+		bottom: Math.max(0, h + y - this.height),
 		textShift: textShift
 	};
 };
@@ -244,6 +252,8 @@ Renderer.prototype.renderSingleNoteGregorian = function (x, note, type, prev) {
 	}
 	return {
 		image: image,
+		top: Math.max(0, h - y),
+		bottom: Math.max(0, h + y - this.height),
 		w: x + w,
 		textShift: textShift
 	};
@@ -438,17 +448,20 @@ Renderer.prototype.renderBar = function (bar) {
 };
 
 Renderer.prototype.renderCluster = function (notes) {
-	var image = '', i, w = 5, textShift = 0, ret;
+	var image = '', i, w = 5, top = 0, bottom = 0, textShift = 0, ret;
 	for (i = 0; i < notes.length; i++) {
 		ret = this.renderSingleNote(w, notes[i][0], notes[i][1], notes[i - 1] ? notes[i - 1][0] : '');
 		image += ret.image;
+		top = Math.max(top, ret.top);
+		bottom = Math.max(bottom, ret.bottom);
 		w = ret.w;
-		if (ret.textShift) {
-			if (ret.textShift < 0 && textShift <= 0) {
-				textShift = Math.min(ret.textShift, textShift);
-			}
-			if (ret.textShift > 0) {
-				textShift = Math.max(ret.textShift, textShift);
+		if (Math.abs(2 * i - notes.length + 1) <= 1) {
+			if (textShift === 0) {
+				textShift = ret.textShift;
+			} else if (Math.max(textShift, ret.textShift) > 0) {
+				textShift = Math.max(textShift, ret.textShift);
+			} else {
+				textShift = Math.min(textShift, ret.textShift);
 			}
 		}
 	}
@@ -458,6 +471,8 @@ Renderer.prototype.renderCluster = function (notes) {
 	return {
 		image: image,
 		width: w,
+		top: top,
+		bottom: bottom,
 		textShift: textShift
 	};
 };
@@ -482,7 +497,7 @@ Renderer.prototype.renderAccent = function (data, accent, text) {
 		image += '<text x="' + (data.width / 2) + '" y="' + (this.height - 1 - data.textShift) + '" ' +
 			'text-anchor="middle" font-size="6px" stroke="none" fill="currentColor">' + text + '</text>';
 	}
-	return this.wrapSvg(data.width, image);
+	return this.wrapSvg(data.width, image, data.top, data.bottom);
 };
 
 Renderer.prototype.renderNote = function (note, index) {

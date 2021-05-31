@@ -95,7 +95,11 @@ Day.addNote = function (d, m, note) {
 	if (!Day.notes[key]) {
 		Day.notes[key] = [];
 	}
-	Day.notes[key].push(note);
+	if (note) {
+		Day.notes[key].push(note);
+	} else {
+		delete Day.notes[key];
+	}
 };
 
 Day.initCalendar = function (name) {
@@ -307,7 +311,9 @@ Day.prototype.calculateNumbers = function () {
 		}
 		if (d % 7 === 0) {
 			this.order = this.christmasDaySequence >= 0 ? 3 : 0;
-			if (this.getMonth() === 11 && this.getDate() >= 26) {
+			if (d <= 3 * 7) {
+				specialData.s = 35 + (d / 7);
+			} else if (this.getMonth() === 11 && this.getDate() >= 26) {
 				specialData.s = -1;
 			} else if (this.getMonth() === 0) {
 				if (this.getDate() >= 2 && this.getDate() <= (config.get('epiphaniasSunday') ? 8 : 5)) {
@@ -588,6 +594,9 @@ Day.prototype.isSunday = function () {
 
 Day.prototype.getSunday = function (/*eve*/) { //TODO
 	if (!this.isSunday()) {
+		return '';
+	}
+	if (this.getPart() === 1 && this.getSubPart() >= 3) {
 		return '';
 	}
 	return this.getYearLetter() +

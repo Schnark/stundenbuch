@@ -109,6 +109,15 @@ Prot. 404/19 (http://www.vatican.va/roman_curia/congregations/ccdds/documents/rc
 Hl. Faustina Kowalska (5. Okt., g)
 Prot. 229/20 (http://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20200518_decreto-celebrazione-santafaustina_la.html)
 
+2021:
+Hl. Gregor von Narek (27. Feb., g)
+Hl. Johannes De Avila (10. Mai, g)
+Hl. Hildegard von Bingen (17. Sep., g)
+Prot 40/21 (http://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20210125_decreto-dottori_la.html)
+
+Hl. Marta → Hll. Marta, Maria und Lazarus
+Prot. 35/21 (http://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20210126_decreto-santi_la.html)
+
 Europa
 ------
 
@@ -145,6 +154,8 @@ Hl. Katharina von Alexandrien (unverändert in Generalkalender aufgenommen)
 Hl. Josefmaria Escriva de Balaguer (26. Jun., g)
 (defakto, nach Aufnahme in Kalender von DE, CH, FL, Diözesen in AT, Bozen-Brixen)
 
+2021:
+Hl. Hildegard von Bingen (unverändert in Generalkalender aufgenommen)
 
 Liturgischer Kalender für Deutschland
 -------------------------------------
@@ -324,8 +335,8 @@ Direktorien:
 Nicht im Kalender, aber im Direktorium verzeichnet:
 
 Sel. Paul VI. (26. Sep., 2015–2019, seither im Generalkalender)
-Hl. Gregor von Narek (27. Feb., seit 2018)
-Hl. Johannes von Avila (10. Mai, seit 2018)
+Hl. Gregor von Narek (27. Feb., 2018–2021, seither im Generalkalender)
+Hl. Johannes von Avila (10. Mai, 2018–2021, seither im Generalkalender)
 Hl. Oscar Romero (24. Mär., seit 2019)
 
 
@@ -356,6 +367,7 @@ http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1989/275.html: Liturgia Horarum: Supplementum
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1992/306-307.html: Liturgia Horarum: Supplementum
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1993/320.html: Liturgia Horarum: Supplementum
+http://www.cultodivino.va/content/dam/cultodivino/notitiae/2020/Notitiae_25202020_2520testo.pdf: Lectiones Biblicae Pro Officio Lectionis Liturgiae Horarum
 
 Ordo Cantus Officii
 -------------------
@@ -388,7 +400,7 @@ http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1973/83.html: Autoren der Hymnen im Stundenbuch
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1977/129.html: Thesaurus Liturgiae Horarum Monasticae
 http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1979/161.html: Verwendung der Nova Vulgata
-
+http://www.cultodivino.va/content/dam/cultodivino/notitiae/2019/2019.pdf: Antiphonale Romanum
 
 Deutsche Texte
 ==============
@@ -429,11 +441,14 @@ Fehlende Texte (ohne Diözesankalender)
 
 Für folgende Texte steht eine deutsche Übersetzung mit anschließender Approbation noch aus:
 
-* Orationen für (genau die fehlen auch auf Englisch):
+* Orationen für:
 - Maria, Mutter der Kirche
 - Hl. Paul VI.
 - Unsere Liebe Frau von Loreto
 - Hl. Faustina Kowalska
+- Hl. Gregor von Narek
+- Hl. Johannes De Avila
+- Hll. Marta, Maria und Lazarus
 
 * Lesung der Lesehore für (gekennzeichnete Tage haben meist nicht approbierten Text im Freiburger Direktorium 2018, https://www.ebfr.de/html/media/dl.html?i=976961; oder im Ergänzungsband 2021, https://www.ebfr.de/html/media/dl.html?i=1184356):
 - Hl. Petrus Claver
@@ -454,10 +469,14 @@ Für folgende Texte steht eine deutsche Übersetzung mit anschließender Approba
 - Hl. Paul VI. (*)
 - Unsere Liebe Frau von Loreto
 - Hl. Faustina Kowalska (*)
+- Hl. Gregor von Narek (*)
+- Hl. Johannes De Avila (*)
+- Hll. Marta, Maria und Lazarus
 
 * Sonstige Texte
 - Neuerungen der editio typica altera (insb. Antiphonen Sonntage geprägte Zeiten in Lesejahr B, C)
 - Maria, Mutter der Kirche (Benedictus- und Magnificat-Antiphon, evt. auch Hymnen)
+- Hll. Marta, Maria und Lazarus (Benedictus-Antiphon)
 
 Von diesen Texten habe ich für folgende Übersetzungen aus alternativen Quellen aufgenommen:
 
@@ -472,6 +491,7 @@ Von diesen Texten habe ich für folgende Übersetzungen aus alternativen Quellen
 - Hl. Rita von Cascia (App)
 - Hl. Paul VI. (Ergänzungsband Direktorium 2021)
 - Hl. Faustina Kowalska (Ergänzungsband Direktorium 2021)
+- Hll. Marta, Maria und Lazarus (alte Lesung Hl. Marta)
 
 Diese Texte müssten eigentlich existieren, sind aber in keiner mir bekannten Quelle verfügbar:
 

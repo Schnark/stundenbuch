@@ -3,7 +3,7 @@
 "use strict";
 
 var PREFIX = 'stundenbuch',
-	VERSION = '1.21',
+	VERSION = '1.22',
 	FILES = [
 		'index.html',
 		'style.css',

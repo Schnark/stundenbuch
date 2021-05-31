@@ -310,7 +310,7 @@ function applyGrammerDe (name, form) {
 	return name;
 }
 
-//TODO nicht auf deutsche Namen(-sbestandteile): von, Callo, Romero
+//TODO nicht auf deutsche Namen(-sbestandteile): von, Callo
 function applyGrammerLa (name, form) {
 	switch (form) {
 	case 'voc':
@@ -351,9 +351,22 @@ function removeHead (name) {
 	return get(name).replace(/^.+\n+/, '');
 }
 
+function selectFromLang (o) {
+	return o[selectLangCode(Object.keys(o), currentLang)];
+}
+
 function getName (type) {
 	var names = currentNames[type] || {};
-	return Config.getConfig().get(type) || names[selectLangCode(Object.keys(names), currentLang)] || get('nomen');
+	return Config.getConfig().get(type) || selectFromLang(names) || get('nomen');
+}
+
+function localizeNotes (notes) {
+	return notes.map(function (note) {
+		if (typeof note === 'string') {
+			return note;
+		}
+		return selectFromLang(note);
+	});
 }
 
 function dynamicReplace (name) {
@@ -403,7 +416,7 @@ function getTitle (name) {
 	var fallback = Day.nameFallback[name] || [],
 		fallbackName = fallback[0] || '',
 		fallbackType = fallback[1] || '';
-	fallbackName = fallbackName.replace(/\+$/, get('titulus-et-socii'));
+	fallbackName = fallbackName.replace(/\+$/, get('titulus-et-socii')).replace(/ \([^()]+\)$/, '');
 	setDynamicData('nomen', get(name + '-nomen', fallbackName));
 	return get(name, get('titulus' + fallbackType));
 }
@@ -606,6 +619,7 @@ return {
 	getTitle: getTitle,
 	setNames: setNames,
 	search: search,
+	localizeNotes: localizeNotes,
 	setPassword: setPassword,
 	clearStorage: clearStorage,
 	test: test,

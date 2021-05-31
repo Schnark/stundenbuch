@@ -1,21 +1,11 @@
 /*global Day, Config, l10n, util*/
-/*global console*/
 /*jshint forin: false*/
 (function () {
 "use strict";
 
-var SOURCES, OMIT, TEXTS, calendar;
+var SOURCES, OMIT, TEXTS, LANG, calendar;
 
-SOURCES = { //{} for 'la', 'en'
-	150: 'EU',
-	'de': 'RK',
-	'de-DE': 'DE',
-	'de-AT': 'AT',
-	'de-CH': 'CH',
-	'de-freiburg': 'FR',
-	'de-mainz': 'MZ',
-	'de-rottenburg-stuttgart': 'RS'
-};
+SOURCES = {};
 
 OMIT = [
 	'natalis', 'dominica-nativitatis',
@@ -25,7 +15,7 @@ OMIT = [
 ];
 
 TEXTS = {
-	'E': ['*-introductio'], //'I' for 'la', 'en'
+	'I': ['*-introductio'],
 	'H': [
 		'hymnus-vespera-*-v', 'hymnus-*', 'hymnus-lectionis-*', 'hymnus-laudes-*',
 		'hymnus-tertia-*', 'hymnus-sexta-*', 'hymnus-nona-*', 'hymnus-vespera-*'
@@ -47,7 +37,53 @@ TEXTS = {
 	'O': ['oratio-vespera-*-v', 'oratio-*']
 };
 
-calendar = {};
+LANG = {
+	reEt: /, | et /g,
+	reNomen: /(?:)/,
+	socii: 'socii',
+	maria: 'Maria',
+	ecclesia: 'Dedicatio Ecclesiæ'
+};
+
+function initLang (lang) {
+	var texts;
+	if (lang === 'de') {
+		SOURCES = {
+			150: 'EU',
+			'de': 'RK',
+			'de-DE': 'DE',
+			'de-AT': 'AT',
+			'de-CH': 'CH',
+			'de-freiburg': 'FR',
+			'de-mainz': 'MZ',
+			'de-rottenburg-stuttgart': 'RS'
+		};
+		texts = {
+			E: TEXTS.I,
+			H: TEXTS.H,
+			A: TEXTS.A,
+			P: TEXTS.P,
+			L: TEXTS.L,
+			O: TEXTS.O
+		};
+		TEXTS = texts;
+		LANG = {
+			reEt: /, | und /g,
+			reNomen: /^(?:Bischof|Bruder|Papst) /,
+			socii: 'Gefährten',
+			maria: 'Maria',
+			ecclesia: 'Kirchweihe'
+		};
+	} else if (lang === 'en') {
+		LANG = {
+			reEt: /, | and /g,
+			reNomen: /(?:)/,
+			socii: 'his companions',
+			maria: 'Mary',
+			ecclesia: 'Dedication of the Church'
+		};
+	}
+}
 
 function normalize (str) {
 	return str.toLowerCase()
@@ -103,9 +139,9 @@ function formatInfo (source, day, month, rank) {
 }
 
 function getAliases (name) {
-	var aliases = name.split(/, | und /g);
+	var aliases = name.split(LANG.reEt);
 	aliases.shift();
-	if (aliases[aliases.length - 1] === 'Gefährten') {
+	if (aliases[aliases.length - 1] === LANG.socii) {
 		aliases.pop();
 	}
 	return aliases;
@@ -141,12 +177,12 @@ function formatEntry (entry) {
 
 function getSort (name, commune) {
 	if (commune.indexOf('maria') > -1) {
-		return 'Maria, ' + calendar[name].title;
+		return LANG.maria + ', ' + calendar[name].title;
 	}
 	if (commune.indexOf('ecclesia') > -1) {
-		return 'Kirchweihe, ' + calendar[name].title;
+		return LANG.ecclesia + ', ' + calendar[name].title;
 	}
-	return l10n.get(name + '-nomen', calendar[name].title).replace(/^(?:Bischof|Bruder|Papst) /, '');
+	return l10n.get(name + '-nomen', calendar[name].title).replace(LANG.reNomen, '');
 }
 
 function formatCalendar () {
@@ -177,16 +213,26 @@ function formatCalendar () {
 	});
 	return (list.map(function (entry) {
 		return entry.html;
-	}).join('\n') + '\n</ul></div>').replace(/^<\/ul><\/div>\n\n/, '').replace(/<h2>.<\/h2>\n<div class="p"><ul>\n<\/ul><\/div>(\n\n)?/g, '');
+	}).join('\n') + '\n</ul></div>')
+		.replace(/^<\/ul><\/div>\n\n/, '')
+		.replace(/<h2>.<\/h2>\n<div class="p"><ul>\n<\/ul><\/div>(\n\n)?/g, '');
 }
 
 function run (lang) {
+	calendar = {};
+	initLang(lang);
 	l10n.load(lang, function () {
 		addCalendars();
-		console.log(formatCalendar());
+		document.getElementById('output').textContent = formatCalendar();
 	});
 }
 
-run('de');
+function init () {
+	document.getElementById('run').addEventListener('click', function () {
+		run(document.getElementById('lang').value);
+	});
+}
+
+init();
 
 })();

@@ -217,16 +217,13 @@ Day.getSource = function (data, element, hora) {
 	if (data.commune === 'ordinarium') {
 		return 'o';
 	}
-	if (data.commune === 'defunctus') {
-		return 'p';
-	}
-	if (element === 'hymnus' && ['tertia', 'sexta', 'nona'].indexOf(hora) > -1) {
+	if (element === 'hymnus' && ['tertia', 'sexta', 'nona'].indexOf(hora) > -1 && data.commune !== 'defunctus') {
 		return 'o';
 	}
 	if (data.rank === 0) {
 		return 'p';
 	}
-	if (element === 'cantica' && ['tertia', 'sexta', 'nona'].indexOf(hora) > -1) {
+	if (element === 'cantica' && ['tertia', 'sexta', 'nona'].indexOf(hora) > -1 && data.commune !== 'defunctus') {
 		return 'o';
 	}
 	if (data.rank === 1) {
@@ -396,8 +393,7 @@ Day.getText = function (data, element, hora, part, yearABC, yearIII) {
 	}
 	if (element === 'lectio') {
 		if (hora === 'lectionis') {
-			return Day.getLectioLectionis(keys,
-				data.rank === 3 ? 'commemoratio' : (data.commune === 'defunctus' || data.rank < 2));
+			return Day.getLectioLectionis(keys, data.rank === 3 ? 'commemoratio' : data.rank < 2);
 		}
 		for (i = 0; i < keys.length; i++) {
 			if (Day.lectio[keys[i]]) {
@@ -548,8 +544,8 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 	}
 	if (types[0] === 'defunctus') {
 		val.tedeum = false;
-		val.completorium = true;
 		if (rank < 2) {
+			val.completorium = true;
 			val.type = '';
 		}
 	}

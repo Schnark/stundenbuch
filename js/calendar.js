@@ -461,7 +461,18 @@ Day.calendars = {
 			'la-x-noaccent': 'Franciscus'
 		},
 		getEntries: function (config) {
-			function moveNIPP (day) {
+			function moveNIPPprev (day) {
+				if (day.getMonth() === 5) {
+					if (day.getDate() === 23) {
+						return '6/24';
+					}
+					if (day.getDate() === 28) {
+						return '6/29';
+					}
+				}
+				return false;
+			}
+			function moveNIPPnext (day) {
 				if (day.getMonth() === 5) {
 					if (day.getDate() === 25) {
 						return '6/24';
@@ -475,12 +486,12 @@ Day.calendars = {
 
 			return [
 				[50, 'easter', 'maria-ecclesia', 2, 'maria'],
-				//move 'nativitatis-ioannes'/'petrus-paulus' by one day when they coincide with 'corpus-domini'/'cor-iesu'
+				//move 'nativitatis-ioannes'/'petrus-paulus' by one day when they coincide with 'corpus-domini' (to next)/'cor-iesu' (to previous)
 				[config.get('corpusSunday') ? 64 : 61, 'easter', '', 4, '', {
-					move: moveNIPP
+					move: moveNIPPnext
 				}],
-				[69, 'easter', '', 4, '', {
-					move: moveNIPP
+				[67, 'easter', '', 4, '', {
+					move: moveNIPPprev
 				}],
 				[69, 'easter', 'cor-maria', 2, 'maria'],
 
@@ -562,6 +573,7 @@ Day.calendars = {
 					}
 				}],
 				[23, 2, 'polycarpus', 2, ['martyr', 'vir']],
+				[27, 2, 'gregorius-narcensis', 3, 'doctor'],
 
 				[4, 3, 'casimirus', 3, 'vir'],
 				[7, 3, 'perpetua-felicitas', 2, ['martyr', 'mulier', 'plures']],
@@ -646,6 +658,7 @@ Day.calendars = {
 				}],
 				[2, 5, 'athanasius', 2, config.get('bugCompat') ? 'pastor' : 'doctor'],
 				[3, 5, 'philippus-iacobus', 1, ['apostolus', 'martyr', 'plures']],
+				[10, 5, 'ioannes-de-avila', 3, 'doctor'],
 				[12, 5, 'nereus-achilleus', 3, ['martyr', 'vir', 'plures']],
 				[12, 5, 'pancratius', 3, ['martyr', 'vir']],
 				[13, 5, 'maria-fatima', 3, 'maria'],
@@ -767,7 +780,7 @@ Day.calendars = {
 						}
 					}
 				}],
-				[29, 7, 'martha', 2, 'mulier'],
+				[29, 7, 'martha', 2, ['mulier', 'plures']], //id nur martha, weil ursprünglich nur Marta
 				[30, 7, 'petrus-chrysologus', 3, 'doctor'],
 				[31, 7, 'ignatius-loyola', 2, 'pastor'],
 
@@ -901,6 +914,7 @@ Day.calendars = {
 				}],
 				[16, 9, 'cornelius-cyprianus', 2, ['martyr', 'vir', 'plures']],
 				[17, 9, 'robertus-bellarmino', 3, 'doctor'],
+				[17, 9, 'hildegard-bingen', 3, ['religiosus', 'mulier']], //id deutsch, weil ursprünglich nur de
 				[19, 9, 'ianuarius', 3, ['martyr', 'vir']],
 				[20, 9, 'andreas-kim-taegon', 2, ['martyr', 'vir', 'plures']],
 				[21, 9, 'matthaeus', 1, ['apostolus', 'martyr']],
@@ -1063,11 +1077,11 @@ Day.calendars = {
 		groups: [
 			[
 				'nomen-iesu', 'sebastianus', 'ansgarius', 'maria-lourdes', 'francisca-romana',
-				'isidorus', 'adalbertus', 'pius-v', 'pancratius', 'maria-magdalena-pazzi',
-				'bernhardinus-senensis', 'ephraem', 'promartyr-roma', 'antonius-maria-zaccaria', 'apollinaris',
-				'birgitta', 'eusebius', 'caietanus', 'stephanus-hungaria', 'ludovicus',
-				'nomen-maria', 'laurentius-ruiz', 'ioannes-xxiii', 'paulus-cruce', 'martinus-porres',
-				'margarita-scotia', 'clemens-i', 'ioannes-damasceni', 'damasus-i'
+				'isidorus', 'adalbertus', 'pius-v', 'ioannes-de-avila', 'pancratius',
+				'maria-magdalena-pazzi', 'bernhardinus-senensis', 'ephraem', 'promartyr-roma', 'antonius-maria-zaccaria',
+				'apollinaris', 'birgitta', 'eusebius', 'caietanus', 'stephanus-hungaria',
+				'ludovicus', 'nomen-maria', 'laurentius-ruiz', 'ioannes-xxiii', 'paulus-cruce',
+				'martinus-porres', 'margarita-scotia', 'clemens-i', 'ioannes-damasceni', 'damasus-i'
 			],
 			[
 				'hilarius', 'vincentius', 'hieronymus-emiliani', 'casimirus', 'cyrillus-hierosolymitanus',
@@ -1079,20 +1093,20 @@ Day.calendars = {
 				'catharina-alexandrina', 'nicolaus', 'maria-loreto', 'ioannes-kety'
 			],
 			[
-				'raimundus-penyafort', 'angela-merici', 'septem-fundatores', 'ioannes-deo', 'turibius',
-				'anselmus', 'fidelis-sigmaringen', 'ioseph-opifex', 'maria-fatima', 'christophorus-magallanes',
-				'gregorius-vii', 'norbertus', 'ioannes-fisher-thomas-more', 'elisabeth-lusitania', 'henricus',
-				'laurentius-brindisi', 'xystus', 'ioanna-francisca-chantal', 'ioannes-eudes', 'ianuarius',
-				'bruno', 'callistus-i', 'margarita-maria-alacoque', 'ioannes-capestrano', 'albertus-magnus',
-				'basilica-petrus-paulus', 'maria-guadalupe', 'silvester'
+				'raimundus-penyafort', 'angela-merici', 'septem-fundatores', 'gregorius-narcensis', 'ioannes-deo',
+				'turibius', 'anselmus', 'fidelis-sigmaringen', 'ioseph-opifex', 'maria-fatima',
+				'christophorus-magallanes', 'gregorius-vii', 'norbertus', 'ioannes-fisher-thomas-more', 'elisabeth-lusitania',
+				'henricus', 'laurentius-brindisi', 'xystus', 'ioanna-francisca-chantal', 'ioannes-eudes',
+				'ianuarius', 'bruno', 'callistus-i', 'margarita-maria-alacoque', 'ioannes-capestrano',
+				'albertus-magnus', 'basilica-petrus-paulus', 'maria-guadalupe', 'silvester'
 			],
 			[
 				'fabianus', 'blasius', 'iosephina-bakhita', 'petrus-damiani', 'patricius',
 				'vincentius-ferrer', 'georgius', 'petrus-chanel', 'nereus-achilleus', 'beda-venerabilis',
 				'paulus-vi', 'romualdus', 'paulinus-nolanus', 'maria-goretti', 'camillus-lellis',
-				'petrus-chrysologus', 'basilica-maria', 'pontianus-hippolytus', 'ioseph-calasanz', 'cosmas-damianus',
-				'faustina-kowalska', 'dionysius', 'hedvigis', 'antonius-maria-claret', 'gertrudis',
-				'columbanus', 'ioannes-didacus', 'petrus-canisius', 'thomas-becket'
+				'petrus-chrysologus', 'basilica-maria', 'pontianus-hippolytus', 'ioseph-calasanz', 'hildegard-bingen',
+				'cosmas-damianus', 'faustina-kowalska', 'dionysius', 'hedvigis', 'antonius-maria-claret',
+				'gertrudis', 'columbanus', 'ioannes-didacus', 'petrus-canisius', 'thomas-becket'
 			]
 		]
 	},
@@ -1173,7 +1187,6 @@ Day.calendars = {
 				[20, 7, 'margareta', 3, ['virgo', 'martyr'], 'Margareta'],
 				[24, 7, 'christophorus', 3, ['martyr', 'vir'], 'Christophorus'],
 				[31, 8, 'paulinus-trevirenis', 3, ['episcopus', 'martyr'], 'Paulinus'],
-				[17, 9, 'hildegard-bingen', 3, ['religiosus', 'mulier'], 'Hildegard von Bingen'],
 				[18, 9, 'lambertus', 3, ['pastor', 'martyr'], 'Lambertus'],
 				[22, 9, 'mauritius', 3, ['martyr', 'vir', 'plures'], 'Mauritius +'],
 				[24, 9, 'rupert-virgil', 3, ['pastor', 'plures'], 'Rupert, Virgil'],
@@ -1203,10 +1216,11 @@ Day.calendars = {
 				[21, 12] //petrus-canisius
 			];
 		},
-		notes: [ //TODO mehrsprachig
+		notes: [ //TODO mehrsprachig {de: '', '': ''}
+			[42, 'easter', 'Welttag der sozialen Kommunikationsmittel'],
 			[1, 1, 'Weltfriedenstag'],
 			[18, 1, 'Beginn der Weltgebetswoche für die Einheit der Christen'],
-			[3, 'sunday', 'Sonntag des Wortes Gottes'], //in Deutschland eigentlich immer am letzten Sonntag im Januar
+			[3, 'sunday', 'Sonntag des Wortes Gottes'],
 			[27, 1, 'Gedenktag für die Opfer des Nationalsozialismus'],
 			[2, 2, 'Tag des geweihten Lebens'],
 			[8, 2, 'Internationaler Tag des Gebets und der Reflexion gegen den Menschenhandel'],
@@ -1214,10 +1228,13 @@ Day.calendars = {
 			[-6, 3, 'Weltgebetstag der Frauen'],
 			[-8, 3, 'Beginn der Woche der Brüderlichkeit'],
 			[13, 3, 'Jahrestag der Wahl von Papst Franziskus'],
+			[19, 3, 'Jahrtag der Amtseinführung von Papst Franziskus'],
 			[23, 4, 'Namenstag von Papst Franziskus'],
 			[24, 5, 'Gebetstag für die Kirche in China'],
+			[-22, 7, 'Welttag der Großeltern und der älteren Menschen'],
 			[1, 9, 'Gebetstag für die Schöpfung'],
 			[-1, 10, 'Erntedanksonntag'],
+			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
 			[31, 10, 'Reformationstag (evangelisch)'],
 			[9, 11, 'Gedenken an die Opfer der Schoah'],
 			[33, 'sunday', 'Welttag der Armen'],
@@ -1243,7 +1260,7 @@ Day.calendars = {
 			],
 			[
 				'meinrad', 'heinrich-seuse', 'rabanus-maurus', 'mathilde', 'leo-ix', 'hermann-josef',
-				'otto-bamberg', 'knud-erich-olaf', 'hildegard-bingen', 'ursula', 'pirmin', 'luzius',
+				'otto-bamberg', 'knud-erich-olaf', 'ursula', 'pirmin', 'luzius',
 				'anno', 'lucia'
 			]
 		]
@@ -1266,9 +1283,12 @@ Day.calendars = {
 			];
 		},
 		notes: [
-			[-8, 9, 'Welttag der sozialen Kommunikationsmittel'], //anderswo an anderem Datum
+			//[3, 'sunday'], //'Sonntag des Wortes Gottes' in Deutschland eigentlich immer am letzten Sonntag im Januar
+			[42, 'easter'], //Welttag der sozialen Kommunikationsmittel
+			[-8, 9, 'Welttag der sozialen Kommunikationsmittel'],
 			[3, 10, 'Tag der Deutschen Einheit'],
-			[-22, 10, 'Weltmissionssonntag'] //anderswo an anderem Datum
+			//Weltmissionssonntag vom vorletzen Sonntag im Oktober löschen
+			[-22, 10, 'Weltmissionssonntag']
 		],
 		groups: [
 			[],
@@ -1314,9 +1334,7 @@ Day.calendars = {
 			];
 		},
 		notes: [
-			[42, 'e', 'Welttag der sozialen Kommunikationsmittel'],
 			[26, 10, 'Nationalfeiertag']
-			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
 		],
 		groups: [
 			['maria-ecclesia'],
@@ -1340,10 +1358,8 @@ Day.calendars = {
 			];
 		},
 		notes: [
-			[42, 'e', 'Welttag der sozialen Kommunikationsmittel'],
 			[1, 8, 'Schweizer Nationalfeiertag'],
 			[-15, 9, 'Eidgenössischer Dank-, Buss- und Bettag']
-			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
 		],
 		groups: [
 			['hieronymus'],
