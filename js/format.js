@@ -71,7 +71,8 @@ function formatNotes (data) {
 	if (!data.notes || !data.notes.length) {
 		return '';
 	}
-	return '<p class="additamentum">' + l10n.localizeNotes(data.notes).join('\n').replace(/</g, '&lt;').replace(/\n/g, '<br>') + '</p>';
+	return '<p class="additamentum">' +
+		l10n.localizeNotes(data.notes).join('\n').replace(/</g, '&lt;').replace(/\n/g, '<br>') + '</p>';
 }
 
 function formatBlock (text, audio, type, easter, debug, raw) {

@@ -29,6 +29,12 @@ Notenschlüssel: 0-6, x
 Text: In Anführungszeichen
 */
 
+var canFlex = (function () {
+	var el = document.createElement('span');
+	el.style.display = 'flex';
+	return el.style.display === 'flex';
+/**/})();
+
 function parseNotes (notes) {
 	var re1 = /((?:[a-u][+#?~.]?)+)(['>\/]?)|([,;:!|*\nx0-6])/g,
 		re2 = /([a-u])([+#?~.]?)/g,
@@ -97,7 +103,8 @@ Renderer.prototype.getHeight = function (l) {
 Renderer.prototype.wrapSvg = function (w, image, t, b) {
 	var h = (this.height + (t || 0) + (b || 0)) / 14, s = ((b || 0) + (t || 0)) / 28;
 	if (s) {
-		s = ' style="position: relative; top: ' + Math.abs(s) + 'em;"';
+		//I must admit I have no idea how that works
+		s = ' style="position: relative; top: ' + (canFlex ? '-' : '') + s + 'em;"';
 	} else {
 		s = '';
 	}

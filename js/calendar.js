@@ -486,7 +486,8 @@ Day.calendars = {
 
 			return [
 				[50, 'easter', 'maria-ecclesia', 2, 'maria'],
-				//move 'nativitatis-ioannes'/'petrus-paulus' by one day when they coincide with 'corpus-domini' (to next)/'cor-iesu' (to previous)
+				//move 'nativitatis-ioannes'/'petrus-paulus' by one day
+				//when they coincide with 'corpus-domini' (to next)/'cor-iesu' (to previous)
 				[config.get('corpusSunday') ? 64 : 61, 'easter', '', 4, '', {
 					move: moveNIPPnext
 				}],
@@ -1074,6 +1075,70 @@ Day.calendars = {
 				[31, 12, 'silvester', 3, 'papa']
 			];
 		},
+		notes: [ //TODO vollständig lokalisieren
+			[42, 'easter', {
+				'': 'Welttag der sozialen Kommunikationsmittel',
+				'en': 'World Communications Day'
+			}],
+			[1, 1, {
+				'': 'Dies Mundanus Pacis',
+				'de': 'Weltfriedenstag',
+				'en': 'World Day of Peace'
+			}],
+			[18, 1, 'Beginn der Weltgebetswoche für die Einheit der Christen'],
+			[3, 'sunday', {
+				'': 'Dominica Verbi Dei',
+				'de': 'Sonntag des Wortes Gottes',
+				'en': 'Sunday of the Word of God'
+			}],
+			[2, 2, {
+				'': 'Dies Vitæ Consecratæ',
+				'de': 'Tag des geweihten Lebens',
+				'en': 'World Day for Consecrated Life'
+			}],
+			[8, 2, {
+				'': 'Internationaler Tag des Gebets und der Reflexion gegen den Menschenhandel',
+				'en': 'World Day of Prayer, Reflection and Action against Human Trafficking'
+			}],
+			[11, 2, {
+				'': 'Dies Mundanus Ægrotorum',
+				'de': 'Welttag der Kranken',
+				'en': 'World Day of the Sick'
+			}],
+			[-6, 3, {
+				'': 'Weltgebetstag der Frauen',
+				'en': 'Women’s World Day of Prayer'
+			}],
+			[13, 3, {
+				'': 'Anniversaria electionis Papæ Francisci',
+				'de': 'Jahrestag der Wahl von Papst Franziskus',
+				'en': 'Anniversary of the election of Pope Francis'
+			}],
+			[19, 3, 'Jahrtag der Amtseinführung von Papst Franziskus'],
+			[23, 4, 'Namenstag von Papst Franziskus'],
+			[24, 5, {
+				'': 'Gebetstag für die Kirche in China',
+				'en': 'World Day of Prayer for the Church in China'
+			}],
+			[-22, 7, {
+				'': 'Welttag der Großeltern und der älteren Menschen',
+				'en': 'World Day for Grandparents and the Elderly'
+			}],
+			[1, 9, {
+				'': 'Weltgebetstag für die Bewahrung der Schöpfung',
+				'en': 'World Day of Prayer for the Care of Creation'
+			}],
+			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
+			[33, 'sunday', {
+				'': 'Welttag der Armen',
+				'en': 'World Day of the Poor'
+			}],
+			[17, 12, {
+				'': 'Dies natali Papæ Francisci',
+				'de': 'Geburtstag von Papst Franziskus',
+				'en': 'Birthday of Pope Francis'
+			}]
+		],
 		groups: [
 			[
 				'nomen-iesu', 'sebastianus', 'ansgarius', 'maria-lourdes', 'francisca-romana',
@@ -1216,30 +1281,13 @@ Day.calendars = {
 				[21, 12] //petrus-canisius
 			];
 		},
-		notes: [ //TODO mehrsprachig {de: '', '': ''}
-			[42, 'easter', 'Welttag der sozialen Kommunikationsmittel'],
-			[1, 1, 'Weltfriedenstag'],
-			[18, 1, 'Beginn der Weltgebetswoche für die Einheit der Christen'],
-			[3, 'sunday', 'Sonntag des Wortes Gottes'],
+		notes: [ //TODO weitere nach ''?
 			[27, 1, 'Gedenktag für die Opfer des Nationalsozialismus'],
-			[2, 2, 'Tag des geweihten Lebens'],
-			[8, 2, 'Internationaler Tag des Gebets und der Reflexion gegen den Menschenhandel'],
-			[11, 2, 'Welttag der Kranken'],
-			[-6, 3, 'Weltgebetstag der Frauen'],
 			[-8, 3, 'Beginn der Woche der Brüderlichkeit'],
-			[13, 3, 'Jahrestag der Wahl von Papst Franziskus'],
-			[19, 3, 'Jahrtag der Amtseinführung von Papst Franziskus'],
-			[23, 4, 'Namenstag von Papst Franziskus'],
-			[24, 5, 'Gebetstag für die Kirche in China'],
-			[-22, 7, 'Welttag der Großeltern und der älteren Menschen'],
-			[1, 9, 'Gebetstag für die Schöpfung'],
 			[-1, 10, 'Erntedanksonntag'],
-			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
 			[31, 10, 'Reformationstag (evangelisch)'],
 			[9, 11, 'Gedenken an die Opfer der Schoah'],
-			[33, 'sunday', 'Welttag der Armen'],
 			[-18, 11, 'Buß- und Bettag (evangelisch)'],
-			[17, 12, 'Geburtstag von Papst Franziskus'],
 			[26, 12, 'Gebetstag für verfolgte und bedrängte Christen']
 		],
 		groups: [
@@ -1285,10 +1333,16 @@ Day.calendars = {
 		notes: [
 			//[3, 'sunday'], //'Sonntag des Wortes Gottes' in Deutschland eigentlich immer am letzten Sonntag im Januar
 			[42, 'easter'], //Welttag der sozialen Kommunikationsmittel
-			[-8, 9, 'Welttag der sozialen Kommunikationsmittel'],
+			[-8, 9, {
+				'': 'Welttag der sozialen Kommunikationsmittel',
+				'en': 'World Communications Day'
+			}],
 			[3, 10, 'Tag der Deutschen Einheit'],
 			//Weltmissionssonntag vom vorletzen Sonntag im Oktober löschen
-			[-22, 10, 'Weltmissionssonntag']
+			[-22, 10, {
+				'': 'Weltmissionssonntag',
+				'en': 'World Mission Day'
+			}]
 		],
 		groups: [
 			[],
