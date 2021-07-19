@@ -10,7 +10,6 @@ var comments = {
 	polycarpus: 'g zugunsten von willigis',
 	'aloisius-gonzaga': 'g zugunsten von alban',
 	'heinrich-kunigunde': 'statt henricus',
-	bonaventura: 'g zugunsten von bernhard-baden, in Baden 17. 7.',
 	'alfonsus-liguori': 'g zugunsten von petrus-faber',
 	monica: 'g zugunsten von gebhard',
 	hieronymus: 'g zugunsten von urs-viktor',

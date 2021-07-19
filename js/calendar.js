@@ -1085,7 +1085,11 @@ Day.calendars = {
 				'de': 'Weltfriedenstag',
 				'en': 'World Day of Peace'
 			}],
-			[18, 1, 'Beginn der Weltgebetswoche für die Einheit der Christen'],
+			[18, 1, {
+				'': 'Initium Hebdomadæ Precibus pro Unitate Effundendis',
+				'de': 'Beginn der Weltgebetswoche für die Einheit der Christen',
+				'en': 'Start of the Week of Prayer for Christian Unity'
+			}],
 			[3, 'sunday', {
 				'': 'Dominica Verbi Dei',
 				'de': 'Sonntag des Wortes Gottes',
@@ -1110,7 +1114,7 @@ Day.calendars = {
 				'en': 'Women’s World Day of Prayer'
 			}],
 			[13, 3, {
-				'': 'Anniversaria electionis Papæ Francisci',
+				'': 'Anniversarium electionis Papæ Francisci',
 				'de': 'Jahrestag der Wahl von Papst Franziskus',
 				'en': 'Anniversary of the election of Pope Francis'
 			}],
@@ -1130,7 +1134,8 @@ Day.calendars = {
 			}],
 			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
 			[33, 'sunday', {
-				'': 'Welttag der Armen',
+				'': 'Dies Mundanus Pauperum',
+				'de': 'Welttag der Armen',
 				'en': 'World Day of the Poor'
 			}],
 			[17, 12, {
@@ -1464,8 +1469,8 @@ Day.calendars = {
 				//8. 7. Kilian (bereits in de)
 				[14, 7, 'ulrich-zell', 3, ['religiosus', 'vir'], 'Ulrich von Zell'],
 				[15, 7], //bonaventura
-				[15, 7, 'bonaventura', 3, 'doctor'],
 				[15, 7, 'bernhard-baden', 3, ['vir', 'beatus'], 'Bernhard von Baden'],
+				[17, 7, 'bonaventura', 2, 'doctor'],
 				[21, 7, 'arbogast', 3, 'episcopus', 'Arbogast'],
 				//9. 8. Theresia Benedicta vom Kreuz (bereits in 150)
 				[12, 8, 'karl-leisner', 3, ['martyr', 'vir', 'beatus'], 'Karl Leisner'],
@@ -1509,8 +1514,7 @@ Day.calendars = {
 				[24, 4, 'fidelis-sigmaringen', 1, ['martyr', 'vir']]
 			],
 			'Baden': [
-				[15, 7, 'bernhard-baden', 1, ['vir', 'beatus']],
-				[17, 7, 'bonaventura', 3, 'doctor']
+				[15, 7, 'bernhard-baden', 1, ['vir', 'beatus']]
 			],
 			'Breisgau': [
 				[14, 7, 'ulrich-zell', 1, ['religiosus', 'vir']]
@@ -1531,16 +1535,16 @@ Day.calendars = {
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
-				'oskar-saier', 'ulrich-zell', 'bonaventura', 'monica', 'landelin', 'otmar',
+				'oskar-saier', 'ulrich-zell', 'monica', 'landelin', 'otmar',
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
-				'bonaventura', 'monica', 'pelagius', 'alfons-maria-eppinger', 'john-henry-newman',
+				'monica', 'pelagius', 'alfons-maria-eppinger', 'john-henry-newman',
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
-				'ulrika-franziska-nisch-hegne', 'heimerad-messkirch', 'bonaventura', 'arbogast', 'monica',
-				'verena-zurzach', 'pentecoste-secunda', 'maria-ecclesia'
+				'ulrika-franziska-nisch-hegne', 'heimerad-messkirch', 'arbogast', 'monica', 'verena-zurzach',
+				'pentecoste-secunda', 'maria-ecclesia'
 			]
 		]
 	},
