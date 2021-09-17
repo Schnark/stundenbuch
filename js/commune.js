@@ -636,7 +636,12 @@ Day.getSpecialData = function (day, order, data) {
 			notes: []
 		};
 
-	keys = [data.m + '/' + data.w, data.m + '/' + data.d];
+	keys = [];
+	for (i = Math.max(1, data.d - 6); i <= data.d; i++) {
+		keys.push(data.m + '/-' + (100 * data.w + i));
+	}
+	keys.push(data.m + '/' + data.d);
+
 	if (data.s) {
 		keys.push('sunday/' + data.s);
 	}

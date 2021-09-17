@@ -27,7 +27,16 @@ plures
 beatus
 extra (nur ecclesia)
 */
-
+/*
+var d = new Day('2021-01-01'), i, n;
+for (i = 0; i < 365; i++) {
+	n = d.getNotes();
+	if (n && n.length) {
+		console.log(d.format() + ': ' + l10n.localizeNotes(n).join(', '));
+	}
+	d = d.next();
+}
+*/
 /*
 Naming conventions for calendars:
 *: basic calendar that has to exist to prevent missing texts
@@ -1076,6 +1085,10 @@ Day.calendars = {
 			];
 		},
 		notes: [ //TODO vollständig lokalisieren
+			[21, 'easter', {
+				'': 'Weltgebetstag um Geistliche Berufungen',
+				'en': 'World Day of Prayer for Vocations'
+			}],
 			[42, 'easter', {
 				'': 'Welttag der sozialen Kommunikationsmittel',
 				'en': 'World Communications Day'
@@ -1109,7 +1122,7 @@ Day.calendars = {
 				'de': 'Welttag der Kranken',
 				'en': 'World Day of the Sick'
 			}],
-			[-6, 3, {
+			[-601, 3, { //1st Friday
 				'': 'Weltgebetstag der Frauen',
 				'en': 'Women’s World Day of Prayer'
 			}],
@@ -1124,15 +1137,23 @@ Day.calendars = {
 				'': 'Gebetstag für die Kirche in China',
 				'en': 'World Day of Prayer for the Church in China'
 			}],
-			[-22, 7, {
-				'': 'Welttag der Großeltern und der älteren Menschen',
+			[-122, 7, { //4th Sunday
+				'': 'Dies Mundanus Avorum',
+				'de': 'Welttag der Großeltern und der älteren Menschen',
 				'en': 'World Day for Grandparents and the Elderly'
 			}],
 			[1, 9, {
 				'': 'Weltgebetstag für die Bewahrung der Schöpfung',
 				'en': 'World Day of Prayer for the Care of Creation'
 			}],
-			//vorletzer Sonntag im Oktober: Weltmissionssonntag, solch ein Datum wird aber nicht unterstützt
+			[-124, 9, { //last Sunday
+				'': 'Welttag des Migranten und Flüchtlings',
+				'en': 'World Day of Migrants and Refugees'
+			}],
+			[-118, 10, { //next to last Sunday
+				'': 'Weltmissionssonntag',
+				'en': 'World Mission Day'
+			}],
 			[33, 'sunday', {
 				'': 'Dies Mundanus Pauperum',
 				'de': 'Welttag der Armen',
@@ -1286,14 +1307,8 @@ Day.calendars = {
 				[21, 12] //petrus-canisius
 			];
 		},
-		notes: [ //TODO weitere nach ''?
-			[27, 1, 'Gedenktag für die Opfer des Nationalsozialismus'],
-			[-8, 3, 'Beginn der Woche der Brüderlichkeit'],
-			[-1, 10, 'Erntedanksonntag'],
-			[31, 10, 'Reformationstag (evangelisch)'],
-			[9, 11, 'Gedenken an die Opfer der Schoah'],
-			[-18, 11, 'Buß- und Bettag (evangelisch)'],
-			[26, 12, 'Gebetstag für verfolgte und bedrängte Christen']
+		notes: [
+			[-101, 10, 'Erntedanksonntag'] //erster Sonntag
 		],
 		groups: [
 			[
@@ -1336,18 +1351,29 @@ Day.calendars = {
 			];
 		},
 		notes: [
-			//[3, 'sunday'], //'Sonntag des Wortes Gottes' in Deutschland eigentlich immer am letzten Sonntag im Januar
+			[3, 'sunday'], //Sonntag des Wortes Gottes
+			[-125, 1, { //letzter Sonntag
+				'': 'Dominica Verbi Dei',
+				'de': 'Sonntag des Wortes Gottes',
+				'en': 'Sunday of the Word of God'
+			}],
+			[27, 1, 'Gedenktag für die Opfer des Nationalsozialismus'],
+			[-105, 3, 'Beginn der Woche der Brüderlichkeit'], //Anfang März, bislang immer zwischen 5. und 11.
 			[42, 'easter'], //Welttag der sozialen Kommunikationsmittel
-			[-8, 9, {
+			[-108, 9, { //zweiter Sonntag
 				'': 'Welttag der sozialen Kommunikationsmittel',
 				'en': 'World Communications Day'
 			}],
 			[3, 10, 'Tag der Deutschen Einheit'],
-			//Weltmissionssonntag vom vorletzen Sonntag im Oktober löschen
-			[-22, 10, {
+			[-118, 10], //Weltmissionssonntag
+			[-122, 10, { //vierter Sonntag
 				'': 'Weltmissionssonntag',
 				'en': 'World Mission Day'
-			}]
+			}],
+			[31, 10, 'Reformationstag (evangelisch)'],
+			[9, 11, 'Gedenken an die Opfer der Schoah'],
+			[-416, 11, 'Buß- und Bettag (evangelisch)'], //Mittwoch zwischen 16. und 22.
+			[26, 12, 'Gebetstag für verfolgte und bedrängte Christen']
 		],
 		groups: [
 			[],
@@ -1365,7 +1391,11 @@ Day.calendars = {
 				[50, 'easter', 'maria-ecclesia', 3, 'maria'],
 
 				[10, 5, 'damian-veuster', 3, 'pastor', 'Damian de Veuster'],
+				[21, 5, 'franz-jaegerstaetter', 3, ['martyr', 'vir', 'beatus'], 'Franz Jägerstätter'],
+				[30, 5, 'otto-neururer', 3, ['martyr', 'vir', 'beatus'], 'Otto Neururer'],
+				[12, 6, 'hildegard-burjan', 3, ['mulier', 'beatus'], 'Hildegard Burjan'],
 				[12, 9, 'nomen-maria', 1, 'maria'],
+				[13, 11, 'carl-lampert', 3, ['martyr', 'vir', 'beatus'], 'Carl Lampert'],
 				[15, 11], //albertus-magnus, leopold
 				[15, 11, 'leopold', 3, 'vir'],
 				[16, 11, 'albertus-magnus', 3, 'doctor'],
@@ -1383,23 +1413,21 @@ Day.calendars = {
 				}],
 				[9, 12], //maria-immaculata move, ioannes-didacus
 				[9, 12, 'ioannes-didacus', 3, 'vir']
-				//TODO evt. ganz AT
-				//21. 5.: Sel. Franz Jägerstätter (g)
-				//30. 5.: Sel. Otto Neururer (g)
-				//12. 6.: Sel. Hildegard Burjan (g)
-				//13. 8.: Sel. Jakob Gapp (g)
-				//13. 11.: Sel. Carl Lampert (g)
-				//12. 12.: Sel. Hartmann (g)
 			];
+		},
+		extra: {
+			'Kirchweihe (allg. Datum)': [
+				[-614, 10, 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia'] //Samstag vor drittem Sonntag
+			]
 		},
 		notes: [
 			[26, 10, 'Nationalfeiertag']
 		],
 		groups: [
-			['maria-ecclesia'],
-			['maria-ecclesia'],
-			['damian-veuster', 'maria-ecclesia'],
-			['maria-ecclesia']
+			['maria-ecclesia', 'otto-neururer', 'hildegard-burjan'],
+			['maria-ecclesia', 'franz-jaegerstaetter'],
+			['maria-ecclesia', 'damian-veuster'],
+			['maria-ecclesia', 'carl-lampert']
 		]
 	},
 	'de-CH': {
@@ -1407,24 +1435,23 @@ Day.calendars = {
 		label: 'Schweiz (deutschsprachige Gebiete)',
 		getEntries: function () {
 			return [
+				[16, 7, 'muttergottes-einsiedeln', 3, 'maria', 'Muttergottes von Einsiedeln'],
+				[16, 8, 'theodor', 3, 'episcopus', 'Theodor'],
 				[25, 9, 'niklaus-flue', 0, 'vir'],
 				[30, 9], //hieronymus
 				[30, 9, 'hieronymus', 3, 'doctor'],
 				[30, 9, 'urs-viktor', 3, ['martyr', 'plures'], 'Urs, Viktor']
-				//TODO evt. ganz CH
-				//[16, 7, 'muttergottes-einsiedeln', 3, 'maria', 'Muttergottes von Einsiedeln']
-				//[16, 8, 'theodor', 3, '?', 'Theodor']
 			];
 		},
 		notes: [
 			[1, 8, 'Schweizer Nationalfeiertag'],
-			[-15, 9, 'Eidgenössischer Dank-, Buss- und Bettag']
+			[-115, 9, 'Eidgenössischer Dank-, Buss- und Bettag'] //dritter Sonntag
 		],
 		groups: [
 			['hieronymus'],
-			['hieronymus'],
+			['theodor', 'hieronymus'],
 			['urs-viktor'],
-			['hieronymus']
+			['muttergottes-einsiedeln', 'hieronymus']
 		]
 	},
 
@@ -1499,13 +1526,6 @@ Day.calendars = {
 				//13. 12. Odilia (bereits in de)
 			];
 		},
-		notes: [
-			[30, 5, 'Jahrestag der Ernennung von Erzbischof Stephan Burger'],
-			[29, 6, 'Jahrtag der Bischofsweihe und Amtseinführung von Erzbischof Stephan Burger'],
-			[9, 8, 'Geburtstag von Erzbischof em. Robert Zollitsch'],
-			[15, 8, 'Hochfest der Schutzpatronin der Erzdiözese Freiburg'],
-			[26, 12, 'Namenstag von Erzbischof Stephan Burger']
-		],
 		extra: {
 			'Dekanat Mosbach-Buchen': [
 				[9, 12, 'liborius-wagner', 3, ['martyr', 'vir', 'beatus'], 'Liborius Wagner']
@@ -1526,9 +1546,16 @@ Day.calendars = {
 				[63, 'easter', 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia']
 			],
 			'Kirchweihe (allg. Datum)': [
-				[-15, 10, 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia']
+				[-115, 10, 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia'] //dritter Sonntag
 			]
 		},
+		notes: [
+			[30, 5, 'Jahrestag der Ernennung von Erzbischof Stephan Burger'],
+			[29, 6, 'Jahrtag der Bischofsweihe und Amtseinführung von Erzbischof Stephan Burger'],
+			[9, 8, 'Geburtstag von Erzbischof em. Robert Zollitsch'],
+			[15, 8, 'Hochfest der Schutzpatronin der Erzdiözese Freiburg'],
+			[26, 12, 'Namenstag von Erzbischof Stephan Burger']
+		],
 		groups: [
 			[
 				'vinzenz-pallotti', 'trudpert', 'bernhard-baden', 'karl-leisner', 'gebhard', 'teresa-kalkutta',

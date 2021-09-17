@@ -287,8 +287,7 @@ Day.prototype.calculateNumbers = function () {
 		d: this.getDate(),
 		m: this.getMonth() + 1,
 		e: this.diffTo(easter),
-		//w: -1: first sunday in month, -2: first monday, ..., -8: second sunday, ...
-		w: -(Math.floor(this.getDate() / 7) * 7 + this.getDay() + 1)
+		w: this.getDay() + 1
 	};
 
 	this.order = 7;
