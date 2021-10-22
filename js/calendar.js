@@ -1499,6 +1499,7 @@ Day.calendars = {
 				[15, 7, 'bernhard-baden', 3, ['vir', 'beatus'], 'Bernhard von Baden'],
 				[17, 7, 'bonaventura', 2, 'doctor'],
 				[21, 7, 'arbogast', 3, 'episcopus', 'Arbogast'],
+				[21, 7, 'franziskus-maria', 3, ['pastor', 'beatus'], 'Franziskus Maria'],
 				//9. 8. Theresia Benedicta vom Kreuz (bereits in 150)
 				[12, 8, 'karl-leisner', 3, ['martyr', 'vir', 'beatus'], 'Karl Leisner'],
 				//15. 8. Mariä Aufnahme in den Himmel (bereits in '')
@@ -1543,7 +1544,9 @@ Day.calendars = {
 				[18, 9, 'lambertus', 0, ['pastor', 'martyr']]
 			],
 			'Freiburger Münster': [
-				[63, 'easter', 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia']
+				[63, 'easter', 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia'],
+				[23, 4, 'georgius', 2, ['martyr', 'vir']],
+				[26, 8, 'alexander', 2, ['martyr', 'vir'], 'Alexander']
 			],
 			'Kirchweihe (allg. Datum)': [
 				[-115, 10, 'anniversarium-dedicationis-ecclesiae', 0, 'ecclesia'] //dritter Sonntag
@@ -1566,7 +1569,7 @@ Day.calendars = {
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
-				'monica', 'pelagius', 'alfons-maria-eppinger', 'john-henry-newman',
+				'franziskus-maria', 'monica', 'pelagius', 'alfons-maria-eppinger', 'john-henry-newman',
 				'pentecoste-secunda', 'maria-ecclesia'
 			],
 			[
