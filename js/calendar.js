@@ -744,7 +744,7 @@ Day.calendars = {
 					}
 				}],
 				[27, 6, 'cyrillus-alexandrinus', 3, 'doctor'],
-				[28, 6, 'irenaeus', 2, ['martyr', 'vir']],
+				[28, 6, 'irenaeus', 2, ['doctor', 'martyr']],
 				[29, 6, 'petrus-paulus', 0, ['apostolus', 'martyr', 'plures'], {
 					texts: {
 						lectio: {
@@ -1127,11 +1127,11 @@ Day.calendars = {
 				'en': 'Women’s World Day of Prayer'
 			}],
 			[13, 3, {
-				'': 'Anniversarium electionis Papæ Francisci',
-				'de': 'Jahrestag der Wahl von Papst Franziskus',
-				'en': 'Anniversary of the election of Pope Francis'
+				'': 'Anniversarium electionis Papæ Francisci (2013)',
+				'de': 'Jahrestag der Wahl von Papst Franziskus (2013)',
+				'en': 'Anniversary of the election of Pope Francis (2013)'
 			}],
-			[19, 3, 'Jahrtag der Amtseinführung von Papst Franziskus'],
+			[19, 3, 'Jahrtag der Amtseinführung von Papst Franziskus (2013)'],
 			[23, 4, 'Namenstag von Papst Franziskus'],
 			[24, 5, {
 				'': 'Gebetstag für die Kirche in China',
@@ -1160,9 +1160,9 @@ Day.calendars = {
 				'en': 'World Day of the Poor'
 			}],
 			[17, 12, {
-				'': 'Dies natali Papæ Francisci',
-				'de': 'Geburtstag von Papst Franziskus',
-				'en': 'Birthday of Pope Francis'
+				'': 'Dies natali Papæ Francisci (1936)',
+				'de': 'Geburtstag von Papst Franziskus (1936)',
+				'en': 'Birthday of Pope Francis (1936)'
 			}]
 		],
 		groups: [
@@ -1553,9 +1553,8 @@ Day.calendars = {
 			]
 		},
 		notes: [
-			[30, 5, 'Jahrestag der Ernennung von Erzbischof Stephan Burger'],
-			[29, 6, 'Jahrtag der Bischofsweihe und Amtseinführung von Erzbischof Stephan Burger'],
-			[9, 8, 'Geburtstag von Erzbischof em. Robert Zollitsch'],
+			[30, 5, 'Jahrestag der Ernennung von Erzbischof Stephan Burger (2014)'],
+			[29, 6, 'Jahrtag der Bischofsweihe und Amtseinführung von Erzbischof Stephan Burger (2014)'],
 			[15, 8, 'Hochfest der Schutzpatronin der Erzdiözese Freiburg'],
 			[26, 12, 'Namenstag von Erzbischof Stephan Burger']
 		],
@@ -1629,8 +1628,8 @@ Day.calendars = {
 			]
 		},
 		notes: [
-			[18, 4, 'Jahrestag der Ernennung von Bischof Peter Kohlgraf'],
-			[27, 8, 'Jahrtag der Bischofsweihe von Bischof Peter Kohlgraf']
+			[18, 4, 'Jahrestag der Ernennung von Bischof Peter Kohlgraf (2017)'],
+			[27, 8, 'Jahrtag der Bischofsweihe von Bischof Peter Kohlgraf (2017)']
 		],
 		groups: [
 			['valentin-terni', 'willigis', 'aloisius-gonzaga', 'alfonsus-liguori'],
@@ -1683,8 +1682,8 @@ Day.calendars = {
 			]
 		},
 		notes: [
-			[7, 7, 'Jahrestag der Ernennung von Bischof Gebhard Fürst'],
-			[17, 9, 'Jahrtag der Bischofsweihe von Bischof Gebhard Fürst']
+			[7, 7, 'Jahrestag der Ernennung von Bischof Gebhard Fürst (2000)'],
+			[17, 9, 'Jahrtag der Bischofsweihe von Bischof Gebhard Fürst (2000)']
 		],
 		groups: [
 			['gebhard', 'konrad', 'carlo-steeb'],

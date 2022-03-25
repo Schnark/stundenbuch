@@ -416,7 +416,7 @@ function getTitle (name) {
 	var fallback = Day.nameFallback[name] || [],
 		fallbackName = fallback[0] || '',
 		fallbackType = fallback[1] || '';
-	fallbackName = fallbackName.replace(/\+$/, get('titulus-et-socii')).replace(/ \([^()]+\)$/, '');
+	fallbackName = fallbackName.replace(/\+$/, get('titulus-et-socii'));
 	setDynamicData('nomen', get(name + '-nomen', fallbackName));
 	return get(name, get('titulus' + fallbackType));
 }
