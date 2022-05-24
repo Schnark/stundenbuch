@@ -1,8 +1,8 @@
 {
-	"version": "1.28",
+	"version": "1.29",
 	"name": "Stundengebet",
 	"description": "Stundengebet",
-	"size": 4793265,
+	"size": 4801960,
 	"package_path": "https://schnark.github.io/stundenbuch/stundenbuch.zip",
 	"icons": {
 		"128": "/img/icon-128.png",

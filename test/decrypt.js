@@ -69,6 +69,9 @@ function run (pw) {
 		{name: 'catalogus-la.txt', start: '[catalogus-index]'},
 		{name: 'audio-la.txt', start: '#TODO\n[audio-data]'}
 	]);
+	decrypt('it.xtea', pw, [
+		{name: 'it.txt', start: ''}
+	]);
 }
 
 function init () {

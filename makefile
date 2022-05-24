@@ -21,16 +21,18 @@ $(ICONPRE)512.png: icon.svg
 	optipng -o7 $(ICONPRE)512.png
 
 .PHONY: l10n-files
-l10n-files: l10n-source/combined/de.txt l10n-source/combined/en.txt l10n-source/combined/la.txt
+l10n-files: l10n-source/combined/de.txt l10n-source/combined/en.txt l10n-source/combined/la.txt l10n-source/combined/it.txt
 
 .PHONY: encrypt
-encrypt: l10n/de.xtea l10n/en.xtea l10n/la.xtea
+encrypt: l10n/de.xtea l10n/en.xtea l10n/la.xtea l10n/it.xtea
 
 DE_FILES = l10n-source/de.txt l10n-source/interface-de.txt l10n-source/biblia-de.txt l10n-source/lectionis-de.txt l10n-source/regional-de.txt l10n-source/catalogus-de.txt l10n-source/audio-de.txt
 
 EN_FILES = l10n-source/en.txt l10n-source/interface-en.txt l10n-source/biblia-en.txt l10n-source/lectionis-en.txt l10n-source/catalogus-en.txt l10n-source/audio-en.txt
 
 LA_FILES = l10n-source/la.txt l10n-source/interface-la.txt l10n-source/biblia-la.txt l10n-source/lectionis-la.txt l10n-source/catalogus-la.txt l10n-source/audio-la.txt
+
+IT_FILES = l10n-source/it.txt
 
 l10n-source/combined/de.txt: $(DE_FILES)
 	paste -s -d"\n" $(DE_FILES) > l10n-source/combined/de.txt
@@ -41,6 +43,9 @@ l10n-source/combined/en.txt: $(EN_FILES)
 l10n-source/combined/la.txt: $(LA_FILES)
 	paste -s -d"\n" $(LA_FILES) > l10n-source/combined/la.txt
 
+l10n-source/combined/it.txt: $(IT_FILES)
+	paste -s -d"\n" $(IT_FILES) > l10n-source/combined/it.txt
+
 l10n/de.xtea: l10n-source/combined/de.txt
 	./encrypt.sh de
 
@@ -49,6 +54,9 @@ l10n/en.xtea: l10n-source/combined/en.txt
 
 l10n/la.xtea: l10n-source/combined/la.txt
 	./encrypt.sh la
+
+l10n/it.xtea: l10n-source/combined/it.txt
+	./encrypt.sh it
 
 $(NAME).zip: clean icons encrypt $(CONTENTS)
 	rm -f $(NAME).zip

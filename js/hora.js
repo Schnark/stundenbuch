@@ -156,6 +156,11 @@ function getHymnusCompletorium (date, day) {
 			return 'hymnus-completorium-paschale';
 		}
 		return 'hymnus-completorium-' + Math.floor(((date.getDayInSequence() + 1) % 14) / 7);
+	case '2':
+		if (date.getPart() === 1) {
+			return 'hymnus-completorium-' + [0, 1, 1, 0, 0, 1][date.getSubPart()];
+		}
+		return 'hymnus-completorium-' + Math.floor(((date.getDayInSequence() + 1) % 14) / 7);
 	default:
 		return 'hymnus-completorium';
 	}
@@ -1741,7 +1746,7 @@ function getCompletorium (date, config) {
 		{type: 'title', title: 'completorium', date: date, eve: true},
 		skip ? 'omitte-' + skip : '',
 		'incipit' + (date.getPart() === 2 ? '-quadragesimae' : ''),
-		'confiteor',
+		config.get('reviewDay') ? 'respectus-diei' : 'confiteor',
 		getHymnusCompletorium(date, day),
 		cantica[0].split('|'),
 		cantica[1].split('|'),
@@ -2008,6 +2013,13 @@ function mergeSequences (seq1, seq2, lang1) {
 	}).join('').replace(/<\/td><\/tr><!--2--><tr><td colspan="2">/g, '').replace(/<!--2-->/g, '') + '</table>';
 }
 
+function complineOnly (lang) {
+	lang = l10n.availableLanguages.filter(function (entry) {
+		return entry.code === lang;
+	})[0];
+	return !lang || lang.complineOnly;
+}
+
 function getHora (date, hora, callback) {
 	var part, seqPrimary, seqSecondary, config, lang1, lang2;
 	config = Config.getConfig(); //TODO übergeben lassen
@@ -2023,6 +2035,9 @@ function getHora (date, hora, callback) {
 	if (callback) {
 		lang1 = config.get('lang');
 		lang2 = config.get('lang2');
+		if (hora !== 'completorium' && complineOnly(lang2)) {
+			lang2 = '';
+		}
 		if (lang2 && lang1 !== lang2) {
 			l10n.load(lang2, function () {
 				seqSecondary = formatSequence(getHoraSequence(date, hora, config), part, true);

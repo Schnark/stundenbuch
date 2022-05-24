@@ -134,7 +134,7 @@ function removeAccents (text) {
 }
 
 function getFileInfo (langData) {
-	var lang, availLang = ['de', 'en', 'la'], additional = [], transforms = [];
+	var lang, availLang = ['de', 'en', 'la', 'it'], additional = [], transforms = [];
 	lang = langData.lang;
 	if (availLang.indexOf(lang) === -1) {
 		lang = availLang[0];
@@ -249,6 +249,9 @@ function load (lang, callback) {
 			'catalogus-' + langData.main,
 			'audio-' + langData.main
 		);
+		if (langData.main === 'it') {
+			files = ['it'];
+		}
 		todo = files.length;
 		for (i = 0; i < files.length; i++) {
 			getRawFile('l10n-source/' + files[i] + '.txt', 'text', onGotFile);
@@ -630,7 +633,8 @@ return {
 		{code: 'de-CH', autonym: 'Deutsch (Schweiz)'},
 		{code: 'en', autonym: 'English', prompt: 'Please enter password:'},
 		{code: 'la', autonym: 'Latina', prompt: 'Da tesseram, quæsumus:'},
-		{code: 'la-x-noaccent', autonym: 'Latina (sine accentibus)'}
+		{code: 'la-x-noaccent', autonym: 'Latina (sine accentibus)'},
+		{code: 'it', autonym: 'Italiano', complineOnly: true}
 	]
 };
 

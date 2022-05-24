@@ -599,8 +599,14 @@ function navigateToUrl () {
 	navigate(location.search, true);
 }
 
-function getLanguageSelect () {
-	return l10n.availableLanguages.map(function (entry) {
+function getLanguageSelect (includeAll) {
+	var languages = l10n.availableLanguages;
+	if (!includeAll) {
+		languages = languages.filter(function (entry) {
+			return !entry.complineOnly;
+		});
+	}
+	return languages.map(function (entry) {
 		return '<option value="' + entry.code + '" lang="' + entry.code + '">' + entry.autonym + '</option>';
 	}).join('');
 }
@@ -634,7 +640,7 @@ function getCalendarSelect () {
 }
 
 function init () {
-	var config, el, langSelect;
+	var config, el;
 	dom.main = document.getElementById('main');
 	dom.settings = document.getElementById('settings');
 	dom.settingsPopup = document.getElementById('popup-settings');
@@ -672,6 +678,7 @@ function init () {
 		varyTSNAntiphon: false,
 		removeDuplicateAntiphon: true,
 		marianAntiphon: 'completorium',
+		reviewDay: false,
 		modusMaria: 2,
 		dayStart: '00:00',
 		calendar: 'de',
@@ -717,9 +724,9 @@ function init () {
 		debug.enableDisable(false);
 	}
 
-	langSelect = getLanguageSelect();
-	document.getElementById('language-select').innerHTML = langSelect;
-	document.getElementById('secondary-language-select').innerHTML += langSelect;
+	document.getElementById('language-select').innerHTML = getLanguageSelect();
+	//TODO add a way to have the complineOnly languages not only as secondary languages
+	document.getElementById('secondary-language-select').innerHTML += getLanguageSelect(true);
 	document.getElementById('calendar-select').innerHTML = getCalendarSelect();
 
 	Config.setConfig(config);
