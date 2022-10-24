@@ -1555,9 +1555,24 @@ Day.calendars = {
 		notes: [
 			[30, 5, 'Jahrestag der Ernennung von Erzbischof Stephan Burger (2014)'],
 			[29, 6, 'Jahrtag der Bischofsweihe und Amtseinführung von Erzbischof Stephan Burger (2014)'],
-			[15, 8, 'Hochfest der Schutzpatronin der Erzdiözese Freiburg'],
+			[15, 8, 'Schutzpatronin der Erzdiözese Freiburg'],
+			[26, 11, 'Zweiter Patron der Erzdiözese Freiburg'],
 			[26, 12, 'Namenstag von Erzbischof Stephan Burger']
 		],
+		extraNotes: {
+			'Hohenzollern': [
+				[24, 4, 'Landespatron von Hohenzollern']
+			],
+			'Baden': [
+				[15, 7, 'Landespatron von Baden']
+			],
+			'Breisgau': [
+				[14, 7, 'Patron des Breisgaus']
+			],
+			'Freiburg': [
+				[18, 9, 'Hauptpatron der Stadt Freiburg']
+			]
+		},
 		groups: [
 			[
 				'vinzenz-pallotti', 'trudpert', 'bernhard-baden', 'karl-leisner', 'gebhard', 'teresa-kalkutta',
@@ -1629,7 +1644,8 @@ Day.calendars = {
 		},
 		notes: [
 			[18, 4, 'Jahrestag der Ernennung von Bischof Peter Kohlgraf (2017)'],
-			[27, 8, 'Jahrtag der Bischofsweihe von Bischof Peter Kohlgraf (2017)']
+			[27, 8, 'Jahrtag der Bischofsweihe von Bischof Peter Kohlgraf (2017)'],
+			[11, 11, 'Patron der Diözese Mainz']
 		],
 		groups: [
 			['valentin-terni', 'willigis', 'aloisius-gonzaga', 'alfonsus-liguori'],
@@ -1683,7 +1699,8 @@ Day.calendars = {
 		},
 		notes: [
 			[7, 7, 'Jahrestag der Ernennung von Bischof Gebhard Fürst (2000)'],
-			[17, 9, 'Jahrtag der Bischofsweihe von Bischof Gebhard Fürst (2000)']
+			[17, 9, 'Jahrtag der Bischofsweihe von Bischof Gebhard Fürst (2000)'],
+			[11, 11, 'Patron der Diözese Rottenburg-Stuttgart']
 		],
 		groups: [
 			['gebhard', 'konrad', 'carlo-steeb'],

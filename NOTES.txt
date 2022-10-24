@@ -334,6 +334,7 @@ Direktorien:
 2020: https://www.ebfr.de/html/media/dl.html?i=976956
 2021: https://www.ebfr.de/html/media/dl.html?i=1187811 mit Ergänzungen https://www.ebfr.de/html/media/dl.html?i=1184356
 2022: https://www.ebfr.de/media/download/integration/1408890/direktorium_2022.pdf
+2023: https://www.ebfr.de/media/download/integration/1632896/direktorium_2023.pdf
 
 Nicht im Kalender, aber im Direktorium verzeichnet:
 
@@ -341,7 +342,10 @@ Sel. Paul VI. (26. Sep., 2015–2019, seither im Generalkalender)
 Hl. Gregor von Narek (27. Feb., 2018–2021, seither im Generalkalender)
 Hl. Johannes von Avila (10. Mai, 2018–2021, seither im Generalkalender)
 Hl. Oscar Romero (24. Mär., seit 2019)
-
+Hl. Charles de Foucauld (1. Dez., seit 2023)
+Sel. Stefan Wyszyński (28. Mai, seit 2023)
+Maria von den Engeln zu Portiunkula (2. Aug., seit 2023)
+Sel. Johannes Paul I. (26. Aug., seit 2023)
 
 Lateinische Texte
 =================
@@ -555,18 +559,16 @@ Vermutlich nicht (zumindest nicht für Freiburg) approbierte Texte, trotzdem vor
 - Hl. Teresa von Kalkutta (Direktorium 2018, App)
 - Hl. Johannes Heinrich Newman (Direktorium 2018, App, https://www.oratoriosanfilippo.org/Newman-germanice.pdf)
 - Sel. Alfons Maria Eppinger (Ergänzungsband Direktorium 2021)
+- Sel. Franziskus Maria vom Kreuz Jordan (Direktorium 2023)
 
 * Lesung der Lesehore für:
 - Hl. Vinzenz Pallotti (Direktorium 2018, Schweiz, http://liturgie.ch/images/liturgie/praxis/direktorium/pdf/lesehore-vinzenz-pallotti.pdf)
 - Hl. Teresa von Kalkutta (App, Direktorium 2018 hat privaten Vorschlag)
 - Hl. Johannes Heinrich Newman (https://www.oratoriosanfilippo.org/Newman-germanice.pdf, App, Direktorium 2018 hat privaten Vorschlag)
 - Sel. Alfons Maria Eppinger (Ergänzungsband Direktorium 2021)
+- Sel. Franziskus Maria vom Kreuz Jordan (Direktorium 2023)
 
 Vermutlich nicht approbierte Texte, nicht vorhanden:
 
-* Oration für:
-- Sel. Franziskus Maria vom Kreuz Jordan
-
 * Lesung der Lesehore für:
 - Pfingstmontag
-- Sel. Franziskus Maria vom Kreuz Jordan

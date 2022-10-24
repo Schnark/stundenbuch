@@ -102,9 +102,16 @@ Day.addNote = function (d, m, note) {
 	}
 };
 
+Day.addNotes = function (notes) {
+	var i;
+	for (i = 0; i < notes.length; i++) {
+		Day.addNote(notes[i][0], notes[i][1], notes[i][2]);
+	}
+};
+
 Day.initCalendar = function (name) {
 	/*jshint forin: false*/
-	var extra, key, i;
+	var extra, key;
 	if (!Day.calendars[name]) { //shouldn't happen
 		name = '';
 	}
@@ -119,16 +126,27 @@ Day.initCalendar = function (name) {
 		l10n.setNames('episcopus', {});
 	}
 	if (Day.calendars[name].notes) {
-		for (i = 0; i < Day.calendars[name].notes.length; i++) {
-			Day.addNote(Day.calendars[name].notes[i][0], Day.calendars[name].notes[i][1], Day.calendars[name].notes[i][2]);
-		}
+		Day.addNotes(Day.calendars[name].notes);
 	}
 	if (Day.calendars[name].extra) {
 		extra = Config.getConfig().get('calendarExtra') || [];
 		for (key in Day.calendars[name].extra) {
-			Day.calendarExtraEntries.push(key);
+			if (Day.calendarExtraEntries.indexOf(key) === -1) {
+				Day.calendarExtraEntries.push(key);
+			}
 			if (extra.indexOf(key) > -1) {
 				Day.addSpecialDays(util.clone(Day.calendars[name].extra[key]), true);
+			}
+		}
+	}
+	if (Day.calendars[name].extraNotes) {
+		extra = Config.getConfig().get('calendarExtra') || [];
+		for (key in Day.calendars[name].extraNotes) {
+			if (Day.calendarExtraEntries.indexOf(key) === -1) {
+				Day.calendarExtraEntries.push(key);
+			}
+			if (extra.indexOf(key) > -1) {
+				Day.addNotes(Day.calendars[name].extraNotes[key]);
 			}
 		}
 	}

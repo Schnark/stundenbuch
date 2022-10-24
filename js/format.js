@@ -256,6 +256,8 @@ function formatResponsoriumLectionis (responsorium, easter) {
 		}
 	}
 
+	//jscs:disable validateIndentation
+	//jscs complains about the last lines, though they are correct
 	switch (mode) {
 	case 'single': return responsorium.replace(/(<p>|<br>)[RV] /g, '$1');
 	case 'expand':
@@ -273,6 +275,7 @@ function formatResponsoriumLectionis (responsorium, easter) {
 			.replace(/(<p>|<br>)V /g, '$1' + v)
 			.replace(/<br>/g, asteriscus + '<br>');
 	}
+	//jscs:enable validateIndentation
 }
 
 function formatResponsorium (responsorium, easter) {

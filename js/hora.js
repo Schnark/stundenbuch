@@ -1414,8 +1414,10 @@ function getOratioLectionis (date, config) {
 			break;
 		case 2: oratio = date.getDayInSequence(-1) + '-quadragesimae'; break;
 		case 3:
+			//jscs:disable validateIndentation
 			oratio = date.getDayInSequence(-1) + '-paschale' +
 				(config.get('ascensionSunday') && [40, 41].indexOf(date.getDayInSequence(-1)) > -1 ? '-asc' : '');
+			//jscs:enable validateIndentation
 		}
 	}
 	return 'oratio-' + oratio;
@@ -1442,8 +1444,10 @@ function getOratioLaudes (date, config) {
 			break;
 		case 2: oratio = date.getDayInSequence(-1) + '-quadragesimae'; break;
 		case 3:
+			//jscs:disable validateIndentation
 			oratio = date.getDayInSequence(-1) + '-paschale' +
 				(config.get('ascensionSunday') && [40, 41].indexOf(date.getDayInSequence(-1)) > -1 ? '-asc' : '');
+			//jscs:enable validateIndentation
 		}
 	}
 	if (commemoratio) {
@@ -1472,8 +1476,10 @@ function getOratioTertiaSextaNona (date, type, config) {
 			break;
 		case 2: oratio = date.getDayInSequence(-1) + '-quadragesimae'; break;
 		case 3:
+			//jscs:disable validateIndentation
 			oratio = date.getDayInSequence(-1) + '-paschale' +
 				(config.get('ascensionSunday') && [40, 41].indexOf(date.getDayInSequence(-1)) > -1 ? '-asc' : '');
+			//jscs:enable validateIndentation
 		}
 	}
 	return 'oratio-' + oratio;
@@ -1500,8 +1506,10 @@ function getOratioVespera (date, config) {
 			break;
 		case 2: oratio = date.getDayInSequence(-1) + '-quadragesimae'; break;
 		case 3:
+			//jscs:disable validateIndentation
 			oratio = date.getDayInSequence(-1) + '-paschale' +
 				(config.get('ascensionSunday') && [40, 41].indexOf(date.getDayInSequence(-1)) > -1 ? '-asc' : '');
+			//jscs:enable validateIndentation
 		}
 	}
 	if (commemoratio) {
@@ -1533,8 +1541,10 @@ function getMaria (date, config) {
 		return ['salve-regina', 'alma-redemptoris-mater', 'ave-regina-caelorum'][date.getPart()];
 	case 3: //Woche
 		d = date.getDayInSequence(35);
+		//jscs:disable validateIndentation
 		return ['ave-regina-caelorum', 'ave-maria', 'salve-regina',
 			'sub-tuum-praesidium', 'alma-redemptoris-mater'][Math.floor(d / 7)];
+		//jscs:enable validateIndentation
 	default: //traditionell
 		if (date.getPart() === 1 || date.getMonth() === 0 || (date.getMonth() === 1 && date.getDate() < 3)) {
 			return 'alma-redemptoris-mater';

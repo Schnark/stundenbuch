@@ -175,7 +175,8 @@ Day.lectio = {
 /*tertia, sexta, nona: varianta-paschale:
 Lectio <Ap 2, 10–11>
 
-Nihil horum tímeas, quæ passúrus es. Ecce missúrus est Diábolus ex vobis in cárcerem, ut tentémini, et habébitis tribulatiónem diébus decem. Esto fidélis usque ad mortem, et dabo tibi corónam vitæ.
+Nihil horum tímeas, quæ passúrus es. Ecce missúrus est Diábolus ex vobis in cárcerem, ut tentémini,
+et habébitis tribulatiónem diébus decem. Esto fidélis usque ad mortem, et dabo tibi corónam vitæ.
 
 Lectio <Ap 3, 21>
 
