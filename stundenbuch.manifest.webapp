@@ -1,8 +1,8 @@
 {
-	"version": "1.31",
+	"version": "1.32",
 	"name": "Stundengebet",
 	"description": "Stundengebet",
-	"size": 4804546,
+	"size": 4804708,
 	"package_path": "http://localhost:8080/stundenbuch.zip",
 	"icons": {
 		"128": "/img/icon-128.png",
@@ -12,10 +12,12 @@
 		"name": "Michael Müller",
 		"url": "https://github.com/Schnark"
 	},
+	"default_locale": "de",
 	"locales": {
 		"en": {
 			"name": "Liturgy of the Hours",
 			"description": "Liturgy of the Hours"
 		}
 	}
+}
 }

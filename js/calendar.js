@@ -1081,7 +1081,11 @@ Day.calendars = {
 				[21, 12, 'petrus-canisius', 3, 'doctor'],
 				[23, 12, 'ioannes-kety', 3, ['misericordia', 'pastor']],
 				[29, 12, 'thomas-becket', 3, ['episcopus', 'martyr']],
-				[31, 12, 'silvester', 3, 'papa']
+				[31, 12, 'silvester', 3, 'papa'],
+
+				[5, 1, 'benedictus-xvi', 3, ['defunctus', 'vir'], 'Benedictus']
+				//day of death is in the octave of Christmas
+				//so use day of burial instead (at least until someone suggests a better date)
 			];
 		},
 		notes: [ //TODO vollständig lokalisieren
@@ -1163,6 +1167,11 @@ Day.calendars = {
 				'': 'Dies natali Papæ Francisci (1936)',
 				'de': 'Geburtstag von Papst Franziskus (1936)',
 				'en': 'Birthday of Pope Francis (1936)'
+			}],
+			[31, 12, {
+				'': 'Dies obitus Papæ Benedicti XVI (2022)',
+				'de': 'Todestag von Papst Benedikt XVI. (2022)',
+				'en': 'Day of the death of Pope Benedict XVI (2022)'
 			}]
 		],
 		groups: [

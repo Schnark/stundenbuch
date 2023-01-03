@@ -507,8 +507,9 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 		key = 'sunday/' + d;
 		val = {
 			//all have rank >= 1 anyway (3 for sundays after Christmas)
-			order: rank === 0 ? 1 : (types.indexOf('dominus') > -1 ? 2 : 3),
-			eve: true
+			order: rank === 0 ? 1 : (types.indexOf('dominus') > -1 ? 2 : 3)
+			//eve: true not necessary for sundays (set by Day.prototype.calculateNumbers),
+			//and wrong for sunday/-1 moved to Dec. 30
 		};
 	} else {
 		key = String(m) + '/' + String(d);

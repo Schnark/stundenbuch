@@ -1,5 +1,5 @@
 {
-	"version": "1.31",
+	"version": "1.32",
 	"name": "Stundengebet",
 	"description": "Stundengebet",
 	"launch_path": "/index.html",
@@ -11,10 +11,12 @@
 		"name": "Michael Müller",
 		"url": "https://github.com/Schnark"
 	},
+	"default_locale": "de",
 	"locales": {
 		"en": {
 			"name": "Liturgy of the Hours",
 			"description": "Liturgy of the Hours"
 		}
 	}
+}
 }
