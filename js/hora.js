@@ -1855,7 +1855,8 @@ function getOverview (date, config) {
 
 function getCatalogue (data) {
 	var catalogus = l10n.get('catalogus'),
-		top = '<div class="title green" data-title="' + catalogus + '"><h1>' + catalogus + '</h1></div>';
+		color = ['green', 'red', 'white', 'blue', 'violet', 'pink', 'black'].indexOf(data[1]) > -1 ? data.splice(1, 1)[0] : '',
+		top = '<div class="title ' + (color || 'green') + '" data-title="' + catalogus + '"><h1>' + catalogus + '</h1></div>';
 	if (data.length > 1) {
 		data.splice(1, 0, '');
 		data.push('');

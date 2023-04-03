@@ -11,7 +11,6 @@
 <link rel="shortcut icon" href="icons/favicon.ico">
 <meta name="msapplication-TileColor" content="#2b5797">
 <meta name="msapplication-config" content="icons/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
 <script>
 if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installPackage)) {
 	navigator.serviceWorker.register('sw.js');
@@ -19,6 +18,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 </script>
 
 <link rel="stylesheet" href="style.css">
+<meta id="theme-color" name="theme-color" content="#060"><!--id before name for ffos-simulator-->
 <script src="js/debug.js" defer></script>
 <script src="js/screenlock.js" defer></script>
 <script src="js/lib/pako.min.js" defer></script>

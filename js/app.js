@@ -39,7 +39,7 @@ function navigate (href, noHistory) {
 		}
 		getHora(new Day(), data.c === 'catalogus' ? data.c : 'catalogus,' + data.c, function (html) {
 			dom.main.innerHTML = html;
-			updateTitle();
+			updateTitleAndColor();
 			if (!noHistory) {
 				document.documentElement.scrollTop = 0;
 				document.body.scrollTop = 0;
@@ -54,7 +54,7 @@ function navigate (href, noHistory) {
 		updateNavigation(currentData.day, currentData.hora);
 		getHora(currentData.day, currentData.hora, function (html) {
 			dom.main.innerHTML = html;
-			updateTitle();
+			updateTitleAndColor();
 			if (Number(Config.getConfig().get('debug')) === 2) {
 				dom.main.innerHTML += debug.getLog();
 			}
@@ -75,11 +75,12 @@ function navigate (href, noHistory) {
 	}
 }
 
-function updateTitle () {
+function updateTitleAndColor () {
 	var title;
 	title = document.getElementsByClassName('title');
 	if (title && title[0] && title[0].dataset && title[0].dataset.title) {
 		document.title = title[0].dataset.title;
+		document.getElementById('theme-color').content = window.getComputedStyle(title[0], null).backgroundColor;
 	}
 }
 
