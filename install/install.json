@@ -4,7 +4,7 @@
 		"en": "Liturgy of the Hours – App for Firefox OS",
 		"de": "Stundengebet – App für Firefox OS"
 	},
-	"serviceworker": true,
+	"serviceworker": false,
 	"icon": "img/icon-128.png",
 	"screenshots": [
 		"1.png",

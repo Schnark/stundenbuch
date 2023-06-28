@@ -3,7 +3,7 @@ CONTENTS = img js l10n index.html style.css manifest.webapp
 ICONPRE = img/icon-
 
 .PHONY: all
-all: $(NAME).zip $(NAME).manifest.webapp github.manifest.webapp
+all: $(NAME).zip $(NAME).manifest.webapp github.manifest.webapp l10n-keys
 
 .PHONY: clean
 clean:
@@ -25,6 +25,14 @@ l10n-files: l10n-source/combined/de.txt l10n-source/combined/en.txt l10n-source/
 
 .PHONY: encrypt
 encrypt: l10n/de.xtea l10n/en.xtea l10n/la.xtea l10n/it.xtea
+
+L10N_KEYS = $(subst l10n-source,l10n-keys,$(wildcard l10n-source/*.txt))
+
+.PHONY: l10n-keys
+l10n-keys: $(L10N_KEYS)
+
+l10n-keys/% : l10n-source/%
+	sed -nf l10n-keys.sed $? > $@
 
 DE_FILES = l10n-source/de.txt l10n-source/interface-de.txt l10n-source/biblia-de.txt l10n-source/lectionis-de.txt l10n-source/regional-de.txt l10n-source/catalogus-de.txt l10n-source/audio-de.txt
 

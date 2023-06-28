@@ -129,7 +129,6 @@ function createTextFile (text, type) {
 
 function fileSaveAs (file, name) {
 	var a = document.createElement('a');
-	a.dataset.nativ = true;
 	if (typeof file !== 'string') {
 		file = URL.createObjectURL(file);
 	}

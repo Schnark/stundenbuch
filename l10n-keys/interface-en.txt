@@ -1,0 +1,599 @@
+[titulus]
+St @nomen
+
+[titulus-plures]
+Sts @nomen
+
+[titulus-beatus]
+Bl @nomen
+
+[titulus-beatus-plures]
+Bls @nomen
+
+[titulus-defunctus]
+Office for the dead for @nomen
+
+[titulus-ecclesia]
+Anniversary of the Dedication of the Church “@nomen”
+
+[titulus-alt]
+@nomen
+
+[titulus-et-socii]
+and Companions
+
+[nomen]
+N.
+
+[liturgia-horarum]
+Breviary
+
+[catalogus]
+Catalogue
+
+[index]
+Overview
+
+[invitatorium]
+Invitatory
+
+[lectionis]
+Office of Readings
+
+[laudes]
+Lauds
+
+[tertia]
+Terce
+
+[sexta]
+Sext
+
+[nona]
+None
+
+[vespera]
+Vespers
+
+[completorium]
+Compline
+
+[vespera-pridiana]
+eve
+
+[complementaris]
+!Complementary psalms
+
+[complementaris-1]
+Complementary psalms
+
+[dies-omittantes]
+Omitted days:
+
+[nulla-memoria]
+no memorial
+
+[sollemnitas-littera]
+S
+
+[festum-littera]
+F
+
+[memoria-littera]
+M
+
+[memoria-1-littera]
+m
+
+[commemoratio-littera]
+c
+
+[textus-abest]
+!Text missing
+
+[quaerere-progreditur]
+Search is in progress …
+
+[quaerere-nihil]
+!No matches
+
+[quaerere-plurima]
+!More matches
+
+[retrorsum]
+Back
+
+[navigatio]
+Navigation
+
+[hora]
+Hour
+
+[dies]
+Date
+
+[prior-dies]
+previous day
+
+[hodie]
+today
+
+[proximus-dies]
+next day
+
+[mensis]
+month
+
+[selectare-diem]
+choose day
+
+[sonus]
+Audio
+
+[modi]
+Settings
+
+[plures-modi]
+Extended settings
+
+[titulus-forma]
+Skin:
+
+[titulus-forma-clara]
+Light
+
+[titulus-forma-obscura]
+Dark
+
+[titulus-forma-sepia]
+Sepia
+
+[titulus-magnitudo-litterae]
+Font size:
+
+[titulus-lingua]
+Language:
+
+[titulus-generalia]
+General
+
+[titulus-dies-initio]
+Start of day:
+
+[titulus-screenlock]
+Disable screen saver
+
+[titulus-lingua-2]
+Secondary language:
+
+[titulus-lingua-2-nulla]
+none
+
+[titulus-aspectus]
+Display
+
+[titulus-responsorium]
+Show responsory etc.:
+
+[titulus-responsorium-originalis]
+Original
+
+[titulus-responsorium-singulus]
+For praying alone
+
+[titulus-responsorium-expandere]
+Extended
+
+[titulus-flexa-asteriscus]
+Flexa and asterisc:
+
+[titulus-flexa-asteriscus-0]
++ as flexa
+
+[titulus-flexa-asteriscus-1]
+† as flexa
+
+[titulus-flexa-asteriscus-2]
+/ as flexa, without linebreak
+
+[titulus-versi]
+Show verse numbers
+
+[titulus-ps-oratio]
+Show psalm orations
+
+[titulus-strophae]
+Show psalm sections
+
+[titulus-solidus]
+Show slash in readings
+
+[titulus-duplex-antiphona]
+Show duplicte antiphons only at beginning and end
+
+[titulus-horae]
+Building of hours
+
+[titulus-feria-communia]
+On memorials use texts of the current day instead from the common
+
+[titulus-memoria-tsn]
+Apply memorials also in daytime hours
+
+[titulus-invitatorium-locus]
+Place of Invitatory:
+
+[titulus-invitatorium-locus-singule]
+as seperate hour
+
+[titulus-invitatorium-locus-lectionis]
+before Office of Readings
+
+[titulus-invitatorium-locus-laudes]
+before Lauds
+
+[titulus-invitatorium-psalmus]
+Psalm in Invitatory:
+
+[titulus-invitatorium-psalmus-95]
+Psalm 95 (94)
+
+[titulus-invitatorium-psalmus-100]
+Psalm 100 (99)
+
+[titulus-invitatorium-psalmus-67]
+Psalm 67 (66)
+
+[titulus-invitatorium-psalmus-24]
+Psalm 24 (23)
+
+[titulus-lectionis-nox]
+Office of Readings is said at night
+
+[titulus-plures-hymni]
+Use more hymns in Lauds and Vespers
+
+[titulus-cantica-laudes]
+Vary cantica of Lauds on feasts
+
+[titulus-duplex-psalmus]
+Replace duplicate psalms in daytime hours
+
+#TODO
+[titulus-distribuere-tsn]
+Spread antiphons of daytime hours among all three
+
+[titulus-pater-noster-intro]
+Introduction to the Lord’s prayer:
+
+[titulus-pater-noster-intro-0]
+without
+
+[titulus-pater-noster-intro-1]
+invitation for prayer
+
+[titulus-pater-noster-intro-2]
+Kyrie
+
+[titulus-sacerdos]
+Blessing by priest
+
+[titulus-maria-antiphona]
+Place of Marian antiphon:
+
+[titulus-maria-nulla]
+No Marian antiphon
+
+[titulus-maria-vespera]
+Vespers
+
+[titulus-maria-completorium]
+Compline
+
+[titulus-respectus-diei]
+Replace examination of conscience with review of the day (currently only in German)
+
+[titulus-maria-antiphona-modus]
+Change Marian antiphon:
+
+[titulus-maria-modus-0]
+traditional
+
+[titulus-maria-modus-1]
+dayly
+
+[titulus-maria-modus-2]
+by time of the year
+
+[titulus-maria-modus-3]
+weekly
+
+[titulus-calendarium]
+Calendar
+
+[titulus-calendarium-selectare]
+Calendar:
+
+[titulus-calendarium-generalis]
+General Roman Calendar
+
+[titulus-calendarium-extra]
+Additional days for:
+
+[titulus-calendarium-addendum]
+Additions to calendar:
+
+[titulus-calendarium-addendum-creare]
+Create item
+
+[titulus-calendarium-addendum-dies]
+Day:
+
+[titulus-calendarium-addendum-mensis]
+Month:
+
+[titulus-calendarium-addendum-ianuarius]
+January
+
+[titulus-calendarium-addendum-februarius]
+February
+
+[titulus-calendarium-addendum-martius]
+March
+
+[titulus-calendarium-addendum-aprilis]
+April
+
+[titulus-calendarium-addendum-maius]
+May
+
+[titulus-calendarium-addendum-iunius]
+June
+
+[titulus-calendarium-addendum-iulius]
+July
+
+[titulus-calendarium-addendum-augustus]
+August
+
+[titulus-calendarium-addendum-september]
+September
+
+[titulus-calendarium-addendum-october]
+October
+
+[titulus-calendarium-addendum-november]
+November
+
+[titulus-calendarium-addendum-december]
+December
+
+[titulus-calendarium-addendum-relativus-pascha]
+Relative to easter
+
+[titulus-calendarium-addendum-dominica]
+Sunday in ordinary time
+
+[titulus-calendarium-addendum-genus]
+Type of item:
+
+[titulus-calendarium-addendum-removere]
+Remove entry
+
+[titulus-calendarium-addendum-notam-addere]
+Add note
+
+[titulus-calendarium-addendum-addere]
+Add entry
+
+[titulus-calendarium-addendum-nota]
+Note:
+
+[titulus-calendarium-addendum-nomen]
+Name:
+
+[titulus-calendarium-addendum-gradus]
+Rank:
+
+[titulus-calendarium-addendum-sollemnitas]
+Solemnity
+
+[titulus-calendarium-addendum-festum]
+Feast
+
+[titulus-calendarium-addendum-memoria]
+Memorial
+
+[titulus-calendarium-addendum-memoria-1]
+Memorial (optional)
+
+[titulus-calendarium-addendum-commune]
+Common:
+
+[titulus-calendarium-addendum-commune-1]
+Additional common:
+
+[titulus-calendarium-addendum-defunctus]
+Office for the Dead
+
+[titulus-calendarium-addendum-ecclesia]
+Dedication of a church
+
+[titulus-calendarium-addendum-maria]
+Blessed Virgin Mary
+
+[titulus-calendarium-addendum-apostolus]
+Apostle
+
+[titulus-calendarium-addendum-apostolus2]
+Later apostle
+
+[titulus-calendarium-addendum-evangelista]
+Evangelist
+
+[titulus-calendarium-addendum-virgo]
+Virgin
+
+[titulus-calendarium-addendum-martyr]
+Martyr
+
+[titulus-calendarium-addendum-pastor]
+Pastor
+
+[titulus-calendarium-addendum-doctor]
+Doctor of the church
+
+[titulus-calendarium-addendum-papa]
+Pope
+
+[titulus-calendarium-addendum-episcopus]
+Bishop
+
+[titulus-calendarium-addendum-fundator]
+Founder
+
+[titulus-calendarium-addendum-missionarius]
+Missionary
+
+[titulus-calendarium-addendum-religiosus]
+Religious
+
+[titulus-calendarium-addendum-abbas]
+Abbot
+
+[titulus-calendarium-addendum-vir]
+Man
+
+[titulus-calendarium-addendum-mulier]
+Woman
+
+[titulus-calendarium-addendum-extra]
+outside that church
+
+[titulus-calendarium-addendum-misericordia]
+Worker for the underprivileged
+
+[titulus-calendarium-addendum-educator]
+Teacher
+
+[titulus-calendarium-addendum-plures]
+several
+
+#TODO
+[titulus-calendarium-addendum-beatus]
+Seliger
+
+[titulus-calendarium-addendum-inserere]
+Insert
+
+[titulus-calendarium-addendum-dimittere]
+Cancel
+
+[titulus-memoria-libidum]
+Optional memorials:
+
+[titulus-selegere]
+Select:
+
+[titulus-selegere-omnia]
+All
+
+[titulus-selegere-nullum]
+None
+
+[titulus-maria-sabbato]
+Memorials of the Blessed Virgin Mary on Saturday
+
+[titulus-commemoratio]
+Commemoration
+
+[titulus-epiphanias-dominica]
+Epipahnias is transferred to Sunday
+
+[titulus-ascensio-dominica]
+Ascension is transferred to Sunday
+
+[titulus-corpus-domini-dominica]
+Corpus Christi is transferred to Sunday
+
+[titulus-ecclesia-extra]
+Dedication of the church always outside that church
+
+[titulus-sonus]
+Enable audio functions
+
+[titulus-sonus-forma]
+Style of notes:
+
+[titulus-sonus-forma-hodierna]
+modern
+
+[titulus-sonus-forma-gregoriana]
+Gregorian
+
+[titulus-sonus-celeriats]
+Speed:
+
+[titulus-varia]
+Other
+
+[titulus-papa]
+Name of the pope:
+
+[titulus-episcopus]
+Name of the bishop:
+
+[titulus-debug]
+Debug:
+
+[titulus-debug-0]
+disabled
+
+[titulus-debug-1]
+default
+
+[titulus-debug-2]
+extended
+
+[titulus-textus-proprii]
+Personal texts:
+
+[titulus-exportare-importare]
+Export/Import
+
+[titulus-servare]
+Save settings
+
+[titulus-restituere]
+Restore settings
+
+[titulus-servare-icalendar]
+Save additions to calendar (iCalendar format)
+
+[titulus-servare-icalendar-1]
+Save additions to calendar (strict iCalendar format)
+
+[titulus-restituere-icalendar]
+Restore additions to calendar (iCalendar format)
+
+[titulus-servare-textus]
+Save personal texts
+
+[titulus-restituere-textus]
+Restore personal texts
+
+[titulus-restituere-praedertiminati]
+Reset settings
+
+[titulus-restituere-adfirmare]
+Really reset settings?
+
+[titulus-restituere-fefellit]
+Restoring settings failed
+
+[titulus-delere-tesseram]
+Delete password
+
+[titulus-delere-adfirmare]
+Really delete password?
+

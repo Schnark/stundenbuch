@@ -1,0 +1,598 @@
+[titulus]
+S. @nomen
+#TODO eig. @nomen-gen
+
+[titulus-plures]
+Ss. @nomen
+
+[titulus-beatus]
+B. @nomen
+
+[titulus-beatus-plures]
+Bb. @nomen
+
+[titulus-defunctus]
+In memoriam @nomen-gen
+
+[titulus-ecclesia]
+Anniversarium Dedicationis Ecclesiæ «@nomen»
+
+[titulus-alt]
+@nomen
+
+[titulus-et-socii]
+et Socii
+#TODO eig. Sociorum
+
+[nomen]
+N.
+
+[liturgia-horarum]
+Liturgia horarum
+
+[catalogus]
+Catalogus
+
+[index]
+Index
+
+[invitatorium]
+Ad Invitatorium
+
+[lectionis]
+Ad Officium lectionis
+
+[laudes]
+Ad Laudes matutinas
+
+[tertia]
+Ad Tertiam
+
+[sexta]
+Ad Sextam
+
+[nona]
+Ad Nonam
+
+[vespera]
+Ad Vesperas
+
+[completorium]
+Ad Completorium
+
+[vespera-pridiana]
+vespera pridiana
+
+[complementaris]
+!Psalmodia complementaris
+
+[complementaris-1]
+Psalmodia complementaris
+
+[dies-omittantes]
+Dies omittantes:
+
+[nulla-memoria]
+nulla memoria
+
+[sollemnitas-littera]
+S
+
+[festum-littera]
+F
+
+[memoria-littera]
+M
+
+[memoria-1-littera]
+m
+
+[commemoratio-littera]
+c
+
+[textus-abest]
+!Textus abest
+
+[quaerere-progreditur]
+Quærere progreditur …
+
+[quaerere-nihil]
+!Nihil quæstionem congruit
+
+[quaerere-plurima]
+!Plurima quæstionem congruit
+
+[retrorsum]
+Retrorsum
+
+[navigatio]
+Navigatio
+
+[hora]
+Hora
+
+[dies]
+Dies
+
+[prior-dies]
+prior dies
+
+[hodie]
+hodie
+
+[proximus-dies]
+proximus dies
+
+[mensis]
+mensis
+
+[selectare-diem]
+selectare diem
+
+[sonus]
+Sonus
+
+[modi]
+Modi
+
+[plures-modi]
+Plures modi
+
+[titulus-forma]
+Forma:
+
+[titulus-forma-clara]
+Clara
+
+[titulus-forma-obscura]
+Obscura
+
+[titulus-forma-sepia]
+Sepia
+
+[titulus-magnitudo-litterae]
+Magnitudo litteræ:
+
+[titulus-lingua]
+Lingua:
+
+[titulus-generalia]
+Generalia
+
+[titulus-dies-initio]
+Initio diei:
+
+[titulus-aspectus]
+Aspectus
+
+[titulus-screenlock]
+Monitorii servatorem non uti
+
+[titulus-lingua-2]
+Lingua secundaria:
+
+[titulus-lingua-2-nulla]
+nulla
+
+[titulus-responsorium]
+Responsoria etc. monstrare:
+
+[titulus-responsorium-originalis]
+Originalis
+
+[titulus-responsorium-singulus]
+Ad recitationem a solo
+
+[titulus-responsorium-expandere]
+Expandere
+
+[titulus-flexa-asteriscus]
+Flexa et asteriscus:
+
+[titulus-flexa-asteriscus-0]
++ pro flexa
+
+[titulus-flexa-asteriscus-1]
+† pro flexa
+
+[titulus-flexa-asteriscus-2]
+/ pro flexa, versum non flectare
+
+[titulus-versi]
+Numeros versorum monstrare
+
+[titulus-ps-oratio]
+Orationes super psalmos monstrare
+
+[titulus-strophae]
+Strophæ psalmorum monstrare
+
+[titulus-solidus]
+Solidum in lectionibus monstrare
+
+[titulus-duplex-antiphona]
+Duplices antiphonæ solus in initio et fine monstrare
+
+[titulus-horae]
+Construxio horarum
+
+[titulus-feria-communia]
+In memoriis textos de feria currente pro Communi dicere
+
+[titulus-memoria-tsn]
+Memoriæ etiam in horas minores adhibere
+
+[titulus-invitatorium-locus]
+Locus Invitatorii:
+
+[titulus-invitatorium-locus-singule]
+singule
+
+[titulus-invitatorium-locus-lectionis]
+ante Officium lectionis
+
+[titulus-invitatorium-locus-laudes]
+ante Laudes matutinas
+
+[titulus-invitatorium-psalmus]
+Psalmus Invitatorii:
+
+[titulus-invitatorium-psalmus-95]
+Psalmus 94 (95)–Veníte, exsultémus
+
+[titulus-invitatorium-psalmus-100]
+Psalmus 99 (100)–Iubiláte Dómino
+
+[titulus-invitatorium-psalmus-67]
+Psalmus 66 (67)–Deus misereátur nostri
+
+[titulus-invitatorium-psalmus-24]
+Psalmus 23 (24)–Dómini est terra
+
+[titulus-lectionis-nox]
+Officium lectionis dicitur noctu vel summo mane
+
+[titulus-plures-hymni]
+Plures hymni ad Laudes matutinas et Vesperas uti
+
+[titulus-cantica-laudes]
+Cantica ad laudes matutinas festæ variare
+
+[titulus-duplex-psalmus]
+Duplices psalmi in horas minores commutare
+
+[titulus-distribuere-tsn]
+Antiphonæ horæ minorum distribuere
+
+[titulus-pater-noster-intro]
+Transitio ad orationem «Pater noster»:
+
+[titulus-pater-noster-intro-0]
+Sine transitione
+
+[titulus-pater-noster-intro-1]
+Invitatio
+
+[titulus-pater-noster-intro-2]
+Kyrie
+
+[titulus-sacerdos]
+Benedictio sacerdotis
+
+[titulus-maria-antiphona]
+Locus antiphonæ finales ad B. Mariam V.:
+
+[titulus-maria-nulla]
+Nulla antiphona ad Mariam
+
+[titulus-maria-vespera]
+Ad Vesperas
+
+[titulus-maria-completorium]
+Ad Completorium
+
+[titulus-respectus-diei]
+Substituere respectum diei pro texto «Confiteor» (præsente soli in lingua Germanica)
+
+[titulus-maria-antiphona-modus]
+Antiphonas finales ad B. Mariam V. variare:
+
+[titulus-maria-modus-0]
+traditionaliter
+
+[titulus-maria-modus-1]
+diurne
+
+[titulus-maria-modus-2]
+per tempum
+
+[titulus-maria-modus-3]
+hebdomadaliter
+
+[titulus-calendarium]
+Calendarium
+
+[titulus-calendarium-selectare]
+Calendarium:
+
+[titulus-calendarium-generalis]
+Calendarium Romanum generale
+
+[titulus-calendarium-extra]
+Additæ dies pro:
+
+[titulus-calendarium-addendum]
+Addenda ad calendarium:
+
+[titulus-calendarium-addendum-creare]
+Rem creare
+
+[titulus-calendarium-addendum-dies]
+Dies:
+
+[titulus-calendarium-addendum-mensis]
+Mensis:
+
+[titulus-calendarium-addendum-ianuarius]
+Ianuarius
+
+[titulus-calendarium-addendum-februarius]
+Februarius
+
+[titulus-calendarium-addendum-martius]
+Martius
+
+[titulus-calendarium-addendum-aprilis]
+Aprilis
+
+[titulus-calendarium-addendum-maius]
+Maius
+
+[titulus-calendarium-addendum-iunius]
+Iunius
+
+[titulus-calendarium-addendum-iulius]
+Iulius
+
+[titulus-calendarium-addendum-augustus]
+Augustus
+
+[titulus-calendarium-addendum-september]
+September
+
+[titulus-calendarium-addendum-october]
+October
+
+[titulus-calendarium-addendum-november]
+November
+
+[titulus-calendarium-addendum-december]
+December
+
+[titulus-calendarium-addendum-relativus-pascha]
+Relativus ad pascham
+
+[titulus-calendarium-addendum-dominica]
+Dominica per annum
+
+[titulus-calendarium-addendum-genus]
+Genus rei:
+
+[titulus-calendarium-addendum-removere]
+Rem removere
+
+[titulus-calendarium-addendum-notam-addere]
+Notam addere
+
+[titulus-calendarium-addendum-addere]
+Rem addere
+
+[titulus-calendarium-addendum-nota]
+Nota:
+
+[titulus-calendarium-addendum-nomen]
+Nomen:
+
+[titulus-calendarium-addendum-gradus]
+Gradus:
+
+[titulus-calendarium-addendum-sollemnitas]
+Sollemnitas
+
+[titulus-calendarium-addendum-festum]
+Festum
+
+[titulus-calendarium-addendum-memoria]
+Memoria
+
+[titulus-calendarium-addendum-memoria-1]
+Memoria ad libidum
+
+[titulus-calendarium-addendum-commune]
+Commune:
+
+[titulus-calendarium-addendum-commune-1]
+Commune additum:
+
+[titulus-calendarium-addendum-defunctus]
+Officium Defunctorum
+
+[titulus-calendarium-addendum-ecclesia]
+Dedicatio ecclesiæ
+
+[titulus-calendarium-addendum-maria]
+Beata Maria Virgo
+
+[titulus-calendarium-addendum-apostolus]
+Apostolus
+
+[titulus-calendarium-addendum-apostolus2]
+Apostolus posterior
+
+[titulus-calendarium-addendum-evangelista]
+Evangelista
+
+[titulus-calendarium-addendum-virgo]
+Virgo
+
+[titulus-calendarium-addendum-martyr]
+Martyr
+
+[titulus-calendarium-addendum-pastor]
+Pastor
+
+[titulus-calendarium-addendum-doctor]
+Doctor
+
+[titulus-calendarium-addendum-papa]
+Papa
+
+[titulus-calendarium-addendum-episcopus]
+Episcopus
+
+[titulus-calendarium-addendum-fundator]
+Fundator
+
+[titulus-calendarium-addendum-missionarius]
+Missionarius
+
+[titulus-calendarium-addendum-religiosus]
+Religiosus
+
+[titulus-calendarium-addendum-abbas]
+Abbas
+
+[titulus-calendarium-addendum-vir]
+Vir
+
+[titulus-calendarium-addendum-mulier]
+Mulier
+
+[titulus-calendarium-addendum-extra]
+Extra ipsam ecclesiam dedicatam
+
+[titulus-calendarium-addendum-misericordia]
+Opera misericordiæ exercuit
+
+[titulus-calendarium-addendum-educator]
+Educator
+
+[titulus-calendarium-addendum-plures]
+Plures
+
+[titulus-calendarium-addendum-beatus]
+Beatus
+
+[titulus-calendarium-addendum-inserere]
+Inserere
+
+[titulus-calendarium-addendum-dimittere]
+Dimittere
+
+[titulus-memoria-libidum]
+Memoriæ ad libidum:
+
+[titulus-selegere]
+Selegere:
+
+[titulus-selegere-omnia]
+Omnia
+
+[titulus-selegere-nullum]
+Nullum
+
+[titulus-maria-sabbato]
+Memoria Sanctæ Mariæ in Sabbato
+
+[titulus-commemoratio]
+Commemoratio
+
+[titulus-epiphanias-dominica]
+Sollemnitas Epipahniæ Domini ad dominicam transfertur
+
+[titulus-ascensio-dominica]
+Sollemnitas Ascensionis Domini ad dominicam transfertur
+
+[titulus-corpus-domini-dominica]
+Sollemnitas Corporis Domini ad dominicam transfertur
+
+[titulus-ecclesia-extra]
+Dedicatio ecclesiæ semper extra ipsam ecclesiam
+
+[titulus-sonus]
+Pars soni uti
+
+[titulus-sonus-forma]
+Forma signorum musicorum:
+
+[titulus-sonus-forma-hodierna]
+hodierna
+
+[titulus-sonus-forma-gregoriana]
+Gregoriana
+
+[titulus-sonus-celeriats]
+Celeritas:
+
+[titulus-varia]
+Varia
+
+[titulus-papa]
+Nomen papæ:
+
+[titulus-episcopus]
+Nomen episcopi:
+
+[titulus-debug]
+Emendatio:
+
+[titulus-debug-0]
+non uti
+
+[titulus-debug-1]
+usitata
+
+[titulus-debug-2]
+extenta
+
+[titulus-textus-proprii]
+Textus proprii:
+
+[titulus-exportare-importare]
+Exportare/Importare
+
+[titulus-servare]
+Modos servare
+
+[titulus-restituere]
+Modos restituere
+
+[titulus-servare-icalendar]
+Addenda ad calendarium servare (formatus iCalendar)
+
+[titulus-servare-icalendar-1]
+Addenda ad calendarium servare (formatus iCalendar strictus)
+
+[titulus-restituere-icalendar]
+Addenda ad calendarium restituere (formatus iCalendar)
+
+[titulus-servare-textus]
+Textus proprios servare
+
+[titulus-restituere-textus]
+Textus proprios restituere
+
+[titulus-restituere-praedertiminati]
+Prædeterminatos modos restituere
+
+[titulus-restituere-adfirmare]
+Adfirma quæsumus te modos restituere velle.
+
+[titulus-restituere-fefellit]
+Modos restituere fefellit!
+
+[titulus-delere-tesseram]
+Tesseram delere
+
+[titulus-delere-adfirmare]
+Adfirma quæsumus te tesseram delere velle.

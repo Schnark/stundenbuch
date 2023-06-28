@@ -6,6 +6,59 @@
 var dateInput,
 	proxy = 'https://lit-beach-8985.herokuapp.com/?url=',
 	appPath = '../../../../stb/stundenbuch.stundenbuch.571/assets/',
+/* This also requires some modifications of the code of the app:
+In stundenbuch.js add the following code:
+In the function androidClass add at the beginning
+
+function getUrlParam (key) {
+	var re = new RegExp('^[^#]*[&?]' + key + '=([^&#]*)'),
+		m = re.exec(location.href);
+
+	if (m) {
+		return decodeURIComponent(m[1].replace(/\+/g, '%20'));
+	}
+	return null;
+}
+var lang = getUrlParam('lang');
+if (lang=='la')lang='lat';
+
+also change
+
+"Date","3/10 2016"
+to
+"Date",getUrlParam('date')||""
+
+"Antiphonale","true"
+to
+"Antiphonale",lang?"false":"true"
+
+"lang",""
+to
+"lang",lang||""
+
+"DiurnalDual","true"
+to
+"DiurnalDual",lang?"false":"true"
+
+and add
+"Psalmoration","false"
+before the final "",""
+
+At the very end add
+
+if (window.parent!==window){window.onload=function(){window.parent.postMessage(document.body.innerHTML,'*');};}
+
+You also may add
+
+this.showpreferences=function(){alert(document.cookie)};
+this.showdatedialog=function(){
+var a=prompt("Datum:",new Date(getCookie("Now")));
+if(a){setCookie("Now",new Date(a),60);location.reload(false)}
+}
+
+after the function androidClass, that is, before
+if(!isAndroid())
+*/
 	localPath = 'l10n-source/cache/', //actually doesn't belong there,
 	//but that way I have to remove just one folder before publishing
 	local = location.href.slice(0, 13) === 'file:///home/' ? {

@@ -1089,6 +1089,11 @@ Day.calendars = {
 			];
 		},
 		notes: [ //TODO vollständig lokalisieren
+			[7, 'easter', {
+				'': 'Dominica de divina misericordia',
+				'de': 'Sonntag der Göttlichen Barmherzigkeit',
+				'en': 'Sunday of the Divine Mercy'
+			}],
 			[21, 'easter', {
 				'': 'Weltgebetstag um Geistliche Berufungen',
 				'en': 'World Day of Prayer for Vocations'

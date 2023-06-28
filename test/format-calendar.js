@@ -186,7 +186,7 @@ function getSort (name, commune) {
 }
 
 function formatCalendar () {
-	var list = [], name, aliases, i;
+	var list = [], name, aliases, i, c;
 	for (name in calendar) {
 		list.push({
 			html: formatEntry(calendar[name]),
@@ -203,8 +203,9 @@ function formatCalendar () {
 		}
 	}
 	for (i = 1; i <= 26; i++) {
+		c = String.fromCharCode(64 + i);
 		list.push({
-			html: '</ul></div>\n\n<h2>' + String.fromCharCode(64 + i) + '</h2>\n<div class="p"><ul>',
+			html: '</ul></div>\n\n<h2 id="' + c + '">' + c + '</h2>\n<div class="p"><ul>',
 			sort: String.fromCharCode(96 + i)
 		});
 	}
@@ -215,7 +216,7 @@ function formatCalendar () {
 		return entry.html;
 	}).join('\n') + '\n</ul></div>')
 		.replace(/^<\/ul><\/div>\n\n/, '')
-		.replace(/<h2>.<\/h2>\n<div class="p"><ul>\n<\/ul><\/div>(\n\n)?/g, '');
+		.replace(/<h2 id=".">.<\/h2>\n<div class="p"><ul>\n<\/ul><\/div>(\n\n)?/g, '');
 }
 
 function run (lang) {

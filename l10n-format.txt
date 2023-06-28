@@ -1,0 +1,117 @@
+General:
+
+Lines starting with # are comments, lines enclosed in [square brackets] define the message name, the message itself follows in the next lines. Use @key to refer to other messages (to avoid duplication)
+
+Hymns:
+
+Add a headline "Hymn" at the start and add an empty line after it. Start a new line for each verse, separate stanzas by one empty line.
+
+Psalms and canticles:
+
+The format is
+
+Psalm/Canticle <source>
+
+!Caption
+
+!Quote <source>
+
+@antiphona
+
+Verse 1
+Verse 2
+
+Verse 3
+Verse 4
+Verse 5
+
+-
+
+@gloria-patri
+
+!Psalm prayer
+
+@antiphona
+
+
+The psalm prayer is optional and may also come after the final @antiphona. Add verse numbers at the start of lines, use lines with just a single hyphen in other places where you want a separating rule.
+
+For [apc-19] the structure of one part is
+
+Alleluia.
+
+Verse
+R: Alleluia.
+Verse
+
+Alleluia.
+R: Alleluia.
+
+Antiphons:
+
+The alleluia during easter is added automatically. So for antiphons that differ just in this alleluia use the variant without it. For antiphons where no alleluia is added even during easter add a | at the end. For antiphons used only during easter drop the final alleluia (if it ends in a double alleluia, drop only one of them).
+
+Short readings:
+
+Start with a headline "Reading <source>" followed by an empty line, followed by the reading, one line for each verse, preceded by the verse number. Verse numbers must start with a number, but may be followed by any other non-space character.
+
+Long readings:
+
+Start with a headline "Reading" followed by an empty line, followed by "!source <detailed source>". For subheadings precede a single line with an equation sign. Add verse numbers as usual. If a line should start with a number that is not a verse number, precede it with a space. Use empty lines for new paragraphs. In poetical texts you can use / and // to structure the text. For emphasis use __double underscores__ around the text (this also works in other parts).
+
+If there is an alternative reading then add a line like the following after the headline:
+~lectio-lectionis-key-alt,responsorium-lectionis-key-alt Alternative: Title
+
+Instead of doing all formatting by hand, you might want to use format.html to generate the data.
+
+Verses:
+
+Like for antiphons, the alleluia is added automatically during easter, so do not add it to the text. Start with a headline "Verse" or "Responsory" followed by an empty line and the verse in two lines.
+
+Responsories:
+
+The format is
+
+Responsory
+
+R Line 1
+Line 2. - R
+
+V Line 3
+Line 2.
+
+or
+
+Responsory
+
+R Line 1
+Line 2.
+
+V Line 3
+Line 2.
+
+As usual, during easter the alleluia is added automatically.
+
+Intercessions:
+
+Start with a headline "Intercessions" followed by an empty line, followed by the intercessions, two lines each, separated by empty lines. If you want to add a comment to encourage adding special intercessions, precede it with an exclamation mark. Use @papa and @episcopus for the names of pope and bishop.
+
+Concluding prayers:
+
+Start with a headline "Concluding prayer" followed by an empty line, followed by the prayer. For the end you can (and for prayers that may use both the short and the long formula) end it with one of @per-christum, @per-christum-1, @qui-vivit, @qui-vivis, or @qui-vivis-1. If you end it without this, close it with the line "R Amen"
+
+Saints:
+
+In common texts you can use @nomen for the name of the saint.
+
+In the optional introduction all lines should start with an exclamation mark.
+
+Catalogue:
+
+Any message with a key starting with catalogus- contains raw HTML.
+
+Audio:
+
+The message [audio-data] is structured as following: Main headlines are created by an equal sign at the start of a line followed by an empty line and by the entries separated by empty lines.
+
+The first line of an entry is the title, the next lines give the notes and lines preceded by an exclamation mark the keys for the texts to which these notes apply.

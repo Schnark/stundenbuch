@@ -75,11 +75,16 @@ function doXor (data) {
 }
 
 function parseKey (key) {
-	//actually only the last 4 bits of each char are random
+	/*DO NOT use this unless your key has enough entropy!
+	Ideally it should contain 32 letters from a to p, all with
+	equal probability. Anything that deviates much from this is
+	NOT SECURE.
+	*/
 	var output = new Uint8Array(16);
 	while (key.length < 32) { //shouldn't happen
 		key = key + key;
 	}
+	//now take only the last 4 bits of each char, only these are random
 	output[0] = ((key.charCodeAt(0) & 0xF) << 4) | (key.charCodeAt(1) & 0xF);
 	output[1] = ((key.charCodeAt(2) & 0xF) << 4) | (key.charCodeAt(3) & 0xF);
 	output[2] = ((key.charCodeAt(4) & 0xF) << 4) | (key.charCodeAt(5) & 0xF);
@@ -100,18 +105,24 @@ function parseKey (key) {
 }
 
 function encrypt (text, key) {
-	var data;
+	var data, iv;
 	text = pako.deflateRaw((new TextEncoder()).encode(text), {level: 9});
 	data = new Uint8Array(24 + text.length);
+	iv = new Uint8Array(8);
+	try {
+		crypto.getRandomValues(iv);
+	} catch (e) {
+		iv[0] = Math.random() * 0xFF;
+		iv[1] = Math.random() * 0xFF;
+		iv[2] = Math.random() * 0xFF;
+		iv[3] = Math.random() * 0xFF;
+		iv[4] = Math.random() * 0xFF;
+		iv[5] = Math.random() * 0xFF;
+		iv[6] = Math.random() * 0xFF;
+		iv[7] = Math.random() * 0xFF;
+	}
 	data.set(parseKey(key));
-	data[16] = Math.random() * 0xFF;
-	data[17] = Math.random() * 0xFF;
-	data[18] = Math.random() * 0xFF;
-	data[19] = Math.random() * 0xFF;
-	data[20] = Math.random() * 0xFF;
-	data[21] = Math.random() * 0xFF;
-	data[22] = Math.random() * 0xFF;
-	data[23] = Math.random() * 0xFF;
+	data.set(iv, 16);
 	data.set(text, 24);
 	doXor(data);
 	return data.subarray(16);

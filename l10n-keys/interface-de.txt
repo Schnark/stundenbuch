@@ -1,0 +1,597 @@
+[titulus]
+Hl. @nomen
+
+[titulus-plures]
+Hll. @nomen
+
+[titulus-beatus]
+Sel. @nomen
+
+[titulus-beatus-plures]
+Sel. @nomen
+
+[titulus-defunctus]
+Totengedächtnis für @nomen
+
+[titulus-ecclesia]
+Jahrtag der Kirchweihe »@nomen«
+
+[titulus-alt]ohne
+@nomen
+
+[titulus-et-socii]
+und Gefährten
+
+[nomen]
+N.
+
+[liturgia-horarum]
+Stundenbuch
+
+[catalogus]
+Katalog
+
+[index]
+Übersicht
+
+[invitatorium]
+Invitatorium
+
+[lectionis]
+Lesehore
+
+[laudes]
+Laudes
+
+[tertia]
+Terz
+
+[sexta]
+Sext
+
+[nona]
+Non
+
+[vespera]
+Vesper
+
+[completorium]
+Komplet
+
+[vespera-pridiana]
+Vorabend
+
+[complementaris]
+!Ergänzungspsalmodie
+
+[complementaris-1]
+Ergänzungspsalmodie
+
+[dies-omittantes]
+Entfallende Tage:
+
+[nulla-memoria]
+kein Gedenktag
+
+[sollemnitas-littera]
+H
+
+[festum-littera]
+F
+
+[memoria-littera]
+G
+
+[memoria-1-littera]
+g
+
+[commemoratio-littera]
+k
+
+[textus-abest]
+!Text nicht vorhanden
+
+[quaerere-progreditur]
+Suche dauert an …
+
+[quaerere-nihil]
+!Keine Treffer
+
+[quaerere-plurima]
+!Weitere Treffer
+
+[retrorsum]
+Zurück
+
+[navigatio]
+Navigation
+
+[hora]
+Hore
+
+[dies]
+Datum
+
+[prior-dies]
+vorheriger Tag
+
+[hodie]
+heute
+
+[proximus-dies]
+nächster Tag
+
+[mensis]
+Monat
+
+[selectare-diem]
+Tag wählen
+
+[sonus]
+Audio
+
+[modi]
+Einstellungen
+
+[plures-modi]
+Weitere Einstellungen
+
+[titulus-forma]
+Aussehen:
+
+[titulus-forma-clara]
+Hell
+
+[titulus-forma-obscura]
+Dunkel
+
+[titulus-forma-sepia]
+Sepia
+
+[titulus-magnitudo-litterae]
+Schriftgröße:
+
+[titulus-lingua]
+Sprache:
+
+[titulus-generalia]
+Allgemeines
+
+[titulus-dies-initio]
+Tagesbeginn:
+
+[titulus-screenlock]
+Bildschirmschoner deaktivieren
+
+[titulus-lingua-2]
+Sekundäre Sprache:
+
+[titulus-lingua-2-nulla]
+keine
+
+[titulus-aspectus]
+Darstellung
+
+[titulus-responsorium]
+Responsorien etc. darstellen:
+
+[titulus-responsorium-originalis]
+Original
+
+[titulus-responsorium-singulus]
+für einen Beter
+
+[titulus-responsorium-expandere]
+ausführlich
+
+[titulus-flexa-asteriscus]
+Flexa und Asteriskus:
+
+[titulus-flexa-asteriscus-0]
++ als Flexa
+
+[titulus-flexa-asteriscus-1]
+† als Flexa
+
+[titulus-flexa-asteriscus-2]
+/ als Flexa, ohne Zeilenumbruch
+
+[titulus-versi]
+Versnummern zeigen
+
+[titulus-ps-oratio]
+Psalmorationen anzeigen
+
+[titulus-strophae]
+Psalmstrophen anzeigen
+
+[titulus-solidus]
+Solidus in Lesungen zeigen
+
+[titulus-duplex-antiphona]
+Doppelte Antiphonen nur am Anfang und Ende zeigen
+
+[titulus-horae]
+Aufbau der Horen
+
+[titulus-feria-communia]
+An Gedenktagen Texte des Tages statt aus dem Commune verwenden
+
+[titulus-memoria-tsn]
+Gedenktage auch in kleinen Horen beachten
+
+[titulus-invitatorium-locus]
+Platz des Invitatoriums:
+
+[titulus-invitatorium-locus-singule]
+als eigene Hore
+
+[titulus-invitatorium-locus-lectionis]
+vor Lesehore
+
+[titulus-invitatorium-locus-laudes]
+vor Laudes
+
+[titulus-invitatorium-psalmus]
+Psalm im Invitatorium:
+
+[titulus-invitatorium-psalmus-95]
+Psalm 95 (94)
+
+[titulus-invitatorium-psalmus-100]
+Psalm 100 (99)
+
+[titulus-invitatorium-psalmus-67]
+Psalm 67 (66)
+
+[titulus-invitatorium-psalmus-24]
+Psalm 24 (23)
+
+[titulus-lectionis-nox]
+Lesehore wird nachts gebetet
+
+[titulus-plures-hymni]
+Mehr Hymnen in Laudes und Vesper verwenden
+
+[titulus-cantica-laudes]
+Cantica der Laudes an Festen variieren
+
+[titulus-duplex-psalmus]
+Doppelte Psalmen in kleinen Horen ersetzen
+
+[titulus-distribuere-tsn]
+Antiphonen der kleinen Horen auf alle drei verteilen
+
+[titulus-pater-noster-intro]
+Überleitung zum Vaterunser:
+
+[titulus-pater-noster-intro-0]
+ohne
+
+[titulus-pater-noster-intro-1]
+Gebetseinladung
+
+[titulus-pater-noster-intro-2]
+Kyrie
+
+[titulus-sacerdos]
+Priesterlicher Segen
+
+[titulus-maria-antiphona]
+Platz der Marianischen Antiphon:
+
+[titulus-maria-nulla]
+keine Marianische Antiphon
+
+[titulus-maria-vespera]
+Vesper
+
+[titulus-maria-completorium]
+Komplet
+
+[titulus-respectus-diei]
+Schuldbekenntnis durch Tagesrückblick ersetzen
+
+[titulus-maria-antiphona-modus]
+Marianische Antiphon wechseln:
+
+[titulus-maria-modus-0]
+traditionell
+
+[titulus-maria-modus-1]
+täglich
+
+[titulus-maria-modus-2]
+nach Zeit im Jahr
+
+[titulus-maria-modus-3]
+wöchentlich
+
+[titulus-calendarium]
+Kalender
+
+[titulus-calendarium-selectare]
+Kalender:
+
+[titulus-calendarium-generalis]
+Allgemeiner Römischer Kalender
+
+[titulus-calendarium-extra]
+Zusätzliche Tage für:
+
+[titulus-calendarium-addendum]
+Zusätze zum Kalender:
+
+[titulus-calendarium-addendum-creare]
+Eintrag erstellen
+
+[titulus-calendarium-addendum-dies]
+Tag:
+
+[titulus-calendarium-addendum-mensis]
+Monat:
+
+[titulus-calendarium-addendum-ianuarius]
+Januar
+
+[titulus-calendarium-addendum-februarius]
+Februar
+
+[titulus-calendarium-addendum-martius]
+März
+
+[titulus-calendarium-addendum-aprilis]
+April
+
+[titulus-calendarium-addendum-maius]
+Mai
+
+[titulus-calendarium-addendum-iunius]
+Juni
+
+[titulus-calendarium-addendum-iulius]
+Juli
+
+[titulus-calendarium-addendum-augustus]
+August
+
+[titulus-calendarium-addendum-september]
+September
+
+[titulus-calendarium-addendum-october]
+Oktober
+
+[titulus-calendarium-addendum-november]
+November
+
+[titulus-calendarium-addendum-december]
+Dezember
+
+[titulus-calendarium-addendum-relativus-pascha]
+relativ zu Ostern
+
+[titulus-calendarium-addendum-dominica]
+Sonntag im Jahreskreis
+
+[titulus-calendarium-addendum-genus]
+Art des Eintrags:
+
+[titulus-calendarium-addendum-removere]
+Eintrag entfernen
+
+[titulus-calendarium-addendum-notam-addere]
+Notiz hinzufügen
+
+[titulus-calendarium-addendum-addere]
+Eintrag hinzufügen
+
+[titulus-calendarium-addendum-nota]
+Notiz:
+
+[titulus-calendarium-addendum-nomen]
+Name:
+
+[titulus-calendarium-addendum-gradus]
+Rang:
+
+[titulus-calendarium-addendum-sollemnitas]
+Hochfest
+
+[titulus-calendarium-addendum-festum]
+Fest
+
+[titulus-calendarium-addendum-memoria]
+Gedenktag
+
+[titulus-calendarium-addendum-memoria-1]
+Gedenktag (nicht geboten)
+
+[titulus-calendarium-addendum-commune]
+Commune:
+
+[titulus-calendarium-addendum-commune-1]
+Weiteres Commune:
+
+[titulus-calendarium-addendum-defunctus]
+Totenoffizium
+
+[titulus-calendarium-addendum-ecclesia]
+Kirchweihe
+
+[titulus-calendarium-addendum-maria]
+Selige Jungfrau Maria
+
+[titulus-calendarium-addendum-apostolus]
+Apostel
+
+[titulus-calendarium-addendum-apostolus2]
+Späterer Apostel
+
+[titulus-calendarium-addendum-evangelista]
+Evangelist
+
+[titulus-calendarium-addendum-virgo]
+Jungfrau
+
+[titulus-calendarium-addendum-martyr]
+Märtyrer
+
+[titulus-calendarium-addendum-pastor]
+Hirt der Kirche
+
+[titulus-calendarium-addendum-doctor]
+Kirchenlehrer
+
+[titulus-calendarium-addendum-papa]
+Papst
+
+[titulus-calendarium-addendum-episcopus]
+Bischof
+
+[titulus-calendarium-addendum-fundator]
+Gründer einer Kirche
+
+[titulus-calendarium-addendum-missionarius]
+Glaubensbote
+
+[titulus-calendarium-addendum-religiosus]
+Ordensmann/-frau
+
+[titulus-calendarium-addendum-abbas]
+Abt
+
+[titulus-calendarium-addendum-vir]
+Mann
+
+[titulus-calendarium-addendum-mulier]
+Frau
+
+[titulus-calendarium-addendum-extra]
+außerhalb dieser Kirche
+
+[titulus-calendarium-addendum-misericordia]
+Heiliger der Nächstenliebe
+
+[titulus-calendarium-addendum-educator]
+Erzieher
+
+[titulus-calendarium-addendum-plures]
+mehrere
+
+[titulus-calendarium-addendum-beatus]
+Seliger
+
+[titulus-calendarium-addendum-inserere]
+Einfügen
+
+[titulus-calendarium-addendum-dimittere]
+Abbrechen
+
+[titulus-memoria-libidum]
+Nichtgebotene Gedenktage:
+
+[titulus-selegere]
+Auswählen:
+
+[titulus-selegere-omnia]
+alle
+
+[titulus-selegere-nullum]
+keine
+
+[titulus-maria-sabbato]
+Mariengedächtnis am Samstag
+
+[titulus-commemoratio]
+Kommemoration
+
+[titulus-epiphanias-dominica]
+Erscheinung des Herrn wird auf Sonntag verlegt
+
+[titulus-ascensio-dominica]
+Christi Himmelfahrt wird auf Sonntag verlegt
+
+[titulus-corpus-domini-dominica]
+Fronleichnam wird auf Sonntag verlegt
+
+[titulus-ecclesia-extra]
+Kirchweihe immer außerhalb dieser Kirche
+
+[titulus-sonus]
+Audiofunktionen aktivieren
+
+[titulus-sonus-forma]
+Art der Noten:
+
+[titulus-sonus-forma-hodierna]
+modern
+
+[titulus-sonus-forma-gregoriana]
+gregorianisch
+
+[titulus-sonus-celeriats]
+Geschwindigkeit:
+
+[titulus-varia]
+Sonstiges
+
+[titulus-papa]
+Name des Papstes:
+
+[titulus-episcopus]
+Name des Bischofs:
+
+[titulus-debug]
+Debug:
+
+[titulus-debug-0]
+deaktiviert
+
+[titulus-debug-1]
+normal
+
+[titulus-debug-2]
+erweitert
+
+[titulus-textus-proprii]
+Eigene Texte:
+
+[titulus-exportare-importare]
+Export/Import
+
+[titulus-servare]
+Einstellungen sichern
+
+[titulus-restituere]
+Einstellungen wiederherstellen
+
+[titulus-servare-icalendar]
+Zusätze zum Kalender sichern (iCalendar-Format)
+
+[titulus-servare-icalendar-1]
+Zusätze zum Kalender sichern (striktes iCalendar-Format)
+
+[titulus-restituere-icalendar]
+Zusätze zum Kalender wiederherstellen (iCalendar-Format)
+
+[titulus-servare-textus]
+Eigene Texte sichern
+
+[titulus-restituere-textus]
+Eigene Texte wiederherstellen
+
+[titulus-restituere-praedertiminati]
+Einstellungen zurücksetzen
+
+[titulus-restituere-adfirmare]
+Sollen die Einstellungen wirklich zurückgesetzt werden?
+
+[titulus-restituere-fefellit]
+Wiederherstellen der Einstellungen fehlgeschlagen!
+
+[titulus-delere-tesseram]
+Passwort löschen
+
+[titulus-delere-adfirmare]
+Soll das Passwort wirklich gelöscht werden?
+
