@@ -2,7 +2,7 @@
 	"version": "1.34",
 	"name": "Stundengebet",
 	"description": "Stundengebet",
-	"size": 4805900,
+	"size": 4805899,
 	"package_path": "http://localhost:8080/stundenbuch.zip",
 	"icons": {
 		"128": "/img/icon-128.png",
@@ -19,5 +19,4 @@
 			"description": "Liturgy of the Hours"
 		}
 	}
-}
 }
