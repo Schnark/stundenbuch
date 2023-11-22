@@ -1372,7 +1372,7 @@ Day.calendars = {
 				'en': 'Sunday of the Word of God'
 			}],
 			[27, 1, 'Gedenktag für die Opfer des Nationalsozialismus'],
-			[-105, 3, 'Beginn der Woche der Brüderlichkeit'], //Anfang März, bislang immer zwischen 5. und 11.
+			[-103, 3, 'Beginn der Woche der Brüderlichkeit'], //Anfang März, bislang immer zwischen 3. (2024) und 11. (2018)
 			[42, 'easter'], //Welttag der sozialen Kommunikationsmittel
 			[-108, 9, { //zweiter Sonntag
 				'': 'Welttag der sozialen Kommunikationsmittel',

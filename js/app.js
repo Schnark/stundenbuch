@@ -730,7 +730,7 @@ function init () {
 		solidus: false,
 		verse: false,
 		screenLock: false,
-		sonus: false,
+		sonus: true,
 		notesStyle: 'modern',
 		volume: 5,
 		audioSpeed: 1,
