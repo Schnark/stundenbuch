@@ -701,7 +701,7 @@ function init () {
 		varyCanticaLaudes: false,
 		paterNosterIntro: 0,
 		replaceDuplicatePsalms: true,
-		noCommons: false,
+		noCommons: false, //TODO allow to set to "use common texts only in ordinary time"
 		memoriaTSN: false,
 		varyTSNAntiphon: false,
 		removeDuplicateAntiphon: true,

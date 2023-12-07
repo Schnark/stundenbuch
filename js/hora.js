@@ -120,7 +120,7 @@ function getHymnusTertiaSextaNona (date, type, complementaris) {
 }
 
 function getHymnusVespera (date, config) {
-	var hymn = date.getText('hymnus', 'vespera');
+	var hymn = date.getText('hymnus', 'vespera'), late;
 	if (!hymn) {
 		switch (date.getPart()) {
 		case 0:
@@ -131,8 +131,10 @@ function getHymnusVespera (date, config) {
 			hymn = 'vespera-' + hymn;
 			break;
 		case 1:
+			//Hymn for Dec 16 is the same as the following week if it is the eve of the 3rd sunday
+			late = date.getSubPart() > 0 || (date.isSunday() && date.getDayInChristmasSequence() === -9);
 			hymn = date.getSubPart() < 3 ?
-				'vespera-adventus' + (date.getSubPart() > 0 ? '-1' : '') :
+				'vespera-adventus' + (late ? '-1' : '') :
 				'vespera-nativitatis' + (date.getSubPart() === 5 ? '-1' : '');
 			break;
 		case 2:
@@ -1306,7 +1308,7 @@ function getBenedictusAntiphona (date) {
 		case 1: case 2:
 			if (
 				date.isSunday() &&
-				[-4, -2, -1].indexOf(date.getDayInChristmasSequence() === -1) &&
+				[-8, -4, -2, -1].indexOf(date.getDayInChristmasSequence()) === -1 &&
 				l10n.has('antiphona-benedictus-21a-adventus')
 			) {
 				return '21' + date.getYearLetter() + '-adventus';
@@ -1401,6 +1403,9 @@ function getOratioLectionis (date, config) {
 	var oratio = date.getText('oratio', 'lectionis');
 	if (!oratio && date.isSunday()) {
 		oratio = date.getSunday().replace(/^[abc](\d+)(-[aqp])?$/, 'dominica-$1$2');
+		if (date.getPart() === 1 && date.getSubPart() === 2) {
+			oratio = false;
+		}
 	}
 	if (!oratio) {
 		switch (date.getPart()) {
@@ -1431,6 +1436,9 @@ function getOratioLaudes (date, config) {
 	}
 	if (!oratio && date.isSunday()) {
 		oratio = date.getSunday().replace(/^[abc](\d+)(-[aqp])?$/, 'dominica-$1$2');
+		if (date.getPart() === 1 && date.getSubPart() === 2) {
+			oratio = false;
+		}
 	}
 	if (!oratio) {
 		switch (date.getPart()) {
@@ -1463,6 +1471,9 @@ function getOratioTertiaSextaNona (date, type, config) {
 	var oratio = date.getText('oratio', ['tertia', 'sexta', 'nona'][type]);
 	if (!oratio && date.isSunday()) {
 		oratio = date.getSunday().replace(/^[abc](\d+)(-[aqp])?$/, 'dominica-$1$2');
+		if (date.getPart() === 1 && date.getSubPart() === 2) {
+			oratio = false;
+		}
 	}
 	if (!oratio) {
 		switch (date.getPart()) {
@@ -1493,6 +1504,9 @@ function getOratioVespera (date, config) {
 	}
 	if (!oratio && date.isSunday()) {
 		oratio = date.getSunday().replace(/^[abc](\d+)(-[aqp])?$/, 'dominica-$1$2');
+		if (date.getPart() === 1 && date.getSubPart() === 2) {
+			oratio = false;
+		}
 	}
 	if (!oratio) {
 		switch (date.getPart()) {

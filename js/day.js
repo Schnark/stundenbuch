@@ -736,7 +736,12 @@ DayEve.prototype.getPartLetter = function () {
 };
 
 DayEve.prototype.getSubPart = function () {
-	return this.next.getSubPart();
+	var subPart = this.next.getSubPart();
+	if ((subPart === 1 || subPart === 2) && this.getPart() === 1) {
+		//eve of 3rd and 4th advent sunday, where 4th advent sunday falls on Dec 24
+		return subPart - 1;
+	}
+	return subPart;
 };
 
 DayEve.prototype.getYearLetter = function () {

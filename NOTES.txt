@@ -329,10 +329,10 @@ Direktorien:
 2015: https://www.ebfr.de/html/media/dl.html?i=976958
 2016: https://www.ebfr.de/html/media/dl.html?i=976959
 2017: https://www.ebfr.de/html/media/dl.html?i=976960
-2018: https://www.ebfr.de/html/media/dl.html?i=976961 oder https://www.ebfr.de/html/media/dl.html?i=474949
-2019: https://www.ebfr.de/html/media/dl.html?i=976962 oder http://www.bistum-freiburg.de/html/media/dl.html?i=791421
+2018: https://www.ebfr.de/html/media/dl.html?i=976961 oder https://www.ebfr.de/html/media/dl.html?i=474949 oder https://web.archive.org/web/20231206184453/https://duct.schollz.com/www.ebfr.de/direktorium_2018.pdf
+2019: https://www.ebfr.de/html/media/dl.html?i=976962 oder http://www.bistum-freiburg.de/html/media/dl.html?i=791421 oder https://web.archive.org/web/20231206184616/https://duct.schollz.com/www.ebfr.de/direktorium_2019.pdf
 2020: https://www.ebfr.de/html/media/dl.html?i=976956
-2021: https://www.ebfr.de/html/media/dl.html?i=1187811 mit Ergänzungen https://www.ebfr.de/html/media/dl.html?i=1184356
+2021: https://www.ebfr.de/html/media/dl.html?i=1187811 mit Ergänzungen https://www.ebfr.de/html/media/dl.html?i=1184356 (https://web.archive.org/web/20231206184749/https://duct.schollz.com/www.ebfr.de/direktorium_2021_ergaenzungsband.pdf)
 2022: https://www.ebfr.de/media/download/integration/1408890/direktorium_2022.pdf
 2023: https://www.ebfr.de/media/download/integration/1632896/direktorium_2023.pdf
 2024: https://www.ebfr.de/media/download/integration/1868715/direktorium_2024.pdf
@@ -508,6 +508,10 @@ Diese Texte müssten eigentlich existieren, sind aber in keiner mir bekannten Qu
 
 * Lesung der Lesehore für:
 - Sel. Marcel Callo (Alternative evt. http://www.fen-net.de/~ea1599/marcel_callo/web/lesungen.pdf, oder Direktorium 2021)
+
+Die Psalmorationen fehlen ebenfalls, inoffizielle Übersetzungen eines Teils davon habe ich übernommen aus:
+https://www.liturgie.at/dl/uqsnJKJKlMlnMJqx4KJK/Einspieler_Mit_dem_Gotteslob_durch_den_Tag_pdf
+https://www.kath-kirche-kaernten.at/images/downloads/psalmorationen.pdf
 
 
 Fehlende Texte (Diözesankalender Freiburg)

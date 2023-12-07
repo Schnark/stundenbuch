@@ -73,9 +73,7 @@ Day.calendars = {
 					},
 					iii: true
 				}],
-				[34, 'sunday', 'rex', 0, 'dominus', { //TODO
-					//when it coincides with another sollemnity,
-					//at least in Freiburg it is moved to [33, 'sunday']
+				[34, 'sunday', 'rex', 0, 'dominus', {
 					texts: {
 						cantica: {
 							vespera0: ['ps-113', 'ps-117', 'apc-4-5'],
@@ -1674,9 +1672,9 @@ Day.calendars = {
 	'de-rottenburg-stuttgart': { //hauptsächlich als POC
 		base: 'de-DE',
 		label: 'Diözese Rottenburg-Stuttgart',
-		episcopus: {
-			'': 'Gebhard'
-		},
+		/*episcopus: {
+			'': ''
+		},*/
 		getEntries: function () {
 			return [
 				//5. 1. Johannes Nepomuk Neumann (bereits in de-DE)
