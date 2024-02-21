@@ -56,7 +56,7 @@ function makeEntry (row, params, callback) {
 		if (
 			params.compare && (
 				['index', 'tertia-complementaris', 'sexta-complementaris', 'nona-complementaris'].indexOf(params.hora) > -1 ||
-				params.lang === 'de' && ['invitatorium', 'lectionis'].indexOf(params.hora) > -1
+				params.lang === 'de' && ['invitatorium', 'lectionis', 'vigilia'].indexOf(params.hora) > -1
 			)
 		) {
 			params.compare = false;
@@ -70,6 +70,7 @@ function makeEntry (row, params, callback) {
 			index: 'Übersicht',
 			invitatorium: 'Invitatorium',
 			lectionis: 'Lesehore',
+			vigilia: 'Vigil',
 			laudes: 'Laudes',
 			tertia: 'Terz',
 			'tertia-complementaris': 'Terz',

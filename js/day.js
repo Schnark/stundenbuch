@@ -501,6 +501,11 @@ Day.prototype.hasTeDeum = function () {
 		(this.getPart() === 3 && this.getSubPart() === 0);
 };
 
+Day.prototype.hasVigilia = function () {
+	this.calculateNumbers();
+	return (this.special && this.special.vigilia) || this.isSunday();
+};
+
 Day.prototype.hasSpecialCompletorium = function () {
 	this.calculateNumbers();
 	return this.special && this.special.completorium && this.getDay() !== 0;
@@ -709,6 +714,10 @@ DayEve.prototype.getType = function () {
 
 DayEve.prototype.hasTeDeum = function () {
 	return this.next.hasTeDeum();
+};
+
+DayEve.prototype.hasVigilia = function () {
+	return this.next.hasVigilia();
 };
 
 DayEve.prototype.hasSpecialCompletorium = function () {

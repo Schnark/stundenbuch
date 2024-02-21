@@ -3,13 +3,13 @@ getHora =
 (function () {
 "use strict";
 
-function getHymnusLectionis (date, config) {
+function getHymnusLectionis (date, vigilia, config) {
 	var hymn = date.getText('hymnus', 'lectionis');
 	if (!hymn) {
 		switch (date.getPart()) {
 		case 0:
 			hymn = 'lectionis-' + date.getDayInSequence(Number(l10n.get('modus-hymnus-lectionis'))) +
-				(config.get('lectionisNight') ? '-nox' : '');
+				(vigilia || config.get('lectionisNight') ? '-nox' : '');
 			break;
 		case 1:
 			if (config.get('bugCompat') && [0, 4, 5].indexOf(date.getSubPart()) > -1) {
@@ -266,6 +266,46 @@ function getCanticaLectionis (date) {
 			}
 			break;
 		}
+	}
+	return cantica;
+}
+
+function getCanticaVigilia (date) {
+	var cantica = date.getText('cantica', 'vigilia'), ant;
+	if (!cantica) {
+		switch (date.getPart()) {
+		case 0:
+			cantica = ['is-33-vig', 'is-33', 'sir-36-vig'];
+			ant = 'per-annum';
+			break;
+		case 1:
+			if (date.getSubPart() <= 2) {
+				cantica = ['is-40', 'is-42', 'is-49'];
+				ant = 'adventus';
+			} else {
+				cantica = ['is-26', 'is-40-vig', 'is-66'];
+				ant = 'nativitatis';
+			}
+			break;
+		case 2:
+			cantica = ['ier-14', 'ez-36', 'lam-5'];
+			ant = 'quadragesimae';
+			if (date.getSubPart() > 1) {
+				ant += '-1';
+			}
+			break;
+		case 3:
+			cantica = ['is-63', 'os-6', 'so-3'];
+			ant = 'paschale';
+			if (date.getSubPart() > 1) {
+				ant += '-1';
+			}
+			break;
+		}
+		ant = '|!vigilia-' + ant;
+		cantica[0] += ant;
+		cantica[1] += ant;
+		cantica[2] += ant;
 	}
 	return cantica;
 }
@@ -701,6 +741,29 @@ function getLectioResponsoriumLectionis (date, config) {
 		'responsorium-lectionis-' + special,
 		'', ''
 	];
+}
+
+function getLectioVigilia (date) {
+	var lectio, d;
+	if (['1', '2'].indexOf(l10n.get('modus-lectionis')) === -1) {
+		return '';
+	}
+
+	lectio = date.getText('lectio', 'vigilia');
+	if (lectio) {
+		return 'lectio-' + lectio;
+	}
+	//if we get here and it's not Sunday, something is broken
+	//but let's ignore it and just round down
+	d = Math.floor(date.getDayInSequence(-1) / 7);
+	switch (date.getPart()) {
+	case 1: d += 2;
+	/*falls through*/
+	case 0:
+	case 3:
+		return 'lectio-vigilia-' + ((d % 8) + 1);
+	case 2: return 'lectio-vigilia-quadragesimae-' + (d + 1);
+	}
 }
 
 function getLectioLaudes (date) {
@@ -1585,7 +1648,7 @@ function getInvitatorium (date, config) {
 
 function getLectionisEaster (date) {
 	return [
-		{type: 'title', title: 'lectionis', date: date},
+		{type: 'title', title: 'lectionis', date: date}, //use "lectionis" as title, since as Vigil it is much longer
 		'omitte-4',
 		'lectio-lectionis-p0-a',
 		['ex-15-lectionis'],
@@ -1602,18 +1665,44 @@ function getLectionisEaster (date) {
 	];
 }
 
-function getLectionis (date, config) {
+function getLectionis (date, vigilia, config) {
 	if (date.getPart() === 3 && date.getDayInSequence(-1) === 0) {
 		return getLectionisEaster(date);
 	}
 	var cantica = getCanticaLectionis(date),
-		lectioResponsorium = getLectioResponsoriumLectionis(date, config);
+		lectioResponsorium = getLectioResponsoriumLectionis(date, config),
+		vigiliaCanticaEvangelium = [],
+		linkVigilia;
+	if (date.hasVigilia()) {
+		if (vigilia) {
+			linkVigilia = {type: 'link', href: getHora.makeLink(date, 'lectionis'), label: 'lectionis'};
+			vigiliaCanticaEvangelium = getCanticaVigilia(date);
+			vigiliaCanticaEvangelium.push(getLectioVigilia(date));
+			if (vigiliaCanticaEvangelium[3]) {
+				if (config.get('removeDuplicateAntiphon')) {
+					vigiliaCanticaEvangelium[0] = vigiliaCanticaEvangelium[0].replace('|', '|<');
+					vigiliaCanticaEvangelium[1] = vigiliaCanticaEvangelium[1].replace(/\|.*$/, '|!');
+					vigiliaCanticaEvangelium[2] = vigiliaCanticaEvangelium[2].replace('|', '|>');
+				}
+				vigiliaCanticaEvangelium[0] = vigiliaCanticaEvangelium[0].split('|');
+				vigiliaCanticaEvangelium[1] = vigiliaCanticaEvangelium[1].split('|');
+				vigiliaCanticaEvangelium[2] = vigiliaCanticaEvangelium[2].split('|');
+			} else {
+				vigiliaCanticaEvangelium = ['vigiliae-desunt'];
+			}
+		} else { //TODO? optional
+			linkVigilia = {type: 'link', href: getHora.makeLink(date, 'vigilia'), label: 'vigilia'};
+		}
+	} else {
+		vigilia = false;
+	}
 	return [
-		{type: 'title', title: 'lectionis', date: date},
+		{type: 'title', title: vigilia ? 'vigilia' : 'lectionis', date: date},
+		linkVigilia,
 		config.get('invitatoriumLocus') === 'lectionis' ?
 			{type: 'link', href: getHora.makeLink(date, 'invitatorium'), label: 'invitatorium'} :
 			'incipit' + (date.getPart() === 2 ? '-quadragesimae' : ''),
-		getHymnusLectionis(date, config),
+		getHymnusLectionis(date, vigilia, config),
 		cantica[0].split('|'),
 		cantica[1].split('|'),
 		cantica[2].split('|'),
@@ -1624,6 +1713,10 @@ function getLectionis (date, config) {
 		lectioResponsorium[3],
 		lectioResponsorium[4],
 		lectioResponsorium[5],
+		vigiliaCanticaEvangelium[0],
+		vigiliaCanticaEvangelium[1],
+		vigiliaCanticaEvangelium[2],
+		vigiliaCanticaEvangelium[3],
 		date.hasTeDeum() ? 'te-deum' : '',
 		getOratioLectionis(date, config),
 		'conclusio',
@@ -1924,6 +2017,9 @@ function getMonth (date) {
 		var data = date.getOmitted(), name, rank;
 		for (name in data) {
 			if (data.hasOwnProperty(name) && data[name] !== 'sollemnitas') {
+				//don't show omitted sollemnities
+				//they are just moved to (probably) the next day
+				//(this might be a bit confusing when they are moved to the next month)
 				rank = data[name];
 				omitted.push(
 					l10n.getTitle(name) + ' ' +
@@ -2003,7 +2099,8 @@ function getHoraSequence (date, hora, config) {
 	switch (hora) {
 	case 'mensis': return getMonth(date, config);
 	case 'invitatorium': return getInvitatorium(date, config);
-	case 'lectionis': return getLectionis(date, config);
+	case 'lectionis': return getLectionis(date, false, config);
+	case 'vigilia': return getLectionis(date, true, config);
 	case 'laudes': return getLaudes(date, config);
 	case 'tertia': return getTertiaSextaNona(date, 0, false, config);
 	case 'tertia-complementaris': return getTertiaSextaNona(date, 0, true, config);

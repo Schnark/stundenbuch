@@ -184,7 +184,9 @@ function canCompare (lang, hora) {
 	return (
 		(lang === 'de' || lang === 'mul') &&
 		['laudes', 'tertia', 'sexta', 'nona', 'vespera', 'completorium'].indexOf(hora) > -1
-	) || lang === 'de-x-combined' || lang === 'de-x-app' || lang === 'la' || lang === 'la-x-app';
+	) || (
+		(lang === 'la' || lang === 'de-x-combined') && hora !== 'vigilia'
+	) || (lang === 'de-x-app' || lang === 'la-x-app');
 }
 
 function getConfig (lang, hora, extra, compare) {
@@ -733,6 +735,7 @@ function getUrl (lang, hora, date) {
 		hora = {
 			invitatorium: 'invitatorium',
 			lectionis: 'lesehore',
+			vigilia: 'vigil',
 			laudes: 'laudes',
 			tertia: 'terz',
 			sexta: 'sext',
@@ -886,7 +889,7 @@ function run () {
 		params.lang = 'de';
 	}
 	if (
-		['index', 'invitatorium', 'lectionis', 'laudes',
+		['index', 'invitatorium', 'lectionis', 'vigilia', 'laudes',
 			'tertia', 'tertia-complementaris',
 			'sexta', 'sexta-complementaris',
 			'nona', 'nona-complementaris',

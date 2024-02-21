@@ -40,6 +40,9 @@ Invitatory
 [lectionis]
 Office of Readings
 
+[vigilia]
+Vigil
+
 [laudes]
 Lauds
 

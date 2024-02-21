@@ -723,7 +723,7 @@ Instrument.prototype.playNotes = function (notes) {
 			this.setShift(Number(note.notes[0][0].charAt(0)), note.notes[0][0].charAt(1) === 'x');
 			return;
 		}
-		note.notes.forEach(function (n) {
+		note.notes.forEach(function (n) { //TODO play two or more equal notes as one long note
 			this.playNote(n[0], n[1]);
 		}.bind(this));
 	}.bind(this));

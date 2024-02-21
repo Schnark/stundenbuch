@@ -74,6 +74,7 @@ Day.cantica = {
 	'cantica-vespera-ecclesia-v': ['ps-147-i', 'ps-147-ii', 'apc-19'],
 	'cantica-vespera-ecclesia-varianta-quadragesimae-v': ['ps-147-i', 'ps-147-ii', 'col-1'],
 	'cantica-lectionis-ecclesia': ['ps-24', 'ps-84', 'ps-87'],
+	'cantica-vigilia-ecclesia': ['tb-13-ii', 'is-2-vig', 'ier-7'],
 	'cantica-laudes-ecclesia': ['ps-63', 'dn-3-iii', 'ps-149'],
 	'cantica-vespera-ecclesia': ['ps-46', 'ps-122', 'apc-19'],
 	'cantica-vespera-ecclesia-varianta-quadragesimae': ['ps-46', 'ps-122', 'apc-15'],
@@ -87,38 +88,46 @@ Day.cantica = {
 
 	'cantica-vespera-maria-v': ['ps-113', 'ps-147-ii', 'eph-1'],
 	'cantica-lectionis-maria': ['ps-24', 'ps-46', 'ps-87'],
+	'cantica-vigilia-maria': ['is-61-62-vig', 'is-62', 'sir-39'],
 	'cantica-laudes-maria': ['ps-118', 'dn-3-ii', 'ps-150'],
 	'cantica-vespera-maria': ['ps-122', 'ps-127', 'eph-1'],
 
 	'cantica-vespera-apostolus-v': ['ps-117', 'ps-147-ii', 'eph-1'],
 	'cantica-lectionis-apostolus': ['ps-19-i', 'ps-64', 'ps-97'],
+	'cantica-vigilia-apostolus': ['is-61', 'sap-3-i', 'sap-10'],
 	'cantica-laudes-apostolus': ['ps-93', 'dn-3-iii', 'ps-148'],
 	'cantica-vespera-apostolus': ['ps-116-ii', 'ps-126', 'eph-1'],
 
 	'cantica-vespera-virgo-v': ['ps-113', 'ps-147-ii', 'eph-1'],
 	'cantica-lectionis-virgo': ['ps-19-i', 'ps-45-i', 'ps-45-ii'],
+	'cantica-vigilia-virgo': ['ier-17', 'sir-14-15', 'sir-31'],
 	'cantica-laudes-virgo': ['ps-63', 'dn-3-iii', 'ps-149'],
 	'cantica-vespera-virgo': ['ps-122', 'ps-127', 'eph-1'],
 
 	'cantica-vespera-martyr-v': ['ps-118-i', 'ps-118-ii', '1-pt-2'],
 	'cantica-lectionis-martyr-plures': ['ps-2', 'ps-33-i', 'ps-33-ii'],
 	'cantica-lectionis-martyr': ['ps-2', 'ps-11', 'ps-17'],
+	'cantica-vigilia-martyr-plures': ['sap-3-i', 'sap-3-ii', 'sap-10'],
+	'cantica-vigilia-martyr': ['ier-17', 'sir-14-15', 'sir-31'],
 	'cantica-laudes-martyr': ['ps-63', 'dn-3-iii', 'ps-149'],
 	'cantica-vespera-martyr': ['ps-116-i', 'ps-116-ii', 'apc-4-5'],
 
 	'cantica-vespera-pastor-v': ['ps-113', 'ps-146', 'eph-1'],
 	'cantica-lectionis-pastor': ['ps-21', 'ps-92-i', 'ps-92-ii'],
+	'cantica-vigilia-pastor': ['ier-17', 'sir-14-15', 'sir-31'],
 	'cantica-laudes-pastor': ['ps-118', 'dn-3-ii', 'ps-150'],
 	'cantica-vespera-pastor': ['ps-15', 'ps-112', 'apc-15'],
 
 	'cantica-vespera-mulier-v': ['ps-113', 'ps-147-ii', 'eph-1'],
 	'cantica-lectionis-mulier': ['ps-19-i', 'ps-45-i', 'ps-45-ii'],
+	'cantica-vigilia-mulier': ['ier-17', 'sir-14-15', 'sir-31'],
 	//'cantica-laudes-mulier': ['ps-63', 'dn-3-iii', 'ps-149'],
 	'cantica-laudes-mulier': ['ps-93', 'dn-3-iii', 'ps-148'],
 	'cantica-vespera-mulier': ['ps-122', 'ps-127', 'eph-1'],
 
 	'cantica-vespera-vir-v': ['ps-113', 'ps-146', 'eph-1'],
 	'cantica-lectionis-vir': ['ps-21', 'ps-92-i', 'ps-92-ii'],
+	'cantica-vigilia-vir': ['ier-17', 'sir-14-15', 'sir-31'],
 	'cantica-laudes-vir': ['ps-118', 'dn-3-ii', 'ps-150'],
 	'cantica-vespera-vir': ['ps-15', 'ps-112', 'apc-15']
 };
@@ -249,7 +258,7 @@ Day.getSource = function (data, element, hora) {
 };
 
 Day.getCantica = function (keys, hora, cantica) {
-	var i, oneAntiphona;
+	var i, tsn, oneAntiphona;
 
 	function modify (key, nr, prefix) {
 		return (prefix ? 'antiphona-' : '') +
@@ -260,10 +269,11 @@ Day.getCantica = function (keys, hora, cantica) {
 		return canticum + '|!' + modify(keys[i], j + 1);
 	}
 
-	oneAntiphona = ['tertia', 'sexta', 'nona'].indexOf(hora) > -1;
+	tsn = ['tertia', 'sexta', 'nona'].indexOf(hora) > -1;
+	oneAntiphona = tsn || hora === 'vigilia';
 
 	if (!cantica) {
-		if (oneAntiphona && keys.indexOf('cantica-defunctus') === -1) {
+		if (tsn && keys.indexOf('cantica-defunctus') === -1) {
 			cantica = ['*', '*', '*'];
 		} else if (
 			hora === 'laudes' &&
@@ -537,6 +547,7 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 	val.name = name;
 	val.rank = rank;
 	val.tedeum = rank < 2;
+	val.vigilia = rank === 0 || (rank === 1 && types.indexOf('dominus') > -1);
 	val.type = typeOfDay;
 	switch (types[0]) {
 	case 'ordinarium': break;
@@ -546,6 +557,7 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 	}
 	if (types[0] === 'defunctus') {
 		val.tedeum = false;
+		val.vigilia = false;
 		if (rank < 2) {
 			val.completorium = true;
 			val.type = '';

@@ -1,4 +1,5 @@
 [modus-lectionis]
+[vigiliae-desunt]
 [lectio-lectionis-p0-a]
 [antiphona-ex-15-lectionis]
 [ex-15-lectionis]

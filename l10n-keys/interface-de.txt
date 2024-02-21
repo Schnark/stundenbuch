@@ -40,6 +40,9 @@ Invitatorium
 [lectionis]
 Lesehore
 
+[vigilia]
+Vigil
+
 [laudes]
 Laudes
 

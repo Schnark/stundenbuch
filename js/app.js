@@ -254,7 +254,7 @@ function updateNavigation (day, hora, linkCurrent) {
 	}
 	[
 		'index',
-		'invitatorium', 'lectionis', 'laudes',
+		'invitatorium', 'lectionis', 'vigilia', 'laudes',
 		'tertia', 'tertia-complementaris',
 		'sexta', 'sexta-complementaris',
 		'nona', 'nona-complementaris',
@@ -262,6 +262,7 @@ function updateNavigation (day, hora, linkCurrent) {
 	].forEach(function (h) {
 		document.getElementById('nav-' + h).href = (hora === h && !linkCurrent) ? '' : makeLink(day, h);
 	});
+	document.getElementById('nav-vigilia-container').style.display = day.hasVigilia() ? '' : 'none';
 	if (isMonth) {
 		hora = 'index';
 	}

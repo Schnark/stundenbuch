@@ -42,6 +42,9 @@ Ad Invitatorium
 [lectionis]
 Ad Officium lectionis
 
+[vigilia]
+Ad Vigilias
+
 [laudes]
 Ad Laudes matutinas
 

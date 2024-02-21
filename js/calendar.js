@@ -57,6 +57,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-135-i-vespera', 'ps-135-ii', '1-tim-3'],
 							lectionis: ['ps-29', 'ps-66-i', 'ps-66-ii'],
+							vigilia: ['is-26', 'is-40-vig', 'is-66'],
 							tertia: ['', '', ''],
 							sexta: ['', '', ''],
 							nona: ['', '', ''],
@@ -78,6 +79,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-117', 'apc-4-5'],
 							lectionis: ['ps-2', 'ps-72-i', 'ps-72-ii'],
+							vigilia: ['1-par-29', 'is-12', 'is-61-62'],
 							vespera: ['ps-110', 'ps-145-i', 'apc-19']
 						},
 						lectio: {
@@ -95,6 +97,7 @@ Day.calendars = {
 						cantica: { //= maria
 							vespera0: ['ps-113', 'ps-147-ii', 'eph-1'],
 							lectionis: ['ps-24', 'ps-46', 'ps-87'],
+							vigilia: ['is-26', 'is-40-vig', 'is-66'],
 							vespera: ['ps-122', 'ps-127', 'eph-1']
 						},
 						lectio: {
@@ -131,6 +134,7 @@ Day.calendars = {
 					type: '',
 					eve: false,
 					tedeum: false,
+					vigilia: false,
 					completorium: false,
 					texts: {
 						preces: {
@@ -184,6 +188,7 @@ Day.calendars = {
 						cantica: {
 							laudes: 'o',
 							lectionis: ['ps-2', 'ps-22', 'ps-38'],
+							vigilia: ['ier-14', 'ez-36', 'lam-5'],
 							tertia: ['ps-40', 'ps-54', 'ps-88'],
 							sexta: ['ps-40', 'ps-54', 'ps-88'],
 							nona: ['ps-40', 'ps-54', 'ps-88'],
@@ -205,6 +210,7 @@ Day.calendars = {
 						cantica: {
 							laudes: ['ps-64', 'is-38', 'ps-150'],
 							lectionis: ['ps-4', 'ps-16-vespera', 'ps-24'],
+							vigilia: ['ier-14', 'ez-36', 'lam-5'],
 							tertia: ['ps-27', 'ps-30', 'ps-76'],
 							sexta: ['ps-27', 'ps-30', 'ps-76'],
 							nona: ['ps-27', 'ps-30', 'ps-76'],
@@ -251,6 +257,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-147-i', 'apc-15'],
 							lectionis: ['ps-104-i', 'ps-104-ii', 'ps-104-iii'],
+							vigilia: ['is-63', 'os-6', 'so-3'],
 							vespera: ['ps-110', 'ps-114', 'apc-19']
 						},
 						lectio: {
@@ -268,6 +275,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-147-ii', 'eph-1'],
 							lectionis: ['ps-8', 'ps-33-i', 'ps-33-ii'],
+							vigilia: ['is-33-vig', 'is-33', 'sir-36-vig'],
 							vespera: ['ps-110', 'ps-114', 'apc-19']
 						},
 						lectio: {
@@ -285,6 +293,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-111', 'ps-147-ii', 'apc-11-12'],
 							lectionis: ['ps-23', 'ps-42', 'ps-81'],
+							vigilia: ['prv-9', 'ier-31', 'sap-16-17'],
 							vespera: ['ps-110', 'ps-116-ii', 'apc-19']
 						},
 						lectio: {
@@ -302,6 +311,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-146', 'apc-4-5'],
 							lectionis: ['ps-36', 'ps-61', 'ps-98'],
+							vigilia: ['is-12', '1-sm-2-i', '1-sm-2-ii'],
 							vespera: ['ps-110', 'ps-111', 'phil-2']
 						},
 						lectio: {
@@ -320,6 +330,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-147-ii', 'eph-1'],
 							lectionis: ['ps-24', 'ps-87', 'ps-99'],
+							vigilia: ['is-26', 'is-40-vig', 'is-66'],
 							vespera: ['ps-122', 'ps-127', 'eph-1']
 						},
 						lectio: {
@@ -339,6 +350,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-135-i-vespera', 'ps-135-ii', '1-tim-3'],
 							lectionis: ['ps-72', 'ps-96', 'ps-97'],
+							vigilia: ['is-26', 'is-40-vig', 'is-66'],
 							tertia: ['ps-47', 'ps-86-i', 'ps-98'],
 							sexta: ['ps-47', 'ps-86-i', 'ps-98'],
 							nona: ['ps-47', 'ps-86-i', 'ps-98'],
@@ -546,6 +558,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-147-ii', 'phil-2'],
 							lectionis: ['ps-2', 'ps-19-i', 'ps-45'],
+							vigilia: ['is-9', 'is-26', 'is-66'],
 							vespera: ['ps-110', 'ps-130-vespera', 'col-1']
 						},
 						lectio: {
@@ -617,6 +630,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-147-ii', 'phil-2'],
 							lectionis: ['ps-2', 'ps-19-i', 'ps-45'],
+							vigilia: ['is-9', 'is-26', 'is-66'],
 							vespera: ['ps-110', 'ps-130-vespera', 'col-1']
 						},
 						lectio: {
@@ -728,6 +742,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-146', 'eph-1'],
 							lectionis: ['ps-21', 'ps-92-i', 'ps-92-ii'],
+							vigilia: ['ier-17', 'sir-14-15', 'sir-31'],
 							laudes: config.get('varyCanticaLaudes') ? ['ps-118', 'dn-3-ii', 'ps-150'] : undefined,
 							vespera: ['ps-15', 'ps-112', 'apc-15']
 						},
@@ -802,6 +817,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-113', 'ps-117', 'apc-19'],
 							lectionis: ['ps-84', 'ps-97', 'ps-99'],
+							vigilia: ['1-par-29', 'is-12', 'is-61-62'],
 							tertia: ['', '', ''],
 							sexta: ['', '', ''],
 							nona: ['', '', ''],
@@ -893,6 +909,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: ['ps-147-i', 'ps-147-ii', 'phil-2'],
 							lectionis: ['ps-2', 'ps-8', 'ps-96'],
+							vigilia: ['1-par-29', 'is-12', 'is-61-62'],
 							tertia: ['', '', ''],
 							sexta: ['', '', ''],
 							nona: ['', '', ''],
@@ -932,9 +949,11 @@ Day.calendars = {
 				[28, 9, 'venceslaus', 3, ['martyr', 'vir']],
 				[28, 9, 'laurentius-ruiz', 3, ['martyr', 'vir', 'plures']],
 				[29, 9, 'archangeli', 1, '', {
+					vigilia: true,
 					texts: {
 						cantica: {
 							lectionis: ['ps-97', 'ps-103-i-archangeli', 'ps-103-ii-archangeli'],
+							vigilia: ['tb-13-i', 'tb-13-ii-vig', 'tb-13-iii'],
 							tertia: ['', '', ''],
 							sexta: ['', '', ''],
 							nona: ['', '', ''],
@@ -1010,6 +1029,7 @@ Day.calendars = {
 						cantica: {
 							vespera0: [config.get('bugCompat') ? 'ps-150' : 'ps-113', 'ps-147-ii', 'apc-19'],
 							lectionis: ['ps-8', 'ps-15', 'ps-16-vespera'],
+							vigilia: ['tb-13-i', 'tb-13-ii-vig', 'tb-13-iii'],
 							vespera: ['ps-110', 'ps-116-ii', 'apc-4-5']
 						},
 						lectio: {
