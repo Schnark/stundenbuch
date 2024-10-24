@@ -184,6 +184,11 @@ function checkFormat (file, callback) {
 			[/./, /^[^“”]*(“[^“”]+”[^“”]*)*$/, true, 'Anführungszeichen'], //“double” ‘single’
 			[/./, new RegExp('^[^<>]*(<' + getReBibleref() + '>[^<>]*)*$'), true, 'Bibelstellen']
 		],
+		':it': [
+			[/./, /[^0-9 ]–[^0-9 \n]/, false, 'Gedankenstrich ohne Leerzeichen'],
+			[/./, /^[^«»‹›]*(«[^«»]+»[^«»]*)*$/, true, 'Anführungszeichen'],
+			[/./, /^[a-zA-ZàéÈèòù0-9() \n<>’\/\-.:,;?!…–»«_@%*+{}|]+$/, true, 'Illegales Zeichen']
+		],
 		'de': [
 			[/./, /^[a-zA-ZäöüÄÖÜßÁáàçéèîłñú0-9() \n<>’\/\-.:,;?!…–»«_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],
 			[/(?!-introductio).{12}$|^.{1,11}$/, /[áçèîłú]/, false, 'Illegales Zeichen (2)'],
@@ -207,8 +212,8 @@ function checkFormat (file, callback) {
 		'lectionis-de': [
 			[/./, /^[a-zA-ZäöüÄÖÜßÁáéëïñó0-9() \n<>’\/\-.:,;?!…–»«›‹_@~=]+$/, true, 'Illegales Zeichen'],
 			[/^responsorium-/, /^Responsorium\n\nR .+\n.(.+)\n\nV .+\n.\1$|^@responsorium-[a-z0-9\-]+$/, true, 'Responsorium im falschen Format'],
-			[/^lectio-lectionis-.*-a(-alt\d?)?$/, /^Erste Lesung\n\n(~lectio-lectionis-[a-z0-9\-]+a-alt\d?,responsorium-lectionis-[a-z0-9\-]+ Alternativ[^\n]+\n\n)*![^\n]+<[^\n]+>\n\n|^@lectio-lectionis-[a-z0-9\-]+-a(-alt2)?$/, true, 'Lesung im falschen Format (1)'],
-			[/^lectio-lectionis-.*-b(-alt\d?)?$/, /^Zweite Lesung\n\n(~lectio-lectionis-[a-z0-9\-]+b-alt\d?,responsorium-lectionis-[a-z0-9\-]+ Alternativ[^\n]+\n\n)*![^\n]+\n\n(=[^\n]+\n\n)?|^@lectio-lectionis-[a-z0-9\-]+-b$/, true, 'Lesung im falschen Format (2)']
+			[/^lectio-lectionis-.*-a(-alt\d?)?$/, /^Erste Lesung\n\n(~(violet,|white,|black,|blue,|red,)?lectio-lectionis-[a-z0-9\-]+a-alt\d?,responsorium-lectionis-[a-z0-9\-]+ Alternativ[^\n]+\n\n)*![^\n]+<[^\n]+>\n\n|^@lectio-lectionis-[a-z0-9\-]+-a(-alt2)?$/, true, 'Lesung im falschen Format (1)'],
+			[/^lectio-lectionis-.*-b(-alt\d?)?$/, /^Zweite Lesung\n\n(~(violet,|white,|black,|blue,|red,)?lectio-lectionis-[a-z0-9\-]+b-alt\d?,responsorium-lectionis-[a-z0-9\-]+ Alternativ[^\n]+\n\n)*![^\n]+\n\n(=[^\n]+\n\n)?|^@lectio-lectionis-[a-z0-9\-]+-b$/, true, 'Lesung im falschen Format (2)']
 		],
 		'la': [
 			[/./, /^[a-zA-ZæÆœŒáéíóúýÁÉÍÓÚǽçèöõü0-9() \n<>’\/\-.:,;?!…–»«_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],
@@ -232,8 +237,8 @@ function checkFormat (file, callback) {
 		'lectionis-la': [
 			[/./, /^[a-zA-ZæÆœŒáéíóúýÁÉÍÓÚǽàçèêõ0-9() \n<>’\/\-.:,;?!…–»«›‹_@~=]+$/, true, 'Illegales Zeichen'],
 			[/^responsorium-/, /^Responsorium(?: <[^<>]+>)?\n\nR .+\n.(.+)\n\nV .+\n.\1$|^@responsorium-[a-z0-9\-]+$/, true, 'Responsorium im falschen Format'],
-			[/^lectio-lectionis-.*-a$/, /^Lectio prior\n\n(~lectio-lectionis-[a-z0-9\-]+a-alt\d?,responsorium-lectionis-[a-z0-9\-]+ Vel[^\n]+\n\n)*![^\n]+\n\n|^@lectio-lectionis-[a-z0-9\-]+-a(-alt2)?$/, true, 'Lesung im falschen Format (1)'],
-			[/^lectio-lectionis-.*-b$/, /^Lectio altera\n\n(~lectio-lectionis-[a-z0-9\-]+b-alt\d?,responsorium-lectionis-[a-z0-9\-]+ Vel[^\n]+\n\n)*![^\n]+\n\n(=[^\n]+\n\n)?|^@lectio-lectionis-[a-z0-9\-]+-b$/, true, 'Lesung im falschen Format (2)']
+			[/^lectio-lectionis-.*-a$/, /^Lectio prior\n\n(~(violet,|white,|black,|blue,|red,)?lectio-lectionis-[a-z0-9\-]+a-alt\d?,responsorium-lectionis-[a-z0-9\-]+ Vel[^\n]+\n\n)*![^\n]+\n\n|^@lectio-lectionis-[a-z0-9\-]+-a(-alt2)?$/, true, 'Lesung im falschen Format (1)'],
+			[/^lectio-lectionis-.*-b$/, /^Lectio altera\n\n(~(violet,|white,|black,|blue,|red,)?lectio-lectionis-[a-z0-9\-]+b-alt\d?,responsorium-lectionis-[a-z0-9\-]+ Vel[^\n]+\n\n)*![^\n]+\n\n(=[^\n]+\n\n)?|^@lectio-lectionis-[a-z0-9\-]+-b$/, true, 'Lesung im falschen Format (2)']
 		],
 		'en': [
 			[/./, /^[a-zA-Z0-9() \n<>’\/\-.:,;?!…–“”_@%*+{}|]+$/, true, 'Illegales Zeichen (1)'],

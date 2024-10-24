@@ -24,6 +24,9 @@ function getKeys (element, hora, name) {
 		hora = 'vespera';
 	}
 	keys.push(element + '-' + hora + '-' + name);
+	if (hora === 'vigilia') {
+		keys.push(element + '-lectionis-' + name);
+	}
 	keys.push(element + '-' + name);
 	if (element === 'antiphona') {
 		keys = keys.map(function (key) {

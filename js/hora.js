@@ -4,12 +4,13 @@ getHora =
 "use strict";
 
 function getHymnusLectionis (date, vigilia, config) {
-	var hymn = date.getText('hymnus', 'lectionis');
+	var vig = vigilia || config.get('lectionisNight'),
+		hymn = date.getText('hymnus', vig ? 'vigilia' : 'lectionis');
 	if (!hymn) {
 		switch (date.getPart()) {
 		case 0:
 			hymn = 'lectionis-' + date.getDayInSequence(Number(l10n.get('modus-hymnus-lectionis'))) +
-				(vigilia || config.get('lectionisNight') ? '-nox' : '');
+				(vig ? '-nox' : '');
 			break;
 		case 1:
 			if (config.get('bugCompat') && [0, 4, 5].indexOf(date.getSubPart()) > -1) {
@@ -461,15 +462,20 @@ function getCanticaTertiaSextaNona (date, hora, complementaris, config) {
 			['ps-119-v', 'ps-96-i', 'ps-96-ii'],
 			['ps-118-i', 'ps-118-ii', 'ps-118-iii']
 		], cantica, antiphona, vespera;
-	if (config.get('replaceDuplicatePsalms')) { //TODO welche Antiphonen?
-//Marienfeste 122 (121) -> 129 (128), 127 (126) -> 131 (130)
-//Apostel, Kirchweihe
-//3. Woche Mo, Mi
+	if (config.get('replaceDuplicatePsalms')) {
+		//TODO passiert auch, wenn diese Psalmen regulär in Vesper vorkommen, in diesem
+		//Fall sollte die Ergänzungspsalmodie gar nicht erst gewählt werden
+		//vermutlich sollte diese Ersetzung ohnehin nur dann erfolgen, wenn die Ergänzungspsalmodie
+		//an Hochfesten verwendet wird, zumindest sind die Ersetzungen genau in diesen Fällen
+		//erwähnt, in allen anderen aber nicht
 		vespera = getCanticaVespera(date).join(' ');
-		if (vespera.indexOf('ps-122') > 0) {
+		if (vespera.indexOf('ps-122') > 0) { //Kirchweihe, Maria, Jungfrauen, heilige Frauen
 			canticum2[0][2] = 'ps-129';
 		}
-		if (vespera.indexOf('ps-127') > 0) {
+		if (vespera.indexOf('ps-126') > 0) { //Apostel
+			canticum2[2][0] = 'ps-129';
+		}
+		if (vespera.indexOf('ps-127') > 0) { //Maria, Jungfrauen, heilige Frauen
 			canticum2[2][1] = 'ps-131';
 		}
 	}
@@ -1462,8 +1468,8 @@ function getPrecesVespera (date) {
 	return 'preces-' + preces;
 }
 
-function getOratioLectionis (date, config) {
-	var oratio = date.getText('oratio', 'lectionis');
+function getOratioLectionis (date, vigilia, config) {
+	var oratio = date.getText('oratio', vigilia || config.get('lectionisNight') ? 'vigilia' : 'lectionis');
 	if (!oratio && date.isSunday()) {
 		oratio = date.getSunday().replace(/^[abc](\d+)(-[aqp])?$/, 'dominica-$1$2');
 		if (date.getPart() === 1 && date.getSubPart() === 2) {
@@ -1623,7 +1629,7 @@ function getMaria (date, config) {
 			'sub-tuum-praesidium', 'alma-redemptoris-mater'][Math.floor(d / 7)];
 		//jscs:enable validateIndentation
 	default: //traditionell
-		if (date.getPart() === 1 || date.getMonth() === 0 || (date.getMonth() === 1 && date.getDate() < 3)) {
+		if (date.getPart() === 1 || date.getMonth() === 0 || (date.getMonth() === 1 && date.getDate() < 2)) {
 			return 'alma-redemptoris-mater';
 		}
 		if (date.getMonth() < 4) {
@@ -1718,7 +1724,7 @@ function getLectionis (date, vigilia, config) {
 		vigiliaCanticaEvangelium[2],
 		vigiliaCanticaEvangelium[3],
 		date.hasTeDeum() ? 'te-deum' : '',
-		getOratioLectionis(date, config),
+		getOratioLectionis(date, vigilia, config),
 		'conclusio',
 		lectioResponsorium[6] ? 'lectio-continua' : '',
 		lectioResponsorium[6]

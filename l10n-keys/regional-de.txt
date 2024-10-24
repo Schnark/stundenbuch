@@ -17,6 +17,8 @@
 [lectio-lectionis-vinzenz-pallotti-b]
 [responsorium-lectionis-vinzenz-pallotti-b]
 [oratio-vinzenz-pallotti]
+[max-josef-metzger]
+[max-josef-metzger-nomen]
 [trudpert]
 [trudpert-nomen]
 [ulrika-franziska-nisch-hegne]

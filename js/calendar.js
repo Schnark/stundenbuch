@@ -1158,7 +1158,10 @@ Day.calendars = {
 				'de': 'Jahrestag der Wahl von Papst Franziskus (2013)',
 				'en': 'Anniversary of the election of Pope Francis (2013)'
 			}],
-			[19, 3, 'Jahrtag der Amtseinführung von Papst Franziskus (2013)'],
+			[19, 3, {
+				'': 'Jahrestag der Amtseinführung von Papst Franziskus (2013)',
+				'en': 'Anniversary of the papal inauguration of Pope Francis (2013)'
+			}],
 			[23, 4, 'Namenstag von Papst Franziskus'],
 			[24, 5, {
 				'': 'Gebetstag für die Kirche in China',
@@ -1180,6 +1183,10 @@ Day.calendars = {
 			[-118, 10, { //next to last Sunday
 				'': 'Weltmissionssonntag',
 				'en': 'World Mission Day'
+			}],
+			[18, 11, {
+				'': 'Gebetstag für die Opfer von Missbrauch und Gewalt in der Kirche',
+				'en': 'Day of Prayer for Victims and Survivors of Abuse in the Church'
 			}],
 			[33, 'sunday', {
 				'': 'Dies Mundanus Pauperum',
@@ -1370,16 +1377,15 @@ Day.calendars = {
 		label: 'Deutschland',
 		getEntries: function () {
 			return [
-				[5, 1, 'johannes-nepomuk-neumann', 3, 'episcopus', 'Johannes Nepomuk Neumann'],
+				[5, 1, 'johannes-nepomuk-neumann', 3, 'episcopus', 'Johannes Nepomuk Neumann'], //?
 				[19, 4, 'marcel-callo', 3, ['martyr', 'vir', 'beatus'], 'Marcel Callo'],
 				[5, 6, 'bonifatius', 1, ['martyr', 'vir']],
-				[3, 11, 'rupert-mayer', 3, ['pastor', 'beatus'], 'Rupert Mayer'],
+				[3, 11, 'rupert-mayer', 3, ['pastor', 'beatus'], 'Rupert Mayer'], //?
 				[4, 12, 'adolph-kolping', 3, ['pastor', 'beatus'], 'Adolph Kolping']
 				//TODO laut DBK von Vollversammlung angenommen, stehen aber in keinem Direktorium:
 				//22. Jan.: Vinzenz Pallotti
 				//10. Mai: Damian de Veuster
 				//20. Nov.: Korbinian
-				//TODO oder de?
 			];
 		},
 		notes: [
@@ -1390,7 +1396,6 @@ Day.calendars = {
 				'en': 'Sunday of the Word of God'
 			}],
 			[27, 1, 'Gedenktag für die Opfer des Nationalsozialismus'],
-			[-103, 3, 'Beginn der Woche der Brüderlichkeit'], //Anfang März, bislang immer zwischen 3. (2024) und 11. (2018)
 			[42, 'easter'], //Welttag der sozialen Kommunikationsmittel
 			[-108, 9, { //zweiter Sonntag
 				'': 'Welttag der sozialen Kommunikationsmittel',
@@ -1509,7 +1514,7 @@ Day.calendars = {
 					},
 					nameFallback: 'Pfingstmontag'
 				}],
-				[55, 'easter', 'maria-ecclesia', 3, 'maria'],
+				[55, 'easter', 'maria-ecclesia', 2, 'maria'],
 
 				[3, 1, 'oskar-saier', 3, ['defunctus', 'vir'], 'Oskar Saier'],
 				//5. 1. Johannes Nepomuk Neumann (bereits in de-DE)
@@ -1518,6 +1523,7 @@ Day.calendars = {
 				//23. 1. Heinrich Seuse (bereits in de)
 				//6. 3. Fridolin von Säckingen (bereits in de)
 				//15. 3. Klemens Maria Hofbauer (bereits in de)
+				[17, 4, 'max-josef-metzger', 3, ['martyr', 'vir', 'beatus'], 'Max Josef Metzger'],
 				//19. 4. Leo IX. (bereits in de)
 				//24. 4. Fidelis von Sigmaringen (bereits in '')
 				[26, 4, 'trudpert', 3, ['martyr', 'vir'], 'Trudpert'],
@@ -1586,7 +1592,7 @@ Day.calendars = {
 		},
 		notes: [
 			[30, 5, 'Jahrestag der Ernennung von Erzbischof Stephan Burger (2014)'],
-			[29, 6, 'Jahrtag der Bischofsweihe und Amtseinführung von Erzbischof Stephan Burger (2014)'],
+			[29, 6, 'Jahrestag der Bischofsweihe von Erzbischof Stephan Burger (2014)'],
 			[15, 8, 'Schutzpatronin der Erzdiözese Freiburg'],
 			[26, 11, 'Zweiter Patron der Erzdiözese Freiburg'],
 			[26, 12, 'Namenstag von Erzbischof Stephan Burger']
@@ -1607,20 +1613,20 @@ Day.calendars = {
 		},
 		groups: [
 			[
-				'vinzenz-pallotti', 'trudpert', 'bernhard-baden', 'karl-leisner', 'gebhard', 'teresa-kalkutta',
-				'pentecoste-secunda', 'maria-ecclesia'
+				'vinzenz-pallotti', 'bernhard-baden', 'karl-leisner', 'gebhard', 'teresa-kalkutta',
+				'pentecoste-secunda'
 			],
 			[
 				'oskar-saier', 'ulrich-zell', 'monica', 'landelin', 'otmar',
-				'pentecoste-secunda', 'maria-ecclesia'
+				'pentecoste-secunda'
 			],
 			[
-				'franziskus-maria', 'monica', 'pelagius', 'alfons-maria-eppinger', 'john-henry-newman',
-				'pentecoste-secunda', 'maria-ecclesia'
+				'max-josef-metzger', 'franziskus-maria', 'monica', 'pelagius', 'alfons-maria-eppinger', 'john-henry-newman',
+				'pentecoste-secunda'
 			],
 			[
-				'ulrika-franziska-nisch-hegne', 'heimerad-messkirch', 'arbogast', 'monica', 'verena-zurzach',
-				'pentecoste-secunda', 'maria-ecclesia'
+				'trudpert', 'ulrika-franziska-nisch-hegne', 'heimerad-messkirch', 'arbogast', 'monica', 'verena-zurzach',
+				'pentecoste-secunda'
 			]
 		]
 	},
@@ -1676,7 +1682,7 @@ Day.calendars = {
 		},
 		notes: [
 			[18, 4, 'Jahrestag der Ernennung von Bischof Peter Kohlgraf (2017)'],
-			[27, 8, 'Jahrtag der Bischofsweihe von Bischof Peter Kohlgraf (2017)'],
+			[27, 8, 'Jahrestag der Bischofsweihe von Bischof Peter Kohlgraf (2017)'],
 			[11, 11, 'Patron der Diözese Mainz']
 		],
 		groups: [
@@ -1692,9 +1698,9 @@ Day.calendars = {
 	'de-rottenburg-stuttgart': { //hauptsächlich als POC
 		base: 'de-DE',
 		label: 'Diözese Rottenburg-Stuttgart',
-		/*episcopus: {
-			'': ''
-		},*/
+		episcopus: {
+			'': 'Klaus'
+		},
 		getEntries: function () {
 			return [
 				//5. 1. Johannes Nepomuk Neumann (bereits in de-DE)
@@ -1730,9 +1736,9 @@ Day.calendars = {
 			]
 		},
 		notes: [
-			[7, 7, 'Jahrestag der Ernennung von Bischof Gebhard Fürst (2000)'],
-			[17, 9, 'Jahrtag der Bischofsweihe von Bischof Gebhard Fürst (2000)'],
-			[11, 11, 'Patron der Diözese Rottenburg-Stuttgart']
+			[2, 10, 'Jahrestag der Ernennung von Bischof Klaus Krämer (2024)'],
+			[11, 11, 'Patron der Diözese Rottenburg-Stuttgart'],
+			[1, 12, 'Jahrestag der Bischofsweihe von Bischof Klaus Krämer (2024)']
 		],
 		groups: [
 			['gebhard', 'konrad', 'carlo-steeb'],
