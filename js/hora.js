@@ -1930,7 +1930,11 @@ function getOverview (date, config) {
 
 		omitted = date.getOmitted();
 		other = Object.keys(omitted).map(function (name) {
-			return l10n.getTitle(name) + ' (' + l10n.get(omitted[name] + '-littera') + ')'; //TODO l10n?
+			var title = l10n.getTitle(name);
+			if (omitted[name]) {
+				title += ' (' + l10n.get(omitted[name] + '-littera') + ')'; //TODO l10n?
+			}
+			return title;
 		});
 		if (other.length) {
 			info.push(l10n.get('dies-info-omittantes') + ' ' + other.join('; '));

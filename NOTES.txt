@@ -598,3 +598,90 @@ Vermutlich nicht approbierte Texte, nicht vorhanden:
 
 * Lesung der Lesehore für:
 - Pfingstmontag
+
+
+Links
+=====
+die mir beim Erstellen der App geholfen haben, zur Verbesserung verwendet werden könnten oder aus anderen Gründen interessant sind
+
+Volltexte
+---------
+* https://vulgata.info/index.php?title=Kategorie:Stundenbuch (deutsch)
+* https://web.archive.org/web/20231206185000/https://duct.schollz.com/play.google.com/store/apps/stundenbuch.stundenbuch.571.zip (deutsch, lateinisch)
+* https://www.liturgies.net/Liturgies/Catholic/loh/index.htm (englisch)
+* https://archive.org/details/liturgyofhours0001unse, https://archive.org/details/liturgyofhours0000unse_r1a6, https://archive.org/details/liturgyofhours0003unse, https://archive.org/details/liturgyofhours0004unse (englisch)
+* https://www.almudi.org/Portals/0/docs/Breviario/fuentes/breviario.html (lateinisch)
+* https://web.archive.org/web/20190213074219/https://www.adorientem.it/2018/05/11/liturgia-horarum-in-lingua-latina/ (lateinisch)
+* https://books.google.de/books?id=t64VBAAAQBAJ, https://books.google.de/books?id=S68VBAAAQBAJ, https://books.google.de/books?id=VLIVBAAAQBAJ, https://books.google.de/books?id=w7IVBAAAQBAJ (lateinisch)
+
+Einzelne Horen
+--------------
+* https://stundenbuch.katholisch.de/kalendertag.php (deutsch)
+* https://www.stundengebet.de/jetzt-beten/ (deutsch)
+* https://www.ibreviary.com/m2/breviario.php (mehrsprachig)
+* https://www.universalis.com/L/today.htm (englisch, lateinisch)
+* https://breviarium.info/ (lateinisch)
+
+Audio
+-----
+* https://www.vaticannews.va/la/podcast/liturgia-horarum.html (lateinisch)
+* https://www.horeb.org/live/empfang/ (deutsch)
+
+Android-Apps
+------------
+* https://web.archive.org/web/20220527224258/https://play.google.com/store/apps/details?id=stundenbuch.stundenbuch, https://web.archive.org/web/20231206185000/https://duct.schollz.com/play.google.com/store/apps/stundenbuch.stundenbuch.571.zip
+* https://play.google.com/store/apps/details?id=de.dicendum.stundenbuch
+
+Noten
+-----
+* https://gregorio-project.github.io/gabc/
+* https://bbloomf.github.io/jgabc/transcriber.html
+* https://web.archive.org/web/20090920115334/http://www.sanctamissa.org/en/music/gregorian-chant/choir/psalm-tones.pdf
+* https://www.maria-laach.de/tedeum/psalmodie-tafeln.html
+* https://www.lingualpfeife.de/tutorials/psalmen
+* https://dli.institute/wp/strophenschemata-zum-gotteslob/
+* https://www.eucharistiefeier.de/stundengebet/
+* http://www.hymntime.com/tch/index.htm
+* https://musicasacra.com/music/latin-settings/
+* https://media.musicasacra.com/dominican/A.pdf
+* http://www.kleingraduale.nl/LiturgiaHorarum/
+
+Bilder
+------
+* https://www.2ds.ca/Prayer/hours.html
+* https://commons.wikimedia.org/wiki/Das_Stundenbuch_der_Maria_von_Burgund
+* https://fonts.google.com/specimen/Nova+Oval
+
+Aktuelles
+---------
+* https://www.vatican.va/roman_curia/congregations/ccdds/index_ge.htm, https://www.vatican.va/roman_curia/congregations/ccdds/index.htm
+* https://www.cultodivino.va/it/rivista-notitiae.html
+* https://www.cultodivino.va/it/documenti/atti-del-dicastero.html
+* https://www.iuscangreg.it/diritto_universale.php?lang=DE
+* https://www.dbk.de/presse/presseberichte-der-vollversammlungen
+* https://www.ebfr.de/dokumente?pagerPage_df14009f=2&stichwortsuche=Direktorium
+* https://www.kirchenrecht-ebfr.de/list/kirchliches_amtsblatt
+* https://bistum-augsburg.de/Glaube/Kirchenjahr/Liturgisches-Direktorium
+* https://liturgie.ch/praxis/dokumente-zur-liturgie/gesamtkirchlich
+* https://www.usccb.org/prayer-and-worship/liturgy-of-the-hours/liturgy-of-the-hours-second-edition
+
+Sonstiges
+---------
+* https://www.stundenbuch-online.de/home.php?p=105
+* https://catholic-resources.org/LoH/index.html
+* https://web.archive.org/web/20230728172928/http://www.stutler.cc/russ/resources.html
+* https://web.archive.org/web/20170122041024/http://www.oblatengemeinschaft.abtei-ottobeuren.de/stundengebet/
+* https://www.kreuzgang.org/viewtopic.php?f=11&t=10984&sid=364c922aba76a82b68d159f736545d6d
+* http://www.nabkal.de/index.html
+* https://www.preces-latinae.org/preces.html
+* https://www.youtube.com/watch?v=uNCJLXh2KFc, https://www.youtube.com/watch?v=1ZxKCAlEi5E, https://www.youtube.com/watch?v=XdmSR4H2EQc
+* https://www.youtube.com/watch?v=khtmZOQr57w
+
+Messbuch
+--------
+* https://archive.org/details/Roman-Missal-Third-Edition
+* https://messbuch.peterskirche.at/
+* https://schott.erzabtei-beuron.de/register/proprium.kal/index.html
+* https://dli.institute/wp/wp-content/uploads/2017/11/ah77_12.pdf
+* https://catholic-resources.org/Lectionary/index.html
+* https://catholic-resources.org/Lectionary/1998USL.htm

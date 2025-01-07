@@ -417,6 +417,11 @@ Day.prototype.calculateNumbers = function () {
 		this.color = special.color;
 	}
 	this.special = special;
+	if (movedBaptism) {
+		this.special.texts.cantica.tertia = this.special.texts.cantica.tsnAlt;
+		this.special.texts.cantica.sexta = this.special.texts.cantica.tsnAlt;
+		this.special.texts.cantica.nona = this.special.texts.cantica.tsnAlt;
+	}
 };
 
 Day.prototype.isRegular28Feb = function () {

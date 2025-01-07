@@ -58,9 +58,10 @@ Day.calendars = {
 							vespera0: ['ps-135-i-vespera', 'ps-135-ii', '1-tim-3'],
 							lectionis: ['ps-29', 'ps-66-i', 'ps-66-ii'],
 							vigilia: ['is-26', 'is-40-vig', 'is-66'],
-							tertia: ['', '', ''],
-							sexta: ['', '', ''],
-							nona: ['', '', ''],
+							tertia: ['ps-118-i', 'ps-118-ii', 'ps-118-iii'],
+							sexta: ['ps-118-i', 'ps-118-ii', 'ps-118-iii'],
+							nona: ['ps-118-i', 'ps-118-ii', 'ps-118-iii'],
+							tsnAlt: ['ps-23', 'ps-76-i', 'ps-76-ii'],
 							vespera: ['ps-110', 'ps-112', 'apc-15']
 						},
 						lectio: {

@@ -5,7 +5,7 @@
 
 var dateInput,
 	proxy = 'https://lit-beach-8985.herokuapp.com/?url=',
-	appPath = '../../../../stb/stundenbuch.stundenbuch.571/assets/',
+	appPath = '../../../Texte/große%20Texte/Glaube/Stundenbuch/stundenbuch.stundenbuch.571/assets/',
 /* This also requires some modifications of the code of the app:
 In stundenbuch.js add the following code:
 In the function androidClass add at the beginning
