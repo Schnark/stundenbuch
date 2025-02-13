@@ -3959,6 +3959,8 @@ Alleluia, alleluia.
 [antiphona-benedictus-gregorius-magnus]
 [antiphona-magnificat-gregorius-magnus]
 [oratio-gregorius-magnus]
+[teresa-kalkutta]
+[teresa-kalkutta-nomen]
 [nativitatis-maria]
 [hymnus-nativitatis-maria]
 [hymnus-laudes-nativitatis-maria]

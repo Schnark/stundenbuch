@@ -885,6 +885,7 @@ Day.calendars = {
 				}],
 
 				[3, 9, 'gregorius-magnus', 2, config.get('bugCompat') ? 'pastor' : 'doctor'],
+				[5, 9, 'teresa-kalkutta', 3, ['misericordia', 'mulier']], //id deutsch, weil ursprünglich nur Freiburg
 				[8, 9, 'nativitatis-maria', 1, 'maria', {
 					texts: {
 						cantica: {
@@ -1211,8 +1212,9 @@ Day.calendars = {
 				'isidorus', 'adalbertus', 'pius-v', 'ioannes-de-avila', 'pancratius',
 				'maria-magdalena-pazzi', 'bernhardinus-senensis', 'ephraem', 'promartyr-roma', 'antonius-maria-zaccaria',
 				'apollinaris', 'birgitta', 'eusebius', 'caietanus', 'stephanus-hungaria',
-				'ludovicus', 'nomen-maria', 'laurentius-ruiz', 'ioannes-xxiii', 'paulus-cruce',
-				'martinus-porres', 'margarita-scotia', 'clemens-i', 'ioannes-damasceni', 'damasus-i'
+				'ludovicus', 'teresa-kalkutta', 'nomen-maria', 'laurentius-ruiz', 'ioannes-xxiii',
+				'paulus-cruce', 'martinus-porres', 'margarita-scotia', 'clemens-i', 'ioannes-damasceni',
+				'damasus-i'
 			],
 			[
 				'hilarius', 'vincentius', 'hieronymus-emiliani', 'casimirus', 'cyrillus-hierosolymitanus',
@@ -1548,7 +1550,6 @@ Day.calendars = {
 				[27, 8, 'gebhard', 3, 'episcopus', 'Gebhard'],
 				[1, 9, 'pelagius', 3, ['martyr', 'vir'], 'Pelagius'],
 				[1, 9, 'verena-zurzach', 3, 'virgo', 'Verena'],
-				[5, 9, 'teresa-kalkutta', 3, ['misericordia', 'mulier'], 'Teresa von Kalkutta'],
 				[9, 9, 'alfons-maria-eppinger', 3, ['virgo', 'beatus'], 'Alfons Maria'],
 				//18. 9. Lambert (bereits in de)
 				[22, 9, 'landelin', 3, ['martyr', 'vir'], 'Landelin'],
@@ -1614,7 +1615,7 @@ Day.calendars = {
 		},
 		groups: [
 			[
-				'vinzenz-pallotti', 'bernhard-baden', 'karl-leisner', 'gebhard', 'teresa-kalkutta',
+				'vinzenz-pallotti', 'bernhard-baden', 'karl-leisner', 'gebhard',
 				'pentecoste-secunda'
 			],
 			[

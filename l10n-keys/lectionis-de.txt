@@ -3627,6 +3627,8 @@
 [responsorium-lectionis-paulinus-trevirenis-b]
 [lectio-lectionis-gregorius-magnus-b]
 [responsorium-lectionis-gregorius-magnus-b]
+[lectio-lectionis-teresa-kalkutta-b]
+[responsorium-lectionis-teresa-kalkutta-b]
 [lectio-lectionis-nativitatis-maria-a]
 [responsorium-lectionis-nativitatis-maria-a]
 [lectio-lectionis-nativitatis-maria-b]
