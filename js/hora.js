@@ -2160,7 +2160,7 @@ function getHora (date, hora, callback) {
 	} else {
 		part = (['vespera', 'completorium'].indexOf(hora) > -1 ? date.getEve() : date).getPartLetter();
 	}
-	if (part === 'p' && hora === 'lectionis' && date.getDayInSequence(-1) === 0) {
+	if (part === 'p' && (hora === 'lectionis' || hora === 'vigilia') && date.getDayInSequence(-1) === 0) {
 		part = 'q';
 	}
 	seqPrimary = formatSequence(getHoraSequence(date, hora, config), part);

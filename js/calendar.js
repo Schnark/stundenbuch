@@ -474,11 +474,11 @@ Day.calendars = {
 		base: '*',
 		labelMsg: 'titulus-calendarium-generalis',
 		papa: {
-			'': 'Franciscus',
-			'de': 'Franziskus',
-			'en': 'Francis',
-			'la': 'Francíscus',
-			'la-x-noaccent': 'Franciscus'
+			'': 'Leo'/*,
+			'de': '',
+			'en': '',
+			'la': '',
+			'la-x-noaccent': ''*/
 		},
 		getEntries: function (config) {
 			function moveNIPPprev (day) {
@@ -1103,9 +1103,7 @@ Day.calendars = {
 				[29, 12, 'thomas-becket', 3, ['episcopus', 'martyr']],
 				[31, 12, 'silvester', 3, 'papa'],
 
-				[5, 1, 'benedictus-xvi', 3, ['defunctus', 'vir'], 'Benedictus']
-				//day of death is in the octave of Christmas
-				//so use day of burial instead (at least until someone suggests a better date)
+				[21, 4, 'franciscus-i', 3, ['defunctus', 'vir'], 'Franciscus']
 			];
 		},
 		notes: [ //TODO vollständig lokalisieren
@@ -1155,16 +1153,21 @@ Day.calendars = {
 				'': 'Weltgebetstag der Frauen',
 				'en': 'Women’s World Day of Prayer'
 			}],
-			[13, 3, {
-				'': 'Anniversarium electionis Papæ Francisci (2013)',
-				'de': 'Jahrestag der Wahl von Papst Franziskus (2013)',
-				'en': 'Anniversary of the election of Pope Francis (2013)'
+			[21, 4, {
+				'': 'Dies obitus Papæ Francisci (2025)',
+				'de': 'Todestag von Papst Franziskus (2025)',
+				'en': 'Day of the death of Pope Francis (2025)'
 			}],
-			[19, 3, {
-				'': 'Jahrestag der Amtseinführung von Papst Franziskus (2013)',
-				'en': 'Anniversary of the papal inauguration of Pope Francis (2013)'
+			[8, 5, {
+				'': 'Anniversarium electionis Papæ Leonis XIV (2025)',
+				'de': 'Jahrestag der Wahl von Papst Leo XIV. (2025)',
+				'en': 'Anniversary of the election of Pope Leo XIV (2025)'
 			}],
-			[23, 4, 'Namenstag von Papst Franziskus'],
+			[18, 5, {
+				'': 'Anniversarium inaugurationis Papæ Leonis XIV (2025)',
+				'de': 'Jahrestag der Amtseinführung von Papst Leo XIV. (2025)',
+				'en': 'Anniversary of the papal inauguration of Pope Leo XIV (2025)'
+			}],
 			[24, 5, {
 				'': 'Gebetstag für die Kirche in China',
 				'en': 'World Day of Prayer for the Church in China'
@@ -1178,6 +1181,12 @@ Day.calendars = {
 				'': 'Weltgebetstag für die Bewahrung der Schöpfung',
 				'en': 'World Day of Prayer for the Care of Creation'
 			}],
+			[14, 9, {
+				'': 'Dies natali Papæ Leonis XIV (1955)',
+				'de': 'Geburtstag von Papst Leo XIV. (1955)',
+				'en': 'Birthday of Pope Leo XIV (1955)'
+			}],
+			[17, 9, 'Namenstag von Papst Leo XIV.'], //TODO oder anderes Datum?
 			[-124, 9, { //last Sunday
 				'': 'Welttag des Migranten und Flüchtlings',
 				'en': 'World Day of Migrants and Refugees'
@@ -1194,16 +1203,6 @@ Day.calendars = {
 				'': 'Dies Mundanus Pauperum',
 				'de': 'Welttag der Armen',
 				'en': 'World Day of the Poor'
-			}],
-			[17, 12, {
-				'': 'Dies natali Papæ Francisci (1936)',
-				'de': 'Geburtstag von Papst Franziskus (1936)',
-				'en': 'Birthday of Pope Francis (1936)'
-			}],
-			[31, 12, {
-				'': 'Dies obitus Papæ Benedicti XVI (2022)',
-				'de': 'Todestag von Papst Benedikt XVI. (2022)',
-				'en': 'Day of the death of Pope Benedict XVI (2022)'
 			}]
 		],
 		groups: [

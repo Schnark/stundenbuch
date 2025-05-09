@@ -368,6 +368,9 @@ function formatSequence (seq, time, secondary) {
 					part[0] = 'ps-95';
 				}
 			}
+			if (antiphona.indexOf('-defunctus') > -1) {
+				time = '';
+			}
 			return formatCanticum(
 				part[0],
 				antiphona,
