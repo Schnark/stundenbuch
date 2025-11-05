@@ -313,28 +313,29 @@ function applyGrammerDe (name, form) {
 	return name;
 }
 
-//TODO nicht auf deutsche Namen(-sbestandteile): von, Callo
+//TODO nicht auf deutsche Namen(-sbestandteile): von, Callo; auch lat. De Avilla
+//TODO noaccent bei ónis etc. beachten; außerdem bereits vorhandenen Akzent entfernen
 function applyGrammerLa (name, form) {
 	switch (form) {
 	case 'voc':
 		return name.replace(/us( |$)/g, 'e$1');
 	case 'gen': return name
-		.replace(/on?( |$)/g, 'onis$1').replace(/ns( |$)/g, 'ntis$1')
+		.replace(/on?( |$)/g, 'ónis$1').replace(/ns( |$)/g, 'ntis$1')
 		.replace(/us( |$)/g, 'i$1').replace(/a( |$)/g, 'æ$1')
 		.replace(/as( |$)/g, 'æ$1').replace(/es( |$)/g, 'is$1')
 		.replace(/és( |$)/g, 'étis$1');
 	case 'dat': return name
-		.replace(/on?( |$)/g, 'oni$1').replace(/ns( |$)/g, 'nti$1')
+		.replace(/on?( |$)/g, 'óni$1').replace(/ns( |$)/g, 'nti$1')
 		.replace(/us( |$)/g, 'o$1').replace(/a( |$)/g, 'æ$1')
 		.replace(/as( |$)/g, 'æ$1').replace(/es( |$)/g, 'i$1')
 		.replace(/és( |$)/g, 'éti$1');
 	case 'acc': return name
-		.replace(/on?( |$)/g, 'onem$1').replace(/ns( |$)/g, 'ntem$1')
+		.replace(/on?( |$)/g, 'ónem$1').replace(/ns( |$)/g, 'ntem$1')
 		.replace(/us( |$)/g, 'um$1').replace(/a( |$)/g, 'am$1')
 		.replace(/as( |$)/g, 'am$1').replace(/es( |$)/g, 'em$1')
 		.replace(/és( |$)/g, 'étem$1');
 	case 'abl': return name
-		.replace(/on?( |$)/g, 'one$1').replace(/ns( |$)/g, 'nte$1')
+		.replace(/on?( |$)/g, 'óne$1').replace(/ns( |$)/g, 'nte$1')
 		.replace(/us( |$)/g, 'o$1').replace(/a( |$)/g, 'a$1')
 		.replace(/as( |$)/g, 'a$1').replace(/es( |$)/g, 'e$1')
 		.replace(/és( |$)/g, 'éte$1');

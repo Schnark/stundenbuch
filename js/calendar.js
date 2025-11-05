@@ -1186,7 +1186,10 @@ Day.calendars = {
 				'de': 'Geburtstag von Papst Leo XIV. (1955)',
 				'en': 'Birthday of Pope Leo XIV (1955)'
 			}],
-			[17, 9, 'Namenstag von Papst Leo XIV.'], //TODO oder anderes Datum?
+			[17, 9, {
+				'': 'Namenstag von Papst Leo XIV.',
+				'en': 'Name day of Pope Leo XIV'
+			}],
 			[-124, 9, { //last Sunday
 				'': 'Welttag des Migranten und Flüchtlings',
 				'en': 'World Day of Migrants and Refugees'
@@ -1554,7 +1557,7 @@ Day.calendars = {
 				[22, 9, 'landelin', 3, ['martyr', 'vir'], 'Landelin'],
 				//25. 9. Niklaus von der Flüe (bereits in de)
 				//28. 9. Lioba (bereits in de)
-				[9, 10, 'john-henry-newman', 3, 'pastor', 'John Henry Newman'],
+				[9, 10, 'john-henry-newman', 3, 'doctor', 'John Henry Newman'],
 				//16. 10. Gallus (bereits in de)
 				//31. 10. Wolfgang (bereits in de)
 				//3. 11. Pirmin (bereits in de)

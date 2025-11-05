@@ -3401,6 +3401,8 @@
 [responsorium-lectionis-martinus-i-b]
 [lectio-lectionis-leo-ix-b]
 [responsorium-lectionis-leo-ix-b]
+[lectio-lectionis-marcel-callo-b]
+[responsorium-lectionis-marcel-callo-b]
 [lectio-lectionis-anselmus-b]
 [responsorium-lectionis-anselmus-b]
 [lectio-lectionis-konrad-parzham-b]

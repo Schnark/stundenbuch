@@ -355,6 +355,7 @@ Direktorien:
 2023: https://www.ebfr.de/media/download/integration/1632896/direktorium_2023.pdf
 2024: https://www.ebfr.de/media/download/integration/1868715/direktorium_2024.pdf
 2025: https://www.ebfr.de/media/download/integration/2074885/direktorium_2025_1.pdf
+2026: https://www.ebfr.de/media/download/integration/2278869/direktorium_2026.pdf
 
 Nicht im Kalender, aber im Direktorium verzeichnet:
 
@@ -467,6 +468,10 @@ Folgende Texte sind im Freiburger Direktorium 2018 (https://www.ebfr.de/html/med
 * Sel. Rupert Mayer: Oration und Lesung für die Lesehore
 * Sel. Adolph Kolping: Oration und Lesung für die Lesehore
 
+Aus anderen Quellen:
+
+* Sel. Marcel Callo: Lesung für die Lesehore aus https://www2.bistum-augsburg.de/asset/download/bistum-augsburg/dateien/amtsblatt/abl0305_7.pdf, Responsorium bearbeitet für übliches Format
+
 
 Fehlende Texte (ohne Diözesankalender)
 --------------------------------------
@@ -529,11 +534,6 @@ Von diesen Texten habe ich für folgende Übersetzungen aus alternativen Quellen
 - Hl. Faustina Kowalska (Ergänzungsband Direktorium 2021)
 - Hll. Marta, Maria und Lazarus (alte Lesung Hl. Marta)
 - Hl. Teresa von Kalkutta (Direktorium 2018)
-
-Diese Texte müssten eigentlich existieren, sind aber in keiner mir bekannten Quelle verfügbar:
-
-* Lesung der Lesehore für:
-- Sel. Marcel Callo (Alternative evt. http://www.fen-net.de/~ea1599/marcel_callo/web/lesungen.pdf, oder Direktorium 2021)
 
 Die Psalmorationen fehlen ebenfalls, inoffizielle Übersetzungen eines Teils davon habe ich übernommen aus:
 https://www.liturgie.at/dl/uqsnJKJKlMlnMJqx4KJK/Einspieler_Mit_dem_Gotteslob_durch_den_Tag_pdf
