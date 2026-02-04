@@ -123,6 +123,11 @@ Prot. 35/21 (https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc
 Hl. Teresa von Kalkutta (5. Sep., g)
 Prot. 703/24 (https://www.cultodivino.va/it/attivita/2025/iscrizione-di-santa-teresa-di-calcutta-nel-calendario-romano-gen.html)
 
+2026:
+Hl. John Henry Newman (9. Okt., g)
+Prot. 760/25 (https://www.cultodivino.va/content/dam/cultodivino/attivit%C3%A0/2026/john-henry-newman,-dottore-delle-chiesa/Prot-760-25-NEWMAN---Adnexus-LAT.pdf)
+
+
 Europa
 ------
 
@@ -311,7 +316,7 @@ Hl. Konrad (G→F)
 
 2012:
 Sel. Teresa von Kalkutta (5. Sep., g)
-Sel. Johannes Heinrich Newman (9. Okt., g)
+Sel. John Henry Newman (9. Okt., g)
 (Direktorium)
 
 2013/4:
@@ -339,6 +344,9 @@ Sel. Max Josef Metzger (17. Apr., g)
 Maria, Mutter der Kirche (g→G)
 (Direktorium)
 Hl. Teresa von Kalkutta (unverändert in Generalkalender aufgenommen)
+
+2026:
+Hl. John Henry Newman (unverändert in Generalkalender aufgenommen)
 
 Direktorien:
 2011: http://www.ebfr.de/lib/download.php?key=141b8d4a6092&file=/dynamic/datei/direktorium_2011.pdf&name=direktorium_2011.pdf
@@ -487,6 +495,7 @@ Für folgende Texte steht eine deutsche Übersetzung mit anschließender Approba
 - Hl. Johannes De Avila
 - Hll. Marta, Maria und Lazarus
 - Hl. Teresa von Kalkutta
+- Hl. John Henry Newman
 
 * Lesung der Lesehore für (gekennzeichnete Tage haben meist nicht approbierten Text im Freiburger Direktorium 2018, https://www.ebfr.de/html/media/dl.html?i=976961; oder im Ergänzungsband 2021, https://www.ebfr.de/html/media/dl.html?i=1184356):
 - Hl. Petrus Claver
@@ -511,6 +520,7 @@ Für folgende Texte steht eine deutsche Übersetzung mit anschließender Approba
 - Hl. Johannes De Avila (*)
 - Hll. Marta, Maria und Lazarus
 - Hl. Teresa von Kalkutta (*)
+- Hl. John Henry Newman (*)
 
 * Sonstige Texte
 - Neuerungen der editio typica altera (insb. Antiphonen Sonntage geprägte Zeiten in Lesejahr B, C)
@@ -525,6 +535,7 @@ Von diesen Texten habe ich für folgende Übersetzungen aus alternativen Quellen
 - Unsere Liebe Frau von Loreto (Ergänzungsband Direktorium 2021)
 - Hll. Marta, Maria und Lazarus (Anhang Direktorium Augsburg 2023)
 - Hl. Teresa von Kalkutta (Direktorium 2018)
+- Hl. John Henry Newman (Direktorium 2018, App, https://www.oratoriosanfilippo.org/Newman-germanice.pdf)
 
 * Lesung der Lesehore für:
 - Heiligster Name Jesu (Direktorium 2018, Franziskaner)
@@ -534,6 +545,7 @@ Von diesen Texten habe ich für folgende Übersetzungen aus alternativen Quellen
 - Hl. Faustina Kowalska (Ergänzungsband Direktorium 2021)
 - Hll. Marta, Maria und Lazarus (alte Lesung Hl. Marta)
 - Hl. Teresa von Kalkutta (Direktorium 2018)
+- Hl. John Henry Newman (https://www.oratoriosanfilippo.org/Newman-germanice.pdf, App, Direktorium 2018 hat privaten Vorschlag)
 
 Die Psalmorationen fehlen ebenfalls, inoffizielle Übersetzungen eines Teils davon habe ich übernommen aus:
 https://www.liturgie.at/dl/uqsnJKJKlMlnMJqx4KJK/Einspieler_Mit_dem_Gotteslob_durch_den_Tag_pdf
@@ -556,6 +568,7 @@ Vermutlich approbierte Texte, vorhanden:
 - Hl. Verena von Zurzach (Schweizer Benediktiner, https://www.st-verena.ch/st-verena/gebet-und-texte/gebete-fuer-die-liturgie/)
 - Hl. Otmar (https://www.bistum-stgallen.ch/fileadmin/kundendaten/Bistum/Heilige/Otmar/Hl._Otmar_-_Proprien_zu_Messbuch_und_Lektionar.pdf)
 - Sel. Liborius Wagner (Ergänzungsband Direktorium 2021; s.a. https://pg-stadtlauringen.de/%C3%BCber-uns/pfarreiengemeinschaft-und-pfarreien#gebete-und-lieder)
+- Sel. Max Josef Metzger (https://www.ebfr.de/media/download/integration/2283669/proprium_sel-max-josef-metzger_17-april.pdf)
 
 * Lesung der Lesehore für:
 - Sel. Ulrika von Hegne (https://www.kirchenrecht-ebfr.de/kabl/2454.pdf, auch https://www.franziskanische-selige-heilige.de/mai/ulrika-von-hegne/, Direktorium 2018)
@@ -563,6 +576,7 @@ Vermutlich approbierte Texte, vorhanden:
 - Sel. Bernhard von Baden (Direktorium 2018; https://www.bistum-speyer.de/fileadmin/user_upload/1-0-0/Zentralstelle_und_Leitung/Downloads/Eigenfeiern/07-15.Bernhard_von_Baden-StG.pdf)
 - Sel. Karl Leisner (https://www.kirchenrecht-ebfr.de/kabl/2803.pdf, auch Direktorium 2018)
 - Hl. Konrad (Lesung Hll. Konrad und Gebhard)
+- Sel. Max Josef Metzger (https://www.ebfr.de/media/download/integration/2283669/proprium_sel-max-josef-metzger_17-april.pdf)
 
 Vermutlich approbierte Texte, nicht vorhanden:
 
@@ -591,14 +605,12 @@ Vermutlich nicht (zumindest nicht für Freiburg) approbierte Texte, trotzdem vor
 * Orationen für:
 - Hl. Vinzenz Pallotti (Direktorium 2018, Schweiz, http://liturgie.ch/images/liturgie/praxis/direktorium/pdf/lesehore-vinzenz-pallotti.pdf)
 - Hl. Teresa von Kalkutta (Direktorium 2018, App)
-- Hl. Johannes Heinrich Newman (Direktorium 2018, App, https://www.oratoriosanfilippo.org/Newman-germanice.pdf)
 - Sel. Alfons Maria Eppinger (Ergänzungsband Direktorium 2021)
 - Sel. Franziskus Maria vom Kreuz Jordan (Direktorium 2023)
 
 * Lesung der Lesehore für:
 - Hl. Vinzenz Pallotti (Direktorium 2018, Schweiz, http://liturgie.ch/images/liturgie/praxis/direktorium/pdf/lesehore-vinzenz-pallotti.pdf)
 - Hl. Teresa von Kalkutta (App, Direktorium 2018 hat privaten Vorschlag)
-- Hl. Johannes Heinrich Newman (https://www.oratoriosanfilippo.org/Newman-germanice.pdf, App, Direktorium 2018 hat privaten Vorschlag)
 - Sel. Alfons Maria Eppinger (Ergänzungsband Direktorium 2021)
 - Sel. Franziskus Maria vom Kreuz Jordan (Direktorium 2023)
 

@@ -2114,6 +2114,8 @@
 [responsorium-lectionis-dionysius-b]
 [lectio-lectionis-ioannes-leonardus-b]
 [responsorium-lectionis-ioannes-leonardus-b]
+[lectio-lectionis-john-henry-newman-b]
+[responsorium-lectionis-john-henry-newman-b]
 [lectio-lectionis-ioannes-xxiii-b]
 [responsorium-lectionis-ioannes-xxiii-b]
 [lectio-lectionis-callistus-i-b]

@@ -1,8 +1,8 @@
 {
-	"version": "1.42",
+	"version": "1.43",
 	"name": "Stundengebet",
 	"description": "Stundengebet",
-	"size": 4878409,
+	"size": 4883907,
 	"package_path": "http://localhost:8080/stundenbuch.zip",
 	"icons": {
 		"128": "/img/icon-128.png",

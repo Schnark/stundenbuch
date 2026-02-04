@@ -533,6 +533,10 @@ Day.addSpecialDay = function (d, m, name, rank, types, data, local) {
 				(types.indexOf('dominus') > -1 ? 2 : rank === 2 ? 6 : 4)
 		};
 	}
+	if (name === '' && data && data.move && Day.specialDays[key]) {
+		Day.specialDays[key].move = data.move;
+		return;
+	}
 	if (name === undefined) {
 		delete Day.specialDays[key];
 		return;

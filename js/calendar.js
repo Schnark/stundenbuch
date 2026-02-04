@@ -1012,6 +1012,7 @@ Day.calendars = {
 				}],
 				[9, 10, 'dionysius', 3, ['martyr', 'vir', 'plures']],
 				[9, 10, 'ioannes-leonardus', 3, ['pastor', 'misericordia']],
+				[9, 10, 'john-henry-newman', 3, 'doctor'],
 				[11, 10, 'ioannes-xxiii', 3, 'papa'],
 				[14, 10, 'callistus-i', 3, ['martyr', 'vir']],
 				[15, 10, 'teresia-iesu', 2, 'virgo'],
@@ -1232,7 +1233,7 @@ Day.calendars = {
 				'turibius', 'anselmus', 'fidelis-sigmaringen', 'ioseph-opifex', 'maria-fatima',
 				'christophorus-magallanes', 'gregorius-vii', 'norbertus', 'ioannes-fisher-thomas-more', 'elisabeth-lusitania',
 				'henricus', 'laurentius-brindisi', 'xystus', 'ioanna-francisca-chantal', 'ioannes-eudes',
-				'ianuarius', 'bruno', 'callistus-i', 'margarita-maria-alacoque', 'ioannes-capestrano',
+				'ianuarius', 'bruno', 'callistus-i', 'john-henry-newman', 'margarita-maria-alacoque', 'ioannes-capestrano',
 				'albertus-magnus', 'basilica-petrus-paulus', 'maria-guadalupe', 'silvester'
 			],
 			[
@@ -1557,7 +1558,6 @@ Day.calendars = {
 				[22, 9, 'landelin', 3, ['martyr', 'vir'], 'Landelin'],
 				//25. 9. Niklaus von der Flüe (bereits in de)
 				//28. 9. Lioba (bereits in de)
-				[9, 10, 'john-henry-newman', 3, 'doctor', 'John Henry Newman'],
 				//16. 10. Gallus (bereits in de)
 				//31. 10. Wolfgang (bereits in de)
 				//3. 11. Pirmin (bereits in de)
@@ -1625,7 +1625,7 @@ Day.calendars = {
 				'pentecoste-secunda'
 			],
 			[
-				'max-josef-metzger', 'franziskus-maria', 'monica', 'pelagius', 'alfons-maria-eppinger', 'john-henry-newman',
+				'max-josef-metzger', 'franziskus-maria', 'monica', 'pelagius', 'alfons-maria-eppinger',
 				'pentecoste-secunda'
 			],
 			[

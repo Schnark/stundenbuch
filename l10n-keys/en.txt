@@ -4154,6 +4154,8 @@ Alleluia, alleluia.
 [ioannes-leonardus]
 [ioannes-leonardus-nomen]
 [oratio-ioannes-leonardus]
+[john-henry-newman]
+[john-henry-newman-nomen]
 [ioannes-xxiii]
 [ioannes-xxiii-nomen]
 [oratio-ioannes-xxiii]

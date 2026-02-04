@@ -586,8 +586,9 @@ label.inline select {
 }
 
 #form-additional-day {
-	width: 2em;
+	width: 2.5em;
 	text-align: right;
+	padding-right: 0.5em;
 }
 
 .mensis {

@@ -713,17 +713,35 @@ Instrument.prototype.playNote = function (note, type) {
 			this.play(freq);
 		}
 	} else {
-		this.play(freq, type === '.' ? 1.5 : 1);
+		if (type === '.') {
+			type = 1.5;
+		} else if (typeof type !== 'number') {
+			type = 1;
+		}
+		this.play(freq, type);
 	}
 };
 
 Instrument.prototype.playNotes = function (notes) {
 	parseNotes(notes).forEach(function (note, i) {
+		var notes;
 		if (i === 0) {
 			this.setShift(Number(note.notes[0][0].charAt(0)), note.notes[0][0].charAt(1) === 'x');
 			return;
 		}
-		note.notes.forEach(function (n) { //TODO play two or more equal notes as one long note
+		if (note.notes.length > 1) { //play two or more equal notes as one long note
+			notes = [];
+			note.notes.forEach(function (n) {
+				var lastNote = notes.length > 0 ? notes[notes.length - 1] : ['', ''];
+				if (n[0] === lastNote[0] && !n[1] && (!lastNote[1] || typeof lastNote[1] === 'number')) {
+					notes[notes.length - 1][1] = (lastNote[1] || 1) + 1;
+				} else {
+					notes.push(n);
+				}
+			});
+			note.notes = notes;
+		}
+		note.notes.forEach(function (n) {
 			this.playNote(n[0], n[1]);
 		}.bind(this));
 	}.bind(this));
